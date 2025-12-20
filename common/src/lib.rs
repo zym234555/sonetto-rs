@@ -12,10 +12,6 @@ pub const CERT_DIR: &str = "./cert";
 pub const KEY_FILE_PATH: &str = "./cert/localhost.key";
 pub const CERT_FILE_PATH: &str = "./cert/localhost.crt";
 
-// todo: user regist n allat shit
-pub const USER_ID: u64 = 1337;
-pub const USERNAME: &str = "Yon";
-
 pub fn init_tracing() {
     #[cfg(target_os = "windows")]
     ansi_term::enable_ansi_support().unwrap();

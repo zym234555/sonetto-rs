@@ -1,5 +1,10 @@
 # sonetto-rs
 
+    ![main image](/images/r99-murc.png)
+
+    ![heroes image](/images/r99-heroes.png)
+
+
 ## What is sonetto-rs?
 
 sonetto-rs is a ps for reverse 1999 made in rust. why? no one tried and succeeded yet.
@@ -38,8 +43,14 @@ Everythings unlocked out the box
 - Real battle logic (right now we skip battle to the end)
 - Auto battle (soon)
 - Drop rates need to be tested
+- 7 day sign is bugged (sometimes rewards are given twice 12 am and 12:30 am)
+
 
 ## Plans for the future
 
 For now I'll just fix the handles that are not working. Then implement a proper system for users to manage their accounts and progress.
 Right now everything is hardcoded to be maxed out which isn't ideal for some people. Eventually we'll add proper currency logic and real battle logic.
+
+## Todo
+- remove unnecessary code
+- remove unused static data
