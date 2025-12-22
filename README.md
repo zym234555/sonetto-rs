@@ -1,10 +1,10 @@
 # sonetto-rs
 
-![main image](/images/r99-murc.png)
-
 ## What is sonetto-rs?
 
 sonetto-rs is a ps for reverse 1999 made in rust. why? no one tried and succeeded yet.
+
+![main image](/images/r99-murc.png)
 
 ## How to use sonetto-rs?
 - need to install rust
