@@ -59,7 +59,6 @@ pub async fn on_get_month_card_info(
             ctx_guard
                 .update_and_save_player_state(|state| {
                     state.claim_month_card(current_time);
-                    state.mark_daily_reward_claimed(current_time);
                     state.mark_activity_pushes_sent(current_time);
                 })
                 .await?;

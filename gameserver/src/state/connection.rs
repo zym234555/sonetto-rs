@@ -75,25 +75,13 @@ impl ConnectionContext {
         .await?
         {
             Some(mut state) => {
-                // Always record login
-                state.record_login(now);
-
-                // Explicit daily reset
-                if state.is_new_server_day(now) {
-                    tracing::info!(
-                        "New server day detected for player {}, performing daily reset",
-                        player_id
-                    );
-                    state.mark_daily_reset(now);
-                }
-
+                state.last_login_timestamp = Some(now);
+                state.updated_at = now;
                 state
             }
             None => {
                 tracing::info!("Creating new player state for player {}", player_id);
-                let mut state = PlayerState::new(player_id, now);
-                state.mark_login_complete(now);
-                state
+                PlayerState::new(player_id, now)
             }
         };
 
@@ -111,14 +99,13 @@ impl ConnectionContext {
                 player_id, initial_login_complete, last_login_timestamp,
                 created_at, updated_at,
                 last_state_push_sent_timestamp, last_activity_push_sent_timestamp,
-                last_currency_push_sent_timestamp,
                 last_daily_reward_time, last_daily_reset_time,
                 month_card_claimed, last_month_card_claim_timestamp,
                 last_sign_in_day, last_sign_in_time,
                 vip_level,
                 last_energy_refill_time, last_weekly_reset_time, last_monthly_reset_time
             )
-            VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12, ?13, ?14, ?15, ?16, ?17, ?18)
+            VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12, ?13, ?14, ?15, ?16, ?17)
             "#,
         )
         .bind(state.player_id)
@@ -128,7 +115,6 @@ impl ConnectionContext {
         .bind(state.updated_at)
         .bind(state.last_state_push_sent_timestamp)
         .bind(state.last_activity_push_sent_timestamp)
-        .bind(state.last_currency_push_sent_timestamp)
         .bind(state.last_daily_reward_time)
         .bind(state.last_daily_reset_time)
         .bind(state.month_card_claimed)
@@ -388,14 +374,6 @@ impl ConnectionContext {
             tracing::info!("Registered session for player {}", player_id);
         } else {
             tracing::warn!("Attempted to register session without player_id");
-        }
-    }
-}
-
-impl Drop for ConnectionContext {
-    fn drop(&mut self) {
-        if let Some(player_id) = self.player_id {
-            self.state.unregister_session(player_id);
         }
     }
 }

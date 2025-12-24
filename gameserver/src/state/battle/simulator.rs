@@ -1,5 +1,3 @@
-// src/battle/simulator.rs
-
 use anyhow::Result;
 use rand::SeedableRng;
 use rand::rngs::StdRng;

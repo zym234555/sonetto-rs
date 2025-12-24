@@ -1,15 +1,16 @@
-use common::{HOST, HTTPSERVER_PORT, init_tracing};
+use common::{config, excel_data_directory, host, http_port, init_config, init_tracing};
 use database::{DatabaseSettings, connect_to, run_migrations};
 use gameserver::state::AppState as GameState;
 use reqwest::Client;
 use std::net::SocketAddr;
 use std::path::PathBuf;
 use std::sync::Arc;
-use tracing::{error, info};
+use tracing::info;
 
 mod handlers;
 mod middleware;
 mod models;
+
 use middleware::crypto::sdk_encryption;
 use middleware::logging::full_logger;
 
@@ -28,23 +29,37 @@ pub struct AppState {
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     init_tracing();
 
-    let data_path = get_data_path()?;
+    let config_path = std::env::current_exe()
+        .ok()
+        .and_then(|exe| exe.parent().map(|p| p.join("config.toml")))
+        .unwrap_or_else(|| PathBuf::from("config.toml"));
 
-    // Initialize database
-    let settings = DatabaseSettings::default();
-    let db = connect_to(&settings)
-        .await
-        .expect("Failed to connect to database");
-    run_migrations(&db).await.expect("Failed to run migrations");
+    let mut cfg = config::ServerConfig::load_or_create(&config_path)?;
+
+    let config_dir = config_path
+        .parent()
+        .map(|p| p.to_path_buf())
+        .unwrap_or_else(|| std::env::current_dir().unwrap());
+
+    cfg.resolve_paths(&config_dir)?;
+    cfg.validate_paths()?;
+
+    info!("Server configuration:");
+    info!("Host: {}:{}", cfg.server.host, cfg.server.http_port);
+
+    init_config(cfg.clone());
+
+    let db_settings = DatabaseSettings {
+        db_name: config().database.path.to_string_lossy().to_string(),
+        ..Default::default()
+    };
+
+    let db = connect_to(&db_settings).await?;
+    run_migrations(&db).await?;
 
     info!("Loading game data...");
-    data::exceldb::init(data_path.to_str().unwrap()).map_err(|e| {
-        error!("Failed to load game data: {:#}", e);
-        e
-    })?;
+    data::exceldb::init(excel_data_directory().to_str().unwrap())?;
     info!("Game data loaded");
-
-    let addr: SocketAddr = format!("{}:{}", HOST, HTTPSERVER_PORT).parse().unwrap();
 
     let state = AppState {
         sdk: SdkState {
@@ -53,69 +68,24 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         game: Arc::new(GameState::new(db)),
     };
 
-    let with_encryption = {
-        handlers::router::account_router()
-            .layer(axum::middleware::from_fn(full_logger))
-            .layer(axum::middleware::from_fn(sdk_encryption))
-    };
+    // Build router
+    let with_encryption = handlers::router::account_router()
+        .layer(axum::middleware::from_fn(full_logger))
+        .layer(axum::middleware::from_fn(sdk_encryption));
 
-    let without_encryption = {
-        handlers::router::game_router()
-            .merge(handlers::router::jsp_router())
-            .merge(handlers::router::index_router())
-            .layer(axum::middleware::from_fn(full_logger))
-    };
+    let without_encryption = handlers::router::game_router()
+        .merge(handlers::router::jsp_router())
+        .merge(handlers::router::index_router())
+        .layer(axum::middleware::from_fn(full_logger));
 
-    let app = with_encryption.merge(without_encryption).with_state(state); // Pass AppState directly, not Arc<AppState>
+    let app = with_encryption.merge(without_encryption).with_state(state);
 
-    tracing::info!("HTTP Server listening on http://{}", addr);
+    let addr: SocketAddr = format!("{}:{}", host(), http_port()).parse()?;
+    info!("HTTP Server listening on http://{}", addr);
+
     axum_server::bind(addr)
         .serve(app.into_make_service())
-        .await
-        .unwrap();
+        .await?;
 
     Ok(())
-}
-
-fn get_data_path() -> anyhow::Result<PathBuf> {
-    let current_dir = std::env::current_dir()?;
-    let current_data_path = current_dir.join("data").join("excel2json");
-    if current_data_path.exists() {
-        return Ok(current_data_path);
-    }
-
-    if let Ok(exe_path) = std::env::current_exe() {
-        if let Some(exe_dir) = exe_path.parent() {
-            let exe_data_path = exe_dir.join("data").join("excel2json");
-            if exe_data_path.exists() {
-                return Ok(exe_data_path);
-            }
-        }
-    }
-
-    let base_dir = if let Ok(manifest_dir) = std::env::var("CARGO_MANIFEST_DIR") {
-        PathBuf::from(manifest_dir)
-    } else {
-        let mut current = std::env::current_dir()?;
-        loop {
-            if current.join("Cargo.toml").exists() {
-                break;
-            }
-            if !current.pop() {
-                return Err(anyhow::anyhow!("Could not find project root"));
-            }
-        }
-        current
-    };
-
-    let data_path = base_dir.join("data").join("excel2json");
-    if !data_path.exists() {
-        return Err(anyhow::anyhow!(
-            "Data directory not found. Checked:\n  - {}\n  - Executable directory\n  - Project root: {}",
-            current_data_path.display(),
-            data_path.display()
-        ));
-    }
-
-    Ok(data_path)
 }

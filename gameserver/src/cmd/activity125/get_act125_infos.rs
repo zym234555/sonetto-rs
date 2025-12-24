@@ -1,6 +1,6 @@
 use crate::packet::ClientPacket;
 use crate::state::ConnectionContext;
-use crate::{data_loader::GameDataLoader, error::AppError};
+use crate::{error::AppError, utils::data_loader::GameDataLoader};
 use prost::Message;
 use sonettobuf::{CmdId, GetAct125InfosReply, GetAct125InfosRequest};
 use std::sync::Arc;

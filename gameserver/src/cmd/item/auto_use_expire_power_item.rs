@@ -22,10 +22,10 @@ pub async fn on_auto_use_expire_power_item(
             if !ps.initial_login_complete {
                 tracing::info!("Completing initial login for player {}", ps.player_id);
                 ps.mark_login_complete(common::time::ServerTime::now_ms());
-                // Reset push timestamps so initial pushes will fire
+
                 ps.last_state_push_sent_timestamp = None;
                 ps.last_activity_push_sent_timestamp = None;
-                ps.last_currency_push_sent_timestamp = None;
+
                 true
             } else {
                 false

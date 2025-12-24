@@ -1,5 +1,6 @@
 // src/battle/mod.rs
 
+mod auto;
 mod cards;
 pub mod end_fight;
 pub mod entity_builder;
@@ -13,6 +14,7 @@ use anyhow::Result;
 use sonettobuf::StartDungeonReply;
 use sqlx::SqlitePool;
 
+pub use auto::generate_auto_opers;
 pub use cards::default_max_ap;
 pub use cards::generate_initial_deck;
 

@@ -18,6 +18,7 @@ pub mod equip;
 pub mod equip_skill;
 pub mod equip_strengthen;
 pub mod guide;
+pub mod hero_trial;
 pub mod insight_item;
 pub mod item;
 pub mod monster;
@@ -55,6 +56,7 @@ pub struct GameDB {
     pub equip_skill: equip_skill::EquipSkillTable,
     pub equip_strengthen: equip_strengthen::EquipStrengthenTable,
     pub guide: guide::GuideTable,
+    pub hero_trial: hero_trial::HeroTrialTable,
     pub insight_item: insight_item::InsightItemTable,
     pub item: item::ItemTable,
     pub monster: monster::MonsterTable,
@@ -127,6 +129,9 @@ impl GameDB {
         let guide = guide::GuideTable::load(
             &format!("{data_dir}/guide.json")
         ).map_err(|e| anyhow::anyhow!("Failed to load guide.json: {}", e))?;
+        let hero_trial = hero_trial::HeroTrialTable::load(
+            &format!("{data_dir}/hero_trial.json")
+        ).map_err(|e| anyhow::anyhow!("Failed to load hero_trial.json: {}", e))?;
         let insight_item = insight_item::InsightItemTable::load(
             &format!("{data_dir}/insight_item.json")
         ).map_err(|e| anyhow::anyhow!("Failed to load insight_item.json: {}", e))?;
@@ -189,6 +194,7 @@ impl GameDB {
             equip_skill,
             equip_strengthen,
             guide,
+            hero_trial,
             insight_item,
             item,
             monster,

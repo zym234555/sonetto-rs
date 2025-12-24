@@ -35,6 +35,7 @@ Everythings unlocked out the box
 - All Psychubes
 - 3m currency to start
 - Battles work (kinda)
+- Auto battle works
 - Battle replay works
 - Battle teams can be set and saved now
 - Username changes work
@@ -43,21 +44,23 @@ Everythings unlocked out the box
 - BGM works (juke box anyone?)
 - Gacha works (80%) (need to add currency logic)
 - Ripple Banner works
+- Standard Banner works
+- Main story now works
+
 
 ## Not working (confirmed)
 - Tower battles
+- Trial heros are bugged (doesn't save in battle replay or load)(not implemented yet)
 - Setting hero talents
 - Achievements
 - Tasks
 - Battle pass
-- Stories (not tested)
 - Currency logic (soon)
 - Profile picture (soon)
 - Real battle logic (right now we skip battle to the end)
-- Auto battle (soon)
 - Drop rates need to be tested
 
-## KnownBugs
+## Known Bugs
 - 7 day sign is bugged (sometimes rewards are given twice 12 am and 12:30 am) (I blame the game for using 3 different time formats)(u64, i64 and i32 lmao)
 - Ezio has max number of moxie its a visual bug (no idea why yet) (normal max is 5 he's showing almost a 100)
 

@@ -8,10 +8,10 @@ CREATE TABLE IF NOT EXISTS player_state (
     created_at INTEGER NOT NULL,
     updated_at INTEGER NOT NULL,
 
-    -- Reward/daily reset timestamps (replaces boolean flags)
+    -- Reward/daily reset timestamps
     last_state_push_sent_timestamp INTEGER,      -- Last time state pushes were sent
     last_activity_push_sent_timestamp INTEGER,   -- Last time activity pushes were sent
-    last_currency_push_sent_timestamp INTEGER,   -- Last time currency pushes were sent
+
 
     -- Daily rewards/resets
     last_daily_reward_time INTEGER,              -- Last daily reward claim

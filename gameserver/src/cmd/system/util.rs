@@ -92,7 +92,7 @@ pub fn extract_user_id(account_id: &str) -> Result<i64, AppError> {
         .ok_or_else(|| AppError::Custom(format!("Invalid account_id format: {}", account_id)))
 }
 
-    pub fn build_login_reply(user_id: i64) -> Vec<u8> {
+pub fn build_login_reply(user_id: i64) -> Vec<u8> {
     let mut payload = Vec::new();
 
     // Reason string (custom binary format: u16 length + string bytes)
@@ -143,4 +143,16 @@ pub async fn send_critter_push(
     ctx_guard.send_push(CmdId::CritterInfoPushCmd, push).await?;
 
     Ok(())
+}
+
+pub async fn login_error(
+    ctx: &Arc<Mutex<ConnectionContext>>,
+    msg: &str,
+    up_tag: u8,
+) -> Result<(), AppError> {
+    let mut ctx = ctx.lock().await;
+    let payload = build_login_error(msg);
+    ctx.send_raw_reply_fixed(CmdId::LoginRequestCmd, payload, 1, up_tag)
+        .await?;
+    Err(AppError::Custom(msg.to_string()))
 }

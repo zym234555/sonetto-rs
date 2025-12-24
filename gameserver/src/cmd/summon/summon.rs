@@ -23,6 +23,8 @@ pub async fn on_summon(
     let pool_id = request.pool_id.unwrap_or(0);
     let count = request.count.unwrap_or(1).clamp(1, 10);
 
+    tracing::info!("Summon request received: Pool {} Count {}", pool_id, count);
+
     let (user_id, db) = {
         let ctx = ctx.lock().await;
         (
@@ -35,7 +37,7 @@ pub async fn on_summon(
 
     let banner_type = match &sp_pool_info {
         Some(sp) => BannerType::from(sp.sp_type),
-        None => BannerType::Normal,
+        None => BannerType::RateUp,
     };
 
     let pool = build_gacha(pool_id, sp_pool_info.as_ref()).await?;

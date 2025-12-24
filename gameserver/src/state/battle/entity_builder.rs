@@ -1,5 +1,3 @@
-// src/battle/entity_builder.rs
-
 use data::exceldb;
 use database::db::game::{equipment, heroes::HeroData};
 use sonettobuf::{EquipRecord, FightEntityInfo, HeroAttribute};

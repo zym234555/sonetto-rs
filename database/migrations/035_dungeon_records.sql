@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS dungeon_records (
     record_round INTEGER NOT NULL,  -- Rounds to complete
     hero_list TEXT NOT NULL,         -- JSON array of hero UIDs
     sub_hero_list TEXT NOT NULL,     -- JSON array of sub hero UIDs
+    trial_hero_list TEXT NULL,   -- JSON array of trial hero UIDs
     cloth_id INTEGER NOT NULL,
     equips TEXT NOT NULL,            -- JSON equipment data
     version INTEGER NOT NULL DEFAULT 5,

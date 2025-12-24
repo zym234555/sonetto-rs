@@ -11,7 +11,9 @@ pub async fn get_activity101_info(
     // Get claimed days
     let claimed_days: Vec<i32> = sqlx::query_scalar(
         "SELECT day_id FROM user_activity101_claims
-         WHERE user_id = ? AND activity_id = ?
+         WHERE user_id = ?
+           AND activity_id = ?
+           AND claimed_at IS NOT NULL
          ORDER BY day_id",
     )
     .bind(user_id)
@@ -19,7 +21,7 @@ pub async fn get_activity101_info(
     .fetch_all(pool)
     .await?;
 
-    // Get total login count (could use sign-in count or activity-specific count)
+    // Get total login count
     let login_count = sqlx::query_scalar::<_, i32>(
         "SELECT addup_sign_in_day FROM user_sign_in_info WHERE user_id = ?",
     )
@@ -87,14 +89,17 @@ pub async fn claim_activity101_day(
     let now = common::time::ServerTime::now_ms();
 
     let rows = sqlx::query(
-        "INSERT INTO user_activity101_claims (user_id, activity_id, day_id, claimed_at)
-         VALUES (?, ?, ?, ?)
-         ON CONFLICT DO NOTHING",
+        "UPDATE user_activity101_claims
+         SET claimed_at = ?
+         WHERE user_id = ?
+           AND activity_id = ?
+           AND day_id = ?
+           AND claimed_at IS NULL",
     )
+    .bind(now)
     .bind(user_id)
     .bind(activity_id)
     .bind(day_id)
-    .bind(now)
     .execute(pool)
     .await?
     .rows_affected();

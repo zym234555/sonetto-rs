@@ -1,3 +1,4 @@
 /target
-/protocol/*.proto
+/protocol/cmd_id.proto
+/protocol/sonetto.proto
 sonetto-rs.zip

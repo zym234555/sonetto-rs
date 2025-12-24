@@ -171,7 +171,6 @@ pub async fn create_user(
 
             last_state_push_sent_timestamp,
             last_activity_push_sent_timestamp,
-            last_currency_push_sent_timestamp,
 
             last_daily_reward_time,
             last_daily_reset_time,
@@ -192,7 +191,7 @@ pub async fn create_user(
             ?9, ?10,
             ?11, ?12,
             ?13, ?14,
-            ?15, ?16, ?17, ?18
+            ?15, ?16, ?17
         )",
     )
     .bind(user_id)
@@ -202,13 +201,12 @@ pub async fn create_user(
     .bind(now) // updated_at
     .bind(None::<i64>) // last_state_push_sent_timestamp
     .bind(None::<i64>) // last_activity_push_sent_timestamp
-    .bind(None::<i64>) // last_currency_push_sent_timestamp
     .bind(None::<i64>) // last_daily_reward_time
     .bind(None::<i64>) // last_daily_reset_time (IMPORTANT)
     .bind(false) // month_card_claimed
     .bind(None::<i64>) // last_month_card_claim_timestamp
     .bind(server_day) // last_sign_in_day (server_day, not YYYYMMDD)
-    .bind(now) // last_sign_in_time
+    .bind(None::<i64>) // last_sign_in_time
     .bind(0) // vip_level
     .bind(None::<i64>) // last_energy_refill_time
     .bind(None::<i64>) // last_weekly_reset_time

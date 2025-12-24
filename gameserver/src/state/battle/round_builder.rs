@@ -1,5 +1,3 @@
-// src/battle/round_builder.rs
-
 use anyhow::Result;
 use sonettobuf::{Fight, FightExPointInfo, FightRound};
 

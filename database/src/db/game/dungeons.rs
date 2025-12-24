@@ -357,7 +357,7 @@ pub async fn should_update_dungeon_record(
     struct ExistingRecord {
         record_round: i32,
         hero_list: String,
-        sub_hero_list: String, // ✅ Add this
+        sub_hero_list: String,
     }
 
     // Check for existing record

@@ -28,7 +28,7 @@ CREATE TABLE hero_group_types (
 -- Hero group members (shared by both common and type groups)
 CREATE TABLE hero_group_members (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    hero_group_id INTEGER NOT NULL,
+    hero_group_id INTEGER NULL,
     hero_uid INTEGER NOT NULL,
     position INTEGER NOT NULL,
     FOREIGN KEY (hero_group_id) REFERENCES hero_groups_common(id) ON DELETE CASCADE

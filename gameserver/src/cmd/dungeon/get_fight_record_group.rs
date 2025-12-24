@@ -21,8 +21,16 @@ pub async fn on_get_fight_record_group(
         (ctx_guard.state.db.clone(), ctx_guard.player_id)
     };
 
-    // Try to load record from database
     let record = load_dungeon_record(&pool, player_id.unwrap_or(0), episode_id).await?;
+
+    tracing::info!("Loaded record: {:?}", record.is_some());
+    if let Some(ref rec) = record {
+        tracing::info!(
+            "Record has {} heroes, {} trial heroes",
+            rec.hero_list.len(),
+            rec.trial_hero_list.len()
+        );
+    }
 
     let reply = GetFightRecordGroupReply {
         fight_group: record,
@@ -32,6 +40,8 @@ pub async fn on_get_fight_record_group(
     ctx_guard
         .send_reply(CmdId::GetFightRecordGroupCmd, reply, 0, req.up_tag)
         .await?;
+
+    tracing::info!("Sent GetFightRecordGroup reply");
 
     Ok(())
 }

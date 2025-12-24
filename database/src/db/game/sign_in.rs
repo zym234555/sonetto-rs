@@ -6,9 +6,19 @@ use sqlx::SqlitePool;
 
 /// Process daily login - returns (is_new_day, is_new_week, is_new_month)
 pub async fn process_daily_login(pool: &SqlitePool, user_id: i64) -> Result<(bool, bool, bool)> {
-    let now = common::time::ServerTime::now_ms();
+    let now = ServerTime::now_ms();
 
-    // Load last sign-in timestamp (NOT last_sign_in_day)
+    let users_rows = sqlx::query("UPDATE users SET updated_at = ? WHERE id = ?")
+        .bind(now)
+        .bind(user_id)
+        .execute(pool)
+        .await?
+        .rows_affected();
+
+    if users_rows == 0 {
+        anyhow::bail!("users row missing for user_id={}", user_id);
+    }
+
     let last_sign_in_time: Option<i64> =
         sqlx::query_scalar("SELECT last_sign_in_time FROM player_state WHERE player_id = ?")
             .bind(user_id)
@@ -17,25 +27,20 @@ pub async fn process_daily_login(pool: &SqlitePool, user_id: i64) -> Result<(boo
 
     let is_new_day = match last_sign_in_time {
         Some(last) if last > 0 => ServerTime::is_new_day(last, now),
-        _ => true,
+        _ => true, // first login ever
     };
 
     let is_new_week = match last_sign_in_time {
         Some(last) if last > 0 => !ServerTime::is_same_week(last, now),
-        _ => false,
+        _ => true,
     };
 
     let is_new_month = match last_sign_in_time {
         Some(last) if last > 0 => !ServerTime::is_same_month(last, now),
-        _ => false,
+        _ => true,
     };
 
-    /* ===============================
-     * STEP 1: Month reset
-     * =============================== */
     if is_new_month {
-        tracing::info!("Monthly reset for user {}", user_id);
-
         sqlx::query("DELETE FROM user_sign_in_days WHERE user_id = ?")
             .bind(user_id)
             .execute(pool)
@@ -47,27 +52,33 @@ pub async fn process_daily_login(pool: &SqlitePool, user_id: i64) -> Result<(boo
             .await?;
     }
 
-    /* ===============================
-     * STEP 2: Daily sign-in
-     * =============================== */
     if is_new_day {
-        let server_date = common::time::ServerTime::server_date();
-        let day_of_month = server_date.day() as i32;
-        let current_server_day = ServerTime::server_day(now);
+        let server_day = ServerTime::server_day(now);
+        let day_of_month = ServerTime::server_date().day() as i32;
 
-        // Record daily sign-in
-        sqlx::query(
-            "INSERT INTO user_sign_in_days (user_id, server_day, day_of_month)
-             VALUES (?, ?, ?)
-             ON CONFLICT DO NOTHING",
+        // Insert daily sign-in (must affect 1 row on first login of the day)
+        let rows = sqlx::query(
+            r#"
+            INSERT INTO user_sign_in_days (user_id, server_day, day_of_month)
+            VALUES (?, ?, ?)
+            ON CONFLICT(user_id, server_day) DO NOTHING
+            "#,
         )
         .bind(user_id)
-        .bind(current_server_day)
+        .bind(server_day)
         .bind(day_of_month)
         .execute(pool)
-        .await?;
+        .await?
+        .rows_affected();
 
-        // Increment accumulated sign-in count
+        if rows == 0 {
+            tracing::info!(
+                "user_sign_in_days already exists for user_id={} server_day={}",
+                user_id,
+                server_day
+            );
+        }
+
         sqlx::query(
             r#"
             INSERT INTO user_sign_in_info
@@ -78,58 +89,65 @@ pub async fn process_daily_login(pool: &SqlitePool, user_id: i64) -> Result<(boo
             "#,
         )
         .bind(user_id)
-        .bind(ServerTime::now_ms())
+        .bind(now / 1000)
         .execute(pool)
         .await?;
 
-        // Month card daily credit
-        let has_active_card: Option<i32> = sqlx::query_scalar(
-            "SELECT 1 FROM user_month_card_history
-             WHERE user_id = ?
-               AND start_time <= ?
-               AND end_time > ?",
+        let has_active_card: bool = sqlx::query_scalar(
+            r#"
+            SELECT EXISTS(
+                SELECT 1 FROM user_month_card_history
+                WHERE user_id = ?
+                  AND start_time <= ?
+                  AND end_time > ?
+            )
+            "#,
         )
         .bind(user_id)
-        .bind(ServerTime::now_ms())
-        .bind(ServerTime::now_ms())
-        .fetch_optional(pool)
+        .bind(now)
+        .bind(now)
+        .fetch_one(pool)
         .await?;
 
-        if has_active_card.is_some() {
+        if has_active_card {
             sqlx::query(
-                "INSERT INTO user_month_card_days (user_id, server_day)
-                 VALUES (?, ?)
-                 ON CONFLICT DO NOTHING",
+                r#"
+                INSERT INTO user_month_card_days
+                    (user_id, server_day, day_of_month)
+                VALUES (?, ?, ?)
+                ON CONFLICT(user_id, server_day) DO NOTHING
+                "#,
             )
             .bind(user_id)
-            .bind(current_server_day)
+            .bind(server_day)
+            .bind(day_of_month)
             .execute(pool)
             .await?;
         }
 
-        tracing::info!("User {} logged in for day {}", user_id, day_of_month);
+        tracing::info!(
+            "daily login recorded user_id={} day={} server_day={}",
+            user_id,
+            day_of_month,
+            server_day
+        );
     }
 
-    /* ===============================
-     * STEP 3: Update timestamps
-     * =============================== */
-    sqlx::query(
+    let ps_rows = sqlx::query(
         "UPDATE player_state
          SET last_sign_in_time = ?, updated_at = ?
          WHERE player_id = ?",
     )
-    .bind(now as i64)
-    .bind(now as i64)
+    .bind(now)
+    .bind(now)
     .bind(user_id)
     .execute(pool)
-    .await?;
+    .await?
+    .rows_affected();
 
-    sqlx::query("UPDATE users SET last_login_at = ?, updated_at = ? WHERE id = ?")
-        .bind(now as i64)
-        .bind(now as i64)
-        .bind(user_id)
-        .execute(pool)
-        .await?;
+    if ps_rows == 0 {
+        anyhow::bail!("player_state row missing for user_id={}", user_id);
+    }
 
     Ok((is_new_day, is_new_week, is_new_month))
 }
@@ -138,7 +156,7 @@ pub async fn process_manual_sign_in(pool: &SqlitePool, user_id: i64) -> Result<(
     let now = ServerTime::now_ms();
 
     // Canonical server-day (monotonic, offset-aware)
-    let server_day = ServerTime::server_day(now) as i32;
+    let server_day = ServerTime::server_day(now);
 
     // Also extract calendar fields if UI needs them
     let server_date = ServerTime::server_date();
@@ -180,7 +198,7 @@ pub async fn process_manual_sign_in(pool: &SqlitePool, user_id: i64) -> Result<(
         "#,
     )
     .bind(user_id)
-    .bind(common::time::ServerTime::now_ms())
+    .bind(common::time::ServerTime::now_ms() / 1000)
     .execute(pool)
     .await?;
 
@@ -287,9 +305,6 @@ pub async fn get_sign_in_info(
     Vec<MonthCardHistory>, // month card history
     Vec<i32>,              // birthday heroes
 )> {
-    // ──────────────────────────────
-    //  Main sign-in info
-    // ──────────────────────────────
     let info =
         sqlx::query_as::<_, UserSignInInfo>("SELECT * FROM user_sign_in_info WHERE user_id = ?")
             .bind(user_id)
@@ -302,9 +317,6 @@ pub async fn get_sign_in_info(
                 reward_mark: 0,
             });
 
-    // ──────────────────────────────
-    // Signed-in days (DISPLAY ONLY)
-    // ──────────────────────────────
     let sign_in_days = sqlx::query_scalar::<_, i32>(
         r#"
         SELECT day_of_month
@@ -317,9 +329,6 @@ pub async fn get_sign_in_info(
     .fetch_all(pool)
     .await?;
 
-    // ──────────────────────────────
-    // Accumulated sign-in bonuses
-    // ──────────────────────────────
     let addup_bonus = sqlx::query_scalar::<_, i32>(
         r#"
         SELECT bonus_id
@@ -332,9 +341,6 @@ pub async fn get_sign_in_info(
     .fetch_all(pool)
     .await?;
 
-    // ──────────────────────────────
-    // Month card sign-in days (DISPLAY ONLY)
-    // ──────────────────────────────
     let month_card_days = sqlx::query_scalar::<_, i32>(
         r#"
         SELECT day_of_month
@@ -347,9 +353,6 @@ pub async fn get_sign_in_info(
     .fetch_all(pool)
     .await?;
 
-    // ──────────────────────────────
-    // Month card history
-    // ──────────────────────────────
     let month_card_history = sqlx::query_as::<_, MonthCardHistory>(
         r#"
         SELECT card_id, start_time, end_time
@@ -362,9 +365,6 @@ pub async fn get_sign_in_info(
     .fetch_all(pool)
     .await?;
 
-    // ──────────────────────────────
-    // Birthday heroes (derived)
-    // ──────────────────────────────
     let birthday_heroes = get_birthday_heroes_today(pool, user_id).await?;
 
     Ok((

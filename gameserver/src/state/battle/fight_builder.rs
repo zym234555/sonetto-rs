@@ -1,5 +1,3 @@
-// src/battle/fight_builder.rs
-
 use super::BattleContext;
 use super::entity_builder;
 use anyhow::Result;
@@ -188,29 +186,39 @@ fn build_enemy_entity(
 
     let game_data = exceldb::get();
 
-    // Get monster config
     let monster = game_data
         .monster
         .iter()
         .find(|m| m.id == monster_id)
         .ok_or_else(|| anyhow::anyhow!("Monster {} not found", monster_id))?;
 
-    // Get monster template for stats
+    let template_id = if monster.template != 0 {
+        monster.template
+    } else {
+        monster.skill_template
+    };
+
     let template = game_data
         .monster_template
         .iter()
-        .find(|t| t.template == monster.template)
-        .ok_or_else(|| anyhow::anyhow!("Monster template {} not found", monster.template))?;
+        .find(|t| t.template == template_id)
+        .ok_or_else(|| {
+            anyhow::anyhow!(
+                "Monster template {} not found (monster {})",
+                template_id,
+                monster_id
+            )
+        })?;
 
-    // Get monster skill template
     let skill_template = game_data
         .monster_skill_template
         .iter()
         .find(|s| s.id == monster.skill_template)
         .ok_or_else(|| {
             anyhow::anyhow!(
-                "Monster skill template {} not found",
-                monster.skill_template
+                "Monster skill template {} not found (monster {})",
+                monster.skill_template,
+                monster_id
             )
         })?;
 

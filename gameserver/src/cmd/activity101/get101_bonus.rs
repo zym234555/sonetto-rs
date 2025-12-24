@@ -24,13 +24,14 @@ pub async fn on_get101_bonus(
         )
     };
 
+    let now = common::time::ServerTime::now_ms();
+
     let mut debug_info = String::new();
     {
         let ctx_guard = ctx.lock().await;
 
         if let Some(state) = &ctx_guard.player_state {
             // ALWAYS use server time for reset logic
-            let now = common::time::ServerTime::now_ms();
 
             debug_info = format!(
                 "DEBUG Get101Bonus:\n\
@@ -53,17 +54,19 @@ pub async fn on_get101_bonus(
     tracing::info!("{}", debug_info);
 
     // Check if already claimed
-    let already_claimed: Option<i32> = sqlx::query_scalar(
-        "SELECT 1 FROM user_activity101_claims
+    let claimed_at: Option<i64> = sqlx::query_scalar(
+        "SELECT claimed_at
+         FROM user_activity101_claims
          WHERE user_id = ? AND activity_id = ? AND day_id = ?",
     )
     .bind(player_id)
     .bind(activity_id)
     .bind(day_id)
     .fetch_optional(&pool)
-    .await?;
+    .await?
+    .flatten();
 
-    if already_claimed.is_some() {
+    if claimed_at.is_some() {
         tracing::warn!(
             "User {} already claimed day {} for activity {}",
             player_id,
@@ -85,6 +88,16 @@ pub async fn on_get101_bonus(
 
     // Claim the reward
     activity101::claim_activity101_day(&pool, player_id, activity_id, day_id as i32).await?;
+
+    {
+        let mut ctx_guard = ctx.lock().await;
+
+        ctx_guard
+            .update_and_save_player_state(|state| {
+                state.mark_daily_reward_claimed(now);
+            })
+            .await?;
+    }
 
     let item_rewards = vec![(140001_u32, 1_i32)]; // (item_id, quantity)
     let currency_rewards = vec![];

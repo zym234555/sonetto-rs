@@ -7,13 +7,12 @@ mod packet;
 mod player;
 
 pub use app::AppState;
-pub use battle::BattleContext;
-pub use battle::create_battle;
-pub use battle::default_max_ap;
-pub use battle::end_fight::send_end_fight_push;
-pub use battle::generate_initial_deck;
-pub use battle::rewards::generate_dungeon_rewards;
-pub use battle::simulator::BattleSimulator;
+pub use battle::{
+    BattleContext, create_battle, default_max_ap, end_fight::send_end_fight_push,
+    generate_auto_opers, generate_initial_deck, rewards::generate_dungeon_rewards,
+    simulator::BattleSimulator,
+};
+
 pub use connection::ActiveBattle;
 pub use connection::ConnectionContext;
 pub use gacha::{

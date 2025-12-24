@@ -31,7 +31,7 @@ pub async fn on_get101_infos(
                 state: Some(state as u32),
             })
             .collect(),
-        sp_infos: vec![], // Special infos if needed
+        sp_infos: vec![],
         login_count: Some(login_count as u32),
         activity_id: Some(activity_id),
         got_once_bonus: Some(got_once_bonus),

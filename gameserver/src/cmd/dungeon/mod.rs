@@ -1,5 +1,7 @@
+mod auto_round;
 mod begin_round;
 mod change_hero_group_select;
+mod dungeon_end_dungeon;
 mod fight_end_fight;
 mod get_dungeon;
 mod get_fight_oper;
@@ -7,8 +9,10 @@ mod get_fight_record_group;
 mod instruction_dungeon_info;
 mod start_dungeon;
 
+pub use auto_round::on_auto_round;
 pub use begin_round::on_begin_round;
 pub use change_hero_group_select::on_change_hero_group_select;
+pub use dungeon_end_dungeon::on_dungeon_end_dungeon;
 pub use fight_end_fight::on_fight_end_fight;
 pub use get_dungeon::on_get_dungeon;
 pub use get_fight_oper::on_get_fight_oper;

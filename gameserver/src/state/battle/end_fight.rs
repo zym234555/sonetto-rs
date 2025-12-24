@@ -1,5 +1,3 @@
-// src/battle/end_fight.rs
-
 use crate::error::AppError;
 use crate::state::ConnectionContext;
 use anyhow::Result;

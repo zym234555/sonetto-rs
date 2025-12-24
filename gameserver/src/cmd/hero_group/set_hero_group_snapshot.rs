@@ -1,7 +1,10 @@
 use crate::error::AppError;
 use crate::packet::ClientPacket;
 use crate::state::ConnectionContext;
-use database::{db::game::hero_group_snapshots::{self, sync_snapshot_to_common}, models::game::hero_groups};
+use database::{
+    db::game::hero_group_snapshots::{self, sync_snapshot_to_common},
+    models::game::hero_groups,
+};
 use prost::Message;
 use sonettobuf::{CmdId, SetHeroGroupSnapshotReply, SetHeroGroupSnapshotRequest};
 use std::sync::Arc;
@@ -26,7 +29,6 @@ pub async fn on_set_hero_group_snapshot(
         )
     };
 
-    // Convert FightGroup → HeroGroupInfo
     let hero_group = hero_groups::HeroGroupInfo {
         group_id: snapshot_sub_id,
         hero_list: {
@@ -35,14 +37,12 @@ pub async fn on_set_hero_group_snapshot(
                 .into_iter()
                 .filter(|&uid| uid != 0)
                 .collect();
-
             heroes.extend(
                 fight_group
                     .sub_hero_list
                     .into_iter()
                     .filter(|&uid| uid != 0),
             );
-
             heroes
         },
         name: String::new(),
@@ -61,7 +61,10 @@ pub async fn on_set_hero_group_snapshot(
             .activity104_equips
             .into_iter()
             .enumerate()
-            .filter(|(_, e)| e.hero_uid.unwrap_or(0) != 0)
+            .filter(|(_, e)| {
+                let uid = e.hero_uid.unwrap_or(0);
+                uid != 0
+            })
             .map(|(index, e)| hero_groups::HeroGroupEquip {
                 index: index as i32,
                 equip_uids: e.equip_uid.into_iter().filter(|&uid| uid != 0).collect(),
@@ -69,7 +72,7 @@ pub async fn on_set_hero_group_snapshot(
             .collect(),
         assist_boss_id: fight_group.assist_boss_id.unwrap_or(0),
     };
-    // Save snapshot
+
     hero_group_snapshots::save_hero_group_snapshot(
         &pool,
         player_id,
@@ -88,7 +91,6 @@ pub async fn on_set_hero_group_snapshot(
 
     sync_snapshot_to_common(&pool, player_id, &hero_group).await?;
 
-    // Reply uses HeroGroupInfo (uses existing From impl)
     let data = SetHeroGroupSnapshotReply {
         snapshot_id: Some(snapshot_id),
         snapshot_sub_id: Some(snapshot_sub_id),

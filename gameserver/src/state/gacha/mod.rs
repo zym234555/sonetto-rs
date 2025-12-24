@@ -21,17 +21,19 @@ pub async fn build_gacha(pool_id: i32, sp_pool_info: Option<&SpPoolInfo>) -> Res
 
     let banner_type = match &sp_pool_info {
         Some(sp) => BannerType::from(sp.sp_type),
-        None => BannerType::Normal,
+        None => BannerType::RateUp,
     };
 
     let (six_up, five_up) = match banner_type {
-        BannerType::Normal => parse_up_heroes(pool_cfg.up_weight.as_str()),
+        BannerType::RateUp => parse_up_heroes(pool_cfg.up_weight.as_str()),
 
         BannerType::Ripple => {
             let sp = sp_pool_info.as_ref().unwrap();
 
             (sp.up_hero_ids.clone(), Vec::new())
         }
+
+        BannerType::Standard => (Vec::new(), Vec::new()),
     };
 
     let summons = game_data.summon.iter().filter(|p| p.id == pool_id);

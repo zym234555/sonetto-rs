@@ -46,5 +46,6 @@ CREATE TABLE hero_group_snapshot_sort_ids (
     snapshot_id INTEGER NOT NULL,
     sub_id INTEGER NOT NULL,
     sort_order INTEGER NOT NULL,
+    PRIMARY KEY (snapshot_id, sub_id),
     FOREIGN KEY (snapshot_id) REFERENCES hero_group_snapshots(id) ON DELETE CASCADE
 );

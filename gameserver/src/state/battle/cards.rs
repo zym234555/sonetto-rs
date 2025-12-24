@@ -6,8 +6,6 @@ use data::exceldb;
 use database::db::game::heroes;
 use sonettobuf::{CardInfo, CardInfoPush, FightGroup};
 
-// src/battle/cards.rs
-
 // Core deck generation
 pub async fn generate_card_deck(
     pool: &SqlitePool,
@@ -77,10 +75,35 @@ async fn build_candidate_pool(
     hero_uids: &[i64],
 ) -> Result<Vec<CardInfo>, AppError> {
     let mut pool_cards = Vec::new();
+    let game_data = exceldb::get();
 
     for &hero_uid in hero_uids {
-        let hero = heroes::get_hero_by_hero_uid(pool, user_id, hero_uid as i32).await?;
-        let hero_id = hero.record.hero_id;
+        let hero_id = if hero_uid < 0 {
+            // Trial hero - load from static data
+            let trial_id = hero_uid.abs() as i32;
+            let trial_data = game_data
+                .hero_trial
+                .iter()
+                .find(|t| t.id == trial_id)
+                .ok_or_else(|| {
+                    tracing::error!("Trial hero {} not found in static data", trial_id);
+                    AppError::InvalidRequest
+                })?;
+
+            tracing::info!(
+                "Loading trial hero {}: hero_id={}, level={}, skin={}",
+                trial_id,
+                trial_data.hero_id,
+                trial_data.level,
+                trial_data.skin
+            );
+
+            trial_data.hero_id
+        } else {
+            // Regular hero - load from database
+            let hero = heroes::get_hero_by_hero_uid(pool, user_id, hero_uid as i32).await?;
+            hero.record.hero_id
+        };
 
         for skill_id in get_hero_skills(hero_id) {
             pool_cards.push(CardInfo {
@@ -89,7 +112,7 @@ async fn build_candidate_pool(
                 skill_id: Some(skill_id),
                 card_type: Some(0), // rank 1
                 status: Some(0),
-                temp_card: Some(false),
+                temp_card: Some(hero_uid < 0), // Mark trial hero cards as temp
                 enchants: vec![],
                 target_uid: Some(0),
                 energy: Some(0),
@@ -123,7 +146,6 @@ fn draw_cards_with_merge(candidates: Vec<CardInfo>, max_cards: usize) -> Vec<Car
             {
                 let new_rank = last.card_type.unwrap_or(1) + 1;
 
-                // Look up the next rank skill from table
                 let game_data = exceldb::get();
                 if let Some(upgraded_skill) = game_data.skill.iter().find(|s| {
                     s.hero_id == last.hero_id.unwrap_or(0)
@@ -154,25 +176,41 @@ fn draw_cards_with_merge(candidates: Vec<CardInfo>, max_cards: usize) -> Vec<Car
 fn get_hero_skills(hero_id: i32) -> Vec<i32> {
     let game_data = exceldb::get();
 
-    let mut skills: Vec<i32> = game_data
-        .skill
-        .iter()
-        .filter(|s| s.hero_id == hero_id)
-        .filter(|s| s.skill_rank == 1) // Only rank 1 skills
-        .map(|s| s.id)
-        .collect();
+
+    let character = game_data.character.iter().find(|c| c.id == hero_id);
+
+    let Some(character) = character else {
+        tracing::warn!("Character {} not found in character table", hero_id);
+        return Vec::new();
+    };
+
+    // Parse skill string: "1#31240111#31240112#31240113|2#31240121#31240122#31240123"
+    let mut skills = Vec::new();
+
+    for skill_group in character.skill.split('|') {
+        let parts: Vec<&str> = skill_group.split('#').collect();
+
+        if parts.is_empty() {
+            continue;
+        }
+
+        // Skip the first part (skill group number like "1" or "2")
+        // Take only the first skill ID from each group (rank 1)
+        if parts.len() > 1 {
+            if let Ok(skill_id) = parts[1].parse::<i32>() {
+                skills.push(skill_id);
+            }
+        }
+    }
 
     if skills.is_empty() {
-        tracing::warn!("No rank 1 skills found for hero {}", hero_id);
-
-        // Debug: show what ranks exist
-        let all_ranks: Vec<_> = game_data
-            .skill
-            .iter()
-            .filter(|s| s.hero_id == hero_id)
-            .map(|s| (s.id, s.skill_rank))
-            .collect();
-        tracing::debug!("Hero {} all skills: {:?}", hero_id, all_ranks);
+        tracing::warn!(
+            "No skills parsed for hero {} from skill string: {}",
+            hero_id,
+            character.skill
+        );
+    } else {
+        tracing::debug!("Hero {} skills: {:?}", hero_id, skills);
     }
 
     skills.sort_unstable();

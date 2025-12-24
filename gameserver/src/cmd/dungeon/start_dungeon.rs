@@ -16,12 +16,10 @@ pub async fn on_start_dungeon(
     req: ClientPacket,
 ) -> Result<(), AppError> {
     let request = StartDungeonRequest::decode(&req.data[..])?;
-
     tracing::info!("Received start dungeon request {:?}", request);
 
     let chapter_id = request.chapter_id.unwrap_or(0);
     let episode_id = request.episode_id.unwrap_or(0);
-    let fight_group = request.fight_group.ok_or(AppError::InvalidRequest)?;
     let use_record = request.use_record.unwrap_or(false);
     let multiplication = request.multiplication.unwrap_or(1);
 
@@ -33,16 +31,23 @@ pub async fn on_start_dungeon(
         )
     };
 
-    let hero_count = fight_group.hero_list.iter().filter(|&&u| u != 0).count();
-
     let game_data = exceldb::get();
-    let battle_id = game_data
+
+    let episode_cfg = game_data
         .episode
         .iter()
         .find(|e| e.id == episode_id)
-        .ok_or(AppError::InvalidRequest)?
-        .battle_id;
+        .ok_or(AppError::InvalidRequest)?;
 
+    if episode_cfg.battle_id == 0 {
+        return handle_story_only_episode(ctx, req, chapter_id, episode_id).await;
+    }
+
+    let fight_group = request.fight_group.ok_or(AppError::InvalidRequest)?;
+
+    let hero_count = fight_group.hero_list.iter().filter(|&&u| u != 0).count();
+
+    let battle_id = episode_cfg.battle_id;
     let max_ap = default_max_ap(episode_id, hero_count);
 
     let battle_ctx = BattleContext {
@@ -55,7 +60,6 @@ pub async fn on_start_dungeon(
     // Generate deck ONCE
     let card_push = generate_initial_deck(&pool, player_id, &fight_group, max_ap).await?;
 
-    // Extract the deck
     let card_deck = card_push.card_group.clone();
 
     // Create battle using the SAME deck
@@ -86,7 +90,6 @@ pub async fn on_start_dungeon(
 
     let updated_dungeon = get_user_dungeon(&pool, player_id, chapter_id, episode_id).await?;
 
-    let game_data = data::exceldb::get();
     let chapter_type = game_data
         .chapter
         .iter()
@@ -96,8 +99,8 @@ pub async fn on_start_dungeon(
 
     let chapter_type_nums = vec![sonettobuf::UserChapterTypeNum {
         chapter_type: Some(chapter_type),
-        today_pass_num: Some(1),  // pull these from db
-        today_total_num: Some(2), // pull these from db
+        today_pass_num: Some(1),
+        today_total_num: Some(2),
     }];
 
     let dungeon_push = DungeonUpdatePush {
@@ -124,6 +127,54 @@ pub async fn on_start_dungeon(
     ctx_guard
         .send_push(CmdId::CardInfoPushCmd, card_push)
         .await?;
+
+    ctx_guard
+        .send_push(CmdId::DungeonUpdatePushCmd, dungeon_push)
+        .await?;
+
+    ctx_guard
+        .send_reply(CmdId::StartDungeonCmd, reply, 0, req.up_tag)
+        .await?;
+
+    Ok(())
+}
+
+async fn handle_story_only_episode(
+    ctx: Arc<Mutex<ConnectionContext>>,
+    req: ClientPacket,
+    chapter_id: i32,
+    episode_id: i32,
+) -> Result<(), AppError> {
+    let (player_id, pool) = {
+        let ctx_guard = ctx.lock().await;
+        (
+            ctx_guard.player_id.ok_or(AppError::NotLoggedIn)?,
+            ctx_guard.state.db.clone(),
+        )
+    };
+    // Ensure dungeon row exists / update progress
+    let updated_dungeon = get_user_dungeon(&pool, player_id, chapter_id, episode_id).await?;
+
+    let dungeon_push = DungeonUpdatePush {
+        dungeon_info: Some(UserDungeon {
+            chapter_id: Some(chapter_id),
+            episode_id: Some(episode_id),
+            star: Some(updated_dungeon.star),
+            challenge_count: Some(updated_dungeon.challenge_count),
+            has_record: Some(updated_dungeon.has_record),
+            left_return_all_num: Some(1),
+            today_pass_num: Some(0),
+            today_total_num: Some(0),
+        }),
+        chapter_type_nums: vec![],
+    };
+
+    let reply = StartDungeonReply {
+        fight: None,
+        round: None,
+    };
+
+    let mut ctx_guard = ctx.lock().await;
 
     ctx_guard
         .send_push(CmdId::DungeonUpdatePushCmd, dungeon_push)

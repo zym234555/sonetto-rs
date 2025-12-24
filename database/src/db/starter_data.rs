@@ -3877,25 +3877,22 @@ async fn load_activity101_from_json(
         }
     };
 
-    // Load claimed days (state == 2)
     if let Some(infos) = data.get("infos").and_then(|v| v.as_array()) {
         for info in infos {
             let day_id = info.get("id").and_then(|v| v.as_i64()).unwrap_or(0) as i32;
-            let state = info.get("state").and_then(|v| v.as_i64()).unwrap_or(0) as i32;
 
-            if state == 2 {
-                // Already claimed
-                sqlx::query(
-                    "INSERT INTO user_activity101_claims (user_id, activity_id, day_id, claimed_at)
-                     VALUES (?, ?, ?, ?)",
-                )
-                .bind(user_id)
-                .bind(activity_id)
-                .bind(day_id)
-                .bind(now)
-                .execute(&mut **tx)
-                .await?;
-            }
+            sqlx::query(
+                r#"
+                INSERT OR IGNORE INTO user_activity101_claims
+                    (user_id, activity_id, day_id, claimed_at)
+                VALUES (?, ?, ?, NULL)
+                "#,
+            )
+            .bind(user_id)
+            .bind(activity_id)
+            .bind(day_id)
+            .execute(&mut **tx)
+            .await?;
         }
     }
 

@@ -13,7 +13,6 @@ pub struct PlayerState {
 
     pub last_state_push_sent_timestamp: Option<i64>,
     pub last_activity_push_sent_timestamp: Option<i64>,
-    pub last_currency_push_sent_timestamp: Option<i64>,
 
     pub last_daily_reward_time: Option<i64>,
     pub last_daily_reset_time: Option<i64>,
@@ -44,7 +43,6 @@ impl PlayerState {
 
             last_state_push_sent_timestamp: None,
             last_activity_push_sent_timestamp: None,
-            last_currency_push_sent_timestamp: None,
 
             last_daily_reward_time: None,
             last_daily_reset_time: None,
@@ -79,11 +77,30 @@ impl PlayerState {
             None => true,
         }
     }
+
+    #[inline]
+    pub fn is_new_week(&self, now_ms: i64) -> bool {
+        match self.last_weekly_reset_time {
+            Some(ts) => ServerTime::server_week(ts) != ServerTime::server_week(now_ms),
+            None => true,
+        }
+    }
+
+    #[inline]
+    pub fn is_new_month(&self, now_ms: i64) -> bool {
+        match self.last_monthly_reset_time {
+            Some(ts) => ServerTime::server_month(ts) != ServerTime::server_month(now_ms),
+            None => true,
+        }
+    }
 }
 
 impl PlayerState {
     pub fn needs_state_push(&self, now_ms: i64) -> bool {
-        self.is_new_server_day(now_ms) || self.last_state_push_sent_timestamp.is_none()
+        match self.last_state_push_sent_timestamp {
+            None => true,
+            Some(last) => ServerTime::server_day(last) != ServerTime::server_day(now_ms),
+        }
     }
 
     pub fn needs_activity_push(&self, now_ms: i64) -> bool {
@@ -92,24 +109,8 @@ impl PlayerState {
 }
 
 impl PlayerState {
-    pub fn record_login(&mut self, now_ms: i64) {
-        self.last_login_timestamp = Some(now_ms);
-        self.updated_at = now_ms;
-    }
-
     pub fn mark_login_complete(&mut self, now_ms: i64) {
         self.initial_login_complete = true;
-        self.updated_at = now_ms;
-    }
-
-    pub fn mark_daily_reset(&mut self, now_ms: i64) {
-        self.last_daily_reset_time = Some(now_ms);
-
-        // Reset push markers so they fire once per day
-        self.last_state_push_sent_timestamp = None;
-        self.last_activity_push_sent_timestamp = None;
-        self.last_currency_push_sent_timestamp = None;
-
         self.updated_at = now_ms;
     }
 

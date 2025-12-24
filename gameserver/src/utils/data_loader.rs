@@ -1,4 +1,4 @@
-use common::DATA_DIRECTORY;
+use common::data_directory;
 use std::fs;
 
 /// Load and send a push message from JSON
@@ -6,8 +6,8 @@ use std::fs;
 #[macro_export]
 macro_rules! send_push {
     ($ctx:expr, $cmd_id:expr, $msg_type:ty, $path:expr) => {{
-        let msg: $msg_type =
-            $crate::data_loader::GameDataLoader::load_struct($path).map_err(|e| {
+        let msg: $msg_type = $crate::utils::data_loader::GameDataLoader::load_struct($path)
+            .map_err(|e| {
                 $crate::error::AppError::Custom(format!(
                     "Failed to load {} from {}: {}",
                     stringify!($msg_type),
@@ -28,8 +28,8 @@ macro_rules! send_push {
 #[macro_export]
 macro_rules! send_reply {
     ($ctx:expr, $up_tag:expr, $cmd_id:expr, $msg_type:ty, $path:expr) => {{
-        let msg: $msg_type =
-            $crate::data_loader::GameDataLoader::load_struct($path).map_err(|e| {
+        let msg: $msg_type = $crate::utils::data_loader::GameDataLoader::load_struct($path)
+            .map_err(|e| {
                 $crate::error::AppError::Custom(format!(
                     "Failed to load {} from {}: {}",
                     stringify!($msg_type),
@@ -69,7 +69,7 @@ impl GameDataLoader {
     where
         T: serde::de::DeserializeOwned,
     {
-        let file_path = DATA_DIRECTORY.join(relative_path);
+        let file_path = data_directory().join(relative_path);
 
         if !file_path.exists() {
             return Err(anyhow::anyhow!(

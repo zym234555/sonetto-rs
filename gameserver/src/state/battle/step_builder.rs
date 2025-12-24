@@ -1,5 +1,3 @@
-// src/battle/step_builder.rs
-
 use sonettobuf::{ActEffect, BuffInfo, FightStep, fight_step};
 
 pub struct FightStepBuilder {
