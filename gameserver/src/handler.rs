@@ -155,9 +155,16 @@ pub async fn dispatch_command(
         // === Guides & Tutorials ===
         CmdId::GetGuideInfoCmd => guide::on_get_guide_info,
         CmdId::GetHandbookInfoCmd => handbook::on_get_handbook_info,
+        CmdId::FinishGuideCmd => guide::on_finish_guide,
 
         // === Social & Friends ===
         CmdId::LoadFriendInfosCmd => friend::on_load_friend_infos,
+        CmdId::GetFriendInfoListCmd => friend::on_get_friend_info_list,
+        CmdId::GetRecommendedFriendsCmd => friend::on_get_recommended_friends,
+        CmdId::GetApplyListCmd => friend::on_get_apply_list,
+        CmdId::GetBlacklistCmd => friend::on_get_blacklist,
+        CmdId::SendMsgCmd => friend::on_send_msg,
+        CmdId::DeleteOfflineMsgCmd => friend::on_delete_offline_msg,
 
         // === UI & Settings ===
         CmdId::GetRedDotInfosCmd => red_dot::on_get_red_dot_infos,

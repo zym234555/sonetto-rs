@@ -109,6 +109,7 @@ Create a `data/` folder next to those binaries and copy `excel2json` and the `st
 * Equipment can be locked and unlocked
 * Characters can be marked as favorite
 * Gacha now reduces currency used and converts when low
+* GM commands now added (check friend list)
 
 ---
 

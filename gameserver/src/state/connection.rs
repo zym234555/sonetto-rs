@@ -18,12 +18,14 @@ pub struct ConnectionContext {
     pub send_queue: VecDeque<CommandPacket>,
 
     pub player_state: Option<PlayerState>,
-    
+
     pub logged_in: bool,
 
     next_sequence: u32,
 
     pub active_battle: Option<ActiveBattle>,
+    pub bot_welcome_sent: bool,
+    pub bot_msg_counter: u64,
 }
 
 #[allow(dead_code)]
@@ -59,6 +61,8 @@ impl ConnectionContext {
             logged_in: false,
             next_sequence: 0,
             active_battle: None,
+            bot_welcome_sent: false,
+            bot_msg_counter: 0,
         }
     }
 

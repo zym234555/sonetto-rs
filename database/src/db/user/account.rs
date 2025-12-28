@@ -366,6 +366,22 @@ pub async fn rename_user_and_update_guide(
     Ok(())
 }
 
+pub async fn update_user_level(pool: &SqlitePool, user_id: i64, level: i32) -> Result<()> {
+    sqlx::query(
+        r#"
+        UPDATE users
+        SET level = ?
+        WHERE id = ?
+        "#,
+    )
+    .bind(level)
+    .bind(user_id)
+    .execute(pool)
+    .await?;
+
+    Ok(())
+}
+
 /// Generate a deterministic user ID from email
 fn generate_user_id(email: &str) -> i64 {
     use std::collections::hash_map::DefaultHasher;

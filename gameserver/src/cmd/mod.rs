@@ -27,6 +27,7 @@ pub mod equip;
 pub mod explore;
 pub mod fight;
 pub mod friend;
+pub mod gm;
 pub mod guide;
 pub mod handbook;
 pub mod hero;
