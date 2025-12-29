@@ -1875,10 +1875,6 @@ pub struct Act128BossDetail {
     pub layer4_total_point: ::core::option::Option<i32>,
     #[prost(int32, optional, tag = "7")]
     pub layer4_highest_point: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "8")]
-    pub sp_highest_point: ::core::option::Option<i32>,
-    #[prost(int32, repeated, packed = "false", tag = "9")]
-    pub sp_item_type_ids: ::prost::alloc::vec::Vec<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -1961,30 +1957,6 @@ pub struct Act128InfoUpdatePush {
     pub activity_id: ::core::option::Option<i32>,
     #[prost(message, optional, tag = "2")]
     pub boss_detail: ::core::option::Option<Act128BossDetail>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act128SpFirstHalfSelectItemReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub boss_id: ::core::option::Option<i32>,
-    #[prost(int32, repeated, packed = "false", tag = "3")]
-    pub item_type_ids: ::prost::alloc::vec::Vec<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act128SpFirstHalfSelectItemRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub boss_id: ::core::option::Option<i32>,
-    #[prost(int32, repeated, packed = "false", tag = "3")]
-    pub item_type_ids: ::prost::alloc::vec::Vec<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -5508,121 +5480,19 @@ pub struct Act181Info {
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct Act182AutoChessGameInfo {
     #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
     pub module: ::core::option::Option<i32>,
-    #[prost(bool, optional, tag = "3")]
+    #[prost(bool, optional, tag = "2")]
     pub start: ::core::option::Option<bool>,
-    #[prost(int32, optional, tag = "4")]
+    #[prost(int32, optional, tag = "3")]
     pub curr_round: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "5")]
+    #[prost(int32, optional, tag = "4")]
     pub episode_id: ::core::option::Option<i32>,
-    #[prost(int32, repeated, packed = "false", tag = "6")]
+    #[prost(int32, repeated, packed = "false", tag = "5")]
     pub master_id_box: ::prost::alloc::vec::Vec<i32>,
-    #[prost(int32, optional, tag = "7")]
+    #[prost(int32, optional, tag = "6")]
     pub select_master_id: ::core::option::Option<i32>,
-    #[prost(bool, optional, tag = "8")]
+    #[prost(bool, optional, tag = "7")]
     pub refreshed: ::core::option::Option<bool>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act182FightRecordInfo {
-    #[prost(int64, optional, tag = "1")]
-    pub uid: ::core::option::Option<i64>,
-    #[prost(message, optional, tag = "2")]
-    pub player_info: ::core::option::Option<Act182SnapshotPlayerInfo>,
-    #[prost(message, optional, tag = "3")]
-    pub friend_player_info: ::core::option::Option<Act182SnapshotPlayerInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Act182GetFriendFightMessageReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int64, optional, tag = "2")]
-    pub friend_user_id: ::core::option::Option<i64>,
-    #[prost(int64, optional, tag = "3")]
-    pub uid: ::core::option::Option<i64>,
-    #[prost(message, optional, tag = "4")]
-    pub turn: ::core::option::Option<AutoChessTurn>,
-    #[prost(message, optional, tag = "5")]
-    pub scene: ::core::option::Option<AutoChessScene>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act182GetFriendFightMessageRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int64, optional, tag = "2")]
-    pub friend_user_id: ::core::option::Option<i64>,
-    #[prost(int64, optional, tag = "3")]
-    pub uid: ::core::option::Option<i64>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Act182GetFriendFightRecordsReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "2")]
-    pub fight_records: ::prost::alloc::vec::Vec<Act182FightRecordInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act182GetFriendFightRecordsRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Act182GetFriendSnapshotsReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int64, optional, tag = "2")]
-    pub friend_user_id: ::core::option::Option<i64>,
-    #[prost(message, optional, tag = "3")]
-    pub snapshots: ::core::option::Option<Act182SnapshotInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act182GetFriendSnapshotsRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int64, optional, tag = "2")]
-    pub friend_user_id: ::core::option::Option<i64>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Act182GetHasSnapshotFriendReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "2")]
-    pub friend_player_info: ::prost::alloc::vec::Vec<Act182SnapshotPlayerInfo>,
-    #[prost(message, optional, tag = "3")]
-    pub snapshot: ::core::option::Option<Act182SnapshotInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act182GetHasSnapshotFriendRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -5683,8 +5553,6 @@ pub struct Act182Info {
     pub gain_reward_rank: ::prost::alloc::vec::Vec<i32>,
     #[prost(int32, optional, tag = "8")]
     pub double_score_times: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "9")]
-    pub snapshot: ::core::option::Option<Act182SnapshotInfo>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -5711,54 +5579,6 @@ pub struct Act182RefreshMasterReply {
 pub struct Act182RefreshMasterRequest {
     #[prost(int32, optional, tag = "1")]
     pub activity_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Act182SaveSnapshotReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "2")]
-    pub snapshot: ::core::option::Option<Act182SnapshotInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act182SaveSnapshotRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Act182SnapshotInfo {
-    #[prost(message, optional, tag = "1")]
-    pub player_info: ::core::option::Option<Act182SnapshotPlayerInfo>,
-    #[prost(message, repeated, tag = "2")]
-    pub war_zones: ::prost::alloc::vec::Vec<AutoChessWarZone>,
-    #[prost(message, optional, tag = "3")]
-    pub master: ::core::option::Option<AutoChessMaster>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act182SnapshotPlayerInfo {
-    #[prost(int64, optional, tag = "1")]
-    pub user_id: ::core::option::Option<i64>,
-    #[prost(int32, optional, tag = "2")]
-    pub portrait: ::core::option::Option<i32>,
-    #[prost(string, optional, tag = "3")]
-    pub name: ::core::option::Option<::prost::alloc::string::String>,
-    #[prost(int32, optional, tag = "4")]
-    pub rank: ::core::option::Option<i32>,
-    #[prost(int64, optional, tag = "5")]
-    pub hurt: ::core::option::Option<i64>,
-    #[prost(bool, optional, tag = "6")]
-    pub is_win: ::core::option::Option<bool>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -5841,10 +5661,6 @@ pub struct Act183EpisodeNo {
     pub repress: ::core::option::Option<Act183RepressNo>,
     #[prost(string, optional, tag = "9")]
     pub params: ::core::option::Option<::prost::alloc::string::String>,
-    #[prost(int32, optional, tag = "10")]
-    pub star: ::core::option::Option<i32>,
-    #[prost(bool, optional, tag = "11")]
-    pub simulate: ::core::option::Option<bool>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -5867,12 +5683,6 @@ pub struct Act183EpisodeRecordNo {
     pub repress: ::core::option::Option<Act183RepressNo>,
     #[prost(string, optional, tag = "8")]
     pub params: ::core::option::Option<::prost::alloc::string::String>,
-    #[prost(int32, optional, tag = "9")]
-    pub star: ::core::option::Option<i32>,
-    #[prost(bool, optional, tag = "10")]
-    pub simulate: ::core::option::Option<bool>,
-    #[prost(int32, optional, tag = "11")]
-    pub round: ::core::option::Option<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -5885,8 +5695,6 @@ pub struct Act183FightResultNo {
     pub heroes: ::prost::alloc::vec::Vec<Act183HeroNo>,
     #[prost(int32, repeated, packed = "false", tag = "3")]
     pub unlock_conditions: ::prost::alloc::vec::Vec<i32>,
-    #[prost(int32, optional, tag = "4")]
-    pub star: ::core::option::Option<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -5963,8 +5771,6 @@ pub struct Act183HeroNo {
     pub hero_id: ::core::option::Option<i64>,
     #[prost(int32, optional, tag = "2")]
     pub trial_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub r#type: ::core::option::Option<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -6284,1648 +6090,6 @@ pub struct Act187FinishGameRequest {
 #[serde(rename_all = "camelCase")]
 #[serde(default)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Act188CardNo {
-    #[prost(int32, optional, tag = "1")]
-    pub uid: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub status: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "4")]
-    pub status2_s: ::prost::alloc::vec::Vec<Act188CardStatus2No>,
-    #[prost(int32, optional, tag = "5")]
-    pub x: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "6")]
-    pub y: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act188CardStatus2No {
-    #[prost(int32, optional, tag = "1")]
-    pub r#type: ::core::option::Option<i32>,
-    #[prost(string, optional, tag = "2")]
-    pub exts: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Act188EnterEpisodeReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub episode_id: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "3")]
-    pub act188_game: ::core::option::Option<Act188GameNo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act188EnterEpisodeRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub episode_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act188EpisodeNo {
-    #[prost(int32, optional, tag = "1")]
-    pub episode_id: ::core::option::Option<i32>,
-    #[prost(bool, optional, tag = "2")]
-    pub is_finished: ::core::option::Option<bool>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Act188EpisodePush {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "2")]
-    pub episodes: ::prost::alloc::vec::Vec<Act188EpisodeNo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Act188GameNo {
-    #[prost(int32, optional, tag = "1")]
-    pub game_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub round: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "3")]
-    pub cards: ::prost::alloc::vec::Vec<Act188CardNo>,
-    #[prost(message, optional, tag = "4")]
-    pub team: ::core::option::Option<Act188TeamNo>,
-    #[prost(message, optional, tag = "5")]
-    pub boss_team: ::core::option::Option<Act188TeamNo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act188ReverseCardReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub episode_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub uid: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act188ReverseCardRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub episode_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub uid: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act188Step {
-    #[prost(string, optional, tag = "1")]
-    pub param: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Act188StepPush {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub episode_id: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "3")]
-    pub steps: ::prost::alloc::vec::Vec<Act188Step>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act188StoryReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub episode_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act188StoryRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub episode_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act188TeamNo {
-    #[prost(int32, optional, tag = "1")]
-    pub hp: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub pair_count: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub max_reverse_count: ::core::option::Option<i32>,
-    #[prost(int32, repeated, packed = "false", tag = "4")]
-    pub ability_ids: ::prost::alloc::vec::Vec<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act190ChooseEpisodeBranchReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub episode_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub branch_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act190ChooseEpisodeBranchRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub episode_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub branch_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Act190EpisodePush {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "2")]
-    pub episodes: ::prost::alloc::vec::Vec<Act190EpisodeRecord>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act190EpisodeRecord {
-    #[prost(int32, optional, tag = "1")]
-    pub episode_id: ::core::option::Option<i32>,
-    #[prost(bool, optional, tag = "2")]
-    pub is_finished: ::core::option::Option<bool>,
-    #[prost(int32, repeated, packed = "false", tag = "3")]
-    pub unlock_branch_ids: ::prost::alloc::vec::Vec<i32>,
-    #[prost(string, optional, tag = "4")]
-    pub progress: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act190FinishEpisodeReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub episode_id: ::core::option::Option<i32>,
-    #[prost(string, optional, tag = "3")]
-    pub progress: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act190FinishEpisodeRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub episode_id: ::core::option::Option<i32>,
-    #[prost(string, optional, tag = "3")]
-    pub progress: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act191BadgeInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub count: ::core::option::Option<i32>,
-    #[prost(bool, optional, tag = "3")]
-    pub act: ::core::option::Option<bool>,
-    #[prost(bool, optional, tag = "4")]
-    pub sp: ::core::option::Option<bool>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act191BattleHeroInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub index: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub hero_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub item_uid1: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "4")]
-    pub item_uid2: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Act191BattleTeamInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub index: ::core::option::Option<i32>,
-    #[prost(string, optional, tag = "2")]
-    pub name: ::core::option::Option<::prost::alloc::string::String>,
-    #[prost(message, repeated, tag = "3")]
-    pub battle_hero_info: ::prost::alloc::vec::Vec<Act191BattleHeroInfo>,
-    #[prost(message, repeated, tag = "4")]
-    pub sub_hero_info: ::prost::alloc::vec::Vec<Act191SubHeroInfo>,
-    #[prost(bool, optional, tag = "5")]
-    pub auto: ::core::option::Option<bool>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act191Effect {
-    #[prost(int32, optional, tag = "1")]
-    pub id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub r#type: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub count: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "4")]
-    pub need_count: ::core::option::Option<i32>,
-    #[prost(bool, optional, tag = "5")]
-    pub end: ::core::option::Option<bool>,
-    #[prost(string, optional, tag = "6")]
-    pub param: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Act191GameEndInfo {
-    #[prost(message, repeated, tag = "1")]
-    pub badge_info_list: ::prost::alloc::vec::Vec<Act191BadgeInfo>,
-    #[prost(int32, optional, tag = "2")]
-    pub gain_score: ::core::option::Option<i32>,
-    #[prost(string, optional, tag = "3")]
-    pub param: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Act191GameInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub coin: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub cur_stage: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub cur_node: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "4")]
-    pub node_info: ::prost::alloc::vec::Vec<Act191NodeInfo>,
-    #[prost(int32, optional, tag = "5")]
-    pub cur_team_index: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "6")]
-    pub team_info: ::prost::alloc::vec::Vec<Act191BattleTeamInfo>,
-    #[prost(message, optional, tag = "7")]
-    pub warehouse_info: ::core::option::Option<Act191WareHouseInfo>,
-    #[prost(int32, optional, tag = "8")]
-    pub score: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "9")]
-    pub state: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "10")]
-    pub rank: ::core::option::Option<i32>,
-    #[prost(string, optional, tag = "11")]
-    pub param: ::core::option::Option<::prost::alloc::string::String>,
-    #[prost(message, optional, tag = "12")]
-    pub record_info: ::core::option::Option<Act191RecordInfo>,
-    #[prost(message, repeated, tag = "13")]
-    pub init_build_info: ::prost::alloc::vec::Vec<Act191InitBuildInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Act191GameInfoUpdatePush {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "2")]
-    pub game_info: ::core::option::Option<Act191GameInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act191HeroFacetsIdInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub role_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub facets_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act191HeroInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub hero_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub exp: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub star: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Act191Info {
-    #[prost(message, repeated, tag = "1")]
-    pub badge_info_list: ::prost::alloc::vec::Vec<Act191BadgeInfo>,
-    #[prost(message, optional, tag = "2")]
-    pub game_info: ::core::option::Option<Act191GameInfo>,
-    #[prost(string, optional, tag = "3")]
-    pub param: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act191InitBuildDetail {
-    #[prost(int32, optional, tag = "1")]
-    pub r#type: ::core::option::Option<i32>,
-    #[prost(int32, repeated, packed = "false", tag = "2")]
-    pub add_hero: ::prost::alloc::vec::Vec<i32>,
-    #[prost(int32, repeated, packed = "false", tag = "3")]
-    pub add_item: ::prost::alloc::vec::Vec<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Act191InitBuildInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub coin: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "3")]
-    pub detail: ::prost::alloc::vec::Vec<Act191InitBuildDetail>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act191ItemInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub uid: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub item_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act191NodeInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub node_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub stage: ::core::option::Option<i32>,
-    #[prost(string, repeated, tag = "3")]
-    pub select_node_str: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-    #[prost(int32, optional, tag = "4")]
-    pub node_type: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "5")]
-    pub state: ::core::option::Option<i32>,
-    #[prost(string, optional, tag = "6")]
-    pub node_str: ::core::option::Option<::prost::alloc::string::String>,
-    #[prost(bool, optional, tag = "7")]
-    pub end_node: ::core::option::Option<bool>,
-    #[prost(string, optional, tag = "8")]
-    pub param: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Act191RecordInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub remodeling_value: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "2")]
-    pub hero_facets: ::prost::alloc::vec::Vec<Act191HeroFacetsIdInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act191SubHeroInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub index: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub hero_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act191TriggerEffectPush {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, repeated, packed = "false", tag = "2")]
-    pub effect_id: ::prost::alloc::vec::Vec<i32>,
-    #[prost(string, optional, tag = "3")]
-    pub param: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Act191WareHouseInfo {
-    #[prost(message, repeated, tag = "1")]
-    pub hero: ::prost::alloc::vec::Vec<Act191HeroInfo>,
-    #[prost(message, repeated, tag = "2")]
-    pub item: ::prost::alloc::vec::Vec<Act191ItemInfo>,
-    #[prost(int32, repeated, packed = "false", tag = "3")]
-    pub enhance_id: ::prost::alloc::vec::Vec<i32>,
-    #[prost(message, repeated, tag = "4")]
-    pub effect: ::prost::alloc::vec::Vec<Act191Effect>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act192ChooseEpisodeBranchReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub episode_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub branch_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act192ChooseEpisodeBranchRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub episode_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub branch_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Act192EpisodePush {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "2")]
-    pub episodes: ::prost::alloc::vec::Vec<Act192EpisodeRecord>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act192EpisodeRecord {
-    #[prost(int32, optional, tag = "1")]
-    pub episode_id: ::core::option::Option<i32>,
-    #[prost(bool, optional, tag = "2")]
-    pub is_finished: ::core::option::Option<bool>,
-    #[prost(int32, repeated, packed = "false", tag = "3")]
-    pub unlock_branch_ids: ::prost::alloc::vec::Vec<i32>,
-    #[prost(string, optional, tag = "4")]
-    pub progress: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act192FinishEpisodeReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub episode_id: ::core::option::Option<i32>,
-    #[prost(string, optional, tag = "3")]
-    pub progress: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act192FinishEpisodeRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub episode_id: ::core::option::Option<i32>,
-    #[prost(string, optional, tag = "3")]
-    pub progress: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Act194EnterEpisodeReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "2")]
-    pub episode_info: ::core::option::Option<Act194EpisodeInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act194EnterEpisodeRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub episode_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act194EpisodeFinishPush {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub episode_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub pass_star: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Act194EpisodeInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub episode_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub current_round: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub total_round_energy: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "4")]
-    pub left_round_energy: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "5")]
-    pub event_infos: ::prost::alloc::vec::Vec<Act194EventInfo>,
-    #[prost(message, repeated, tag = "6")]
-    pub team_infos: ::prost::alloc::vec::Vec<Act194TeamInfo>,
-    #[prost(message, repeated, tag = "7")]
-    pub item_infos: ::prost::alloc::vec::Vec<Act194ItemInfo>,
-    #[prost(int32, repeated, packed = "false", tag = "8")]
-    pub buff_ids: ::prost::alloc::vec::Vec<i32>,
-    #[prost(int32, repeated, packed = "false", tag = "9")]
-    pub item_buff_ids: ::prost::alloc::vec::Vec<i32>,
-    #[prost(bool, optional, tag = "10")]
-    pub is_extra_star: ::core::option::Option<bool>,
-    #[prost(message, repeated, tag = "11")]
-    pub finished_event_infos: ::prost::alloc::vec::Vec<Act194FinishEventInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Act194EpisodeInfoPush {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub episode_id: ::core::option::Option<i32>,
-    #[prost(bool, optional, tag = "3")]
-    pub is_episode_finish: ::core::option::Option<bool>,
-    #[prost(int32, optional, tag = "4")]
-    pub pass_star: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "5")]
-    pub episode_info: ::core::option::Option<Act194EpisodeInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act194EpisodeRecord {
-    #[prost(int32, optional, tag = "1")]
-    pub episode_id: ::core::option::Option<i32>,
-    #[prost(bool, optional, tag = "2")]
-    pub is_unlock: ::core::option::Option<bool>,
-    #[prost(int32, optional, tag = "3")]
-    pub pass_count: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "4")]
-    pub pass_star: ::core::option::Option<i32>,
-    #[prost(bool, optional, tag = "5")]
-    pub have_progress: ::core::option::Option<bool>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Act194EpisodeRecordsPush {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "2")]
-    pub episode_records: ::prost::alloc::vec::Vec<Act194EpisodeRecord>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Act194EventInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub event_id: ::core::option::Option<i32>,
-    #[prost(bool, optional, tag = "2")]
-    pub is_chose: ::core::option::Option<bool>,
-    #[prost(int32, optional, tag = "3")]
-    pub option_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "4")]
-    pub team_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "5")]
-    pub event_end_round: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "6")]
-    pub options: ::prost::alloc::vec::Vec<Act194OptionInfo>,
-    #[prost(int32, optional, tag = "7")]
-    pub pre_event_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act194FinishEventInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub finished_event_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub option_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act194FinishStoryEpisodeReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub episode_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act194FinishStoryEpisodeRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub episode_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Act194GetEpisodeInfoReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "2")]
-    pub episode_info: ::core::option::Option<Act194EpisodeInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act194GetEpisodeInfoRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub episode_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Act194GetInfosReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "2")]
-    pub episode_records: ::prost::alloc::vec::Vec<Act194EpisodeRecord>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act194GetInfosRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act194ItemInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub item_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub quantity: ::core::option::Option<i32>,
-    #[prost(int32, repeated, packed = "false", tag = "3")]
-    pub buff_ids: ::prost::alloc::vec::Vec<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Act194NewEventInfosPush {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub episode_id: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "3")]
-    pub new_event_infos: ::prost::alloc::vec::Vec<Act194EventInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act194NextRoundReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub episode_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act194NextRoundRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub episode_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act194OptionInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub option_id: ::core::option::Option<i32>,
-    #[prost(bool, optional, tag = "2")]
-    pub is_chosable: ::core::option::Option<bool>,
-    #[prost(int32, optional, tag = "3")]
-    pub cost_action_point: ::core::option::Option<i32>,
-    #[prost(bool, optional, tag = "4")]
-    pub is_ever_chosen: ::core::option::Option<bool>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act194ResetEpisodeReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub episode_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act194ResetEpisodeRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub episode_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act194SendTeamExploreReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub episode_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub event_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act194SendTeamExploreRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub episode_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub event_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "4")]
-    pub team_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "5")]
-    pub option_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act194SkipEpisodeReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub episode_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act194SkipEpisodeRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub episode_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act194TeamInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub team_id: ::core::option::Option<i32>,
-    #[prost(int32, repeated, packed = "false", tag = "2")]
-    pub buff_ids: ::prost::alloc::vec::Vec<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub round_action_time: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "4")]
-    pub round_acted_time: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act194UseItemReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub episode_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub item_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act194UseItemRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub episode_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub item_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act194WithdrawTeamReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub episode_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub team_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act194WithdrawTeamRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub episode_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub team_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act196GainReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act196GainRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act197ExploreReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act197ExploreRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub r#type: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act197GainInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub pool_id: ::core::option::Option<i32>,
-    #[prost(int32, repeated, packed = "false", tag = "2")]
-    pub gain_ids: ::prost::alloc::vec::Vec<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act197RummageReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub pool_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act197RummageRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub pool_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act198CanGetPush {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act198GainReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act198GainRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act199GainReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub hero_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act199GainRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub hero_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act203ChooseEpisodeBranchReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub episode_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub branch_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act203ChooseEpisodeBranchRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub episode_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub branch_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Act203EpisodePush {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "2")]
-    pub episodes: ::prost::alloc::vec::Vec<Act203EpisodeRecord>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act203EpisodeRecord {
-    #[prost(int32, optional, tag = "1")]
-    pub episode_id: ::core::option::Option<i32>,
-    #[prost(bool, optional, tag = "2")]
-    pub is_finished: ::core::option::Option<bool>,
-    #[prost(int32, repeated, packed = "false", tag = "3")]
-    pub unlock_branch_ids: ::prost::alloc::vec::Vec<i32>,
-    #[prost(string, optional, tag = "4")]
-    pub progress: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act203FinishEpisodeReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub episode_id: ::core::option::Option<i32>,
-    #[prost(string, optional, tag = "3")]
-    pub progress: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act203FinishEpisodeRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub episode_id: ::core::option::Option<i32>,
-    #[prost(string, optional, tag = "3")]
-    pub progress: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act203SaveEpisodeProgressReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub episode_id: ::core::option::Option<i32>,
-    #[prost(string, optional, tag = "3")]
-    pub progress: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act203SaveEpisodeProgressRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub episode_id: ::core::option::Option<i32>,
-    #[prost(string, optional, tag = "3")]
-    pub progress: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act204Info {
-    #[prost(int32, optional, tag = "1")]
-    pub current_stage: ::core::option::Option<i32>,
-    #[prost(int64, optional, tag = "2")]
-    pub get_milestone_progress: ::core::option::Option<i64>,
-    #[prost(bool, optional, tag = "3")]
-    pub get_daily_collection: ::core::option::Option<bool>,
-    #[prost(bool, optional, tag = "4")]
-    pub get_onece_bonus: ::core::option::Option<bool>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act204TaskInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub task_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub progress: ::core::option::Option<i32>,
-    #[prost(uint64, optional, tag = "3")]
-    pub expire_time: ::core::option::Option<u64>,
-    #[prost(bool, optional, tag = "4")]
-    pub has_get_bonus: ::core::option::Option<bool>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Act204TaskPush {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "2")]
-    pub act204_tasks: ::prost::alloc::vec::Vec<Act204TaskInfo>,
-    #[prost(message, repeated, tag = "3")]
-    pub delete_tasks: ::prost::alloc::vec::Vec<Act204TaskInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act205FinishGameReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub game_type: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub have_game_count: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "4")]
-    pub reward_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act205FinishGameRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub game_type: ::core::option::Option<i32>,
-    #[prost(string, optional, tag = "3")]
-    pub game_info: ::core::option::Option<::prost::alloc::string::String>,
-    #[prost(int32, optional, tag = "4")]
-    pub reward_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act205GetGameInfoReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub game_type: ::core::option::Option<i32>,
-    #[prost(string, optional, tag = "3")]
-    pub game_info: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act205GetGameInfoRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act205GetInfoReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub game_type: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub have_game_count: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act205GetInfoRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act205InfoPush {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub game_type: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub have_game_count: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act206ChooseDirectionReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "2")]
-    pub chosen_info: ::core::option::Option<Act206ChosenInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act206ChooseDirectionRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub direction_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act206ChosenInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub current_direction: ::core::option::Option<i32>,
-    #[prost(uint64, optional, tag = "2")]
-    pub direction_gen_time: ::core::option::Option<u64>,
-    #[prost(int32, optional, tag = "3")]
-    pub reselected_num: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "4")]
-    pub reward_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act206GetBonusReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub reward_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act206GetBonusRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act206GetInfoReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(bool, optional, tag = "2")]
-    pub has_chosen_direction: ::core::option::Option<bool>,
-    #[prost(message, optional, tag = "3")]
-    pub chosen_info: ::core::option::Option<Act206ChosenInfo>,
-    #[prost(int32, repeated, packed = "false", tag = "4")]
-    pub option_directions: ::prost::alloc::vec::Vec<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act206GetInfoRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act206InfoPush {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(bool, optional, tag = "2")]
-    pub has_chosen_direction: ::core::option::Option<bool>,
-    #[prost(message, optional, tag = "3")]
-    pub chosen_info: ::core::option::Option<Act206ChosenInfo>,
-    #[prost(int32, repeated, packed = "false", tag = "4")]
-    pub option_directions: ::prost::alloc::vec::Vec<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act208BonusNo {
-    #[prost(int32, optional, tag = "1")]
-    pub id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub status: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act208ReceiveBonusReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act208ReceiveBonusRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act209InfoPush {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub max_layer: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act210ChooseEpisodeBranchReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub episode_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub branch_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act210ChooseEpisodeBranchRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub episode_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub branch_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Act210EpisodePush {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "2")]
-    pub episodes: ::prost::alloc::vec::Vec<Act210EpisodeRecord>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act210EpisodeRecord {
-    #[prost(int32, optional, tag = "1")]
-    pub episode_id: ::core::option::Option<i32>,
-    #[prost(bool, optional, tag = "2")]
-    pub is_finished: ::core::option::Option<bool>,
-    #[prost(int32, repeated, packed = "false", tag = "3")]
-    pub unlock_branch_ids: ::prost::alloc::vec::Vec<i32>,
-    #[prost(string, optional, tag = "4")]
-    pub progress: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act210FinishEpisodeReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub episode_id: ::core::option::Option<i32>,
-    #[prost(string, optional, tag = "3")]
-    pub progress: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act210FinishEpisodeRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub episode_id: ::core::option::Option<i32>,
-    #[prost(string, optional, tag = "3")]
-    pub progress: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act210SaveEpisodeProgressReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub episode_id: ::core::option::Option<i32>,
-    #[prost(string, optional, tag = "3")]
-    pub progress: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act210SaveEpisodeProgressRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub episode_id: ::core::option::Option<i32>,
-    #[prost(string, optional, tag = "3")]
-    pub progress: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act211ChooseEpisodeBranchReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub episode_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub branch_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act211ChooseEpisodeBranchRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub episode_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub branch_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Act211EpisodePush {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "2")]
-    pub episodes: ::prost::alloc::vec::Vec<Act211EpisodeRecord>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act211EpisodeRecord {
-    #[prost(int32, optional, tag = "1")]
-    pub episode_id: ::core::option::Option<i32>,
-    #[prost(bool, optional, tag = "2")]
-    pub is_finished: ::core::option::Option<bool>,
-    #[prost(int32, repeated, packed = "false", tag = "3")]
-    pub unlock_branch_ids: ::prost::alloc::vec::Vec<i32>,
-    #[prost(string, optional, tag = "4")]
-    pub progress: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act211FinishEpisodeReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub episode_id: ::core::option::Option<i32>,
-    #[prost(string, optional, tag = "3")]
-    pub progress: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act211FinishEpisodeRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub episode_id: ::core::option::Option<i32>,
-    #[prost(string, optional, tag = "3")]
-    pub progress: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act211SaveEpisodeProgressReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub episode_id: ::core::option::Option<i32>,
-    #[prost(string, optional, tag = "3")]
-    pub progress: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act211SaveEpisodeProgressRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub episode_id: ::core::option::Option<i32>,
-    #[prost(string, optional, tag = "3")]
-    pub progress: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act212BonusNo {
-    #[prost(int32, optional, tag = "1")]
-    pub id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub status: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Act212BonusPush {
-    #[prost(message, optional, tag = "1")]
-    pub act212_info: ::core::option::Option<Act212InfoNo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Act212InfoNo {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(bool, optional, tag = "2")]
-    pub is_active: ::core::option::Option<bool>,
-    #[prost(message, repeated, tag = "3")]
-    pub bonuss: ::prost::alloc::vec::Vec<Act212BonusNo>,
-    #[prost(int64, optional, tag = "4")]
-    pub end_time: ::core::option::Option<i64>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act212ReceiveBonusReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub status: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Act212ReceiveBonusRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ActEffect {
     #[prost(int64, optional, tag = "1")]
     pub target_id: ::core::option::Option<i64>,
@@ -7969,14 +6133,6 @@ pub struct ActEffect {
     pub power_info: ::core::option::Option<PowerInfo>,
     #[prost(message, optional, tag = "21")]
     pub card_heat_value: ::core::option::Option<CardHeatValue>,
-    #[prost(message, repeated, tag = "22")]
-    pub fight_tasks: ::prost::alloc::vec::Vec<FightTask>,
-    #[prost(message, optional, tag = "23")]
-    pub fight: ::core::option::Option<Fight>,
-    #[prost(message, optional, tag = "24")]
-    pub buff_act_info: ::core::option::Option<BuffActInfo>,
-    #[prost(message, optional, tag = "25")]
-    pub hurt_info: ::core::option::Option<FightHurtInfo>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -8621,272 +6777,6 @@ pub struct ApplyRequest {
 #[serde(rename_all = "camelCase")]
 #[serde(default)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ArcherAttack {
-    #[prost(int32, optional, tag = "1")]
-    pub uid: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "2")]
-    pub hero: ::core::option::Option<HeroUnit>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct AssassinBuff {
-    #[prost(int32, optional, tag = "1")]
-    pub id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub duration: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct AssassinBuild {
-    #[prost(int32, optional, tag = "1")]
-    pub id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub r#type: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub level: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct AssassinBuildInfo {
-    #[prost(int32, repeated, packed = "false", tag = "1")]
-    pub unlock_build_ids: ::prost::alloc::vec::Vec<i32>,
-    #[prost(message, repeated, tag = "2")]
-    pub buildings: ::prost::alloc::vec::Vec<AssassinBuild>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct AssassinChangeMapReply {
-    #[prost(message, optional, tag = "1")]
-    pub scene: ::core::option::Option<AssassinScene>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct AssassinChangeMapRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub map_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct AssassinChangingMapPush {
-    #[prost(int32, optional, tag = "1")]
-    pub map_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct AssassinCount {
-    #[prost(int32, optional, tag = "1")]
-    pub key: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub value: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct AssassinGrid {
-    #[prost(int32, optional, tag = "1")]
-    pub grid_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub has_fog: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "3")]
-    pub traps: ::prost::alloc::vec::Vec<AssassinTrap>,
-    #[prost(int32, optional, tag = "4")]
-    pub trace_point: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct AssassinHero {
-    #[prost(int32, optional, tag = "1")]
-    pub hero_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub career_id: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "3")]
-    pub item_list: ::prost::alloc::vec::Vec<HeroItem>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct AssassinHeroInfo {
-    #[prost(int32, repeated, packed = "false", tag = "1")]
-    pub unlock_career_ids: ::prost::alloc::vec::Vec<i32>,
-    #[prost(message, repeated, tag = "2")]
-    pub heros: ::prost::alloc::vec::Vec<AssassinHero>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct AssassinItem {
-    #[prost(int32, optional, tag = "1")]
-    pub item_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub count: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct AssassinMission {
-    #[prost(int32, optional, tag = "1")]
-    pub id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub progress: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub target_progress: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct AssassinOutSideInfo {
-    #[prost(int32, required, tag = "1")]
-    pub activity_id: i32,
-    #[prost(int32, repeated, packed = "false", tag = "2")]
-    pub unlock_map_ids: ::prost::alloc::vec::Vec<i32>,
-    #[prost(message, repeated, tag = "3")]
-    pub items: ::prost::alloc::vec::Vec<AssassinItem>,
-    #[prost(message, optional, tag = "4")]
-    pub building_info: ::core::option::Option<AssassinBuildInfo>,
-    #[prost(message, optional, tag = "5")]
-    pub quest_info: ::core::option::Option<AssassinOutSideQuestInfo>,
-    #[prost(message, optional, tag = "6")]
-    pub hero_info: ::core::option::Option<AssassinHeroInfo>,
-    #[prost(int32, optional, tag = "7")]
-    pub coin: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct AssassinOutSideQuestInfo {
-    #[prost(int32, repeated, packed = "false", tag = "1")]
-    pub finish_quest_ids: ::prost::alloc::vec::Vec<i32>,
-    #[prost(int32, repeated, packed = "false", tag = "2")]
-    pub current_quest_ids: ::prost::alloc::vec::Vec<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub assassin_quest_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct AssassinOutSideUnlockPush {
-    #[prost(int32, repeated, packed = "false", tag = "1")]
-    pub unlock_map_ids: ::prost::alloc::vec::Vec<i32>,
-    #[prost(int32, repeated, packed = "false", tag = "2")]
-    pub unlock_build_ids: ::prost::alloc::vec::Vec<i32>,
-    #[prost(message, repeated, tag = "3")]
-    pub items: ::prost::alloc::vec::Vec<AssassinItem>,
-    #[prost(message, repeated, tag = "4")]
-    pub heros: ::prost::alloc::vec::Vec<AssassinHero>,
-    #[prost(int32, repeated, packed = "false", tag = "5")]
-    pub quest_ids: ::prost::alloc::vec::Vec<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct AssassinScene {
-    #[prost(int32, optional, tag = "1")]
-    pub map_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub round: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub current_event_id: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "4")]
-    pub grids: ::prost::alloc::vec::Vec<AssassinGrid>,
-    #[prost(message, repeated, tag = "5")]
-    pub heros: ::prost::alloc::vec::Vec<HeroUnit>,
-    #[prost(message, repeated, tag = "6")]
-    pub monsters: ::prost::alloc::vec::Vec<MonsterUnit>,
-    #[prost(message, optional, tag = "7")]
-    pub mission: ::core::option::Option<AssassinMission>,
-    #[prost(int32, repeated, packed = "false", tag = "8")]
-    pub interactives: ::prost::alloc::vec::Vec<i32>,
-    #[prost(int32, repeated, packed = "false", tag = "9")]
-    pub battle_grid_ids: ::prost::alloc::vec::Vec<i32>,
-    #[prost(int32, optional, tag = "10")]
-    pub next_round: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "11")]
-    pub changing_map_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "12")]
-    pub state: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "13")]
-    pub alert_level: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "14")]
-    pub quest_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "15")]
-    pub direction: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct AssassinTrap {
-    #[prost(int32, optional, tag = "1")]
-    pub id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub duration: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct AssassinUnlockLibraryPush {
-    #[prost(int32, repeated, packed = "false", tag = "1")]
-    pub unlock_library_ids: ::prost::alloc::vec::Vec<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct AssassinUseSkillReply {
-    #[prost(int32, optional, tag = "1")]
-    pub uid: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub target_id: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "3")]
-    pub hero: ::prost::alloc::vec::Vec<HeroUnit>,
-    #[prost(message, repeated, tag = "4")]
-    pub monster: ::prost::alloc::vec::Vec<MonsterUnit>,
-    #[prost(message, repeated, tag = "5")]
-    pub grid: ::prost::alloc::vec::Vec<AssassinGrid>,
-    #[prost(int32, optional, tag = "6")]
-    pub alert_level: ::core::option::Option<i32>,
-    #[prost(int32, repeated, packed = "false", tag = "7")]
-    pub del_monster_uid: ::prost::alloc::vec::Vec<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct AssassinUseSkillRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub uid: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub target_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AssistBossInfo {
     #[prost(message, repeated, tag = "1")]
     pub skills: ::prost::alloc::vec::Vec<AssistBossSkillInfo>,
@@ -8906,16 +6796,16 @@ pub struct AssistBossInfo {
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
 #[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct AssistBossNo {
     #[prost(int32, optional, tag = "1")]
     pub id: ::core::option::Option<i32>,
     #[prost(int32, optional, tag = "2")]
     pub level: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "3")]
-    pub talent_plans: ::prost::alloc::vec::Vec<TalentPlanNo>,
-    #[prost(int32, optional, tag = "4")]
-    pub use_talent_plan: ::core::option::Option<i32>,
+    #[prost(int32, optional, tag = "3")]
+    pub talent_point: ::core::option::Option<i32>,
+    #[prost(int32, repeated, packed = "false", tag = "4")]
+    pub talent_ids: ::prost::alloc::vec::Vec<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -8988,8 +6878,6 @@ pub struct AssistHeroInfo {
     pub destiny_level: ::core::option::Option<i32>,
     #[prost(int32, optional, tag = "21")]
     pub destiny_stone: ::core::option::Option<i32>,
-    #[prost(string, optional, tag = "22")]
-    pub extra_str: ::core::option::Option<::prost::alloc::string::String>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -9028,10 +6916,6 @@ pub struct AutoChess {
     pub skill_container: ::core::option::Option<AutoChessSkillContainer>,
     #[prost(message, optional, tag = "11")]
     pub buff_container: ::core::option::Option<AutoChessBuffContainer>,
-    #[prost(int32, optional, tag = "12")]
-    pub durability: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "13")]
-    pub cd: ::core::option::Option<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -9207,57 +7091,23 @@ pub struct AutoChessEnterFightRequest {
 #[serde(rename_all = "camelCase")]
 #[serde(default)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct AutoChessEnterFriendFightSceneReply {
+pub struct AutoChessEnterSceneReply {
     #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
     pub module_id: ::core::option::Option<i32>,
-    #[prost(int64, optional, tag = "3")]
-    pub user_id: ::core::option::Option<i64>,
-    #[prost(message, optional, tag = "4")]
+    #[prost(message, optional, tag = "2")]
     pub scene: ::core::option::Option<AutoChessScene>,
-    #[prost(message, optional, tag = "5")]
-    pub turn: ::core::option::Option<AutoChessTurn>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
 #[serde(default)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct AutoChessEnterFriendFightSceneRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub module_id: ::core::option::Option<i32>,
-    #[prost(int64, optional, tag = "3")]
-    pub user_id: ::core::option::Option<i64>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct AutoChessEnterSceneReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub module_id: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "3")]
-    pub scene: ::core::option::Option<AutoChessScene>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct AutoChessEnterSceneRequest {
     #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
     pub module_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
+    #[prost(int32, optional, tag = "2")]
     pub episode_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "4")]
+    #[prost(int32, optional, tag = "3")]
     pub master_id: ::core::option::Option<i32>,
-    #[prost(string, optional, tag = "5")]
-    pub params: ::core::option::Option<::prost::alloc::string::String>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -9272,8 +7122,6 @@ pub struct AutoChessFight {
     pub my_side_master: ::core::option::Option<AutoChessMaster>,
     #[prost(message, optional, tag = "4")]
     pub enemy_master: ::core::option::Option<AutoChessMaster>,
-    #[prost(message, repeated, tag = "5")]
-    pub unwar_zones: ::prost::alloc::vec::Vec<AutoChessWarZone>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -9560,7 +7408,7 @@ pub struct AutoChessScenePush {
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
 #[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct AutoChessSettlePush {
     #[prost(int64, optional, tag = "1")]
     pub remaining_hp: ::core::option::Option<i64>,
@@ -9582,8 +7430,6 @@ pub struct AutoChessSettlePush {
     pub master_id: ::core::option::Option<i32>,
     #[prost(int32, optional, tag = "10")]
     pub round: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "11")]
-    pub war_zones: ::prost::alloc::vec::Vec<AutoChessWarZone>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -9640,28 +7486,6 @@ pub struct AutoChessUseMasterSkillRequest {
     pub module_id: ::core::option::Option<i32>,
     #[prost(int32, optional, tag = "2")]
     pub skill_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub target_uid: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct AutoChessUseSkillReply {
-    #[prost(int32, optional, tag = "1")]
-    pub module_id: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "2")]
-    pub turn: ::core::option::Option<AutoChessTurn>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct AutoChessUseSkillRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub module_id: ::core::option::Option<i32>,
-    #[prost(int64, optional, tag = "2")]
-    pub chess_uid: ::core::option::Option<i64>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -9925,8 +7749,6 @@ pub struct BeginRoundOper {
     pub param2: ::core::option::Option<i32>,
     #[prost(int64, optional, tag = "4")]
     pub to_id: ::core::option::Option<i64>,
-    #[prost(int32, optional, tag = "5")]
-    pub param3: ::core::option::Option<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -9994,16 +7816,6 @@ pub struct BlacklistChangePush {
 #[serde(rename_all = "camelCase")]
 #[serde(default)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct BlockColorInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub block_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub block_color: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct BlockInfo {
     #[prost(int32, optional, tag = "1")]
     pub block_id: ::core::option::Option<i32>,
@@ -10015,8 +7827,6 @@ pub struct BlockInfo {
     pub rotate: ::core::option::Option<i32>,
     #[prost(int32, optional, tag = "5")]
     pub water_type: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "6")]
-    pub block_color: ::core::option::Option<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -10041,38 +7851,12 @@ pub struct BlockPackageInfo {
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
 #[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct BlockPermanentInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub block_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub color: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct BonusSceneNo {
     #[prost(int32, optional, tag = "1")]
     pub bonus_scene_id: ::core::option::Option<i32>,
     #[prost(int32, repeated, packed = "false", tag = "2")]
     pub options: ::prost::alloc::vec::Vec<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct BossFightResetChapterReply {
-    #[prost(int32, optional, tag = "1")]
-    pub chapter_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct BossFightResetChapterRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub chapter_id: ::core::option::Option<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -10174,18 +7958,6 @@ pub struct BpSelfSelectBonus {
 #[serde(rename_all = "camelCase")]
 #[serde(default)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct BuffActInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub act_id: ::core::option::Option<i32>,
-    #[prost(int32, repeated, packed = "false", tag = "2")]
-    pub param: ::prost::alloc::vec::Vec<i32>,
-    #[prost(string, optional, tag = "3")]
-    pub str_param: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BuffInfo {
     #[prost(int32, optional, tag = "1")]
     pub buff_id: ::core::option::Option<i32>,
@@ -10205,8 +7977,6 @@ pub struct BuffInfo {
     pub layer: ::core::option::Option<i32>,
     #[prost(int32, optional, tag = "9")]
     pub r#type: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "10")]
-    pub act_info: ::prost::alloc::vec::Vec<BuffActInfo>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -10263,24 +8033,6 @@ pub struct BuildingInfo {
 pub struct BuildingLevelUpPush {
     #[prost(message, repeated, tag = "1")]
     pub building_infos: ::prost::alloc::vec::Vec<BuildingInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct BuildingLevelUpReply {
-    #[prost(int32, optional, tag = "1")]
-    pub coin: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "2")]
-    pub building: ::core::option::Option<AssassinBuild>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct BuildingLevelUpRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub building_id: ::core::option::Option<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -10405,26 +8157,6 @@ pub struct BuyIn174ShopRequest {
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
 #[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct BuyIn191ShopReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "2")]
-    pub game_info: ::core::option::Option<Act191GameInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct BuyIn191ShopRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub index: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct BuyManufactureBuildingInfoReply {
     #[prost(int32, optional, tag = "1")]
@@ -10496,28 +8228,6 @@ pub struct BuyRogueGoodsRequest {
     pub id: ::core::option::Option<i32>,
     #[prost(int32, optional, tag = "3")]
     pub num: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct CancelHero3124TalentTreeReply {
-    #[prost(int32, optional, tag = "1")]
-    pub hero_id: ::core::option::Option<i32>,
-    #[prost(string, optional, tag = "2")]
-    pub extra_str: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct CancelHero3124TalentTreeRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub hero_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub sub_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub level: ::core::option::Option<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -10711,7 +8421,6 @@ pub mod card_info {
         SupportEx = 3,
         NotCompose = 4,
         CardDeckUseActPoint = 5,
-        Skill3 = 6,
     }
     impl CardType {
         /// String value of the enum field names used in the ProtoBuf definition.
@@ -10726,7 +8435,6 @@ pub mod card_info {
                 Self::SupportEx => "SUPPORT_EX",
                 Self::NotCompose => "NOT_COMPOSE",
                 Self::CardDeckUseActPoint => "CARD_DECK_USE_ACT_POINT",
-                Self::Skill3 => "SKILL3",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -10738,7 +8446,6 @@ pub mod card_info {
                 "SUPPORT_EX" => Some(Self::SupportEx),
                 "NOT_COMPOSE" => Some(Self::NotCompose),
                 "CARD_DECK_USE_ACT_POINT" => Some(Self::CardDeckUseActPoint),
-                "SKILL3" => Some(Self::Skill3),
                 _ => None,
             }
         }
@@ -10825,36 +8532,6 @@ pub struct ChangeAct174TeamRequest {
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
 #[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ChangeAct191TeamReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub cur_team_index: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "3")]
-    pub team_info: ::core::option::Option<Act191BattleTeamInfo>,
-    #[prost(int32, optional, tag = "4")]
-    pub rank: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "5")]
-    pub op_type: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ChangeAct191TeamRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub cur_team_index: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "3")]
-    pub team_info: ::core::option::Option<Act191BattleTeamInfo>,
-    #[prost(int32, optional, tag = "4")]
-    pub op_type: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ChangeFightGroupReply {
     #[prost(int32, optional, tag = "1")]
@@ -10871,24 +8548,6 @@ pub struct ChangeFightGroupRequest {
     pub activity_id: ::core::option::Option<i32>,
     #[prost(int32, optional, tag = "2")]
     pub hero_group_snapshot_sub_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct ChangeFishingCurrencyReply {
-    #[prost(int32, optional, tag = "1")]
-    pub count: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub exchanged_count: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct ChangeFishingCurrencyRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub count: ::core::option::Option<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -11162,19 +8821,6 @@ pub struct CheckEventRequest {
 #[serde(rename_all = "camelCase")]
 #[serde(default)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct CheckHeroGroupNameReply {}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct CheckHeroGroupNameRequest {
-    #[prost(string, optional, tag = "1")]
-    pub name: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct Chess {
     #[prost(int32, optional, tag = "1")]
     pub r#type: ::core::option::Option<i32>,
@@ -11190,52 +8836,6 @@ pub struct Chess {
 pub struct ChessBoardRow {
     #[prost(message, repeated, tag = "1")]
     pub chess: ::prost::alloc::vec::Vec<Chess>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct ChoiceHero3123WeaponReply {
-    #[prost(int32, optional, tag = "1")]
-    pub hero_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub main_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub sub_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct ChoiceHero3123WeaponRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub hero_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub main_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub sub_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct ChoiceHero3124TalentTreeReply {
-    #[prost(int32, optional, tag = "1")]
-    pub hero_id: ::core::option::Option<i32>,
-    #[prost(string, optional, tag = "2")]
-    pub extra_str: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct ChoiceHero3124TalentTreeRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub hero_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub sub_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub level: ::core::option::Option<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -11298,100 +8898,6 @@ pub struct ClothUpdatePush {
     #[prost(message, optional, tag = "1")]
     pub update_infos: ::core::option::Option<PlayerClothInfo>,
 }
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct CommandPostBonusAllReply {
-    #[prost(int32, repeated, packed = "false", tag = "1")]
-    pub bonus_id: ::prost::alloc::vec::Vec<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct CommandPostBonusAllRequest {}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct CommandPostBonusReply {
-    #[prost(int32, optional, tag = "1")]
-    pub bonus_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct CommandPostBonusRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub bonus_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct CommandPostDispatchReply {
-    #[prost(message, optional, tag = "1")]
-    pub event: ::core::option::Option<CommandPostEventInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct CommandPostDispatchRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub event_id: ::core::option::Option<i32>,
-    #[prost(int32, repeated, packed = "false", tag = "2")]
-    pub hero_ids: ::prost::alloc::vec::Vec<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct CommandPostEventInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub state: ::core::option::Option<i32>,
-    #[prost(int32, repeated, packed = "false", tag = "3")]
-    pub hero_ids: ::prost::alloc::vec::Vec<i32>,
-    #[prost(uint64, optional, tag = "4")]
-    pub start_time: ::core::option::Option<u64>,
-    #[prost(uint64, optional, tag = "5")]
-    pub end_time: ::core::option::Option<u64>,
-    #[prost(bool, optional, tag = "6")]
-    pub read: ::core::option::Option<bool>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct CommandPostEventReadReply {
-    #[prost(int32, optional, tag = "1")]
-    pub id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct CommandPostEventReadRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct CommandPostPaperReply {
-    #[prost(int32, optional, tag = "1")]
-    pub paper: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct CommandPostPaperRequest {}
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
 #[serde(default)]
@@ -11773,11 +9279,6 @@ pub mod custom_data {
     #[repr(i32)]
     pub enum CustomDataType {
         Act183 = 1,
-        WeekwalkVer2 = 2,
-        Act191 = 3,
-        Survival = 4,
-        Odyssey = 5,
-        Act128Sp = 6,
     }
     impl CustomDataType {
         /// String value of the enum field names used in the ProtoBuf definition.
@@ -11787,22 +9288,12 @@ pub mod custom_data {
         pub fn as_str_name(&self) -> &'static str {
             match self {
                 Self::Act183 => "Act183",
-                Self::WeekwalkVer2 => "WeekwalkVer2",
-                Self::Act191 => "Act191",
-                Self::Survival => "Survival",
-                Self::Odyssey => "Odyssey",
-                Self::Act128Sp => "Act128Sp",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
         pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
             match value {
                 "Act183" => Some(Self::Act183),
-                "WeekwalkVer2" => Some(Self::WeekwalkVer2),
-                "Act191" => Some(Self::Act191),
-                "Survival" => Some(Self::Survival),
-                "Odyssey" => Some(Self::Odyssey),
-                "Act128Sp" => Some(Self::Act128Sp),
                 _ => None,
             }
         }
@@ -11837,28 +9328,6 @@ pub struct DecomposeAct123EquipRequest {
     pub activity_id: ::core::option::Option<i32>,
     #[prost(int64, repeated, packed = "false", tag = "2")]
     pub equip_uids: ::prost::alloc::vec::Vec<i64>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct DeleteHeroGroupReply {
-    #[prost(int32, optional, tag = "1")]
-    pub snapshot_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub snapshot_sub_id: ::core::option::Option<i32>,
-    #[prost(int32, repeated, packed = "false", tag = "4")]
-    pub sort_sub_ids: ::prost::alloc::vec::Vec<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct DeleteHeroGroupRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub snapshot_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub snapshot_sub_id: ::core::option::Option<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -12051,417 +9520,6 @@ pub struct DialogEventSelectRequest {
     pub historylist: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     #[prost(int32, optional, tag = "4")]
     pub option: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Dice {
-    #[prost(int64, optional, tag = "1")]
-    pub uid: ::core::option::Option<i64>,
-    #[prost(int32, optional, tag = "2")]
-    pub status: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub suit_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "4")]
-    pub num: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "5")]
-    pub dice_id: ::core::option::Option<i32>,
-    #[prost(bool, optional, tag = "6")]
-    pub deleted: ::core::option::Option<bool>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DiceBox {
-    #[prost(int32, optional, tag = "1")]
-    pub capacity: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "2")]
-    pub dices: ::prost::alloc::vec::Vec<Dice>,
-    #[prost(int32, optional, tag = "3")]
-    pub reset_times: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "4")]
-    pub max_reset_times: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct DiceEnemyBehavior {
-    #[prost(int32, optional, tag = "1")]
-    pub r#type: ::core::option::Option<i32>,
-    #[prost(int64, optional, tag = "2")]
-    pub from_id: ::core::option::Option<i64>,
-    #[prost(int64, repeated, packed = "false", tag = "3")]
-    pub target_ids: ::prost::alloc::vec::Vec<i64>,
-    #[prost(int64, repeated, packed = "false", tag = "4")]
-    pub value: ::prost::alloc::vec::Vec<i64>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DiceFight {
-    #[prost(int32, optional, tag = "1")]
-    pub round: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub status: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "3")]
-    pub ally_hero: ::core::option::Option<DiceHero>,
-    #[prost(message, repeated, tag = "4")]
-    pub enemy_heros: ::prost::alloc::vec::Vec<DiceHero>,
-    #[prost(message, repeated, tag = "5")]
-    pub skill_cards: ::prost::alloc::vec::Vec<DiceSkillCard>,
-    #[prost(message, optional, tag = "6")]
-    pub dice_box: ::core::option::Option<DiceBox>,
-    #[prost(bool, optional, tag = "7")]
-    pub confirmed: ::core::option::Option<bool>,
-    #[prost(message, repeated, tag = "8")]
-    pub behaviors: ::prost::alloc::vec::Vec<DiceEnemyBehavior>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DiceFightEffect {
-    #[prost(int32, optional, tag = "1")]
-    pub effect_type: ::core::option::Option<i32>,
-    #[prost(int64, optional, tag = "2")]
-    pub from_id: ::core::option::Option<i64>,
-    #[prost(int64, optional, tag = "3")]
-    pub target_id: ::core::option::Option<i64>,
-    #[prost(int64, optional, tag = "4")]
-    pub effect_num: ::core::option::Option<i64>,
-    #[prost(string, optional, tag = "5")]
-    pub extra_data: ::core::option::Option<::prost::alloc::string::String>,
-    #[prost(message, optional, tag = "7")]
-    pub next_fight_step: ::core::option::Option<DiceFightStep>,
-    #[prost(message, optional, tag = "8")]
-    pub buff: ::core::option::Option<DiceHeroBuff>,
-    #[prost(int64, repeated, packed = "false", tag = "9")]
-    pub target_ids: ::prost::alloc::vec::Vec<i64>,
-    #[prost(message, repeated, tag = "10")]
-    pub skill_cards: ::prost::alloc::vec::Vec<DiceSkillCard>,
-    #[prost(message, optional, tag = "11")]
-    pub dice_box: ::core::option::Option<DiceBox>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DiceFightSettlePush {
-    #[prost(int32, optional, tag = "1")]
-    pub status: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "2")]
-    pub info: ::core::option::Option<DiceGameInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DiceFightStep {
-    #[prost(int32, optional, tag = "1")]
-    pub action_type: ::core::option::Option<i32>,
-    #[prost(int64, optional, tag = "2")]
-    pub reason_id: ::core::option::Option<i64>,
-    #[prost(int64, optional, tag = "3")]
-    pub from_id: ::core::option::Option<i64>,
-    #[prost(int64, optional, tag = "4")]
-    pub to_id: ::core::option::Option<i64>,
-    #[prost(message, repeated, tag = "5")]
-    pub effect: ::prost::alloc::vec::Vec<DiceFightEffect>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DiceGameInfo {
-    #[prost(message, repeated, tag = "1")]
-    pub game_info: ::prost::alloc::vec::Vec<DiceHeroGameInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DiceGiveUpReply {
-    #[prost(message, optional, tag = "1")]
-    pub info: ::core::option::Option<DiceGameInfo>,
-    #[prost(int32, optional, tag = "2")]
-    pub chapter: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct DiceGiveUpRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub chapter: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DiceHero {
-    #[prost(int64, optional, tag = "1")]
-    pub uid: ::core::option::Option<i64>,
-    #[prost(int32, optional, tag = "2")]
-    pub id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub status: ::core::option::Option<i32>,
-    #[prost(int64, optional, tag = "4")]
-    pub hp: ::core::option::Option<i64>,
-    #[prost(int64, optional, tag = "5")]
-    pub shield: ::core::option::Option<i64>,
-    #[prost(int64, optional, tag = "6")]
-    pub power: ::core::option::Option<i64>,
-    #[prost(int64, optional, tag = "7")]
-    pub max_hp: ::core::option::Option<i64>,
-    #[prost(int64, optional, tag = "8")]
-    pub max_shield: ::core::option::Option<i64>,
-    #[prost(int64, optional, tag = "9")]
-    pub max_power: ::core::option::Option<i64>,
-    #[prost(message, optional, tag = "10")]
-    pub buff_container: ::core::option::Option<DiceHeroBuffContainer>,
-    #[prost(int32, repeated, packed = "false", tag = "11")]
-    pub relic_ids: ::prost::alloc::vec::Vec<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct DiceHeroBaseInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub id: ::core::option::Option<i32>,
-    #[prost(int64, optional, tag = "2")]
-    pub hp: ::core::option::Option<i64>,
-    #[prost(int64, optional, tag = "3")]
-    pub shield: ::core::option::Option<i64>,
-    #[prost(int64, optional, tag = "4")]
-    pub power: ::core::option::Option<i64>,
-    #[prost(int64, optional, tag = "5")]
-    pub max_hp: ::core::option::Option<i64>,
-    #[prost(int64, optional, tag = "6")]
-    pub max_shield: ::core::option::Option<i64>,
-    #[prost(int64, optional, tag = "7")]
-    pub max_power: ::core::option::Option<i64>,
-    #[prost(int32, repeated, packed = "false", tag = "8")]
-    pub relic_ids: ::prost::alloc::vec::Vec<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct DiceHeroBuff {
-    #[prost(int64, optional, tag = "1")]
-    pub uid: ::core::option::Option<i64>,
-    #[prost(int32, optional, tag = "2")]
-    pub id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub layer: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DiceHeroBuffContainer {
-    #[prost(message, repeated, tag = "1")]
-    pub buffs: ::prost::alloc::vec::Vec<DiceHeroBuff>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DiceHeroConfirmDiceReply {
-    #[prost(message, repeated, tag = "1")]
-    pub steps: ::prost::alloc::vec::Vec<DiceFightStep>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct DiceHeroConfirmDiceRequest {}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DiceHeroEndRoundReply {
-    #[prost(message, repeated, tag = "1")]
-    pub steps: ::prost::alloc::vec::Vec<DiceFightStep>,
-    #[prost(message, optional, tag = "2")]
-    pub fight: ::core::option::Option<DiceFight>,
-    #[prost(message, repeated, tag = "3")]
-    pub after_steps: ::prost::alloc::vec::Vec<DiceFightStep>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct DiceHeroEndRoundRequest {}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DiceHeroEnterFightReply {
-    #[prost(message, optional, tag = "1")]
-    pub fight: ::core::option::Option<DiceFight>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct DiceHeroEnterFightRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub level_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DiceHeroEnterStoryReply {
-    #[prost(message, optional, tag = "1")]
-    pub info: ::core::option::Option<DiceGameInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct DiceHeroEnterStoryRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub level_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub chapter: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DiceHeroGameInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub chapter: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "2")]
-    pub hero_base_info: ::core::option::Option<DiceHeroBaseInfo>,
-    #[prost(message, optional, tag = "3")]
-    pub panel: ::core::option::Option<DiceHeroRewardPanel>,
-    #[prost(int32, repeated, packed = "false", tag = "4")]
-    pub pass_level_ids: ::prost::alloc::vec::Vec<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DiceHeroGetInfoReply {
-    #[prost(message, optional, tag = "1")]
-    pub info: ::core::option::Option<DiceGameInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct DiceHeroGetInfoRequest {}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DiceHeroGetRewardReply {
-    #[prost(message, optional, tag = "1")]
-    pub info: ::core::option::Option<DiceGameInfo>,
-    #[prost(int32, optional, tag = "2")]
-    pub chapter: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct DiceHeroGetRewardRequest {
-    #[prost(int32, repeated, packed = "false", tag = "1")]
-    pub index: ::prost::alloc::vec::Vec<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub chapter: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DiceHeroResetDiceReply {
-    #[prost(message, optional, tag = "1")]
-    pub dice_box: ::core::option::Option<DiceBox>,
-    #[prost(message, repeated, tag = "2")]
-    pub steps: ::prost::alloc::vec::Vec<DiceFightStep>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct DiceHeroResetDiceRequest {
-    #[prost(int64, repeated, packed = "false", tag = "1")]
-    pub dice_uids: ::prost::alloc::vec::Vec<i64>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct DiceHeroRewardItem {
-    #[prost(int32, optional, tag = "1")]
-    pub r#type: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DiceHeroRewardPanel {
-    #[prost(message, repeated, tag = "1")]
-    pub reward_items: ::prost::alloc::vec::Vec<DiceHeroRewardItem>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DiceHeroUseSkillReply {
-    #[prost(message, repeated, tag = "1")]
-    pub steps: ::prost::alloc::vec::Vec<DiceFightStep>,
-    #[prost(int32, repeated, packed = "false", tag = "2")]
-    pub skill_id: ::prost::alloc::vec::Vec<i32>,
-    #[prost(int64, repeated, packed = "false", tag = "3")]
-    pub dice_uids: ::prost::alloc::vec::Vec<i64>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct DiceHeroUseSkillRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub r#type: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub skill_id: ::core::option::Option<i32>,
-    #[prost(int64, optional, tag = "3")]
-    pub to_id: ::core::option::Option<i64>,
-    #[prost(int64, repeated, packed = "false", tag = "4")]
-    pub dice_uids: ::prost::alloc::vec::Vec<i64>,
-    #[prost(int32, optional, tag = "5")]
-    pub pattern: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DiceSkillCard {
-    #[prost(int32, optional, tag = "1")]
-    pub skill_id: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "2")]
-    pub round_use_counts: ::prost::alloc::vec::Vec<DiceSkillCardRoundUseCount>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct DiceSkillCardRoundUseCount {
-    #[prost(int32, optional, tag = "1")]
-    pub round: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub count: ::core::option::Option<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -12960,43 +10018,7 @@ pub mod effect_type_enum {
         Savefightrecord = 319,
         Addsphandcard = 320,
         Noncareerrestraint = 321,
-        Clearmonstersub = 322,
-        Fighttaskupdate = 323,
-        Retainsleep = 324,
-        Removemonstersub = 325,
-        Addcardrecordbyround = 326,
-        Directuseexskill = 327,
-        Splitstart = 328,
-        Splitend = 329,
-        Fightparamchange = 330,
-        Bloodpoolmaxcreate = 333,
-        Bloodpoolmaxchange = 334,
-        Bloodpoolvaluechange = 335,
-        Coldsaturdayhurt = 336,
-        Newchangewave = 337,
-        Changecardenergy = 338,
-        Clienteffect = 339,
-        Magiccircleupgrade = 340,
-        Nuodikarandomattack = 341,
-        Nuodikateamattack = 342,
-        Triggeranalysis = 343,
-        Getsecretkey = 344,
-        Survivalhealthchange = 345,
-        Lockhpmax = 346,
-        Cureupbylosthp = 347,
-        Nousecardenergyrecordbyround = 348,
-        Nuodikarandomattacknum = 349,
-        Buffactinfoupdate = 350,
-        Realdamagekill = 351,
-        Buffdelreason = 352,
-        Randomdiceuseskill = 353,
-        Towerdeepchange = 354,
-        Fighthurtdetail = 355,
         Trigger = 999,
-        Eziobigskilldamage = 1000,
-        Eziobigskillorigindamage = 1001,
-        Updateitemplayerskill = 1002,
-        Eziobigskillexit = 1003,
     }
     impl EffectType {
         /// String value of the enum field names used in the ProtoBuf definition.
@@ -13326,43 +10348,7 @@ pub mod effect_type_enum {
                 Self::Savefightrecord => "SAVEFIGHTRECORD",
                 Self::Addsphandcard => "ADDSPHANDCARD",
                 Self::Noncareerrestraint => "NONCAREERRESTRAINT",
-                Self::Clearmonstersub => "CLEARMONSTERSUB",
-                Self::Fighttaskupdate => "FIGHTTASKUPDATE",
-                Self::Retainsleep => "RETAINSLEEP",
-                Self::Removemonstersub => "REMOVEMONSTERSUB",
-                Self::Addcardrecordbyround => "ADDCARDRECORDBYROUND",
-                Self::Directuseexskill => "DIRECTUSEEXSKILL",
-                Self::Splitstart => "SPLITSTART",
-                Self::Splitend => "SPLITEND",
-                Self::Fightparamchange => "FIGHTPARAMCHANGE",
-                Self::Bloodpoolmaxcreate => "BLOODPOOLMAXCREATE",
-                Self::Bloodpoolmaxchange => "BLOODPOOLMAXCHANGE",
-                Self::Bloodpoolvaluechange => "BLOODPOOLVALUECHANGE",
-                Self::Coldsaturdayhurt => "COLDSATURDAYHURT",
-                Self::Newchangewave => "NEWCHANGEWAVE",
-                Self::Changecardenergy => "CHANGECARDENERGY",
-                Self::Clienteffect => "CLIENTEFFECT",
-                Self::Magiccircleupgrade => "MAGICCIRCLEUPGRADE",
-                Self::Nuodikarandomattack => "NUODIKARANDOMATTACK",
-                Self::Nuodikateamattack => "NUODIKATEAMATTACK",
-                Self::Triggeranalysis => "TRIGGERANALYSIS",
-                Self::Getsecretkey => "GETSECRETKEY",
-                Self::Survivalhealthchange => "SURVIVALHEALTHCHANGE",
-                Self::Lockhpmax => "LOCKHPMAX",
-                Self::Cureupbylosthp => "CUREUPBYLOSTHP",
-                Self::Nousecardenergyrecordbyround => "NOUSECARDENERGYRECORDBYROUND",
-                Self::Nuodikarandomattacknum => "NUODIKARANDOMATTACKNUM",
-                Self::Buffactinfoupdate => "BUFFACTINFOUPDATE",
-                Self::Realdamagekill => "REALDAMAGEKILL",
-                Self::Buffdelreason => "BUFFDELREASON",
-                Self::Randomdiceuseskill => "RANDOMDICEUSESKILL",
-                Self::Towerdeepchange => "TOWERDEEPCHANGE",
-                Self::Fighthurtdetail => "FIGHTHURTDETAIL",
                 Self::Trigger => "TRIGGER",
-                Self::Eziobigskilldamage => "EZIOBIGSKILLDAMAGE",
-                Self::Eziobigskillorigindamage => "EZIOBIGSKILLORIGINDAMAGE",
-                Self::Updateitemplayerskill => "UPDATEITEMPLAYERSKILL",
-                Self::Eziobigskillexit => "EZIOBIGSKILLEXIT",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -13693,45 +10679,7 @@ pub mod effect_type_enum {
                 "SAVEFIGHTRECORD" => Some(Self::Savefightrecord),
                 "ADDSPHANDCARD" => Some(Self::Addsphandcard),
                 "NONCAREERRESTRAINT" => Some(Self::Noncareerrestraint),
-                "CLEARMONSTERSUB" => Some(Self::Clearmonstersub),
-                "FIGHTTASKUPDATE" => Some(Self::Fighttaskupdate),
-                "RETAINSLEEP" => Some(Self::Retainsleep),
-                "REMOVEMONSTERSUB" => Some(Self::Removemonstersub),
-                "ADDCARDRECORDBYROUND" => Some(Self::Addcardrecordbyround),
-                "DIRECTUSEEXSKILL" => Some(Self::Directuseexskill),
-                "SPLITSTART" => Some(Self::Splitstart),
-                "SPLITEND" => Some(Self::Splitend),
-                "FIGHTPARAMCHANGE" => Some(Self::Fightparamchange),
-                "BLOODPOOLMAXCREATE" => Some(Self::Bloodpoolmaxcreate),
-                "BLOODPOOLMAXCHANGE" => Some(Self::Bloodpoolmaxchange),
-                "BLOODPOOLVALUECHANGE" => Some(Self::Bloodpoolvaluechange),
-                "COLDSATURDAYHURT" => Some(Self::Coldsaturdayhurt),
-                "NEWCHANGEWAVE" => Some(Self::Newchangewave),
-                "CHANGECARDENERGY" => Some(Self::Changecardenergy),
-                "CLIENTEFFECT" => Some(Self::Clienteffect),
-                "MAGICCIRCLEUPGRADE" => Some(Self::Magiccircleupgrade),
-                "NUODIKARANDOMATTACK" => Some(Self::Nuodikarandomattack),
-                "NUODIKATEAMATTACK" => Some(Self::Nuodikateamattack),
-                "TRIGGERANALYSIS" => Some(Self::Triggeranalysis),
-                "GETSECRETKEY" => Some(Self::Getsecretkey),
-                "SURVIVALHEALTHCHANGE" => Some(Self::Survivalhealthchange),
-                "LOCKHPMAX" => Some(Self::Lockhpmax),
-                "CUREUPBYLOSTHP" => Some(Self::Cureupbylosthp),
-                "NOUSECARDENERGYRECORDBYROUND" => {
-                    Some(Self::Nousecardenergyrecordbyround)
-                }
-                "NUODIKARANDOMATTACKNUM" => Some(Self::Nuodikarandomattacknum),
-                "BUFFACTINFOUPDATE" => Some(Self::Buffactinfoupdate),
-                "REALDAMAGEKILL" => Some(Self::Realdamagekill),
-                "BUFFDELREASON" => Some(Self::Buffdelreason),
-                "RANDOMDICEUSESKILL" => Some(Self::Randomdiceuseskill),
-                "TOWERDEEPCHANGE" => Some(Self::Towerdeepchange),
-                "FIGHTHURTDETAIL" => Some(Self::Fighthurtdetail),
                 "TRIGGER" => Some(Self::Trigger),
-                "EZIOBIGSKILLDAMAGE" => Some(Self::Eziobigskilldamage),
-                "EZIOBIGSKILLORIGINDAMAGE" => Some(Self::Eziobigskillorigindamage),
-                "UPDATEITEMPLAYERSKILL" => Some(Self::Updateitemplayerskill),
-                "EZIOBIGSKILLEXIT" => Some(Self::Eziobigskillexit),
                 _ => None,
             }
         }
@@ -13763,24 +10711,6 @@ pub struct EmitterInfo {
 #[serde(rename_all = "camelCase")]
 #[serde(default)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct End191ReplaceEventReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "2")]
-    pub game_info: ::core::option::Option<Act191GameInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct End191ReplaceEventRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EndAct174GameReply {
     #[prost(int32, optional, tag = "1")]
     pub activity_id: ::core::option::Option<i32>,
@@ -13792,24 +10722,6 @@ pub struct EndAct174GameReply {
 #[serde(default)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct EndAct174GameRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct EndAct191GameReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "2")]
-    pub game_end_info: ::core::option::Option<Act191GameEndInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct EndAct191GameRequest {
     #[prost(int32, optional, tag = "1")]
     pub activity_id: ::core::option::Option<i32>,
 }
@@ -13934,42 +10846,6 @@ pub struct EnhanceInfoBox {
     pub can_upgrade_ids: ::prost::alloc::vec::Vec<i32>,
     #[prost(int32, repeated, packed = "false", tag = "3")]
     pub upgraded_options: ::prost::alloc::vec::Vec<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct EnterAssassinSceneReply {
-    #[prost(message, optional, tag = "1")]
-    pub scene: ::core::option::Option<AssassinScene>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct EnterAssassinSceneRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub quest_id: ::core::option::Option<i32>,
-    #[prost(int32, repeated, packed = "false", tag = "2")]
-    pub hero_ids: ::prost::alloc::vec::Vec<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct EnterBattleGridReply {
-    #[prost(message, optional, tag = "1")]
-    pub fight: ::core::option::Option<Fight>,
-    #[prost(message, optional, tag = "2")]
-    pub round: ::core::option::Option<FightRound>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct EnterBattleGridRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub battle_grid_id: ::core::option::Option<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -14189,22 +11065,6 @@ pub struct EnterSchoolRequest {
 #[serde(rename_all = "camelCase")]
 #[serde(default)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct EnterSurvivalReply {
-    #[prost(message, optional, tag = "1")]
-    pub scene: ::core::option::Option<SurvivalScene>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct EnterSurvivalRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub copy_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EntityInfoReply {
     #[prost(message, optional, tag = "1")]
     pub entity_info: ::core::option::Option<FightEntityInfo>,
@@ -14300,14 +11160,14 @@ pub struct EpisodeInfo {
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
 #[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct EpisodeNo {
     #[prost(int32, optional, tag = "1")]
     pub episode_id: ::core::option::Option<i32>,
     #[prost(int32, optional, tag = "2")]
     pub status: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "3")]
-    pub heros: ::prost::alloc::vec::Vec<HeroNo>,
+    #[prost(int32, repeated, packed = "false", tag = "3")]
+    pub hero_ids: ::prost::alloc::vec::Vec<i32>,
     #[prost(int32, optional, tag = "4")]
     pub assist_boss_id: ::core::option::Option<i32>,
 }
@@ -14395,26 +11255,6 @@ pub struct EquipDecomposeRequest {
 pub struct EquipDeletePush {
     #[prost(int64, repeated, packed = "false", tag = "1")]
     pub uids: ::prost::alloc::vec::Vec<i64>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct EquipHeroItemReply {
-    #[prost(message, optional, tag = "1")]
-    pub hero: ::core::option::Option<AssassinHero>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct EquipHeroItemRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub hero_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub index: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub item_type: ::core::option::Option<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -14899,10 +11739,6 @@ pub struct Fight {
     pub param: ::prost::alloc::vec::Vec<FightParam>,
     #[prost(message, repeated, tag = "17")]
     pub custom_data: ::prost::alloc::vec::Vec<CustomData>,
-    #[prost(message, optional, tag = "18")]
-    pub fight_task_box: ::core::option::Option<FightTaskBox>,
-    #[prost(message, repeated, tag = "19")]
-    pub progress_list: ::prost::alloc::vec::Vec<FightProgressInfo>,
 }
 /// Nested message and enum types in `Fight`.
 pub mod fight {
@@ -14960,16 +11796,6 @@ pub struct FightActivity104EquipRecord {
     pub hero_uid: ::core::option::Option<i64>,
     #[prost(message, repeated, tag = "2")]
     pub activity104_equip_records: ::prost::alloc::vec::Vec<Activity104EquipRecord>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct FightBloodPool {
-    #[prost(int32, optional, tag = "1")]
-    pub value: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub max: ::core::option::Option<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -15088,16 +11914,6 @@ pub struct FightEntityInfo {
     pub guard: ::core::option::Option<i32>,
     #[prost(int32, optional, tag = "35")]
     pub sub_cd: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "36")]
-    pub ex_point_type: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "37")]
-    pub equips: ::prost::alloc::vec::Vec<EquipRecord>,
-    #[prost(int32, optional, tag = "38")]
-    pub destiny_stone: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "39")]
-    pub destiny_rank: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "40")]
-    pub custom_unit_id: ::core::option::Option<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -15132,8 +11948,6 @@ pub struct FightExPointInfo {
     pub power_infos: ::prost::alloc::vec::Vec<PowerInfo>,
     #[prost(int32, optional, tag = "4")]
     pub current_hp: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "5")]
-    pub ex_point_type: ::core::option::Option<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -15221,117 +12035,11 @@ pub struct FightHeroSpAttributeInfo {
 #[serde(rename_all = "camelCase")]
 #[serde(default)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct FightHurtInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub damage: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub reduce_hp: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub reduce_shield: ::core::option::Option<i32>,
-    #[prost(bool, optional, tag = "4")]
-    pub career_restraint: ::core::option::Option<bool>,
-    #[prost(bool, optional, tag = "5")]
-    pub critical: ::core::option::Option<bool>,
-    #[prost(bool, optional, tag = "6")]
-    pub assassinate: ::core::option::Option<bool>,
-    #[prost(int32, optional, tag = "7")]
-    pub hurt_effect: ::core::option::Option<i32>,
-    #[prost(enumeration = "fight_hurt_info::DamageFromType", optional, tag = "8")]
-    pub damage_from_type: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "9")]
-    pub config_effect: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "10")]
-    pub buff_act_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "11")]
-    pub buff_uid: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "12")]
-    pub effect_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "13")]
-    pub skill_id: ::core::option::Option<i32>,
-    #[prost(int64, optional, tag = "14")]
-    pub from_uid: ::core::option::Option<i64>,
-}
-/// Nested message and enum types in `FightHurtInfo`.
-pub mod fight_hurt_info {
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[serde(rename_all = "camelCase")]
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        PartialEq,
-        Eq,
-        Hash,
-        PartialOrd,
-        Ord,
-        ::prost::Enumeration
-    )]
-    #[repr(i32)]
-    pub enum DamageFromType {
-        None = 0,
-        Skill = 1,
-        SkillEffect = 2,
-        Buff = 3,
-        Additional = 4,
-        AbsorbHurt = 5,
-        ShareHurt = 6,
-    }
-    impl DamageFromType {
-        /// String value of the enum field names used in the ProtoBuf definition.
-        ///
-        /// The values are not transformed in any way and thus are considered stable
-        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
-        pub fn as_str_name(&self) -> &'static str {
-            match self {
-                Self::None => "NONE",
-                Self::Skill => "Skill",
-                Self::SkillEffect => "SkillEffect",
-                Self::Buff => "Buff",
-                Self::Additional => "Additional",
-                Self::AbsorbHurt => "AbsorbHurt",
-                Self::ShareHurt => "ShareHurt",
-            }
-        }
-        /// Creates an enum from field names used in the ProtoBuf definition.
-        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
-            match value {
-                "NONE" => Some(Self::None),
-                "Skill" => Some(Self::Skill),
-                "SkillEffect" => Some(Self::SkillEffect),
-                "Buff" => Some(Self::Buff),
-                "Additional" => Some(Self::Additional),
-                "AbsorbHurt" => Some(Self::AbsorbHurt),
-                "ShareHurt" => Some(Self::ShareHurt),
-                _ => None,
-            }
-        }
-    }
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct FightParam {
     #[prost(int32, optional, tag = "1")]
     pub key: ::core::option::Option<i32>,
     #[prost(int32, optional, tag = "2")]
     pub value: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct FightProgressInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub max: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub value: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "4")]
-    pub show_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "5")]
-    pub skill_id: ::core::option::Option<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -15540,8 +12248,6 @@ pub struct FightStep {
     pub card_index: ::core::option::Option<i32>,
     #[prost(int32, optional, tag = "7")]
     pub support_hero_id: ::core::option::Option<i32>,
-    #[prost(bool, optional, tag = "8")]
-    pub fake_timeline: ::core::option::Option<bool>,
 }
 /// Nested message and enum types in `FightStep`.
 pub mod fight_step {
@@ -15597,40 +12303,6 @@ pub mod fight_step {
 #[serde(rename_all = "camelCase")]
 #[serde(default)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct FightTask {
-    #[prost(int32, optional, tag = "1")]
-    pub task_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub status: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "3")]
-    pub values: ::prost::alloc::vec::Vec<FightTaskValue>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct FightTaskBox {
-    #[prost(message, repeated, tag = "1")]
-    pub tasks: ::prost::alloc::vec::Vec<FightTask>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct FightTaskValue {
-    #[prost(int32, optional, tag = "1")]
-    pub index: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub progress: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub max_progress: ::core::option::Option<i32>,
-    #[prost(bool, optional, tag = "4")]
-    pub finished: ::core::option::Option<bool>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FightTeam {
     #[prost(message, repeated, tag = "1")]
     pub entitys: ::prost::alloc::vec::Vec<FightEntityInfo>,
@@ -15666,14 +12338,6 @@ pub struct FightTeam {
     pub card_heat: ::core::option::Option<CardHeatInfo>,
     #[prost(int32, optional, tag = "17")]
     pub card_deck_size: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "18")]
-    pub blood_pool: ::core::option::Option<FightBloodPool>,
-    #[prost(message, optional, tag = "19")]
-    pub vorpalith: ::core::option::Option<FightEntityInfo>,
-    #[prost(message, optional, tag = "20")]
-    pub item_skill_group: ::core::option::Option<ItemPlayerSkillGroup>,
-    #[prost(message, repeated, tag = "21")]
-    pub sp_fight_entities: ::prost::alloc::vec::Vec<FightEntityInfo>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -15862,26 +12526,6 @@ pub struct FinishAct186TaskRequest {
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
 #[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct FinishAct204TaskReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub task_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct FinishAct204TaskRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub task_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct FinishAllTaskReply {
     #[prost(int32, optional, tag = "1")]
@@ -15906,22 +12550,6 @@ pub struct FinishAllTaskRequest {
     pub task_ids: ::prost::alloc::vec::Vec<i32>,
     #[prost(int32, optional, tag = "4")]
     pub activity_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct FinishCommandPostEventReply {
-    #[prost(int32, optional, tag = "1")]
-    pub id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct FinishCommandPostEventRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub id: ::core::option::Option<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -15965,42 +12593,6 @@ pub struct FinishGuideRequest {
     pub guide_id: i32,
     #[prost(int32, required, tag = "2")]
     pub step_id: i32,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct FinishMissionReply {
-    #[prost(message, optional, tag = "1")]
-    pub mission: ::core::option::Option<AssassinMission>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct FinishMissionRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub mission_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct FinishNecrologistStoryModeReply {
-    #[prost(int32, optional, tag = "1")]
-    pub story_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub mode_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct FinishNecrologistStoryModeRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub story_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub mode_id: ::core::option::Option<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -16089,128 +12681,6 @@ pub struct FinishTrainCritterRequest {
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
 #[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct FinishUserTurnReply {
-    #[prost(message, repeated, tag = "1")]
-    pub summons: ::prost::alloc::vec::Vec<MonsterUnit>,
-    #[prost(message, repeated, tag = "2")]
-    pub attacks: ::prost::alloc::vec::Vec<ArcherAttack>,
-    #[prost(message, repeated, tag = "3")]
-    pub moves: ::prost::alloc::vec::Vec<MonsterMove>,
-    #[prost(int32, repeated, packed = "false", tag = "4")]
-    pub battle_grids: ::prost::alloc::vec::Vec<i32>,
-    #[prost(int32, optional, tag = "5")]
-    pub alert_level: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "6")]
-    pub hero: ::prost::alloc::vec::Vec<HeroUnit>,
-    #[prost(message, repeated, tag = "7")]
-    pub grid: ::prost::alloc::vec::Vec<AssassinGrid>,
-    #[prost(message, repeated, tag = "8")]
-    pub monster: ::prost::alloc::vec::Vec<MonsterUnit>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct FinishUserTurnRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub round: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct FishingBoatInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub r#type: ::core::option::Option<i32>,
-    #[prost(uint64, optional, tag = "2")]
-    pub user_id: ::core::option::Option<u64>,
-    #[prost(string, optional, tag = "3")]
-    pub name: ::core::option::Option<::prost::alloc::string::String>,
-    #[prost(uint32, optional, tag = "4")]
-    pub portrait: ::core::option::Option<u32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct FishingFriendInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub r#type: ::core::option::Option<i32>,
-    #[prost(uint64, optional, tag = "2")]
-    pub user_id: ::core::option::Option<u64>,
-    #[prost(string, optional, tag = "3")]
-    pub name: ::core::option::Option<::prost::alloc::string::String>,
-    #[prost(uint32, optional, tag = "4")]
-    pub portrait: ::core::option::Option<u32>,
-    #[prost(int32, optional, tag = "5")]
-    pub pool_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct FishingPoolInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub pool_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub refresh_time: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "3")]
-    pub boats_info: ::prost::alloc::vec::Vec<FishingBoatInfo>,
-    #[prost(message, repeated, tag = "4")]
-    pub fishing_progress: ::prost::alloc::vec::Vec<FishingProgressInfo>,
-    #[prost(int32, optional, tag = "5")]
-    pub change_count: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "6")]
-    pub today_accept_share_count: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct FishingProgressInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub r#type: ::core::option::Option<i32>,
-    #[prost(uint64, optional, tag = "2")]
-    pub fishery_user_id: ::core::option::Option<u64>,
-    #[prost(int32, optional, tag = "3")]
-    pub pool_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "4")]
-    pub fish_times: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "5")]
-    pub start_time: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "6")]
-    pub finish_time: ::core::option::Option<i32>,
-    #[prost(string, optional, tag = "7")]
-    pub name: ::core::option::Option<::prost::alloc::string::String>,
-    #[prost(uint32, optional, tag = "8")]
-    pub portrait: ::core::option::Option<u32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct FishingReply {
-    #[prost(uint64, optional, tag = "1")]
-    pub pool_user_id: ::core::option::Option<u64>,
-    #[prost(int32, optional, tag = "2")]
-    pub fish_times: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "3")]
-    pub progress: ::core::option::Option<FishingProgressInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct FishingRequest {
-    #[prost(uint64, optional, tag = "1")]
-    pub pool_user_id: ::core::option::Option<u64>,
-    #[prost(int32, optional, tag = "2")]
-    pub fish_times: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ForecastBehavior {
     #[prost(int32, optional, tag = "1")]
@@ -16273,46 +12743,6 @@ pub struct Fresh174ShopReply {
 #[serde(default)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct Fresh174ShopRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Fresh191EnhanceReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "2")]
-    pub node_info: ::core::option::Option<Act191NodeInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Fresh191EnhanceRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub index: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Fresh191ShopReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "2")]
-    pub node_info: ::core::option::Option<Act191NodeInfo>,
-    #[prost(int32, optional, tag = "3")]
-    pub coin: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Fresh191ShopRequest {
     #[prost(int32, optional, tag = "1")]
     pub activity_id: ::core::option::Option<i32>,
 }
@@ -16451,24 +12881,6 @@ pub struct GmSummonResultPush {
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
 #[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Gain191RewardEventReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "2")]
-    pub game_info: ::core::option::Option<Act191GameInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Gain191RewardEventRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct GainFinalInviteRewardReply {
     #[prost(message, optional, tag = "1")]
@@ -16542,26 +12954,6 @@ pub struct GainInviteRewardRequest {
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
 #[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct GainItem {
-    #[prost(int32, optional, tag = "1")]
-    pub item_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub count: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GainItemPush {
-    #[prost(int32, optional, tag = "1")]
-    pub uid: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "2")]
-    pub items: ::prost::alloc::vec::Vec<GainItem>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GainProductionLineReply {
     #[prost(message, repeated, tag = "1")]
@@ -16598,16 +12990,6 @@ pub struct GainRoomHeroFaithRequest {
 pub struct GainSpecialBlockPush {
     #[prost(int32, repeated, packed = "false", tag = "1")]
     pub special_blocks: ::prost::alloc::vec::Vec<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct GameStatePush {
-    #[prost(int32, optional, tag = "1")]
-    pub game_state: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub quest_id: ::core::option::Option<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -17696,82 +14078,6 @@ pub struct Get187InfoRequest {
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
 #[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Get196InfoReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, repeated, packed = "false", tag = "2")]
-    pub has_gain: ::prost::alloc::vec::Vec<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Get196InfoRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Get197InfoReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "2")]
-    pub has_gain: ::prost::alloc::vec::Vec<Act197GainInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Get197InfoRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Get199InfoReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub hero_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Get199InfoRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Get201InfoReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(bool, optional, tag = "2")]
-    pub is_turnback: ::core::option::Option<bool>,
-    #[prost(message, repeated, tag = "3")]
-    pub invite_players: ::prost::alloc::vec::Vec<InvitePlayer>,
-    #[prost(string, optional, tag = "4")]
-    pub invite_code: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Get201InfoRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetAchievementInfoReply {
     #[prost(message, repeated, tag = "1")]
@@ -18283,24 +14589,6 @@ pub struct GetAct186SpBonusInfoRequest {
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
 #[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetAct188InfoReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "2")]
-    pub episodes: ::prost::alloc::vec::Vec<Act188EpisodeNo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct GetAct188InfoRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct GetAct189InfoReply {
     #[prost(int32, optional, tag = "1")]
@@ -18329,238 +14617,6 @@ pub struct GetAct189OnceBonusReply {
 #[serde(default)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct GetAct189OnceBonusRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetAct190InfoReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "2")]
-    pub episodes: ::prost::alloc::vec::Vec<Act190EpisodeRecord>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct GetAct190InfoRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetAct191InfoReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "2")]
-    pub info: ::core::option::Option<Act191Info>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct GetAct191InfoRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetAct192InfoReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "2")]
-    pub episodes: ::prost::alloc::vec::Vec<Act192EpisodeRecord>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct GetAct192InfoRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetAct203InfoReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "2")]
-    pub episodes: ::prost::alloc::vec::Vec<Act203EpisodeRecord>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct GetAct203InfoRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct GetAct204DailyCollectionReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct GetAct204DailyCollectionRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetAct204InfoReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "2")]
-    pub info: ::core::option::Option<Act204Info>,
-    #[prost(message, repeated, tag = "3")]
-    pub task_infos: ::prost::alloc::vec::Vec<Act204TaskInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct GetAct204InfoRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct GetAct204MilestoneRewardReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int64, optional, tag = "2")]
-    pub get_milestone_progress: ::core::option::Option<i64>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct GetAct204MilestoneRewardRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct GetAct204OnceBonusReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct GetAct204OnceBonusRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetAct208InfoReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "2")]
-    pub bonus: ::prost::alloc::vec::Vec<Act208BonusNo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct GetAct208InfoRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct GetAct209InfoReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub max_layer: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct GetAct209InfoRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetAct210InfoReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "2")]
-    pub episodes: ::prost::alloc::vec::Vec<Act210EpisodeRecord>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct GetAct210InfoRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetAct211InfoReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "2")]
-    pub episodes: ::prost::alloc::vec::Vec<Act211EpisodeRecord>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct GetAct211InfoRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetAct212InfoReply {
-    #[prost(message, optional, tag = "1")]
-    pub act212_info: ::core::option::Option<Act212InfoNo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct GetAct212InfoRequest {
     #[prost(int32, optional, tag = "1")]
     pub activity_id: ::core::option::Option<i32>,
 }
@@ -18650,38 +14706,6 @@ pub struct GetApplyListRequest {}
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
 #[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct GetAssassinLibraryInfoReply {
-    #[prost(int32, repeated, packed = "false", tag = "1")]
-    pub unlock_library_ids: ::prost::alloc::vec::Vec<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct GetAssassinLibraryInfoRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetAssassinOutSideInfoReply {
-    #[prost(message, optional, tag = "1")]
-    pub assassin_out_side_info: ::core::option::Option<AssassinOutSideInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct GetAssassinOutSideInfoRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct GetAssistBonusReply {
     #[prost(int32, optional, tag = "1")]
@@ -18750,22 +14774,6 @@ pub struct GetBlockPackageInfoReply {
 #[serde(default)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct GetBlockPackageInfoRequset {}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetBlockPermanentInfoReply {
-    #[prost(message, repeated, tag = "1")]
-    pub permanent_infos: ::prost::alloc::vec::Vec<BlockPermanentInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct GetBlockPermanentInfoRequest {
-    #[prost(int32, repeated, packed = "false", tag = "1")]
-    pub block_ids: ::prost::alloc::vec::Vec<i32>,
-}
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
 #[serde(default)]
@@ -18917,24 +14925,6 @@ pub struct GetChargeInfoRequest {}
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
 #[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct GetChargePushInfoReply {}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct GetChargePushInfoRequest {}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct GetChargePushPush {
-    #[prost(int32, repeated, packed = "false", tag = "1")]
-    pub push_id: ::prost::alloc::vec::Vec<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetClothInfoReply {
     #[prost(message, optional, tag = "1")]
@@ -18945,29 +14935,6 @@ pub struct GetClothInfoReply {
 #[serde(default)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct GetClothInfoRequest {}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetCommandPostInfoReply {
-    #[prost(message, repeated, tag = "1")]
-    pub event_list: ::prost::alloc::vec::Vec<CommandPostEventInfo>,
-    #[prost(message, repeated, tag = "2")]
-    pub tasks: ::prost::alloc::vec::Vec<Task>,
-    #[prost(message, repeated, tag = "3")]
-    pub catch_tasks: ::prost::alloc::vec::Vec<Task>,
-    #[prost(int32, repeated, packed = "false", tag = "4")]
-    pub gain_bonus: ::prost::alloc::vec::Vec<i32>,
-    #[prost(int32, optional, tag = "5")]
-    pub paper: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "6")]
-    pub catch_num: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct GetCommandPostInfoRequest {}
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
 #[serde(default)]
@@ -19221,47 +15188,6 @@ pub struct GetFightRecordGroupRequest {
     #[prost(int32, optional, tag = "1")]
     pub episode_id: ::core::option::Option<i32>,
 }
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetFishingBonusReply {
-    #[prost(message, repeated, tag = "1")]
-    pub bonus_info: ::prost::alloc::vec::Vec<FishingProgressInfo>,
-    #[prost(int32, optional, tag = "2")]
-    pub today_accept_share_count: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct GetFishingBonusRequest {}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetFishingFriendsReply {
-    #[prost(message, repeated, tag = "1")]
-    pub not_fishing_friend_info: ::prost::alloc::vec::Vec<FishingFriendInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct GetFishingFriendsRequest {}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetFishingInfoReply {
-    #[prost(message, optional, tag = "1")]
-    pub fishing_pool_info: ::core::option::Option<FishingPoolInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct GetFishingInfoRequest {}
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
 #[serde(default)]
@@ -19602,22 +15528,6 @@ pub struct GetMonthCardInfoRequest {}
 #[serde(rename_all = "camelCase")]
 #[serde(default)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetNecrologistStoryReply {
-    #[prost(message, repeated, tag = "1")]
-    pub story: ::prost::alloc::vec::Vec<NecrologistStory>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct GetNecrologistStoryRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub story_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetOrderInfoReply {
     #[prost(int32, optional, tag = "1")]
     pub purchase_order_finish_count: ::core::option::Option<i32>,
@@ -19635,26 +15545,6 @@ pub struct GetOrderInfoReply {
 #[serde(default)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct GetOrderInfoRequest {}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetOtherFishingInfoReply {
-    #[prost(uint64, optional, tag = "1")]
-    pub user_id: ::core::option::Option<u64>,
-    #[prost(message, optional, tag = "2")]
-    pub fishing_pool_info: ::core::option::Option<FishingPoolInfo>,
-    #[prost(message, optional, tag = "3")]
-    pub friend_info: ::core::option::Option<FishingFriendInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct GetOtherFishingInfoRequest {
-    #[prost(uint64, optional, tag = "1")]
-    pub user_id: ::core::option::Option<u64>,
-}
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
 #[serde(default)]
@@ -19772,32 +15662,6 @@ pub struct GetPointRewardReply {
 pub struct GetPointRewardRequest {
     #[prost(int32, repeated, packed = "false", tag = "1")]
     pub id: ::prost::alloc::vec::Vec<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetPowerMakerInfoReply {
-    #[prost(int32, optional, tag = "1")]
-    pub status: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub next_remain_second: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub make_count: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "4")]
-    pub logout_second: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "5")]
-    pub power_maker_items: ::prost::alloc::vec::Vec<PowerItem>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct GetPowerMakerInfoRequest {
-    #[prost(bool, optional, tag = "1")]
-    pub is_auto_use: ::core::option::Option<bool>,
-    #[prost(bool, optional, tag = "2")]
-    pub is_login: ::core::option::Option<bool>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -19988,8 +15852,6 @@ pub struct GetRoomObInfoReply {
     pub skins: ::prost::alloc::vec::Vec<RoomSkinInfo>,
     #[prost(message, repeated, tag = "10")]
     pub road_infos: ::prost::alloc::vec::Vec<RoadInfo>,
-    #[prost(bool, optional, tag = "11")]
-    pub have_fishing_bonus: ::core::option::Option<bool>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -20065,8 +15927,6 @@ pub struct GetRoomShareReply {
     pub skins: ::prost::alloc::vec::Vec<RoomSkinInfo>,
     #[prost(message, repeated, tag = "13")]
     pub road_infos: ::prost::alloc::vec::Vec<RoadInfo>,
-    #[prost(int32, optional, tag = "14")]
-    pub change_color_count: ::core::option::Option<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -20318,24 +16178,6 @@ pub struct GetSummonInfoRequest {}
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
 #[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct GetSummonProgressRewardsReply {
-    #[prost(int32, optional, tag = "1")]
-    pub pool_id: ::core::option::Option<i32>,
-    #[prost(int32, repeated, packed = "false", tag = "2")]
-    pub has_get_reward_progresses: ::prost::alloc::vec::Vec<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct GetSummonProgressRewardsRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub pool_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct GetTaskActivityBonusReply {
     #[prost(int32, optional, tag = "1")]
@@ -20386,8 +16228,6 @@ pub struct GetTowerInfoReply {
     pub assist_bosses: ::prost::alloc::vec::Vec<AssistBossNo>,
     #[prost(int32, optional, tag = "4")]
     pub mop_up_times: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "5")]
-    pub trial_hero_season: ::core::option::Option<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -20490,19 +16330,6 @@ pub struct GetUnlockActivity104EquipIdsRequest {
 #[serde(rename_all = "camelCase")]
 #[serde(default)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetUnlockVoucherInfoReply {
-    #[prost(message, repeated, tag = "1")]
-    pub vouchers: ::prost::alloc::vec::Vec<UnlockVoucherInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct GetUnlockVoucherInfoRequest {}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetWeekwalkInfoReply {
     #[prost(message, optional, tag = "1")]
     pub info: ::core::option::Option<WeekwalkInfo>,
@@ -20514,22 +16341,6 @@ pub struct GetWeekwalkInfoReply {
 #[serde(default)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct GetWeekwalkInfoRequest {}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct GiveUpAssassinSceneReply {
-    #[prost(int32, optional, tag = "1")]
-    pub result: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct GiveUpAssassinSceneRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub map_id: ::core::option::Option<i32>,
-}
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
 #[serde(default)]
@@ -20637,54 +16448,6 @@ pub struct HeroAllAttribute {
     pub ex_attr: ::core::option::Option<HeroExAttribute>,
     #[prost(message, optional, tag = "3")]
     pub sp_attr: ::core::option::Option<HeroSpAttribute>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct HeroAssassinReply {
-    #[prost(message, optional, tag = "1")]
-    pub hero: ::core::option::Option<HeroUnit>,
-    #[prost(message, repeated, tag = "2")]
-    pub monster: ::prost::alloc::vec::Vec<MonsterUnit>,
-    #[prost(int32, repeated, packed = "false", tag = "3")]
-    pub del_monster_uid: ::prost::alloc::vec::Vec<i32>,
-    #[prost(int32, optional, tag = "4")]
-    pub act_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct HeroAssassinRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub uid: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub act_id: ::core::option::Option<i32>,
-    #[prost(string, optional, tag = "3")]
-    pub param: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct HeroAttackReply {
-    #[prost(message, optional, tag = "1")]
-    pub fight: ::core::option::Option<Fight>,
-    #[prost(message, optional, tag = "2")]
-    pub round: ::core::option::Option<FightRound>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct HeroAttackRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub uid: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub act_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub target_id: ::core::option::Option<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -20827,8 +16590,6 @@ pub struct HeroGroupSnapshotNo {
     pub snapshot_id: ::core::option::Option<i32>,
     #[prost(message, repeated, tag = "2")]
     pub hero_group_snapshots: ::prost::alloc::vec::Vec<HeroGroupInfo>,
-    #[prost(int32, repeated, packed = "false", tag = "3")]
-    pub sort_sub_ids: ::prost::alloc::vec::Vec<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -20907,8 +16668,6 @@ pub struct HeroInfo {
     pub destiny_stone_unlock: ::prost::alloc::vec::Vec<i32>,
     #[prost(int32, optional, tag = "36")]
     pub red_dot: ::core::option::Option<i32>,
-    #[prost(string, optional, tag = "37")]
-    pub extra_str: ::core::option::Option<::prost::alloc::string::String>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -20944,26 +16703,6 @@ pub struct HeroInfoNo {
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
 #[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct HeroInteractiveReply {
-    #[prost(message, optional, tag = "1")]
-    pub hero: ::core::option::Option<HeroUnit>,
-    #[prost(int32, optional, tag = "2")]
-    pub interactive_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct HeroInteractiveRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub uid: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub interactive_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct HeroInvitationInfo {
     #[prost(int32, repeated, packed = "false", tag = "1")]
@@ -20972,16 +16711,6 @@ pub struct HeroInvitationInfo {
     pub gain_reward: ::prost::alloc::vec::Vec<i32>,
     #[prost(bool, optional, tag = "3")]
     pub final_reward: ::core::option::Option<bool>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct HeroItem {
-    #[prost(int32, optional, tag = "1")]
-    pub index: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub item_type: ::core::option::Option<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -21014,48 +16743,6 @@ pub struct HeroLevelUpUpdatePush {
     pub new_level: ::core::option::Option<i32>,
     #[prost(int32, optional, tag = "3")]
     pub new_rank: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct HeroMoveReply {
-    #[prost(message, repeated, tag = "1")]
-    pub moves: ::prost::alloc::vec::Vec<MonsterMove>,
-    #[prost(message, optional, tag = "2")]
-    pub hero: ::core::option::Option<HeroUnit>,
-    #[prost(message, repeated, tag = "3")]
-    pub grid: ::prost::alloc::vec::Vec<AssassinGrid>,
-    #[prost(message, repeated, tag = "4")]
-    pub monster: ::prost::alloc::vec::Vec<MonsterUnit>,
-    #[prost(int32, optional, tag = "5")]
-    pub act_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "6")]
-    pub alert_level: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct HeroMoveRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub uid: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub act_id: ::core::option::Option<i32>,
-    #[prost(string, optional, tag = "3")]
-    pub param: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct HeroNo {
-    #[prost(int32, optional, tag = "1")]
-    pub hero_id: ::core::option::Option<i32>,
-    #[prost(int64, repeated, packed = "false", tag = "2")]
-    pub equip_uid: ::prost::alloc::vec::Vec<i64>,
-    #[prost(int32, optional, tag = "3")]
-    pub trial_id: ::core::option::Option<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -21200,10 +16887,6 @@ pub struct HeroSpAttribute {
     pub extra_dmg: ::core::option::Option<i32>,
     #[prost(int32, optional, tag = "27")]
     pub reuse_dmg: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "28")]
-    pub big_skill_rate: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "29")]
-    pub clutch_dmg: ::core::option::Option<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -21312,22 +16995,6 @@ pub struct HeroStoryInfo {
     pub unlock: ::core::option::Option<bool>,
     #[prost(message, repeated, tag = "10")]
     pub dispatch_infos: ::prost::alloc::vec::Vec<HeroStoryDispatchInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct HeroStoryPlotFinishReply {
-    #[prost(int32, optional, tag = "1")]
-    pub plot: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct HeroStoryPlotFinishRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub plot: ::core::option::Option<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -21472,60 +17139,6 @@ pub struct HeroTouchReply {
 pub struct HeroTouchRequest {
     #[prost(int32, optional, tag = "1")]
     pub hero_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct HeroTransferCareerReply {
-    #[prost(message, optional, tag = "1")]
-    pub hero: ::core::option::Option<AssassinHero>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct HeroTransferCareerRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub hero_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub career_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct HeroUnit {
-    #[prost(int32, optional, tag = "1")]
-    pub uid: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub hero_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub career_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "4")]
-    pub hp: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "5")]
-    pub is_dead: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "6")]
-    pub action_point: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "7")]
-    pub items: ::prost::alloc::vec::Vec<AssassinItem>,
-    #[prost(message, repeated, tag = "8")]
-    pub buffs: ::prost::alloc::vec::Vec<AssassinBuff>,
-    #[prost(int32, optional, tag = "9")]
-    pub grid_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "10")]
-    pub pos: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "11")]
-    pub max_action_point: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "12")]
-    pub state: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "13")]
-    pub round_skill_counts: ::prost::alloc::vec::Vec<AssassinCount>,
-    #[prost(message, repeated, tag = "14")]
-    pub total_skill_counts: ::prost::alloc::vec::Vec<AssassinCount>,
-    #[prost(message, repeated, tag = "15")]
-    pub round_item_counts: ::prost::alloc::vec::Vec<AssassinCount>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -21785,24 +17398,6 @@ pub struct IntelBox {
 #[serde(rename_all = "camelCase")]
 #[serde(default)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct InteractiveReply {
-    #[prost(int32, optional, tag = "1")]
-    pub quest_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub coin: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct InteractiveRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub quest_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct InterruptDispatchReply {
     #[prost(int32, optional, tag = "1")]
     pub element_id: ::core::option::Option<i32>,
@@ -21848,8 +17443,6 @@ pub struct InvitePlayer {
     pub name: ::core::option::Option<::prost::alloc::string::String>,
     #[prost(int32, optional, tag = "3")]
     pub portrait: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "4")]
-    pub role_type: ::core::option::Option<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -21878,28 +17471,6 @@ pub struct ItemChangePush {
     pub power_items: ::prost::alloc::vec::Vec<PowerItem>,
     #[prost(message, repeated, tag = "3")]
     pub insight_items: ::prost::alloc::vec::Vec<InsightItem>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ItemPlayerSkillGroup {
-    #[prost(message, repeated, tag = "1")]
-    pub item_skill_infos: ::prost::alloc::vec::Vec<ItemPlayerSkillInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct ItemPlayerSkillInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub skill_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub item_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub cd: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "4")]
-    pub count: ::core::option::Option<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -21934,24 +17505,6 @@ pub struct LayerNo {
     pub history_high_score: ::core::option::Option<i32>,
     #[prost(message, repeated, tag = "4")]
     pub episode_n_os: ::prost::alloc::vec::Vec<EpisodeNo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Leave191ShopReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "2")]
-    pub game_info: ::core::option::Option<Act191GameInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Leave191ShopRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -22031,14 +17584,14 @@ pub struct LogoutRequest {}
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
 #[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct LuckyBagInfo {
     #[prost(int32, optional, tag = "1")]
     pub count: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "2")]
-    pub single_bag_infos: ::prost::alloc::vec::Vec<SingleBagInfo>,
+    #[prost(int32, optional, tag = "2")]
+    pub lucky_bag_id: ::core::option::Option<i32>,
     #[prost(int32, optional, tag = "3")]
-    pub not_ssr_count: ::core::option::Option<i32>,
+    pub open_lb_times: ::core::option::Option<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -22063,8 +17616,6 @@ pub struct M2qEntry {
     pub material_id: ::core::option::Option<u32>,
     #[prost(int32, optional, tag = "2")]
     pub quantity: ::core::option::Option<i32>,
-    #[prost(int64, optional, tag = "3")]
-    pub time: ::core::option::Option<i64>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -22077,12 +17628,6 @@ pub struct MagicCircleInfo {
     pub round: ::core::option::Option<i32>,
     #[prost(int64, optional, tag = "3")]
     pub create_uid: ::core::option::Option<i64>,
-    #[prost(int32, optional, tag = "4")]
-    pub electric_level: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "5")]
-    pub electric_progress: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "6")]
-    pub max_electric_progress: ::core::option::Option<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -22647,62 +18192,6 @@ pub struct MissionInfo {
 #[serde(rename_all = "camelCase")]
 #[serde(default)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct MissionUpdatePush {
-    #[prost(message, optional, tag = "1")]
-    pub mission: ::core::option::Option<AssassinMission>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct MonsterMove {
-    #[prost(int32, optional, tag = "1")]
-    pub uid: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "2")]
-    pub path: ::prost::alloc::vec::Vec<Position>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct MonsterSummon {
-    #[prost(int32, optional, tag = "1")]
-    pub grid_id: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "2")]
-    pub monster: ::core::option::Option<MonsterUnit>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct MonsterUnit {
-    #[prost(int32, optional, tag = "1")]
-    pub uid: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub monster_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub is_dead: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "4")]
-    pub buffs: ::prost::alloc::vec::Vec<AssassinBuff>,
-    #[prost(int32, optional, tag = "5")]
-    pub grid_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "6")]
-    pub pos: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "7")]
-    pub scan: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct MonsterUpdatePush {
-    #[prost(message, repeated, tag = "1")]
-    pub monsters: ::prost::alloc::vec::Vec<MonsterUnit>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct MonthCardHistory {
     #[prost(int32, optional, tag = "1")]
     pub id: ::core::option::Option<i32>,
@@ -22747,48 +18236,6 @@ pub struct MoveCardRequest {
     pub from_position: ::core::option::Option<i32>,
     #[prost(int32, optional, tag = "2")]
     pub to_position: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct NecrologistStory {
-    #[prost(int32, optional, tag = "1")]
-    pub story_id: ::core::option::Option<i32>,
-    #[prost(string, optional, tag = "2")]
-    pub info: ::core::option::Option<::prost::alloc::string::String>,
-    #[prost(message, repeated, tag = "3")]
-    pub plot_infos: ::prost::alloc::vec::Vec<NecrologistStoryPlotInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct NecrologistStoryPlotInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub state: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "3")]
-    pub values: ::prost::alloc::vec::Vec<NecrologistStorySituationValue>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct NecrologistStorySituationValue {
-    #[prost(string, optional, tag = "1")]
-    pub key: ::core::option::Option<::prost::alloc::string::String>,
-    #[prost(int32, optional, tag = "2")]
-    pub value: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct NewInteractivePush {
-    #[prost(int32, repeated, packed = "false", tag = "1")]
-    pub interactive_ids: ::prost::alloc::vec::Vec<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -22847,22 +18294,6 @@ pub struct NewReddotNo {
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
 #[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct NextRoundReply {
-    #[prost(message, optional, tag = "2")]
-    pub scene: ::core::option::Option<AssassinScene>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct NextRoundRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub round: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct NodeInfo {
     #[prost(int32, optional, tag = "1")]
@@ -22887,680 +18318,6 @@ pub struct NodeInfo {
     pub interactive10drop: ::core::option::Option<i32>,
     #[prost(bool, optional, tag = "11")]
     pub fog: ::core::option::Option<bool>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct OdysseyAndReward {
-    #[prost(message, repeated, tag = "1")]
-    pub rewards: ::prost::alloc::vec::Vec<OdysseyReward>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct OdysseyBagGetItemPush {
-    #[prost(message, repeated, tag = "1")]
-    pub items: ::prost::alloc::vec::Vec<OdysseyItem>,
-    #[prost(int32, optional, tag = "2")]
-    pub reason: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct OdysseyBagInfo {
-    #[prost(message, repeated, tag = "1")]
-    pub items: ::prost::alloc::vec::Vec<OdysseyItem>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct OdysseyBagUpdateItemNewFlagReply {
-    #[prost(message, repeated, tag = "1")]
-    pub items: ::prost::alloc::vec::Vec<OdysseyItem>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct OdysseyBagUpdateItemNewFlagRequest {
-    #[prost(int32, repeated, packed = "false", tag = "1")]
-    pub uid_list: ::prost::alloc::vec::Vec<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct OdysseyElement {
-    #[prost(int32, optional, tag = "1")]
-    pub id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub status: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "3")]
-    pub option_ele: ::core::option::Option<OdysseyOptionElement>,
-    #[prost(message, optional, tag = "4")]
-    pub religion_ele: ::core::option::Option<OdysseyFightReligionElement>,
-    #[prost(message, optional, tag = "5")]
-    pub conquest_ele: ::core::option::Option<OdysseyFightConquestElement>,
-    #[prost(message, optional, tag = "6")]
-    pub mythic_ele: ::core::option::Option<OdysseyFightMythicElement>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct OdysseyExpReward {
-    #[prost(int32, optional, tag = "1")]
-    pub exp: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct OdysseyFightConquestElement {
-    #[prost(int32, optional, tag = "1")]
-    pub high_wave: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub curr_wave: ::core::option::Option<i32>,
-    #[prost(bool, optional, tag = "3")]
-    pub new_flag: ::core::option::Option<bool>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct OdysseyFightInfo {
-    #[prost(message, optional, tag = "1")]
-    pub mercenary_info: ::core::option::Option<OdysseyMercenaryInfo>,
-    #[prost(message, optional, tag = "2")]
-    pub religion_info: ::core::option::Option<OdysseyReligionInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct OdysseyFightMercenaryRefreshReply {
-    #[prost(int64, optional, tag = "1")]
-    pub next_ref_time: ::core::option::Option<i64>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct OdysseyFightMercenaryRefreshRequest {}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct OdysseyFightMercenarySetDropReply {
-    #[prost(int32, optional, tag = "1")]
-    pub r#type: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub suit_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct OdysseyFightMercenarySetDropRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub r#type: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub suit_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct OdysseyFightMercenaryUpdatePush {
-    #[prost(message, optional, tag = "1")]
-    pub info: ::core::option::Option<OdysseyMercenaryInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct OdysseyFightMythicElement {
-    #[prost(int32, optional, tag = "1")]
-    pub evaluation: ::core::option::Option<i32>,
-    #[prost(int32, repeated, packed = "false", tag = "2")]
-    pub finished_task_ids: ::prost::alloc::vec::Vec<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct OdysseyFightReligionDiscloseReply {
-    #[prost(message, optional, tag = "1")]
-    pub member: ::core::option::Option<OdysseyReligionMember>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct OdysseyFightReligionDiscloseRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub religion_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct OdysseyFightReligionElement {
-    #[prost(int32, optional, tag = "1")]
-    pub religion_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct OdysseyFightReligionMemberUpdatePush {
-    #[prost(message, optional, tag = "1")]
-    pub member: ::core::option::Option<OdysseyReligionMember>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct OdysseyFightSettlePush {
-    #[prost(int32, optional, tag = "1")]
-    pub episode_id: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "2")]
-    pub element: ::core::option::Option<OdysseyElement>,
-    #[prost(message, optional, tag = "3")]
-    pub reward: ::core::option::Option<OdysseyAndReward>,
-    #[prost(int32, optional, tag = "4")]
-    pub result: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct OdysseyForm {
-    #[prost(int32, optional, tag = "1")]
-    pub no: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "2")]
-    pub heroes: ::prost::alloc::vec::Vec<OdysseyFormHero>,
-    #[prost(message, repeated, tag = "3")]
-    pub suits: ::prost::alloc::vec::Vec<OdysseyFormEquipSuit>,
-    #[prost(int32, optional, tag = "4")]
-    pub cloth_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct OdysseyFormEquip {
-    #[prost(int32, optional, tag = "1")]
-    pub slot_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub equip_uid: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct OdysseyFormEquipSuit {
-    #[prost(int32, optional, tag = "1")]
-    pub suit_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub level: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub count: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct OdysseyFormHero {
-    #[prost(int32, optional, tag = "1")]
-    pub position: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub hero_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub trial_id: ::core::option::Option<i32>,
-    #[prost(int64, optional, tag = "4")]
-    pub mind_id: ::core::option::Option<i64>,
-    #[prost(message, repeated, tag = "5")]
-    pub equips: ::prost::alloc::vec::Vec<OdysseyFormEquip>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct OdysseyFormInfo {
-    #[prost(message, optional, tag = "1")]
-    pub curr_form: ::core::option::Option<OdysseyForm>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct OdysseyFormSaveReply {
-    #[prost(message, optional, tag = "1")]
-    pub form: ::core::option::Option<OdysseyForm>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct OdysseyFormSaveRequest {
-    #[prost(message, optional, tag = "1")]
-    pub form: ::core::option::Option<OdysseyForm>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct OdysseyFormSwitchReply {
-    #[prost(message, optional, tag = "1")]
-    pub form: ::core::option::Option<OdysseyForm>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct OdysseyFormSwitchRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub form_no: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct OdysseyGetInfoReply {
-    #[prost(message, optional, tag = "1")]
-    pub info: ::core::option::Option<OdysseyInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct OdysseyGetInfoRequest {}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct OdysseyHotfixPush {
-    #[prost(string, optional, tag = "1")]
-    pub params: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct OdysseyHotfixReply {
-    #[prost(string, optional, tag = "1")]
-    pub params: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct OdysseyHotfixRequest {
-    #[prost(string, optional, tag = "1")]
-    pub params: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct OdysseyInfo {
-    #[prost(message, optional, tag = "1")]
-    pub prop_info: ::core::option::Option<OdysseyPropInfo>,
-    #[prost(message, optional, tag = "2")]
-    pub map_info: ::core::option::Option<OdysseyMapInfo>,
-    #[prost(message, optional, tag = "3")]
-    pub bag_info: ::core::option::Option<OdysseyBagInfo>,
-    #[prost(message, optional, tag = "4")]
-    pub talent_info: ::core::option::Option<OdysseyTalentInfo>,
-    #[prost(message, optional, tag = "5")]
-    pub form_info: ::core::option::Option<OdysseyFormInfo>,
-    #[prost(message, optional, tag = "6")]
-    pub fight_info: ::core::option::Option<OdysseyFightInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct OdysseyInteractOptionParam {
-    #[prost(int32, optional, tag = "1")]
-    pub option_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct OdysseyItem {
-    #[prost(int32, optional, tag = "1")]
-    pub uid: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub count: ::core::option::Option<i32>,
-    #[prost(bool, optional, tag = "4")]
-    pub new_flag: ::core::option::Option<bool>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct OdysseyItemReward {
-    #[prost(int32, optional, tag = "1")]
-    pub item_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub count: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct OdysseyMap {
-    #[prost(int32, optional, tag = "1")]
-    pub id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub explore_value: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct OdysseyMapInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub curr_ele_id: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "2")]
-    pub maps: ::prost::alloc::vec::Vec<OdysseyMap>,
-    #[prost(message, repeated, tag = "3")]
-    pub elements: ::prost::alloc::vec::Vec<OdysseyElement>,
-    #[prost(int32, repeated, packed = "false", tag = "4")]
-    pub finished_ele_ids: ::prost::alloc::vec::Vec<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct OdysseyMapInteractReply {
-    #[prost(message, optional, tag = "1")]
-    pub element: ::core::option::Option<OdysseyElement>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct OdysseyMapInteractRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub ele_id: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "2")]
-    pub option_param: ::core::option::Option<OdysseyInteractOptionParam>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct OdysseyMapSetCurrElementReply {
-    #[prost(int32, optional, tag = "1")]
-    pub ele_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct OdysseyMapSetCurrElementRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub ele_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct OdysseyMapUpdateElementPush {
-    #[prost(message, repeated, tag = "1")]
-    pub updates: ::prost::alloc::vec::Vec<OdysseyElement>,
-    #[prost(int32, optional, tag = "2")]
-    pub reason: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct OdysseyMapUpdatePush {
-    #[prost(message, repeated, tag = "1")]
-    pub maps: ::prost::alloc::vec::Vec<OdysseyMap>,
-    #[prost(int32, optional, tag = "2")]
-    pub reason: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct OdysseyMercenaryInfo {
-    #[prost(int64, optional, tag = "1")]
-    pub next_ref_time: ::core::option::Option<i64>,
-    #[prost(message, repeated, tag = "2")]
-    pub suits: ::prost::alloc::vec::Vec<OdysseyMercenarySuit>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct OdysseyMercenarySuit {
-    #[prost(int32, optional, tag = "1")]
-    pub r#type: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub suit_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct OdysseyOptionElement {
-    #[prost(int32, optional, tag = "1")]
-    pub result: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct OdysseyPropInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub exp: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub level: ::core::option::Option<i32>,
-    #[prost(string, optional, tag = "3")]
-    pub params: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct OdysseyReligionInfo {
-    #[prost(message, repeated, tag = "1")]
-    pub members: ::prost::alloc::vec::Vec<OdysseyReligionMember>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct OdysseyReligionMember {
-    #[prost(int32, optional, tag = "1")]
-    pub religion_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub status: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct OdysseyReward {
-    #[prost(message, optional, tag = "1")]
-    pub item_reward: ::core::option::Option<OdysseyItemReward>,
-    #[prost(message, optional, tag = "2")]
-    pub exp_reward: ::core::option::Option<OdysseyExpReward>,
-    #[prost(message, optional, tag = "3")]
-    pub talent_reward: ::core::option::Option<OdysseyTalentReward>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct OdysseyTalentAllResetReply {
-    #[prost(message, optional, tag = "1")]
-    pub info: ::core::option::Option<OdysseyTalentInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct OdysseyTalentAllResetRequest {}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct OdysseyTalentCassandraTreeCancelReply {
-    #[prost(string, optional, tag = "1")]
-    pub cassandra_tree: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct OdysseyTalentCassandraTreeCancelRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub sub_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub level: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct OdysseyTalentCassandraTreeChoiceReply {
-    #[prost(string, optional, tag = "1")]
-    pub cassandra_tree: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct OdysseyTalentCassandraTreeChoiceRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub sub_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub level: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct OdysseyTalentCassandraTreeResetReply {
-    #[prost(string, optional, tag = "1")]
-    pub cassandra_tree: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct OdysseyTalentCassandraTreeResetRequest {}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct OdysseyTalentInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub point: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "2")]
-    pub nodes: ::prost::alloc::vec::Vec<OdysseyTalentNode>,
-    #[prost(string, optional, tag = "3")]
-    pub cassandra_tree: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct OdysseyTalentNode {
-    #[prost(int32, optional, tag = "1")]
-    pub id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub level: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub consume: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct OdysseyTalentNodeLevelDownReply {
-    #[prost(message, optional, tag = "1")]
-    pub node: ::core::option::Option<OdysseyTalentNode>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct OdysseyTalentNodeLevelDownRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub node_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct OdysseyTalentNodeLevelUpReply {
-    #[prost(message, optional, tag = "1")]
-    pub node: ::core::option::Option<OdysseyTalentNode>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct OdysseyTalentNodeLevelUpRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub node_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct OdysseyTalentPointUpdatePush {
-    #[prost(int32, optional, tag = "1")]
-    pub point: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub reason: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct OdysseyTalentReward {
-    #[prost(int32, optional, tag = "1")]
-    pub point: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct OdysseyUpdateInfoPush {
-    #[prost(message, optional, tag = "1")]
-    pub info: ::core::option::Option<OdysseyInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct OdysseyUpdateLevelPush {
-    #[prost(int32, optional, tag = "1")]
-    pub old_level: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub new_level: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub old_exp: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "4")]
-    pub new_exp: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "5")]
-    pub reason: ::core::option::Option<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -23683,12 +18440,6 @@ pub struct PlayerCardInfo {
     pub tower_boss_pass_count: ::core::option::Option<i32>,
     #[prost(int32, optional, tag = "21")]
     pub hero_max_level_count: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "22")]
-    pub weekwalk_ver2_platinum_cup: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "23")]
-    pub hero_count: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "24")]
-    pub tower_layer_metre: ::core::option::Option<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -23723,11 +18474,9 @@ pub struct PlayerClothInfo {
 #[serde(default)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PlayerFinisherInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub r#type: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "2")]
+    #[prost(message, repeated, tag = "1")]
     pub skills: ::prost::alloc::vec::Vec<PlayerFinisherSkillInfo>,
-    #[prost(int32, optional, tag = "3")]
+    #[prost(int32, optional, tag = "2")]
     pub round_use_limit: ::core::option::Option<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
@@ -23809,16 +18558,6 @@ pub struct PlayerSkillInfo {
     pub need_power: ::core::option::Option<i32>,
     #[prost(int32, optional, tag = "4")]
     pub r#type: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Position {
-    #[prost(int32, optional, tag = "1")]
-    pub grid_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub pos: ::core::option::Option<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -24482,22 +19221,6 @@ pub struct ReconnectFightRequest {}
 #[serde(rename_all = "camelCase")]
 #[serde(default)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct RecordChargePushReply {
-    #[prost(int32, optional, tag = "1")]
-    pub id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct RecordChargePushRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct RecordDialogInfoReplay {
     #[prost(int32, optional, tag = "1")]
     pub dialog_id: ::core::option::Option<i32>,
@@ -24541,22 +19264,6 @@ pub struct RecordElementReply {
 pub struct RecordElementRequest {
     #[prost(int32, optional, tag = "1")]
     pub element_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct RecoverSceneReply {
-    #[prost(message, optional, tag = "1")]
-    pub scene: ::core::option::Option<AssassinScene>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct RecoverSceneRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub map_id: ::core::option::Option<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -24883,24 +19590,6 @@ pub struct ResetExploreRequest {}
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
 #[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct ResetHero3124TalentTreeReply {
-    #[prost(int32, optional, tag = "1")]
-    pub hero_id: ::core::option::Option<i32>,
-    #[prost(string, optional, tag = "2")]
-    pub extra_str: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct ResetHero3124TalentTreeRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub hero_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResetLayerReply {
     #[prost(message, optional, tag = "1")]
@@ -25043,38 +19732,6 @@ pub struct RestBuildingInfoPush {
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
 #[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct RestartAssassinSceneReply {
-    #[prost(message, optional, tag = "1")]
-    pub scene: ::core::option::Option<AssassinScene>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct RestartAssassinSceneRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub map_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ReturnAssassinSceneReply {
-    #[prost(message, optional, tag = "1")]
-    pub scene: ::core::option::Option<AssassinScene>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct ReturnAssassinSceneRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub map_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct RewardPointInfo {
     #[prost(int32, optional, tag = "1")]
@@ -25127,14 +19784,6 @@ pub struct RoadInfo {
     pub skin_id: ::core::option::Option<i32>,
     #[prost(int32, optional, tag = "9")]
     pub block_clean_type: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct RoadInfoPush {
-    #[prost(message, repeated, tag = "1")]
-    pub road_infos: ::prost::alloc::vec::Vec<RoadInfo>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -26629,20 +21278,6 @@ pub struct RougeLastReward {
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
 #[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct RougeLayerChoiceInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub layer_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub map_rule_id: ::core::option::Option<i32>,
-    #[prost(int32, repeated, packed = "false", tag = "3")]
-    pub cur_layer_collection: ::prost::alloc::vec::Vec<i32>,
-    #[prost(int32, optional, tag = "4")]
-    pub map_rule_can_fresh_num: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RougeLayerInfo {
     #[prost(int32, optional, tag = "1")]
@@ -26653,8 +21288,6 @@ pub struct RougeLayerInfo {
     pub cur_node: ::core::option::Option<i32>,
     #[prost(message, repeated, tag = "4")]
     pub node_info: ::prost::alloc::vec::Vec<NodeInfo>,
-    #[prost(message, optional, tag = "5")]
-    pub layer_choice_info: ::core::option::Option<RougeLayerChoiceInfo>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -26815,12 +21448,6 @@ pub struct RougeMapInfo {
     pub rouge_entrust: ::core::option::Option<RougeEntrustInfo>,
     #[prost(message, repeated, tag = "8")]
     pub map_skill: ::prost::alloc::vec::Vec<RougeMapSkillInfo>,
-    #[prost(int32, optional, tag = "9")]
-    pub monster_rule_fresh_num: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "10")]
-    pub monster_rule_can_fresh_num: ::core::option::Option<i32>,
-    #[prost(int32, repeated, packed = "false", tag = "11")]
-    pub choice_collection: ::prost::alloc::vec::Vec<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -26903,8 +21530,6 @@ pub struct RougeMiddleLayerInfo {
     pub position_index: ::core::option::Option<i32>,
     #[prost(message, repeated, tag = "4")]
     pub piece_info: ::prost::alloc::vec::Vec<RougePieceInfo>,
-    #[prost(message, repeated, tag = "5")]
-    pub layer_choice_info: ::prost::alloc::vec::Vec<RougeLayerChoiceInfo>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -27003,8 +21628,6 @@ pub struct RougeOutsideInfo {
     pub is_genius_new_stage: ::core::option::Option<bool>,
     #[prost(message, optional, tag = "10")]
     pub limiter_info: ::core::option::Option<RougeLimiterInfo>,
-    #[prost(int32, optional, tag = "11")]
-    pub cur_extra_point: ::core::option::Option<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -27135,42 +21758,6 @@ pub struct RougeReddotUpdatePush {
     pub season: ::core::option::Option<i32>,
     #[prost(message, repeated, tag = "2")]
     pub new_reddots: ::prost::alloc::vec::Vec<NewReddotNo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct RougeRefreshMapRuleReply {
-    #[prost(message, optional, tag = "1")]
-    pub map: ::core::option::Option<RougeMapInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct RougeRefreshMapRuleRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub season: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub layer: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct RougeRefreshMonsterRuleReply {
-    #[prost(message, optional, tag = "1")]
-    pub map: ::core::option::Option<RougeMapInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct RougeRefreshMonsterRuleRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub season: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub index: ::core::option::Option<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -27317,8 +21904,6 @@ pub struct RougeResultInfo {
     pub pre_remain_score2_genius_point: ::core::option::Option<i32>,
     #[prost(message, optional, tag = "33")]
     pub limiter_res_no: ::core::option::Option<LimiterResNo>,
-    #[prost(int32, optional, tag = "34")]
-    pub extra_add_point: ::core::option::Option<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -27802,134 +22387,6 @@ pub struct SearchRequest {
 #[serde(rename_all = "camelCase")]
 #[serde(default)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Select191EnhanceReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "2")]
-    pub game_info: ::core::option::Option<Act191GameInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Select191EnhanceRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub index: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Select191InitBuildReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "2")]
-    pub game_info: ::core::option::Option<Act191GameInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Select191InitBuildRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub init_build_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Select191NodeReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "2")]
-    pub game_info: ::core::option::Option<Act191GameInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Select191NodeRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub index: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Select191ReplaceEventReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "2")]
-    pub game_info: ::core::option::Option<Act191GameInfo>,
-    #[prost(int32, repeated, packed = "false", tag = "3")]
-    pub res_item_id: ::prost::alloc::vec::Vec<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Select191ReplaceEventRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, repeated, packed = "false", tag = "2")]
-    pub item_uid: ::prost::alloc::vec::Vec<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Select191UpgradeEventReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "2")]
-    pub game_info: ::core::option::Option<Act191GameInfo>,
-    #[prost(int32, repeated, packed = "false", tag = "3")]
-    pub res_item_id: ::prost::alloc::vec::Vec<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Select191UpgradeEventRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, repeated, packed = "false", tag = "2")]
-    pub item_uid: ::prost::alloc::vec::Vec<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Select191UseHeroFacetsIdReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub role_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub facets_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Select191UseHeroFacetsIdRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub role_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub facets_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SelectAct174ForceBagReply {
     #[prost(int32, optional, tag = "1")]
     pub activity_id: ::core::option::Option<i32>,
@@ -28077,16 +22534,6 @@ pub struct SendMsgRequest {
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
 #[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct ServerErrorInfoPush {
-    #[prost(string, optional, tag = "1")]
-    pub msg: ::core::option::Option<::prost::alloc::string::String>,
-    #[prost(bool, optional, tag = "2")]
-    pub is_alert: ::core::option::Option<bool>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct ServerResultCodePush {
     #[prost(int32, optional, tag = "1")]
@@ -28142,24 +22589,6 @@ pub struct SetBirthdayReply {}
 pub struct SetBirthdayRequest {
     #[prost(string, optional, tag = "1")]
     pub birthday: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SetBlockColorReply {
-    #[prost(int32, repeated, packed = "false", tag = "1")]
-    pub block_ids: ::prost::alloc::vec::Vec<i32>,
-    #[prost(message, repeated, tag = "2")]
-    pub infos: ::prost::alloc::vec::Vec<BlockInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SetBlockColorRequest {
-    #[prost(message, repeated, tag = "1")]
-    pub block_color_infos: ::prost::alloc::vec::Vec<BlockColorInfo>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -28267,7 +22696,7 @@ pub struct SetHeroGroupSnapshotReply {
     #[prost(int32, optional, tag = "2")]
     pub snapshot_sub_id: ::core::option::Option<i32>,
     #[prost(message, optional, tag = "3")]
-    pub group_info: ::core::option::Option<HeroGroupInfo>,
+    pub fight_group: ::core::option::Option<FightGroup>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -28569,22 +22998,6 @@ pub struct SetSimplePropertyRequest {
 #[serde(rename_all = "camelCase")]
 #[serde(default)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SetUiStyleSkinReply {
-    #[prost(int32, optional, tag = "1")]
-    pub item_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SetUiStyleSkinRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub item_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct SetUseBgmReply {
     #[prost(int32, optional, tag = "1")]
     pub bgm_id: ::core::option::Option<i32>,
@@ -28816,16 +23229,6 @@ pub struct SimplePropertyPush {
 #[serde(rename_all = "camelCase")]
 #[serde(default)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SingleBagInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub bag_id: ::core::option::Option<i32>,
-    #[prost(bool, optional, tag = "2")]
-    pub is_open: ::core::option::Option<bool>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct SkillInfo {
     #[prost(int32, optional, tag = "1")]
     pub skill_id: ::core::option::Option<i32>,
@@ -28893,8 +23296,6 @@ pub struct SpPoolInfo {
     pub open_time: ::core::option::Option<u64>,
     #[prost(bool, optional, tag = "6")]
     pub used_first_ssr_guarantee: ::core::option::Option<bool>,
-    #[prost(int32, repeated, packed = "false", tag = "7")]
-    pub has_get_reward_progresses: ::prost::alloc::vec::Vec<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -28953,24 +23354,6 @@ pub struct Start174GameReply {
 #[serde(default)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct Start174GameRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Start191GameReply {
-    #[prost(int32, optional, tag = "1")]
-    pub activity_id: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "2")]
-    pub game_info: ::core::option::Option<Act191GameInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct Start191GameRequest {
     #[prost(int32, optional, tag = "1")]
     pub activity_id: ::core::option::Option<i32>,
 }
@@ -29230,22 +23613,6 @@ pub struct StartSiegeBattleRequest {}
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
 #[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct StartSurvivalWeekReply {
-    #[prost(string, optional, tag = "1")]
-    pub aaa: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct StartSurvivalWeekRequest {
-    #[prost(string, optional, tag = "1")]
-    pub aaa: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StartTowerBattleReply {
     #[prost(message, optional, tag = "1")]
@@ -29258,8 +23625,6 @@ pub struct StartTowerBattleReply {
     pub layer_id: ::core::option::Option<i32>,
     #[prost(int32, optional, tag = "5")]
     pub difficulty: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "6")]
-    pub talent_plan_id: ::core::option::Option<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -29276,8 +23641,6 @@ pub struct StartTowerBattleRequest {
     pub layer_id: ::core::option::Option<i32>,
     #[prost(int32, optional, tag = "5")]
     pub difficulty: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "6")]
-    pub talent_plan_id: ::core::option::Option<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -29435,15 +23798,7 @@ pub struct SummonCritterRequest {
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
 #[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SummonMonsterPush {
-    #[prost(message, repeated, tag = "1")]
-    pub summons: ::prost::alloc::vec::Vec<MonsterUnit>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct SummonPoolInfo {
     #[prost(int32, optional, tag = "1")]
     pub pool_id: ::core::option::Option<i32>,
@@ -29465,8 +23820,6 @@ pub struct SummonPoolInfo {
     pub can_get_guarantee_sr_count: ::core::option::Option<i32>,
     #[prost(int32, optional, tag = "10")]
     pub guarantee_sr_count_down: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "11")]
-    pub summon_count: ::core::option::Option<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -29536,1993 +23889,6 @@ pub struct SummonedInfo {
     pub uid: ::core::option::Option<i64>,
     #[prost(int64, optional, tag = "4")]
     pub from_uid: ::core::option::Option<i64>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurBag {
-    #[prost(int32, optional, tag = "1")]
-    pub bag_type: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "2")]
-    pub item: ::prost::alloc::vec::Vec<SurBagItem>,
-    #[prost(int32, optional, tag = "3")]
-    pub max_weight_limit: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurBagItem {
-    #[prost(int64, optional, tag = "1")]
-    pub uid: ::core::option::Option<i64>,
-    #[prost(int32, optional, tag = "2")]
-    pub id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub count: ::core::option::Option<i32>,
-    #[prost(string, optional, tag = "4")]
-    pub param: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurHex {
-    #[prost(int32, optional, tag = "1")]
-    pub q: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub r: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurHexDir {
-    #[prost(message, optional, tag = "1")]
-    pub hex: ::core::option::Option<SurHex>,
-    #[prost(int32, optional, tag = "2")]
-    pub dir: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurInteractivePanel {
-    #[prost(int32, optional, tag = "1")]
-    pub r#type: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub unit_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub tree_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "4")]
-    pub dialogue_id: ::core::option::Option<i32>,
-    #[prost(string, repeated, tag = "5")]
-    pub param: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurPlayer {
-    #[prost(message, optional, tag = "1")]
-    pub position: ::core::option::Option<SurHexDir>,
-    #[prost(int32, optional, tag = "2")]
-    pub contamination: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "3")]
-    pub explored: ::prost::alloc::vec::Vec<SurHex>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurUnit {
-    #[prost(int32, optional, tag = "1")]
-    pub id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub cfg_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub unit_type: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "4")]
-    pub position: ::core::option::Option<SurHexDir>,
-    #[prost(string, optional, tag = "5")]
-    pub extra_param: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalAbandonRecruitNpcReply {
-    #[prost(message, optional, tag = "1")]
-    pub recruit_info: ::core::option::Option<SurvivalRecruitInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalAbandonRecruitNpcRequest {}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalAbandonWeekReply {}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalAbandonWeekRequest {}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalAttrContainer {
-    #[prost(message, repeated, tag = "1")]
-    pub values: ::prost::alloc::vec::Vec<SurvivalAttrValue>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalAttrContainerUpdatePush {
-    #[prost(message, repeated, tag = "1")]
-    pub updates: ::prost::alloc::vec::Vec<SurvivalAttrValue>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalAttrValue {
-    #[prost(int32, optional, tag = "1")]
-    pub attr_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub final_val: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalBag {
-    #[prost(int32, optional, tag = "1")]
-    pub bag_type: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "2")]
-    pub item: ::prost::alloc::vec::Vec<SurvivalBagItem>,
-    #[prost(int32, optional, tag = "3")]
-    pub max_weight_limit: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalBagItem {
-    #[prost(int64, optional, tag = "1")]
-    pub uid: ::core::option::Option<i64>,
-    #[prost(int32, optional, tag = "2")]
-    pub id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub count: ::core::option::Option<i32>,
-    #[prost(string, optional, tag = "4")]
-    pub param: ::core::option::Option<::prost::alloc::string::String>,
-    #[prost(int32, optional, tag = "5")]
-    pub bag_reason: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalBagUpdatePush {
-    #[prost(int32, optional, tag = "1")]
-    pub r#type: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "2")]
-    pub update_items: ::prost::alloc::vec::Vec<SurvivalBagItem>,
-    #[prost(int64, repeated, packed = "false", tag = "3")]
-    pub del_item_uids: ::prost::alloc::vec::Vec<i64>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalBatchHeroChangePositionReply {
-    #[prost(int32, repeated, packed = "false", tag = "1")]
-    pub hero_id: ::prost::alloc::vec::Vec<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub building_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalBatchHeroChangePositionRequest {
-    #[prost(int32, repeated, packed = "false", tag = "1")]
-    pub hero_id: ::prost::alloc::vec::Vec<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub building_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalBuildReply {
-    #[prost(message, optional, tag = "1")]
-    pub building: ::core::option::Option<SurvivalBuilding>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalBuildRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalBuilding {
-    #[prost(int32, optional, tag = "1")]
-    pub id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub building_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub level: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "4")]
-    pub status: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "5")]
-    pub attr_container: ::core::option::Option<SurvivalAttrContainer>,
-    #[prost(message, repeated, tag = "6")]
-    pub hero_pos: ::prost::alloc::vec::Vec<SurvivalBuildingHeroPos>,
-    #[prost(message, repeated, tag = "7")]
-    pub npc_pos: ::prost::alloc::vec::Vec<SurvivalBuildingNpcPos>,
-    #[prost(message, optional, tag = "8")]
-    pub shop: ::core::option::Option<SurvivalShop>,
-    #[prost(message, optional, tag = "9")]
-    pub reputation_prop: ::core::option::Option<SurvivalReputationProp>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalBuildingBox {
-    #[prost(message, repeated, tag = "1")]
-    pub building: ::prost::alloc::vec::Vec<SurvivalBuilding>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalBuildingHeroPos {
-    #[prost(int32, optional, tag = "1")]
-    pub hero_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub pos: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalBuildingNpcPos {
-    #[prost(int32, optional, tag = "1")]
-    pub npc_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub pos: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalBuildingUpdatePush {
-    #[prost(message, repeated, tag = "1")]
-    pub buildings: ::prost::alloc::vec::Vec<SurvivalBuilding>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalChooseBootyReply {
-    #[prost(message, optional, tag = "1")]
-    pub week_info: ::core::option::Option<SurvivalWeekInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalChooseBootyRequest {
-    #[prost(int32, repeated, packed = "false", tag = "1")]
-    pub npc_id: ::prost::alloc::vec::Vec<i32>,
-    #[prost(int32, repeated, packed = "false", tag = "2")]
-    pub equip_id: ::prost::alloc::vec::Vec<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalClosePanelPush {
-    #[prost(message, optional, tag = "1")]
-    pub panel: ::core::option::Option<SurvivalPanel>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalClosePanelReply {}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalClosePanelRequest {
-    #[prost(int64, optional, tag = "1")]
-    pub panel_uid: ::core::option::Option<i64>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalDailyReportPush {
-    #[prost(string, optional, tag = "1")]
-    pub json: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalDecreesPanelProp {
-    #[prost(int32, repeated, packed = "false", tag = "1")]
-    pub decrees_id: ::prost::alloc::vec::Vec<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub select_num: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalEquipBox {
-    #[prost(int32, optional, tag = "1")]
-    pub curr_plan_id: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "2")]
-    pub slots: ::prost::alloc::vec::Vec<SurvivalEquipSlot>,
-    #[prost(int32, optional, tag = "3")]
-    pub max_tag_id: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "4")]
-    pub jewelry_slots: ::prost::alloc::vec::Vec<SurvivalEquipSlot>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalEquipCompoundReply {
-    #[prost(message, optional, tag = "1")]
-    pub item: ::core::option::Option<SurvivalBagItem>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalEquipCompoundRequest {
-    #[prost(int64, repeated, packed = "false", tag = "1")]
-    pub uid: ::prost::alloc::vec::Vec<i64>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalEquipDemountReply {
-    #[prost(message, optional, tag = "1")]
-    pub slot: ::core::option::Option<SurvivalEquipSlot>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalEquipDemountRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub slot_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalEquipOneKeyDemountReply {}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalEquipOneKeyDemountRequest {}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalEquipOneKeyWearReply {}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalEquipOneKeyWearRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub tag_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalEquipSetNewFlagReply {
-    #[prost(message, repeated, tag = "2")]
-    pub slots: ::prost::alloc::vec::Vec<SurvivalEquipSlot>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalEquipSetNewFlagRequest {
-    #[prost(int32, repeated, packed = "false", tag = "1")]
-    pub slot_id: ::prost::alloc::vec::Vec<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalEquipSlot {
-    #[prost(int32, optional, tag = "1")]
-    pub slot_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub level: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "3")]
-    pub item: ::core::option::Option<SurvivalBagItem>,
-    #[prost(message, repeated, tag = "4")]
-    pub values: ::prost::alloc::vec::Vec<SurvivalFinalEigenvalue>,
-    #[prost(bool, optional, tag = "5")]
-    pub unlock: ::core::option::Option<bool>,
-    #[prost(bool, optional, tag = "6")]
-    pub new_flag: ::core::option::Option<bool>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalEquipSwitchPlanReply {
-    #[prost(message, optional, tag = "1")]
-    pub equip_box: ::core::option::Option<SurvivalEquipBox>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalEquipSwitchPlanRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub new_plan_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalEquipUpdatePush {
-    #[prost(message, optional, tag = "1")]
-    pub equip_box: ::core::option::Option<SurvivalEquipBox>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalEquipWearReply {
-    #[prost(int32, optional, tag = "1")]
-    pub slot_id: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "2")]
-    pub slots: ::prost::alloc::vec::Vec<SurvivalEquipSlot>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalEquipWearRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub slot_id: ::core::option::Option<i32>,
-    #[prost(int64, optional, tag = "2")]
-    pub uid: ::core::option::Option<i64>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalExploreBattleInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub unit_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub battle_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub status: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalFinalEigenvalue {
-    #[prost(int32, optional, tag = "1")]
-    pub id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub value: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalFollowTask {
-    #[prost(int32, optional, tag = "1")]
-    pub module_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub task_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub follow_unit_uid: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalGetEquipInfoReply {
-    #[prost(message, optional, tag = "1")]
-    pub equip_box: ::core::option::Option<SurvivalEquipBox>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalGetEquipInfoRequest {}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalGetTalentInfoReply {
-    #[prost(message, optional, tag = "1")]
-    pub talent_box: ::core::option::Option<SurvivalTalentBox>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalGetTalentInfoRequest {}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalGetWeekInfoReply {
-    #[prost(message, optional, tag = "1")]
-    pub week_info: ::core::option::Option<SurvivalWeekInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalGetWeekInfoRequest {}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalHandbook {
-    #[prost(int32, optional, tag = "1")]
-    pub id: ::core::option::Option<i32>,
-    #[prost(bool, optional, tag = "2")]
-    pub is_new: ::core::option::Option<bool>,
-    #[prost(int32, optional, tag = "3")]
-    pub param: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalHandbookBox {
-    #[prost(message, repeated, tag = "1")]
-    pub handbook: ::prost::alloc::vec::Vec<SurvivalHandbook>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalHandbookPush {
-    #[prost(message, repeated, tag = "1")]
-    pub handbook: ::prost::alloc::vec::Vec<SurvivalHandbook>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalHero {
-    #[prost(int32, optional, tag = "1")]
-    pub hero_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub health: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub status: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalHeroBox {
-    #[prost(message, repeated, tag = "1")]
-    pub heros: ::prost::alloc::vec::Vec<SurvivalHero>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalHeroChangePositionReply {
-    #[prost(int32, optional, tag = "1")]
-    pub hero_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub building_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub position: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalHeroChangePositionRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub hero_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub building_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub position: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalHeroExchangePositionReply {
-    #[prost(int32, optional, tag = "1")]
-    pub src_hero_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub target_hero_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalHeroExchangePositionRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub src_hero_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub target_hero_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalHeroUpdatePush {
-    #[prost(message, repeated, tag = "1")]
-    pub hero: ::prost::alloc::vec::Vec<SurvivalHero>,
-    #[prost(int32, optional, tag = "2")]
-    pub reason: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalHexCell {
-    #[prost(message, optional, tag = "1")]
-    pub hex: ::core::option::Option<SurHexDir>,
-    #[prost(int32, optional, tag = "2")]
-    pub style: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalIntrudeAbandonExterminateReply {
-    #[prost(message, optional, tag = "1")]
-    pub fight: ::core::option::Option<SurvivalIntrudeFight>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalIntrudeAbandonExterminateRequest {}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalIntrudeBox {
-    #[prost(int32, optional, tag = "1")]
-    pub template_id: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "2")]
-    pub fight: ::core::option::Option<SurvivalIntrudeFight>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalIntrudeExterminateReply {
-    #[prost(message, optional, tag = "1")]
-    pub fight: ::core::option::Option<SurvivalIntrudeFight>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalIntrudeExterminateRequest {
-    #[prost(int32, repeated, packed = "false", tag = "1")]
-    pub npc_id: ::prost::alloc::vec::Vec<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalIntrudeFight {
-    #[prost(int32, optional, tag = "1")]
-    pub fight_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub stage_no: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub begin_time: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "4")]
-    pub end_time: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "6")]
-    pub schemes: ::prost::alloc::vec::Vec<SurvivalIntrudeScheme>,
-    #[prost(int32, optional, tag = "8")]
-    pub curr_round: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "9")]
-    pub rounds: ::prost::alloc::vec::Vec<SurvivalIntrudeFightRound>,
-    #[prost(message, repeated, tag = "10")]
-    pub monsters: ::prost::alloc::vec::Vec<SurvivalIntrudeMonster>,
-    #[prost(int32, optional, tag = "11")]
-    pub status: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalIntrudeFightRound {
-    #[prost(int32, optional, tag = "1")]
-    pub round: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub equip_plan_id: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "3")]
-    pub heroes: ::prost::alloc::vec::Vec<SurvivalIntrudeHero>,
-    #[prost(bool, optional, tag = "4")]
-    pub finished: ::core::option::Option<bool>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalIntrudeFightSettlePush {
-    #[prost(message, optional, tag = "1")]
-    pub fight: ::core::option::Option<SurvivalIntrudeFight>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalIntrudeHero {
-    #[prost(int32, optional, tag = "1")]
-    pub hero_id: ::core::option::Option<i32>,
-    #[prost(int64, repeated, packed = "false", tag = "2")]
-    pub equip_uid: ::prost::alloc::vec::Vec<i64>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalIntrudeMonster {
-    #[prost(int32, optional, tag = "1")]
-    pub monster_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub current_hp: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub current_hp_rate: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalIntrudeReExterminateReply {
-    #[prost(message, optional, tag = "1")]
-    pub fight: ::core::option::Option<SurvivalIntrudeFight>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalIntrudeReExterminateRequest {}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalIntrudeScheme {
-    #[prost(int32, optional, tag = "1")]
-    pub id: ::core::option::Option<i32>,
-    #[prost(bool, optional, tag = "2")]
-    pub repress: ::core::option::Option<bool>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalItemTips {
-    #[prost(int32, optional, tag = "1")]
-    pub item_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub count: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalItemTipsPush {
-    #[prost(message, repeated, tag = "1")]
-    pub item_tips: ::prost::alloc::vec::Vec<SurvivalItemTips>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalJewelryEquipDemountReply {
-    #[prost(message, optional, tag = "1")]
-    pub slot: ::core::option::Option<SurvivalEquipSlot>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalJewelryEquipDemountRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub slot_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalJewelryEquipWearReply {
-    #[prost(int32, optional, tag = "1")]
-    pub slot_id: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "2")]
-    pub slots: ::prost::alloc::vec::Vec<SurvivalEquipSlot>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalJewelryEquipWearRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub slot_id: ::core::option::Option<i32>,
-    #[prost(int64, optional, tag = "2")]
-    pub uid: ::core::option::Option<i64>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalMapInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub map_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub disaster_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub rain_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "4")]
-    pub task_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalMarkNewHandbookReply {
-    #[prost(int32, repeated, packed = "false", tag = "1")]
-    pub ids: ::prost::alloc::vec::Vec<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalMarkNewHandbookRequest {
-    #[prost(int32, repeated, packed = "false", tag = "1")]
-    pub ids: ::prost::alloc::vec::Vec<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalNpc {
-    #[prost(int32, optional, tag = "1")]
-    pub id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub status: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub position: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalNpcAcceptTaskReply {
-    #[prost(int32, optional, tag = "1")]
-    pub npc_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub behavior_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalNpcAcceptTaskRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub npc_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub behavior_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalNpcBox {
-    #[prost(message, repeated, tag = "1")]
-    pub npcs: ::prost::alloc::vec::Vec<SurvivalNpc>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalNpcChangePositionReply {
-    #[prost(int32, optional, tag = "1")]
-    pub npc_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub building_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub position: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalNpcChangePositionRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub npc_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub building_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub position: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalNpcExchangePositionReply {
-    #[prost(int32, optional, tag = "1")]
-    pub src_npc_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub target_npc_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalNpcExchangePositionRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub src_npc_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub target_npc_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalOpenPanelPush {
-    #[prost(message, optional, tag = "1")]
-    pub panel: ::core::option::Option<SurvivalPanel>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalOutSideGainRewardReply {
-    #[prost(int32, optional, tag = "1")]
-    pub reward_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalOutSideGainRewardRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub reward_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalOutSideGetInfoReply {
-    #[prost(message, optional, tag = "1")]
-    pub info: ::core::option::Option<SurvivalOutSideInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalOutSideGetInfoRequest {}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalOutSideInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub season: ::core::option::Option<i32>,
-    #[prost(int32, repeated, packed = "false", tag = "2")]
-    pub versions: ::prost::alloc::vec::Vec<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub score: ::core::option::Option<i32>,
-    #[prost(int32, repeated, packed = "false", tag = "4")]
-    pub gain: ::prost::alloc::vec::Vec<i32>,
-    #[prost(int32, repeated, packed = "false", tag = "5")]
-    pub npc_id: ::prost::alloc::vec::Vec<i32>,
-    #[prost(int32, repeated, packed = "false", tag = "6")]
-    pub equip_ids: ::prost::alloc::vec::Vec<i32>,
-    #[prost(bool, optional, tag = "7")]
-    pub in_week: ::core::option::Option<bool>,
-    #[prost(int32, repeated, packed = "false", tag = "9")]
-    pub pass_hardness_mod: ::prost::alloc::vec::Vec<i32>,
-    #[prost(int32, optional, tag = "10")]
-    pub curr_mod: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "11")]
-    pub curr_day: ::core::option::Option<i32>,
-    #[prost(int32, repeated, packed = "false", tag = "12")]
-    pub unlock_difficulty: ::prost::alloc::vec::Vec<i32>,
-    #[prost(int32, repeated, packed = "false", tag = "13")]
-    pub end_id: ::prost::alloc::vec::Vec<i32>,
-    #[prost(string, optional, tag = "14")]
-    pub client_data: ::core::option::Option<::prost::alloc::string::String>,
-    #[prost(message, optional, tag = "15")]
-    pub handbook_box: ::core::option::Option<SurvivalHandbookBox>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalPanel {
-    #[prost(int64, optional, tag = "1")]
-    pub uid: ::core::option::Option<i64>,
-    #[prost(int32, optional, tag = "2")]
-    pub r#type: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub unit_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "4")]
-    pub tree_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "5")]
-    pub dialogue_id: ::core::option::Option<i32>,
-    #[prost(string, repeated, tag = "6")]
-    pub param: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-    #[prost(message, repeated, tag = "8")]
-    pub items: ::prost::alloc::vec::Vec<SurvivalBagItem>,
-    #[prost(int32, optional, tag = "9")]
-    pub can_select_num: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "10")]
-    pub shop: ::core::option::Option<SurvivalShop>,
-    #[prost(message, optional, tag = "11")]
-    pub decrees_prop: ::core::option::Option<SurvivalDecreesPanelProp>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalPanelOperationReply {
-    #[prost(message, optional, tag = "1")]
-    pub panel: ::core::option::Option<SurvivalPanel>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalPanelOperationRequest {
-    #[prost(int64, optional, tag = "1")]
-    pub panel_uid: ::core::option::Option<i64>,
-    #[prost(string, optional, tag = "2")]
-    pub operation: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalPublishRecruitTagReply {
-    #[prost(message, optional, tag = "1")]
-    pub recruit_info: ::core::option::Option<SurvivalRecruitInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalPublishRecruitTagRequest {
-    #[prost(int32, repeated, packed = "false", tag = "1")]
-    pub tag_id: ::prost::alloc::vec::Vec<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalReceiveTaskRewardReply {
-    #[prost(int32, optional, tag = "1")]
-    pub module_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub task_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalReceiveTaskRewardRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub module_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub task_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalRecruitGood {
-    #[prost(int32, optional, tag = "1")]
-    pub id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub npc_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalRecruitInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub id: ::core::option::Option<i32>,
-    #[prost(int32, repeated, packed = "false", tag = "2")]
-    pub tags: ::prost::alloc::vec::Vec<i32>,
-    #[prost(int32, repeated, packed = "false", tag = "3")]
-    pub selected_tags: ::prost::alloc::vec::Vec<i32>,
-    #[prost(int32, optional, tag = "4")]
-    pub can_refresh_times: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "5")]
-    pub good: ::prost::alloc::vec::Vec<SurvivalRecruitGood>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalRecruitInfoPush {
-    #[prost(message, optional, tag = "1")]
-    pub recruit_info: ::core::option::Option<SurvivalRecruitInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalRecruitNpcReply {
-    #[prost(message, optional, tag = "1")]
-    pub recruit_info: ::core::option::Option<SurvivalRecruitInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalRecruitNpcRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub npc_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalRefreshRecruitTagReply {
-    #[prost(message, optional, tag = "1")]
-    pub recruit_info: ::core::option::Option<SurvivalRecruitInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalRefreshRecruitTagRequest {}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalRemoveBagItemReply {}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalRemoveBagItemRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub bag_type: ::core::option::Option<i32>,
-    #[prost(int64, optional, tag = "2")]
-    pub uid: ::core::option::Option<i64>,
-    #[prost(int32, optional, tag = "3")]
-    pub count: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalRemoveTaskInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub module_id: ::core::option::Option<i32>,
-    #[prost(int32, repeated, packed = "false", tag = "2")]
-    pub task_id: ::prost::alloc::vec::Vec<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalRepairReply {
-    #[prost(message, optional, tag = "1")]
-    pub building: ::core::option::Option<SurvivalBuilding>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalRepairRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalReputationExpReply {
-    #[prost(message, optional, tag = "1")]
-    pub building: ::core::option::Option<SurvivalBuilding>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalReputationExpRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub reputation_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalReputationProp {
-    #[prost(int32, optional, tag = "1")]
-    pub reputation_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub reputation_exp: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub reputation_level: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "4")]
-    pub shop: ::core::option::Option<SurvivalShop>,
-    #[prost(int32, repeated, packed = "false", tag = "5")]
-    pub gain: ::prost::alloc::vec::Vec<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalReputationRewardReply {
-    #[prost(int32, optional, tag = "1")]
-    pub reputation_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub level: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalReputationRewardRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub reputation_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub level: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalSafeZone {
-    #[prost(message, repeated, tag = "2")]
-    pub shrink_info: ::prost::alloc::vec::Vec<SurvivalShrinkInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalScene {
-    #[prost(int32, optional, tag = "1")]
-    pub map_id: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "2")]
-    pub player: ::core::option::Option<SurPlayer>,
-    #[prost(message, repeated, tag = "3")]
-    pub unit: ::prost::alloc::vec::Vec<SurUnit>,
-    #[prost(int32, optional, tag = "4")]
-    pub countdown: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "5")]
-    pub circle: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "6")]
-    pub bag: ::core::option::Option<SurBag>,
-    #[prost(message, optional, tag = "7")]
-    pub panel: ::core::option::Option<SurInteractivePanel>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalSceneEndPush {
-    #[prost(bool, optional, tag = "1")]
-    pub is_win: ::core::option::Option<bool>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalSceneGiveUpReply {}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalSceneGiveUpRequest {}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalSceneHero {
-    #[prost(int64, optional, tag = "1")]
-    pub uid: ::core::option::Option<i64>,
-    #[prost(int32, optional, tag = "2")]
-    pub hero_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalSceneHotfix1Push {
-    #[prost(string, repeated, tag = "1")]
-    pub data: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-    #[prost(int32, repeated, packed = "false", tag = "2")]
-    pub int_data: ::prost::alloc::vec::Vec<i32>,
-    #[prost(int64, repeated, packed = "false", tag = "3")]
-    pub long_data: ::prost::alloc::vec::Vec<i64>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalSceneHotfix1Reply {
-    #[prost(string, repeated, tag = "1")]
-    pub data: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-    #[prost(int32, repeated, packed = "false", tag = "2")]
-    pub int_data: ::prost::alloc::vec::Vec<i32>,
-    #[prost(int64, repeated, packed = "false", tag = "3")]
-    pub long_data: ::prost::alloc::vec::Vec<i64>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalSceneHotfix1Request {
-    #[prost(string, repeated, tag = "1")]
-    pub data: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-    #[prost(int32, repeated, packed = "false", tag = "2")]
-    pub int_data: ::prost::alloc::vec::Vec<i32>,
-    #[prost(int64, repeated, packed = "false", tag = "3")]
-    pub long_data: ::prost::alloc::vec::Vec<i64>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalSceneHotfix2Push {
-    #[prost(string, repeated, tag = "1")]
-    pub data: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-    #[prost(int32, repeated, packed = "false", tag = "2")]
-    pub int_data: ::prost::alloc::vec::Vec<i32>,
-    #[prost(int64, repeated, packed = "false", tag = "3")]
-    pub long_data: ::prost::alloc::vec::Vec<i64>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalSceneHotfix2Reply {
-    #[prost(string, repeated, tag = "1")]
-    pub data: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-    #[prost(int32, repeated, packed = "false", tag = "2")]
-    pub int_data: ::prost::alloc::vec::Vec<i32>,
-    #[prost(int64, repeated, packed = "false", tag = "3")]
-    pub long_data: ::prost::alloc::vec::Vec<i64>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalSceneHotfix2Request {
-    #[prost(string, repeated, tag = "1")]
-    pub data: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-    #[prost(int32, repeated, packed = "false", tag = "2")]
-    pub int_data: ::prost::alloc::vec::Vec<i32>,
-    #[prost(int64, repeated, packed = "false", tag = "3")]
-    pub long_data: ::prost::alloc::vec::Vec<i64>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalSceneHotfix3Push {
-    #[prost(string, repeated, tag = "1")]
-    pub data: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-    #[prost(int32, repeated, packed = "false", tag = "2")]
-    pub int_data: ::prost::alloc::vec::Vec<i32>,
-    #[prost(int64, repeated, packed = "false", tag = "3")]
-    pub long_data: ::prost::alloc::vec::Vec<i64>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalSceneHotfix3Reply {
-    #[prost(string, repeated, tag = "1")]
-    pub data: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-    #[prost(int32, repeated, packed = "false", tag = "2")]
-    pub int_data: ::prost::alloc::vec::Vec<i32>,
-    #[prost(int64, repeated, packed = "false", tag = "3")]
-    pub long_data: ::prost::alloc::vec::Vec<i64>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalSceneHotfix3Request {
-    #[prost(string, repeated, tag = "1")]
-    pub data: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-    #[prost(int32, repeated, packed = "false", tag = "2")]
-    pub int_data: ::prost::alloc::vec::Vec<i32>,
-    #[prost(int64, repeated, packed = "false", tag = "3")]
-    pub long_data: ::prost::alloc::vec::Vec<i64>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalSceneOperationLogPush {
-    #[prost(string, repeated, tag = "1")]
-    pub data: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalSceneOperationLogReply {
-    #[prost(string, optional, tag = "1")]
-    pub aaa: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalSceneOperationLogRequest {}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalSceneOperationReply {
-    #[prost(int32, optional, tag = "1")]
-    pub operation_type: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "2")]
-    pub step_wrapper: ::core::option::Option<SurvivalStepWrapper>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalSceneOperationRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub operation_type: ::core::option::Option<i32>,
-    #[prost(string, optional, tag = "2")]
-    pub param: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalSceneProp {
-    #[prost(int32, optional, tag = "1")]
-    pub magma_status: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "2")]
-    pub radar_hex: ::core::option::Option<SurHex>,
-    #[prost(int32, optional, tag = "3")]
-    pub teleport_gate: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "4")]
-    pub teleport_gate_hex: ::core::option::Option<SurHex>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalSceneTeamInfo {
-    #[prost(message, repeated, tag = "1")]
-    pub hero: ::prost::alloc::vec::Vec<SurvivalSceneHero>,
-    #[prost(int32, repeated, packed = "false", tag = "2")]
-    pub npc_id: ::prost::alloc::vec::Vec<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalSettleWeekPush {
-    #[prost(bool, optional, tag = "1")]
-    pub win: ::core::option::Option<bool>,
-    #[prost(int32, optional, tag = "2")]
-    pub score: ::core::option::Option<i32>,
-    #[prost(string, optional, tag = "3")]
-    pub report: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalShop {
-    #[prost(int32, optional, tag = "1")]
-    pub id: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "2")]
-    pub items: ::prost::alloc::vec::Vec<SurvivalShopItem>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalShopBuyReply {
-    #[prost(int64, optional, tag = "1")]
-    pub uid: ::core::option::Option<i64>,
-    #[prost(int32, optional, tag = "2")]
-    pub count: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub shop_type: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "4")]
-    pub shop_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalShopBuyRequest {
-    #[prost(int64, optional, tag = "1")]
-    pub uid: ::core::option::Option<i64>,
-    #[prost(int32, optional, tag = "2")]
-    pub count: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub shop_type: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "4")]
-    pub shop_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalShopItem {
-    #[prost(int64, optional, tag = "1")]
-    pub uid: ::core::option::Option<i64>,
-    #[prost(int32, optional, tag = "2")]
-    pub id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub item_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "4")]
-    pub count: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "5")]
-    pub group_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalShopSellReply {}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalShopSellRequest {
-    #[prost(int64, optional, tag = "1")]
-    pub uid: ::core::option::Option<i64>,
-    #[prost(int32, optional, tag = "2")]
-    pub count: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub shop_type: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "4")]
-    pub shop_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalShopUpdatePush {
-    #[prost(message, optional, tag = "1")]
-    pub shop: ::core::option::Option<SurvivalShop>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalShrinkInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub round: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub start_time: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub end_time: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "4")]
-    pub final_circle: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalStartWeekChooseDiffReply {
-    #[prost(message, optional, tag = "1")]
-    pub week_info: ::core::option::Option<SurvivalWeekInfo>,
-    #[prost(int32, optional, tag = "2")]
-    pub extend_score: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalStartWeekChooseDiffRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub difficulty: ::core::option::Option<i32>,
-    #[prost(int32, repeated, packed = "false", tag = "2")]
-    pub hardness_id: ::prost::alloc::vec::Vec<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalStep {
-    #[prost(int32, optional, tag = "1")]
-    pub r#type: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub unit_type: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "4")]
-    pub position: ::core::option::Option<SurHexDir>,
-    #[prost(int32, repeated, packed = "false", tag = "5")]
-    pub param_int: ::prost::alloc::vec::Vec<i32>,
-    #[prost(int64, repeated, packed = "false", tag = "6")]
-    pub param_long: ::prost::alloc::vec::Vec<i64>,
-    #[prost(string, repeated, tag = "7")]
-    pub param_str: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-    #[prost(message, optional, tag = "8")]
-    pub panel: ::core::option::Option<SurInteractivePanel>,
-    #[prost(message, optional, tag = "9")]
-    pub unit: ::core::option::Option<SurUnit>,
-    #[prost(message, repeated, tag = "10")]
-    pub hex: ::prost::alloc::vec::Vec<SurHex>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalStepPush {
-    #[prost(message, repeated, tag = "1")]
-    pub step: ::prost::alloc::vec::Vec<SurvivalStep>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalStepWrapper {
-    #[prost(message, repeated, tag = "1")]
-    pub step: ::prost::alloc::vec::Vec<SurvivalStep>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalSurvivalOutSideClientDataReply {
-    #[prost(string, optional, tag = "1")]
-    pub data: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalSurvivalOutSideClientDataRequest {
-    #[prost(string, optional, tag = "1")]
-    pub data: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalSurvivalWeekClientDataReply {
-    #[prost(string, optional, tag = "1")]
-    pub data: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalSurvivalWeekClientDataRequest {
-    #[prost(string, optional, tag = "1")]
-    pub data: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalTalentBox {
-    #[prost(int32, repeated, packed = "false", tag = "1")]
-    pub talent_ids: ::prost::alloc::vec::Vec<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalTask {
-    #[prost(int32, optional, tag = "1")]
-    pub id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub progress: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub status: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalTaskBox {
-    #[prost(int32, optional, tag = "1")]
-    pub module_id: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "2")]
-    pub tasks: ::prost::alloc::vec::Vec<SurvivalTask>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalTaskFollowReply {
-    #[prost(int32, optional, tag = "1")]
-    pub module_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub task_id: ::core::option::Option<i32>,
-    #[prost(bool, optional, tag = "3")]
-    pub follow: ::core::option::Option<bool>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalTaskFollowRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub module_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub task_id: ::core::option::Option<i32>,
-    #[prost(bool, optional, tag = "3")]
-    pub follow: ::core::option::Option<bool>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalTaskPanel {
-    #[prost(message, repeated, tag = "1")]
-    pub boxs: ::prost::alloc::vec::Vec<SurvivalTaskBox>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalTaskUpdatePush {
-    #[prost(message, repeated, tag = "1")]
-    pub boxs: ::prost::alloc::vec::Vec<SurvivalTaskBox>,
-    #[prost(message, repeated, tag = "2")]
-    pub remove_task_info: ::prost::alloc::vec::Vec<SurvivalRemoveTaskInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalUpdateClientDataReply {
-    #[prost(string, optional, tag = "1")]
-    pub data: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalUpdateClientDataRequest {
-    #[prost(string, optional, tag = "1")]
-    pub data: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalUpgradeReply {
-    #[prost(message, optional, tag = "1")]
-    pub building: ::core::option::Option<SurvivalBuilding>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalUpgradeRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalUseItemReply {
-    #[prost(int64, optional, tag = "1")]
-    pub item_uid: ::core::option::Option<i64>,
-    #[prost(int32, optional, tag = "2")]
-    pub operation_type: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalUseItemRequest {
-    #[prost(int64, optional, tag = "1")]
-    pub item_uid: ::core::option::Option<i64>,
-    #[prost(string, optional, tag = "2")]
-    pub param: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalWeekHotfix1Push {
-    #[prost(string, repeated, tag = "1")]
-    pub data: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-    #[prost(int32, repeated, packed = "false", tag = "2")]
-    pub int_data: ::prost::alloc::vec::Vec<i32>,
-    #[prost(int64, repeated, packed = "false", tag = "3")]
-    pub long_data: ::prost::alloc::vec::Vec<i64>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalWeekHotfix1Reply {
-    #[prost(string, repeated, tag = "1")]
-    pub data: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-    #[prost(int32, repeated, packed = "false", tag = "2")]
-    pub int_data: ::prost::alloc::vec::Vec<i32>,
-    #[prost(int64, repeated, packed = "false", tag = "3")]
-    pub long_data: ::prost::alloc::vec::Vec<i64>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalWeekHotfix1Request {
-    #[prost(string, repeated, tag = "1")]
-    pub data: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-    #[prost(int32, repeated, packed = "false", tag = "2")]
-    pub int_data: ::prost::alloc::vec::Vec<i32>,
-    #[prost(int64, repeated, packed = "false", tag = "3")]
-    pub long_data: ::prost::alloc::vec::Vec<i64>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalWeekHotfix2Push {
-    #[prost(string, repeated, tag = "1")]
-    pub data: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-    #[prost(int32, repeated, packed = "false", tag = "2")]
-    pub int_data: ::prost::alloc::vec::Vec<i32>,
-    #[prost(int64, repeated, packed = "false", tag = "3")]
-    pub long_data: ::prost::alloc::vec::Vec<i64>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalWeekHotfix2Reply {
-    #[prost(string, repeated, tag = "1")]
-    pub data: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-    #[prost(int32, repeated, packed = "false", tag = "2")]
-    pub int_data: ::prost::alloc::vec::Vec<i32>,
-    #[prost(int64, repeated, packed = "false", tag = "3")]
-    pub long_data: ::prost::alloc::vec::Vec<i64>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalWeekHotfix2Request {
-    #[prost(string, repeated, tag = "1")]
-    pub data: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-    #[prost(int32, repeated, packed = "false", tag = "2")]
-    pub int_data: ::prost::alloc::vec::Vec<i32>,
-    #[prost(int64, repeated, packed = "false", tag = "3")]
-    pub long_data: ::prost::alloc::vec::Vec<i64>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalWeekHotfix3Push {
-    #[prost(string, repeated, tag = "1")]
-    pub data: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-    #[prost(int32, repeated, packed = "false", tag = "2")]
-    pub int_data: ::prost::alloc::vec::Vec<i32>,
-    #[prost(int64, repeated, packed = "false", tag = "3")]
-    pub long_data: ::prost::alloc::vec::Vec<i64>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalWeekHotfix3Reply {
-    #[prost(string, repeated, tag = "1")]
-    pub data: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-    #[prost(int32, repeated, packed = "false", tag = "2")]
-    pub int_data: ::prost::alloc::vec::Vec<i32>,
-    #[prost(int64, repeated, packed = "false", tag = "3")]
-    pub long_data: ::prost::alloc::vec::Vec<i64>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SurvivalWeekHotfix3Request {
-    #[prost(string, repeated, tag = "1")]
-    pub data: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-    #[prost(int32, repeated, packed = "false", tag = "2")]
-    pub int_data: ::prost::alloc::vec::Vec<i32>,
-    #[prost(int64, repeated, packed = "false", tag = "3")]
-    pub long_data: ::prost::alloc::vec::Vec<i64>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalWeekInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub shelter_map_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub day: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub difficulty: ::core::option::Option<i32>,
-    #[prost(int32, repeated, packed = "false", tag = "4")]
-    pub hardness_ids: ::prost::alloc::vec::Vec<i32>,
-    #[prost(bool, optional, tag = "5")]
-    pub in_survival: ::core::option::Option<bool>,
-    #[prost(message, optional, tag = "6")]
-    pub building_box: ::core::option::Option<SurvivalBuildingBox>,
-    #[prost(message, optional, tag = "7")]
-    pub hero_box: ::core::option::Option<SurvivalHeroBox>,
-    #[prost(message, optional, tag = "8")]
-    pub npc_box: ::core::option::Option<SurvivalNpcBox>,
-    #[prost(message, repeated, tag = "9")]
-    pub bag: ::prost::alloc::vec::Vec<SurvivalBag>,
-    #[prost(message, repeated, tag = "10")]
-    pub map_info: ::prost::alloc::vec::Vec<SurvivalMapInfo>,
-    #[prost(message, optional, tag = "12")]
-    pub task_panel: ::core::option::Option<SurvivalTaskPanel>,
-    #[prost(message, optional, tag = "13")]
-    pub equip_box: ::core::option::Option<SurvivalEquipBox>,
-    #[prost(message, optional, tag = "15")]
-    pub attr_container: ::core::option::Option<SurvivalAttrContainer>,
-    #[prost(message, optional, tag = "16")]
-    pub intrude_box: ::core::option::Option<SurvivalIntrudeBox>,
-    #[prost(message, optional, tag = "17")]
-    pub panel: ::core::option::Option<SurvivalPanel>,
-    #[prost(message, optional, tag = "18")]
-    pub recruit_info: ::core::option::Option<SurvivalRecruitInfo>,
-    #[prost(string, optional, tag = "19")]
-    pub client_data: ::core::option::Option<::prost::alloc::string::String>,
-    #[prost(message, optional, tag = "20")]
-    pub pre_explore_shop: ::core::option::Option<SurvivalShop>,
-    #[prost(int32, optional, tag = "21")]
-    pub rain_type: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "22")]
-    pub talent_box: ::core::option::Option<SurvivalTalentBox>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SurvivalWeekInfoPush {
-    #[prost(message, optional, tag = "1")]
-    pub week_info: ::core::option::Option<SurvivalWeekInfo>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -31609,20 +23975,6 @@ pub struct TalentNo {
     pub level: ::core::option::Option<i32>,
     #[prost(int32, repeated, packed = "false", tag = "3")]
     pub skill_ids: ::prost::alloc::vec::Vec<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct TalentPlanNo {
-    #[prost(int32, optional, tag = "1")]
-    pub plan_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub talent_point: ::core::option::Option<i32>,
-    #[prost(int32, repeated, packed = "false", tag = "3")]
-    pub talent_ids: ::prost::alloc::vec::Vec<i32>,
-    #[prost(string, optional, tag = "4")]
-    pub plan_name: ::core::option::Option<::prost::alloc::string::String>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -31875,156 +24227,6 @@ pub struct TowerBattleFinishPush {
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
 #[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct TowerChangeTalentPlanReply {
-    #[prost(int32, optional, tag = "1")]
-    pub boss_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub plan_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct TowerChangeTalentPlanRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub boss_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub plan_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct TowerDeepArchive {
-    #[prost(int32, optional, tag = "1")]
-    pub archive_no: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "2")]
-    pub group: ::core::option::Option<TowerDeepGroup>,
-    #[prost(int64, optional, tag = "3")]
-    pub create_time: ::core::option::Option<i64>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct TowerDeepFightSettlePush {
-    #[prost(message, optional, tag = "1")]
-    pub group: ::core::option::Option<TowerDeepGroup>,
-    #[prost(int32, optional, tag = "2")]
-    pub result: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub high_deep: ::core::option::Option<i32>,
-    #[prost(bool, optional, tag = "4")]
-    pub new_record: ::core::option::Option<bool>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct TowerDeepGetInfoReply {
-    #[prost(message, optional, tag = "1")]
-    pub info: ::core::option::Option<TowerDeepInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct TowerDeepGetInfoRequest {}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct TowerDeepGroup {
-    #[prost(message, repeated, tag = "1")]
-    pub teams: ::prost::alloc::vec::Vec<TowerDeepTeam>,
-    #[prost(int32, optional, tag = "2")]
-    pub curr_deep: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct TowerDeepHero {
-    #[prost(int32, optional, tag = "1")]
-    pub hero_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub trial_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct TowerDeepInfo {
-    #[prost(message, optional, tag = "1")]
-    pub group: ::core::option::Option<TowerDeepGroup>,
-    #[prost(bool, optional, tag = "2")]
-    pub endless: ::core::option::Option<bool>,
-    #[prost(message, repeated, tag = "3")]
-    pub archives: ::prost::alloc::vec::Vec<TowerDeepArchive>,
-    #[prost(int32, optional, tag = "4")]
-    pub high_deep: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct TowerDeepLoadArchiveReply {
-    #[prost(message, optional, tag = "1")]
-    pub archive: ::core::option::Option<TowerDeepArchive>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct TowerDeepLoadArchiveRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub archive_no: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct TowerDeepResetReply {
-    #[prost(message, optional, tag = "1")]
-    pub group: ::core::option::Option<TowerDeepGroup>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct TowerDeepResetRequest {}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct TowerDeepSaveArchiveReply {
-    #[prost(message, optional, tag = "1")]
-    pub archive: ::core::option::Option<TowerDeepArchive>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct TowerDeepSaveArchiveRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub archive_no: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct TowerDeepTeam {
-    #[prost(int32, optional, tag = "1")]
-    pub team_no: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "2")]
-    pub heroes: ::prost::alloc::vec::Vec<TowerDeepHero>,
-    #[prost(int32, optional, tag = "3")]
-    pub deep: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TowerLayerUpdatePush {
     #[prost(int32, optional, tag = "1")]
@@ -32071,8 +24273,6 @@ pub struct TowerNo {
     pub history_high_score: ::core::option::Option<i32>,
     #[prost(string, optional, tag = "7")]
     pub params: ::core::option::Option<::prost::alloc::string::String>,
-    #[prost(int32, repeated, packed = "false", tag = "8")]
-    pub pass_teach_ids: ::prost::alloc::vec::Vec<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -32089,30 +24289,6 @@ pub struct TowerOpenNo {
     pub round: ::core::option::Option<i32>,
     #[prost(int64, optional, tag = "5")]
     pub next_time: ::core::option::Option<i64>,
-    #[prost(int64, optional, tag = "6")]
-    pub tower_start_time: ::core::option::Option<i64>,
-    #[prost(int64, optional, tag = "7")]
-    pub task_end_time: ::core::option::Option<i64>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct TowerRenameTalentPlanReply {
-    #[prost(int32, optional, tag = "1")]
-    pub boss_id: ::core::option::Option<i32>,
-    #[prost(string, optional, tag = "2")]
-    pub plan_name: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct TowerRenameTalentPlanRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub boss_id: ::core::option::Option<i32>,
-    #[prost(string, optional, tag = "2")]
-    pub plan_name: ::core::option::Option<::prost::alloc::string::String>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -32571,24 +24747,6 @@ pub struct UnlockVoiceRequest {
 #[serde(rename_all = "camelCase")]
 #[serde(default)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct UnlockVoucherInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub voucher_id: ::core::option::Option<i32>,
-    #[prost(uint64, optional, tag = "2")]
-    pub get_time: ::core::option::Option<u64>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UnlockVoucherInfoUpdatePush {
-    #[prost(message, repeated, tag = "1")]
-    pub vouchers: ::prost::alloc::vec::Vec<UnlockVoucherInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct Update106OrderPush {
     #[prost(int32, optional, tag = "1")]
     pub activity_id: ::core::option::Option<i32>,
@@ -32696,38 +24854,6 @@ pub struct UpdateHeroGroupRequest {
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
 #[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UpdateHeroGroupSnapshotPush {
-    #[prost(int32, optional, tag = "1")]
-    pub snapshot_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub snapshot_sub_id: ::core::option::Option<i32>,
-    #[prost(message, optional, tag = "3")]
-    pub group_info: ::core::option::Option<HeroGroupInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct UpdateHeroGroupSortReply {
-    #[prost(int32, optional, tag = "1")]
-    pub snapshot_id: ::core::option::Option<i32>,
-    #[prost(int32, repeated, packed = "false", tag = "2")]
-    pub sort_sub_ids: ::prost::alloc::vec::Vec<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct UpdateHeroGroupSortRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub snapshot_id: ::core::option::Option<i32>,
-    #[prost(int32, repeated, packed = "false", tag = "2")]
-    pub sort_sub_ids: ::prost::alloc::vec::Vec<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct UpdateHeroStoryStatusReply {}
 #[derive(serde::Serialize, serde::Deserialize)]
@@ -32737,30 +24863,6 @@ pub struct UpdateHeroStoryStatusReply {}
 pub struct UpdateHeroStoryStatusRequest {
     #[prost(int32, optional, tag = "1")]
     pub story_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UpdateNecrologistStoryReply {
-    #[prost(int32, optional, tag = "1")]
-    pub story_id: ::core::option::Option<i32>,
-    #[prost(string, optional, tag = "2")]
-    pub info: ::core::option::Option<::prost::alloc::string::String>,
-    #[prost(message, repeated, tag = "3")]
-    pub plot_infos: ::prost::alloc::vec::Vec<NecrologistStoryPlotInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UpdateNecrologistStoryRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub story_id: ::core::option::Option<i32>,
-    #[prost(string, optional, tag = "2")]
-    pub info: ::core::option::Option<::prost::alloc::string::String>,
-    #[prost(message, repeated, tag = "3")]
-    pub plot_infos: ::prost::alloc::vec::Vec<NecrologistStoryPlotInfo>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -32886,36 +24988,6 @@ pub struct UpgradeElementRequest {
     pub activity_id: ::core::option::Option<i32>,
     #[prost(int32, optional, tag = "2")]
     pub element_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UseAssassinItemReply {
-    #[prost(int32, optional, tag = "1")]
-    pub uid: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub item_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub target_id: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "4")]
-    pub hero: ::prost::alloc::vec::Vec<HeroUnit>,
-    #[prost(message, repeated, tag = "5")]
-    pub monster: ::prost::alloc::vec::Vec<MonsterUnit>,
-    #[prost(message, optional, tag = "6")]
-    pub grid: ::core::option::Option<AssassinGrid>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct UseAssassinItemRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub uid: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub item_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub target_id: ::core::option::Option<i32>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -33821,358 +25893,6 @@ pub struct WeekwalkInfoUpdatePush {
 #[derive(serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
 #[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct WeekwalkVer2BattleInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub battle_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub status: ::core::option::Option<i32>,
-    #[prost(int32, repeated, packed = "false", tag = "3")]
-    pub hero_ids: ::prost::alloc::vec::Vec<i32>,
-    #[prost(int32, repeated, packed = "false", tag = "4")]
-    pub choose_skill_ids: ::prost::alloc::vec::Vec<i32>,
-    #[prost(int32, optional, tag = "5")]
-    pub hero_group_select: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "6")]
-    pub element_id: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "7")]
-    pub cup_infos: ::prost::alloc::vec::Vec<WeekwalkVer2CupInfo>,
-    #[prost(string, optional, tag = "8")]
-    pub params: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct WeekwalkVer2ChangeHeroGroupSelectReply {
-    #[prost(int32, optional, tag = "1")]
-    pub layer_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub battle_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub select: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct WeekwalkVer2ChangeHeroGroupSelectRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub layer_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub battle_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub select: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct WeekwalkVer2ChooseSkillReply {
-    #[prost(int32, optional, tag = "1")]
-    pub no: ::core::option::Option<i32>,
-    #[prost(int32, repeated, packed = "false", tag = "2")]
-    pub skill_ids: ::prost::alloc::vec::Vec<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct WeekwalkVer2ChooseSkillRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub no: ::core::option::Option<i32>,
-    #[prost(int32, repeated, packed = "false", tag = "2")]
-    pub skill_ids: ::prost::alloc::vec::Vec<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct WeekwalkVer2CupInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub result: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct WeekwalkVer2ElementInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub element_id: ::core::option::Option<i32>,
-    #[prost(bool, optional, tag = "2")]
-    pub finish: ::core::option::Option<bool>,
-    #[prost(int32, optional, tag = "3")]
-    pub index: ::core::option::Option<i32>,
-    #[prost(bool, optional, tag = "4")]
-    pub visible: ::core::option::Option<bool>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct WeekwalkVer2FightSettlePush {
-    #[prost(int32, optional, tag = "1")]
-    pub layer_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub battle_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub result: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "4")]
-    pub cup_infos: ::prost::alloc::vec::Vec<WeekwalkVer2CupInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct WeekwalkVer2GetInfoReply {
-    #[prost(message, optional, tag = "1")]
-    pub info: ::core::option::Option<WeekwalkVer2Info>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct WeekwalkVer2GetInfoRequest {}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct WeekwalkVer2GetSettleInfoReply {
-    #[prost(message, optional, tag = "1")]
-    pub settle_info: ::core::option::Option<WeekwalkVer2SettleInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct WeekwalkVer2GetSettleInfoRequest {}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct WeekwalkVer2HeroRecommendReply {
-    #[prost(message, repeated, tag = "1")]
-    pub racommends: ::prost::alloc::vec::Vec<EpisodeHeroRecommendInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct WeekwalkVer2HeroRecommendRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub element_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub layer_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct WeekwalkVer2Info {
-    #[prost(int32, optional, tag = "1")]
-    pub time_id: ::core::option::Option<i32>,
-    #[prost(int64, optional, tag = "2")]
-    pub start_time: ::core::option::Option<i64>,
-    #[prost(int64, optional, tag = "3")]
-    pub end_time: ::core::option::Option<i64>,
-    #[prost(message, repeated, tag = "4")]
-    pub layer_infos: ::prost::alloc::vec::Vec<WeekwalkVer2LayerInfo>,
-    #[prost(bool, optional, tag = "5")]
-    pub pop_rule: ::core::option::Option<bool>,
-    #[prost(message, optional, tag = "6")]
-    pub prev_settle: ::core::option::Option<WeekwalkVer2PrevSettleInfo>,
-    #[prost(message, repeated, tag = "7")]
-    pub snapshot_infos: ::prost::alloc::vec::Vec<WeekwalkVer2SnapshotInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct WeekwalkVer2InfoUpdatePush {
-    #[prost(message, optional, tag = "1")]
-    pub info: ::core::option::Option<WeekwalkVer2Info>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct WeekwalkVer2LayerInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub scene_id: ::core::option::Option<i32>,
-    #[prost(bool, optional, tag = "3")]
-    pub all_pass: ::core::option::Option<bool>,
-    #[prost(bool, optional, tag = "4")]
-    pub finished: ::core::option::Option<bool>,
-    #[prost(bool, optional, tag = "5")]
-    pub unlock: ::core::option::Option<bool>,
-    #[prost(bool, optional, tag = "6")]
-    pub show_finished: ::core::option::Option<bool>,
-    #[prost(message, repeated, tag = "7")]
-    pub battle_infos: ::prost::alloc::vec::Vec<WeekwalkVer2BattleInfo>,
-    #[prost(message, repeated, tag = "8")]
-    pub element_infos: ::prost::alloc::vec::Vec<WeekwalkVer2ElementInfo>,
-    #[prost(string, optional, tag = "9")]
-    pub params: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct WeekwalkVer2MarkPopRuleReply {}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct WeekwalkVer2MarkPopRuleRequest {}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct WeekwalkVer2MarkPreSettleReply {}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct WeekwalkVer2MarkPreSettleRequest {}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct WeekwalkVer2MarkShowFinishedReply {
-    #[prost(int32, optional, tag = "1")]
-    pub layer_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct WeekwalkVer2MarkShowFinishedRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub layer_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct WeekwalkVer2PrevSettleInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub max_layer_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub max_battle_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "3")]
-    pub max_battle_index: ::core::option::Option<i32>,
-    #[prost(bool, optional, tag = "4")]
-    pub show: ::core::option::Option<bool>,
-    #[prost(message, repeated, tag = "5")]
-    pub layer_infos: ::prost::alloc::vec::Vec<WeekwalkVer2PrevSettleLayerInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct WeekwalkVer2PrevSettleLayerInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub layer_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub platinum_cup_num: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct WeekwalkVer2ResetLayerReply {
-    #[prost(message, optional, tag = "1")]
-    pub layer_info: ::core::option::Option<WeekwalkVer2LayerInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct WeekwalkVer2ResetLayerRequest {
-    #[prost(int32, optional, tag = "1")]
-    pub layer_id: ::core::option::Option<i32>,
-    #[prost(int32, optional, tag = "2")]
-    pub battle_id: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct WeekwalkVer2SettleBattleInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub battle_id: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "2")]
-    pub cup_infos: ::prost::alloc::vec::Vec<WeekwalkVer2CupInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct WeekwalkVer2SettleHeroInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub hero_id: ::core::option::Option<i32>,
-    #[prost(int64, optional, tag = "2")]
-    pub all_harm: ::core::option::Option<i64>,
-    #[prost(int64, optional, tag = "3")]
-    pub single_high_harm: ::core::option::Option<i64>,
-    #[prost(int64, optional, tag = "4")]
-    pub all_hurt: ::core::option::Option<i64>,
-    #[prost(int64, optional, tag = "5")]
-    pub all_heal: ::core::option::Option<i64>,
-    #[prost(int64, optional, tag = "6")]
-    pub all_healed: ::core::option::Option<i64>,
-    #[prost(int32, optional, tag = "7")]
-    pub battle_num: ::core::option::Option<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct WeekwalkVer2SettleInfo {
-    #[prost(message, repeated, tag = "1")]
-    pub layer_infos: ::prost::alloc::vec::Vec<WeekwalkVer2SettleLayerInfo>,
-    #[prost(message, optional, tag = "2")]
-    pub harm_hero: ::core::option::Option<WeekwalkVer2SettleHeroInfo>,
-    #[prost(message, optional, tag = "3")]
-    pub heal_hero: ::core::option::Option<WeekwalkVer2SettleHeroInfo>,
-    #[prost(message, optional, tag = "4")]
-    pub hurt_hero: ::core::option::Option<WeekwalkVer2SettleHeroInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct WeekwalkVer2SettleInfoUpdatePush {
-    #[prost(message, optional, tag = "1")]
-    pub settle_info: ::core::option::Option<WeekwalkVer2SettleInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct WeekwalkVer2SettleLayerInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub layer_id: ::core::option::Option<i32>,
-    #[prost(message, repeated, tag = "2")]
-    pub battle_infos: ::prost::alloc::vec::Vec<WeekwalkVer2SettleBattleInfo>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct WeekwalkVer2SnapshotInfo {
-    #[prost(int32, optional, tag = "1")]
-    pub no: ::core::option::Option<i32>,
-    #[prost(int32, repeated, packed = "false", tag = "2")]
-    pub skill_ids: ::prost::alloc::vec::Vec<i32>,
-}
-#[derive(serde::Serialize, serde::Deserialize)]
-#[serde(rename_all = "camelCase")]
-#[serde(default)]
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct WholesaleOrderInfo {
     #[prost(int32, optional, tag = "1")]
@@ -34202,13 +25922,13 @@ pub struct WordTestRequest {
 pub enum CmdId {
     /// / === framework.network.socket.system_cmd ===
     /// / Original: Login
-    LoginRequestCmd = 1,
+    LoginCmd = 1,
     /// / Original: GetLostCmdRespRequest
-    ReconnectRequestCmd = 3,
+    ReconnectCmd = 3,
     /// / Original: ForceLogoutResponse
-    ForceLogoutPushCmd = 4,
+    ForceLogoutCmd = 4,
     /// / Original: GetLostCmdRespResponseStartTag
-    GetReconnectStartTagRequestCmd = 5,
+    GetReconnectStartTagCmd = 5,
     /// / === Achievement ===
     /// / Original: UpdateAchievementPush
     UpdateAchievementPushCmd = -23802,
@@ -34536,8 +26256,6 @@ pub enum CmdId {
     Get128InfosCmd = -8584,
     /// / Original: Act128GetTotalRewardsRequest / Act128GetTotalRewardsReply
     Act128GetTotalRewardsCmd = 10535,
-    /// / Original: Act128SpFirstHalfSelectItemRequest / Act128SpFirstHalfSelectItemReply
-    Act128SpFirstHalfSelectItemCmd = 14305,
     /// / Original: Act128GetTotalSingleRewardRequest / Act128GetTotalSingleRewardReply
     Act128GetTotalSingleRewardCmd = 21046,
     /// / Original: Act128DoublePointRequest / Act128DoublePointReply
@@ -34970,10 +26688,6 @@ pub enum CmdId {
     /// / Original: Get181SpBonusRequest / Get181SpBonusReply
     Get181SpBonusCmd = 18242,
     /// / === Activity182 ===
-    /// / Original: Act182GetFriendSnapshotsRequest / Act182GetFriendSnapshotsReply
-    Act182GetFriendSnapshotsCmd = -31641,
-    /// / Original: Act182SaveSnapshotRequest / Act182SaveSnapshotReply
-    Act182SaveSnapshotCmd = -6229,
     /// / Original: GetAct182RandomMasterRequest / GetAct182RandomMasterReply
     GetAct182RandomMasterCmd = -5479,
     /// / Original: Act182RefreshMasterRequest / Act182RefreshMasterReply
@@ -34982,14 +26696,8 @@ pub enum CmdId {
     GetAct182InfoCmd = -1800,
     /// / Original: Act182GetRankRewardRequest / Act182GetRankRewardReply
     Act182GetRankRewardCmd = 8829,
-    /// / Original: Act182GetHasSnapshotFriendRequest / Act182GetHasSnapshotFriendReply
-    Act182GetHasSnapshotFriendCmd = 10800,
-    /// / Original: Act182GetFriendFightRecordsRequest / Act182GetFriendFightRecordsReply
-    Act182GetFriendFightRecordsCmd = 15304,
     /// / Original: Act182InfoPush
     Act182InfoPushCmd = 19288,
-    /// / Original: Act182GetFriendFightMessageRequest / Act182GetFriendFightMessageReply
-    Act182GetFriendFightMessageCmd = 32155,
     /// / === Activity183 ===
     /// / Original: Act183ResetEpisodeRequest / Act183ResetEpisodeReply
     Act183ResetEpisodeCmd = -31354,
@@ -35049,285 +26757,16 @@ pub enum CmdId {
     Act187AcceptRewardCmd = 16875,
     /// / Original: Act187FinishGameRequest / Act187FinishGameReply
     Act187FinishGameCmd = 18257,
-    /// / === Activity188 ===
-    /// / Original: Act188ReverseCardRequest / Act188ReverseCardReply
-    Act188ReverseCardCmd = -30066,
-    /// / Original: Act188EnterEpisodeRequest / Act188EnterEpisodeReply
-    Act188EnterEpisodeCmd = -23233,
-    /// / Original: Act188EpisodePush
-    Act188EpisodePushCmd = -13291,
-    /// / Original: Act188StepPush
-    Act188StepPushCmd = -7800,
-    /// / Original: GetAct188InfoRequest / GetAct188InfoReply
-    GetAct188InfoCmd = 6020,
-    /// / Original: Act188StoryRequest / Act188StoryReply
-    Act188StoryCmd = 28505,
     /// / === Activity189 ===
     /// / Original: GetAct189OnceBonusRequest / GetAct189OnceBonusReply
     GetAct189OnceBonusCmd = 12102,
     /// / Original: GetAct189InfoRequest / GetAct189InfoReply
     GetAct189InfoCmd = 18246,
-    /// / === Activity190 ===
-    /// / Original: Act190EpisodePush
-    Act190EpisodePushCmd = -20185,
-    /// / Original: Act190ChooseEpisodeBranchRequest / Act190ChooseEpisodeBranchReply
-    Act190ChooseEpisodeBranchCmd = -19422,
-    /// / Original: GetAct190InfoRequest / GetAct190InfoReply
-    GetAct190InfoCmd = -16010,
-    /// / Original: Act190FinishEpisodeRequest / Act190FinishEpisodeReply
-    Act190FinishEpisodeCmd = 11476,
-    /// / === Activity191 ===
-    /// / Original: EndAct191GameRequest / EndAct191GameReply
-    EndAct191GameCmd = -31907,
-    /// / Original: Start191GameRequest / Start191GameReply
-    Start191GameCmd = -30084,
-    /// / Original: Select191EnhanceRequest / Select191EnhanceReply
-    Select191EnhanceCmd = -14426,
-    /// / Original: Fresh191ShopRequest / Fresh191ShopReply
-    Fresh191ShopCmd = -12378,
-    /// / Original: Select191UseHeroFacetsIdRequest / Select191UseHeroFacetsIdReply
-    Select191UseHeroFacetsIdCmd = -11548,
-    /// / Original: Select191NodeRequest / Select191NodeReply
-    Select191NodeCmd = -7238,
-    /// / Original: GetAct191InfoRequest / GetAct191InfoReply
-    GetAct191InfoCmd = -3784,
-    /// / Original: Gain191RewardEventRequest / Gain191RewardEventReply
-    Gain191RewardEventCmd = -2310,
-    /// / Original: Act191TriggerEffectPush
-    Act191TriggerEffectPushCmd = -1407,
-    /// / Original: ChangeAct191TeamRequest / ChangeAct191TeamReply
-    ChangeAct191TeamCmd = 1209,
-    /// / Original: Select191UpgradeEventRequest / Select191UpgradeEventReply
-    Select191UpgradeEventCmd = 4048,
-    /// / Original: Fresh191EnhanceRequest / Fresh191EnhanceReply
-    Fresh191EnhanceCmd = 4862,
-    /// / Original: Select191InitBuildRequest / Select191InitBuildReply
-    Select191InitBuildCmd = 5592,
-    /// / Original: End191ReplaceEventRequest / End191ReplaceEventReply
-    End191ReplaceEventCmd = 16745,
-    /// / Original: BuyIn191ShopRequest / BuyIn191ShopReply
-    BuyIn191ShopCmd = 17301,
-    /// / Original: Leave191ShopRequest / Leave191ShopReply
-    Leave191ShopCmd = 23419,
-    /// / Original: Act191GameInfoUpdatePush
-    Act191GameInfoUpdatePushCmd = 26889,
-    /// / Original: Select191ReplaceEventRequest / Select191ReplaceEventReply
-    Select191ReplaceEventCmd = 32370,
-    /// / === Activity192 ===
-    /// / Original: Act192EpisodePush
-    Act192EpisodePushCmd = 235,
-    /// / Original: Act192ChooseEpisodeBranchRequest / Act192ChooseEpisodeBranchReply
-    Act192ChooseEpisodeBranchCmd = 4710,
-    /// / Original: GetAct192InfoRequest / GetAct192InfoReply
-    GetAct192InfoCmd = 8442,
-    /// / Original: Act192FinishEpisodeRequest / Act192FinishEpisodeReply
-    Act192FinishEpisodeCmd = 10264,
-    /// / === Activity194 ===
-    /// / Original: Act194NewEventInfosPush
-    Act194NewEventInfosPushCmd = -31055,
-    /// / Original: Act194WithdrawTeamRequest / Act194WithdrawTeamReply
-    Act194WithdrawTeamCmd = -29821,
-    /// / Original: Act194EpisodeRecordsPush
-    Act194EpisodeRecordsPushCmd = -25247,
-    /// / Original: Act194GetInfosRequest / Act194GetInfosReply
-    Act194GetInfosCmd = -23311,
-    /// / Original: Act194ResetEpisodeRequest / Act194ResetEpisodeReply
-    Act194ResetEpisodeCmd = -11106,
-    /// / Original: Act194SkipEpisodeRequest / Act194SkipEpisodeReply
-    Act194SkipEpisodeCmd = -3534,
-    /// / Original: Act194EpisodeInfoPush
-    Act194EpisodeInfoPushCmd = -1701,
-    /// / Original: Act194EpisodeFinishPush
-    Act194EpisodeFinishPushCmd = 8304,
-    /// / Original: Act194FinishStoryEpisodeRequest / Act194FinishStoryEpisodeReply
-    Act194FinishStoryEpisodeCmd = 14653,
-    /// / Original: Act194UseItemRequest / Act194UseItemReply
-    Act194UseItemCmd = 16878,
-    /// / Original: Act194GetEpisodeInfoRequest / Act194GetEpisodeInfoReply
-    Act194GetEpisodeInfoCmd = 18791,
-    /// / Original: Act194EnterEpisodeRequest / Act194EnterEpisodeReply
-    Act194EnterEpisodeCmd = 23897,
-    /// / Original: Act194SendTeamExploreRequest / Act194SendTeamExploreReply
-    Act194SendTeamExploreCmd = 28706,
-    /// / Original: Act194NextRoundRequest / Act194NextRoundReply
-    Act194NextRoundCmd = 31417,
-    /// / === Activity196 ===
-    /// / Original: Act196GainRequest / Act196GainReply
-    Act196GainCmd = -30315,
-    /// / Original: Get196InfoRequest / Get196InfoReply
-    Get196InfoCmd = 8714,
-    /// / === Activity197 ===
-    /// / Original: Get197InfoRequest / Get197InfoReply
-    Get197InfoCmd = -20116,
-    /// / Original: Act197RummageRequest / Act197RummageReply
-    Act197RummageCmd = -11674,
-    /// / Original: Act197ExploreRequest / Act197ExploreReply
-    Act197ExploreCmd = 12439,
-    /// / === Activity198 ===
-    /// / Original: Act198GainRequest / Act198GainReply
-    Act198GainCmd = -22439,
-    /// / Original: Act198CanGetPush
-    Act198CanGetPushCmd = 15033,
-    /// / === Activity199 ===
-    /// / Original: Get199InfoRequest / Get199InfoReply
-    Get199InfoCmd = -12240,
-    /// / Original: Act199GainRequest / Act199GainReply
-    Act199GainCmd = 14267,
-    /// / === Activity201 ===
-    /// / Original: Get201InfoRequest / Get201InfoReply
-    Get201InfoCmd = -5040,
-    /// / === Activity203 ===
-    /// / Original: Act203EpisodePush
-    Act203EpisodePushCmd = -29699,
-    /// / Original: Act203FinishEpisodeRequest / Act203FinishEpisodeReply
-    Act203FinishEpisodeCmd = -11542,
-    /// / Original: GetAct203InfoRequest / GetAct203InfoReply
-    GetAct203InfoCmd = 4332,
-    /// / Original: Act203ChooseEpisodeBranchRequest / Act203ChooseEpisodeBranchReply
-    Act203ChooseEpisodeBranchCmd = 4792,
-    /// / Original: Act203SaveEpisodeProgressRequest / Act203SaveEpisodeProgressReply
-    Act203SaveEpisodeProgressCmd = 30829,
-    /// / === Activity204 ===
-    /// / Original: GetAct204DailyCollectionRequest / GetAct204DailyCollectionReply
-    GetAct204DailyCollectionCmd = -21439,
-    /// / Original: FinishAct204TaskRequest / FinishAct204TaskReply
-    FinishAct204TaskCmd = -18186,
-    /// / Original: Act204TaskPush
-    Act204TaskPushCmd = 2793,
-    /// / Original: GetAct204MilestoneRewardRequest / GetAct204MilestoneRewardReply
-    GetAct204MilestoneRewardCmd = 7351,
-    /// / Original: GetAct204InfoRequest / GetAct204InfoReply
-    GetAct204InfoCmd = 16558,
-    /// / Original: GetAct204OnceBonusRequest / GetAct204OnceBonusReply
-    GetAct204OnceBonusCmd = 18862,
-    /// / === Activity205 ===
-    /// / Original: Act205GetInfoRequest / Act205GetInfoReply
-    Act205GetInfoCmd = -32240,
-    /// / Original: Act205FinishGameRequest / Act205FinishGameReply
-    Act205FinishGameCmd = -29217,
-    /// / Original: Act205InfoPush
-    Act205InfoPushCmd = -25724,
-    /// / Original: Act205GetGameInfoRequest / Act205GetGameInfoReply
-    Act205GetGameInfoCmd = 23306,
-    /// / === Activity206 ===
-    /// / Original: Act206InfoPush
-    Act206InfoPushCmd = -346,
-    /// / Original: Act206GetBonusRequest / Act206GetBonusReply
-    Act206GetBonusCmd = 14477,
-    /// / Original: Act206ChooseDirectionRequest / Act206ChooseDirectionReply
-    Act206ChooseDirectionCmd = 27112,
-    /// / Original: Act206GetInfoRequest / Act206GetInfoReply
-    Act206GetInfoCmd = 28210,
-    /// / === Activity208 ===
-    /// / Original: Act208ReceiveBonusRequest / Act208ReceiveBonusReply
-    Act208ReceiveBonusCmd = -25484,
-    /// / Original: GetAct208InfoRequest / GetAct208InfoReply
-    GetAct208InfoCmd = -74,
-    /// / === Activity209 ===
-    /// / Original: Act209InfoPush
-    Act209InfoPushCmd = 10252,
-    /// / Original: GetAct209InfoRequest / GetAct209InfoReply
-    GetAct209InfoCmd = 12152,
-    /// / === Activity210 ===
-    /// / Original: Act210FinishEpisodeRequest / Act210FinishEpisodeReply
-    Act210FinishEpisodeCmd = -29722,
-    /// / Original: Act210ChooseEpisodeBranchRequest / Act210ChooseEpisodeBranchReply
-    Act210ChooseEpisodeBranchCmd = -26444,
-    /// / Original: GetAct210InfoRequest / GetAct210InfoReply
-    GetAct210InfoCmd = -22104,
-    /// / Original: Act210SaveEpisodeProgressRequest / Act210SaveEpisodeProgressReply
-    Act210SaveEpisodeProgressCmd = -407,
-    /// / Original: Act210EpisodePush
-    Act210EpisodePushCmd = 14457,
-    /// / === Activity211 ===
-    /// / Original: Act211FinishEpisodeRequest / Act211FinishEpisodeReply
-    Act211FinishEpisodeCmd = -30328,
-    /// / Original: Act211ChooseEpisodeBranchRequest / Act211ChooseEpisodeBranchReply
-    Act211ChooseEpisodeBranchCmd = -14378,
-    /// / Original: GetAct211InfoRequest / GetAct211InfoReply
-    GetAct211InfoCmd = -9878,
-    /// / Original: Act211SaveEpisodeProgressRequest / Act211SaveEpisodeProgressReply
-    Act211SaveEpisodeProgressCmd = 11659,
-    /// / Original: Act211EpisodePush
-    Act211EpisodePushCmd = 24667,
-    /// / === Activity212 ===
-    /// / Original: Act212ReceiveBonusRequest / Act212ReceiveBonusReply
-    Act212ReceiveBonusCmd = -20022,
-    /// / Original: GetAct212InfoRequest / GetAct212InfoReply
-    GetAct212InfoCmd = 2348,
-    /// / Original: Act212BonusPush
-    Act212BonusPushCmd = 28059,
     /// / === Antique ===
     /// / Original: GetAntiqueInfoRequest / GetAntiqueInfoReply
     GetAntiqueInfoCmd = -25429,
     /// / Original: AntiqueUpdatePush
     AntiqueUpdatePushCmd = 13506,
-    /// / === AssassinOutSide ===
-    /// / Original: BuildingLevelUpRequest / BuildingLevelUpReply
-    AssassinOutSideBuildingLevelUpCmd = -20386,
-    /// / Original: InteractiveRequest / InteractiveReply
-    InteractiveCmd = -18575,
-    /// / Original: EquipHeroItemRequest / EquipHeroItemReply
-    EquipHeroItemCmd = -3308,
-    /// / Original: GetAssassinOutSideInfoRequest / GetAssassinOutSideInfoReply
-    GetAssassinOutSideInfoCmd = -415,
-    /// / Original: AssassinUnlockLibraryPush
-    AssassinUnlockLibraryPushCmd = 268,
-    /// / Original: GetAssassinLibraryInfoRequest / GetAssassinLibraryInfoReply
-    GetAssassinLibraryInfoCmd = 8985,
-    /// / Original: AssassinOutSideUnlockPush
-    AssassinOutSideUnlockPushCmd = 16004,
-    /// / Original: HeroTransferCareerRequest / HeroTransferCareerReply
-    HeroTransferCareerCmd = 28888,
-    /// / === AssassinScene ===
-    /// / Original: HeroUpdatePush
-    AssassinSceneHeroUpdatePushCmd = -32619,
-    /// / Original: NextRoundRequest / NextRoundReply
-    NextRoundCmd = -32213,
-    /// / Original: EnterBattleGridRequest / EnterBattleGridReply
-    EnterBattleGridCmd = -29244,
-    /// / Original: AssassinUseSkillRequest / AssassinUseSkillReply
-    AssassinUseSkillCmd = -26475,
-    /// / Original: NewInteractivePush
-    NewInteractivePushCmd = -20788,
-    /// / Original: HeroMoveRequest / HeroMoveReply
-    HeroMoveCmd = -17527,
-    /// / Original: UseAssassinItemRequest / UseAssassinItemReply
-    UseAssassinItemCmd = -15136,
-    /// / Original: AssassinChangeMapRequest / AssassinChangeMapReply
-    AssassinChangeMapCmd = -12019,
-    /// / Original: FinishUserTurnRequest / FinishUserTurnReply
-    FinishUserTurnCmd = -11507,
-    /// / Original: RecoverSceneRequest / RecoverSceneReply
-    RecoverSceneCmd = -8312,
-    /// / Original: GiveUpAssassinSceneRequest / GiveUpAssassinSceneReply
-    GiveUpAssassinSceneCmd = -2873,
-    /// / Original: MissionUpdatePush
-    MissionUpdatePushCmd = -1527,
-    /// / Original: AssassinChangingMapPush
-    AssassinChangingMapPushCmd = 10246,
-    /// / Original: EnterAssassinSceneRequest / EnterAssassinSceneReply
-    EnterAssassinSceneCmd = 13077,
-    /// / Original: HeroAttackRequest / HeroAttackReply
-    HeroAttackCmd = 14378,
-    /// / Original: FinishMissionRequest / FinishMissionReply
-    FinishMissionCmd = 14951,
-    /// / Original: RestartAssassinSceneRequest / RestartAssassinSceneReply
-    RestartAssassinSceneCmd = 15132,
-    /// / Original: MonsterUpdatePush
-    MonsterUpdatePushCmd = 20559,
-    /// / Original: SummonMonsterPush
-    SummonMonsterPushCmd = 21131,
-    /// / Original: HeroInteractiveRequest / HeroInteractiveReply
-    HeroInteractiveCmd = 22096,
-    /// / Original: GameStatePush
-    GameStatePushCmd = 25279,
-    /// / Original: ReturnAssassinSceneRequest / ReturnAssassinSceneReply
-    ReturnAssassinSceneCmd = 26295,
-    /// / Original: GainItemPush
-    GainItemPushCmd = 26450,
-    /// / Original: HeroAssassinRequest / HeroAssassinReply
-    HeroAssassinCmd = 31575,
     /// / === AutoChess ===
     /// / Original: AutoChessSettlePush
     AutoChessSettlePushCmd = -32448,
@@ -35343,14 +26782,10 @@ pub enum CmdId {
     AutoChessRoundSettlePushCmd = -4024,
     /// / Original: AutoChessGiveUpRequest / AutoChessGiveUpReply
     AutoChessGiveUpCmd = -3457,
-    /// / Original: AutoChessEnterFriendFightSceneRequest / AutoChessEnterFriendFightSceneReply
-    AutoChessEnterFriendFightSceneCmd = -3067,
     /// / Original: AutoChessScenePush
     AutoChessScenePushCmd = 1693,
     /// / Original: AutoChessPreviewFightRequest / AutoChessPreviewFightReply
     AutoChessPreviewFightCmd = 3715,
-    /// / Original: AutoChessUseSkillRequest / AutoChessUseSkillReply
-    AutoChessUseSkillCmd = 10043,
     /// / Original: AutoChessMallRegionSelectItemRequest / AutoChessMallRegionSelectItemReply
     AutoChessMallRegionSelectItemCmd = 10984,
     /// / Original: AutoChessFreezeItemRequest / AutoChessFreezeItemReply
@@ -35379,9 +26814,6 @@ pub enum CmdId {
     UpdateBgmPushCmd = 2848,
     /// / Original: SetFavoriteBgmRequest / SetFavoriteBgmReply
     SetFavoriteBgmCmd = 18537,
-    /// / === BossFight ===
-    /// / Original: BossFightResetChapterRequest / BossFightResetChapterReply
-    BossFightResetChapterCmd = 15341,
     /// / === Bp ===
     /// / Original: BpScoreUpdatePush
     BpScoreUpdatePushCmd = -27276,
@@ -35414,13 +26846,6 @@ pub enum CmdId {
     ReadChargeNewCmd = 23467,
     /// / Original: GetChargeInfoRequest / GetChargeInfoReply
     GetChargeInfoCmd = 31537,
-    /// / === ChargePush ===
-    /// / Original: GetChargePushPush
-    GetChargePushCmd = -20283,
-    /// / Original: GetChargePushInfoRequest / GetChargePushInfoReply
-    GetChargePushInfoCmd = -17743,
-    /// / Original: RecordChargePushRequest / RecordChargePushReply
-    RecordChargePushCmd = 15268,
     /// / === Chat ===
     /// / Original: SendMsgRequest / SendMsgReply
     SendMsgCmd = -29022,
@@ -35434,21 +26859,6 @@ pub enum CmdId {
     ReportCmd = 22157,
     /// / Original: GetReportTypeRequest / GetReportTypeReply
     GetReportTypeCmd = 27727,
-    /// / === CommandPost ===
-    /// / Original: CommandPostEventReadRequest / CommandPostEventReadReply
-    CommandPostEventReadCmd = -16743,
-    /// / Original: CommandPostPaperRequest / CommandPostPaperReply
-    CommandPostPaperCmd = -12877,
-    /// / Original: CommandPostDispatchRequest / CommandPostDispatchReply
-    CommandPostDispatchCmd = -4117,
-    /// / Original: CommandPostBonusRequest / CommandPostBonusReply
-    CommandPostBonusCmd = 7554,
-    /// / Original: GetCommandPostInfoRequest / GetCommandPostInfoReply
-    GetCommandPostInfoCmd = 19527,
-    /// / Original: FinishCommandPostEventRequest / FinishCommandPostEventReply
-    FinishCommandPostEventCmd = 22910,
-    /// / Original: CommandPostBonusAllRequest / CommandPostBonusAllReply
-    CommandPostBonusAllCmd = 26907,
     /// / === Common ===
     /// / Original: GetServerTimeRequest / GetServerTimeReply
     GetServerTimeCmd = 24032,
@@ -35521,27 +26931,6 @@ pub enum CmdId {
     GetDialogInfoCmd = -15619,
     /// / Original: RecordDialogInfoRequest / RecordDialogInfoReplay
     RecordDialogInfoCmd = 21980,
-    /// / === DiceHero ===
-    /// / Original: DiceHeroGetInfoRequest / DiceHeroGetInfoReply
-    DiceHeroGetInfoCmd = -32593,
-    /// / Original: DiceHeroResetDiceRequest / DiceHeroResetDiceReply
-    DiceHeroResetDiceCmd = -30111,
-    /// / Original: DiceGiveUpRequest / DiceGiveUpReply
-    DiceGiveUpCmd = -28885,
-    /// / Original: DiceFightSettlePush
-    DiceFightSettlePushCmd = -27668,
-    /// / Original: DiceHeroEndRoundRequest / DiceHeroEndRoundReply
-    DiceHeroEndRoundCmd = -24426,
-    /// / Original: DiceHeroEnterStoryRequest / DiceHeroEnterStoryReply
-    DiceHeroEnterStoryCmd = -20618,
-    /// / Original: DiceHeroGetRewardRequest / DiceHeroGetRewardReply
-    DiceHeroGetRewardCmd = -11236,
-    /// / Original: DiceHeroUseSkillRequest / DiceHeroUseSkillReply
-    DiceHeroUseSkillCmd = -1341,
-    /// / Original: DiceHeroEnterFightRequest / DiceHeroEnterFightReply
-    DiceHeroEnterFightCmd = 7481,
-    /// / Original: DiceHeroConfirmDiceRequest / DiceHeroConfirmDiceReply
-    DiceHeroConfirmDiceCmd = 21466,
     /// / === Dispatch ===
     /// / Original: GetDispatchInfoRequest / GetDispatchInfoReply
     GetDispatchInfoCmd = -30467,
@@ -35702,19 +27091,6 @@ pub enum CmdId {
     RedealCardInfoPushCmd = 30262,
     /// / Original: GetFightRecordAllRequest / GetFightRecordAllReply
     GetFightRecordAllCmd = 30317,
-    /// / === Fishing ===
-    /// / Original: GetFishingFriendsRequest / GetFishingFriendsReply
-    GetFishingFriendsCmd = -25524,
-    /// / Original: ChangeFishingCurrencyRequest / ChangeFishingCurrencyReply
-    ChangeFishingCurrencyCmd = -13006,
-    /// / Original: GetFishingInfoRequest / GetFishingInfoReply
-    GetFishingInfoCmd = -11219,
-    /// / Original: GetOtherFishingInfoRequest / GetOtherFishingInfoReply
-    GetOtherFishingInfoCmd = -6609,
-    /// / Original: FishingRequest / FishingReply
-    FishingCmd = 1441,
-    /// / Original: GetFishingBonusRequest / GetFishingBonusReply
-    GetFishingBonusCmd = 24055,
     /// / === Friend ===
     /// / Original: GetFriendInfoListRequest / GetFriendInfoListReply
     GetFriendInfoListCmd = -30711,
@@ -35759,8 +27135,6 @@ pub enum CmdId {
     FightTipsMessagePushCmd = 3036,
     /// / Original: GMRequest / GMReply
     GmCmd = 9762,
-    /// / Original: ServerErrorInfoPush
-    ServerErrorInfoPushCmd = 28434,
     /// / === Guide ===
     /// / Original: UpdateGuidePush
     UpdateGuidePushCmd = -11849,
@@ -35781,7 +27155,7 @@ pub enum CmdId {
     /// / Original: UnMarkIsNewRequest / UnMarkIsNewReply
     UnMarkIsNewCmd = -29069,
     /// / Original: HeroUpdatePush
-    HeroHeroUpdatePushCmd = -25616,
+    HeroUpdatePushCmd = -25616,
     /// / Original: HeroRankUpRequest / HeroRankUpReply
     HeroRankUpCmd = -25186,
     /// / Original: TalentStyleReadRequest / TalentStyleReadReply
@@ -35798,8 +27172,6 @@ pub enum CmdId {
     TakeoffAllTalentCubeCmd = -20353,
     /// / Original: PutTalentCubeRequest / PutTalentCubeReply
     PutTalentCubeCmd = -15329,
-    /// / Original: CancelHero3124TalentTreeRequest / CancelHero3124TalentTreeReply
-    CancelHero3124TalentTreeCmd = -8715,
     /// / Original: HeroInfoListRequest / HeroInfoListReply
     HeroInfoListCmd = -3787,
     /// / Original: UnlockTalentStyleRequest / UnlockTalentStyleReply
@@ -35810,16 +27182,12 @@ pub enum CmdId {
     RenameTalentTemplateCmd = 2331,
     /// / Original: HeroTalentUpRequest / HeroTalentUpReply
     HeroTalentUpCmd = 5242,
-    /// / Original: ResetHero3124TalentTreeRequest / ResetHero3124TalentTreeReply
-    ResetHero3124TalentTreeCmd = 5714,
     /// / Original: UseSkinRequest / UseSkinReply
     UseSkinCmd = 5793,
     /// / Original: DestinyStoneUseRequest / DestinyStoneUseReply
     DestinyStoneUseCmd = 6261,
     /// / Original: DestinyLevelUpRequest / DestinyLevelUpReply
     DestinyLevelUpCmd = 9532,
-    /// / Original: ChoiceHero3124TalentTreeRequest / ChoiceHero3124TalentTreeReply
-    ChoiceHero3124TalentTreeCmd = 13914,
     /// / Original: ItemUnlockRequest / ItemUnlockReply
     ItemUnlockCmd = 14170,
     /// / Original: UseTalentStyleRequest / UseTalentStyleReply
@@ -35840,8 +27208,6 @@ pub enum CmdId {
     PutTalentSchemeCmd = 29077,
     /// / Original: UseTalentTemplateRequest / UseTalentTemplateReply
     UseTalentTemplateCmd = 29648,
-    /// / Original: ChoiceHero3123WeaponRequest / ChoiceHero3123WeaponReply
-    ChoiceHero3123WeaponCmd = 29963,
     /// / Original: HeroTalentStyleStatRequest / HeroTalentStyleStatReply
     HeroTalentStyleStatCmd = 31906,
     /// / === HeroGroup ===
@@ -35855,18 +27221,10 @@ pub enum CmdId {
     HeroGroupUpdateHeroGroupPushCmd = -8854,
     /// / Original: ChangeHeroGroupSelectRequest / ChangeHeroGroupSelectReply
     ChangeHeroGroupSelectCmd = -1459,
-    /// / Original: UpdateHeroGroupSnapshotPush
-    UpdateHeroGroupSnapshotPushCmd = 1402,
     /// / Original: GetHeroGroupSnapshotListRequest / GetHeroGroupSnapshotListReply
     GetHeroGroupSnapshotListCmd = 2131,
-    /// / Original: CheckHeroGroupNameRequest / CheckHeroGroupNameReply
-    CheckHeroGroupNameCmd = 18790,
-    /// / Original: UpdateHeroGroupSortRequest / UpdateHeroGroupSortReply
-    UpdateHeroGroupSortCmd = 26866,
     /// / Original: UpdateHeroGroupNameRequest / UpdateHeroGroupNameReply
     UpdateHeroGroupNameCmd = 28378,
-    /// / Original: DeleteHeroGroupRequest / DeleteHeroGroupReply
-    DeleteHeroGroupCmd = 30458,
     /// / Original: UpdateHeroGroupRequest / UpdateHeroGroupReply
     HeroGroupUpdateHeroGroupCmd = 31018,
     /// / Original: GetHeroGroupCommonListRequest / GetHeroGroupCommonListReply
@@ -35881,8 +27239,6 @@ pub enum CmdId {
     /// / === HeroStory ===
     /// / Original: GetHeroStoryRequest / GetHeroStoryReply
     GetHeroStoryCmd = -27537,
-    /// / Original: HeroStoryPlotFinishRequest / HeroStoryPlotFinishReply
-    HeroStoryPlotFinishCmd = -23569,
     /// / Original: ExchangeTicketRequest / ExchangeTicketReply
     ExchangeTicketCmd = -22201,
     /// / Original: GetScoreBonusRequest / GetScoreBonusReply
@@ -35931,8 +27287,6 @@ pub enum CmdId {
     AutoUseExpirePowerItemCmd = 8367,
     /// / Original: ItemChangePush
     ItemChangePushCmd = 16437,
-    /// / Original: GetPowerMakerInfoRequest / GetPowerMakerInfoReply
-    GetPowerMakerInfoCmd = 18761,
     /// / Original: UseInsightItemRequest / UseInsightItemReply
     UseInsightItemCmd = 25074,
     /// / Original: GetItemListRequest / GetItemListReply
@@ -35970,66 +27324,6 @@ pub enum CmdId {
     /// / === Material ===
     /// / Original: MaterialChangePush
     MaterialChangePushCmd = 22389,
-    /// / === NecrologistStory ===
-    /// / Original: GetNecrologistStoryRequest / GetNecrologistStoryReply
-    GetNecrologistStoryCmd = -32123,
-    /// / Original: FinishNecrologistStoryModeRequest / FinishNecrologistStoryModeReply
-    FinishNecrologistStoryModeCmd = -9909,
-    /// / Original: UpdateNecrologistStoryRequest / UpdateNecrologistStoryReply
-    UpdateNecrologistStoryCmd = 2792,
-    /// / === Odyssey ===
-    /// / Original: OdysseyUpdateLevelPush
-    OdysseyUpdateLevelPushCmd = -31076,
-    /// / Original: OdysseyMapUpdatePush
-    OdysseyMapUpdatePushCmd = -28798,
-    /// / Original: OdysseyTalentNodeLevelUpRequest / OdysseyTalentNodeLevelUpReply
-    OdysseyTalentNodeLevelUpCmd = -25268,
-    /// / Original: OdysseyFormSwitchRequest / OdysseyFormSwitchReply
-    OdysseyFormSwitchCmd = -21433,
-    /// / Original: OdysseyHotfixPush
-    OdysseyOdysseyHotfixPushCmd = -18893,
-    /// / Original: OdysseyTalentCassandraTreeCancelRequest / OdysseyTalentCassandraTreeCancelReply
-    OdysseyTalentCassandraTreeCancelCmd = -17233,
-    /// / Original: OdysseyTalentAllResetRequest / OdysseyTalentAllResetReply
-    OdysseyTalentAllResetCmd = -17147,
-    /// / Original: OdysseyFormSaveRequest / OdysseyFormSaveReply
-    OdysseyFormSaveCmd = -13276,
-    /// / Original: OdysseyMapInteractRequest / OdysseyMapInteractReply
-    OdysseyMapInteractCmd = -11399,
-    /// / Original: OdysseyTalentNodeLevelDownRequest / OdysseyTalentNodeLevelDownReply
-    OdysseyTalentNodeLevelDownCmd = -9889,
-    /// / Original: OdysseyFightMercenaryRefreshRequest / OdysseyFightMercenaryRefreshReply
-    OdysseyFightMercenaryRefreshCmd = -6648,
-    /// / Original: OdysseyFightReligionMemberUpdatePush
-    OdysseyFightReligionMemberUpdatePushCmd = -1721,
-    /// / Original: OdysseyUpdateInfoPush
-    OdysseyUpdateInfoPushCmd = -176,
-    /// / Original: OdysseyTalentCassandraTreeChoiceRequest / OdysseyTalentCassandraTreeChoiceReply
-    OdysseyTalentCassandraTreeChoiceCmd = 3540,
-    /// / Original: OdysseyFightReligionDiscloseRequest / OdysseyFightReligionDiscloseReply
-    OdysseyFightReligionDiscloseCmd = 4418,
-    /// / Original: OdysseyBagGetItemPush
-    OdysseyBagGetItemPushCmd = 5466,
-    /// / Original: OdysseyBagUpdateItemNewFlagRequest / OdysseyBagUpdateItemNewFlagReply
-    OdysseyBagUpdateItemNewFlagCmd = 15809,
-    /// / Original: OdysseyFightSettlePush
-    OdysseyFightSettlePushCmd = 16804,
-    /// / Original: OdysseyFightMercenaryUpdatePush
-    OdysseyFightMercenaryUpdatePushCmd = 18204,
-    /// / Original: OdysseyHotfixRequest / OdysseyHotfixReply
-    OdysseyOdysseyHotfixCmd = 21875,
-    /// / Original: OdysseyGetInfoRequest / OdysseyGetInfoReply
-    OdysseyGetInfoCmd = 23853,
-    /// / Original: OdysseyTalentPointUpdatePush
-    OdysseyTalentPointUpdatePushCmd = 25238,
-    /// / Original: OdysseyTalentCassandraTreeResetRequest / OdysseyTalentCassandraTreeResetReply
-    OdysseyTalentCassandraTreeResetCmd = 30348,
-    /// / Original: OdysseyFightMercenarySetDropRequest / OdysseyFightMercenarySetDropReply
-    OdysseyFightMercenarySetDropCmd = 30522,
-    /// / Original: OdysseyMapSetCurrElementRequest / OdysseyMapSetCurrElementReply
-    OdysseyMapSetCurrElementCmd = 30961,
-    /// / Original: OdysseyMapUpdateElementPush
-    OdysseyMapUpdateElementPushCmd = 31148,
     /// / === Open ===
     /// / Original: UpdateOpenPush
     UpdateOpenPushCmd = -7688,
@@ -36074,8 +27368,6 @@ pub enum CmdId {
     SetSimplePropertyCmd = 25593,
     /// / Original: SetShowHeroUniqueIdsRequest / SetShowHeroUniqueIdsReply
     SetShowHeroUniqueIdsCmd = 27344,
-    /// / Original: SetUiStyleSkinRequest / SetUiStyleSkinReply
-    SetUiStyleSkinCmd = 27886,
     /// / Original: SetBirthdayRequest / SetBirthdayReply
     SetBirthdayCmd = 30017,
     /// / Original: SetSignatureRequest / SetSignatureReply
@@ -36263,7 +27555,7 @@ pub enum CmdId {
     /// / Original: BlockPackageGainPush
     BlockPackageGainPushCmd = 868,
     /// / Original: BuildingLevelUpPush
-    RoomBuildingLevelUpPushCmd = 1881,
+    BuildingLevelUpPushCmd = 1881,
     /// / Original: LockOrderRequest / LockOrderReply
     LockOrderCmd = 2899,
     /// / Original: UnloadRestBuildingCrittersRequest / UnloadRestBuildingCrittersReply
@@ -36274,12 +27566,8 @@ pub enum CmdId {
     ProductionLineInfoCmd = 6697,
     /// / Original: RouseCrittersRequest / RouseCrittersReply
     RouseCrittersCmd = 7436,
-    /// / Original: SetBlockColorRequest / SetBlockColorReply
-    SetBlockColorCmd = 8868,
     /// / Original: DispatchCritterRequest / DispatchCritterReply
     DispatchCritterCmd = 9019,
-    /// / Original: GetBlockPermanentInfoRequest / GetBlockPermanentInfoReply
-    GetBlockPermanentInfoCmd = 9263,
     /// / Original: ReplaceRestBuildingCrittersRequest / ReplaceRestBuildingCrittersReply
     ReplaceRestBuildingCrittersCmd = 9606,
     /// / Original: GetRoomShareRequest / GetRoomShareReply
@@ -36322,8 +27610,6 @@ pub enum CmdId {
     GenerateRoadCmd = 21087,
     /// / Original: BuildingGainPush
     BuildingGainPushCmd = 22011,
-    /// / Original: RoadInfoPush
-    RoadInfoPushCmd = 22400,
     /// / Original: GetFrozenItemInfoRequest / GetFrozenItemInfoReply
     GetFrozenItemInfoCmd = 24157,
     /// / Original: UseBlockRequest / UseBlockReply
@@ -36423,8 +27709,6 @@ pub enum CmdId {
     ActiveTalentCmd = 6807,
     /// / Original: RougeOneKeyRemoveFromBarRequest / RougeOneKeyRemoveFromBarReply
     RougeOneKeyRemoveFromBarCmd = 6839,
-    /// / Original: RougeRefreshMapRuleRequest / RougeRefreshMapRuleReply
-    RougeRefreshMapRuleCmd = 7450,
     /// / Original: RougeSelectReviveRequest / RougeSelectReviveReply
     RougeSelectReviveCmd = 10756,
     /// / Original: RougeEntrustInfoPush
@@ -36475,8 +27759,6 @@ pub enum CmdId {
     RougeLayerMapInfoPushCmd = 29148,
     /// / Original: RougeInMapItemUpdatePush
     RougeInMapItemUpdatePushCmd = 29500,
-    /// / Original: RougeRefreshMonsterRuleRequest / RougeRefreshMonsterRuleReply
-    RougeRefreshMonsterRuleCmd = 30052,
     /// / Original: RougeShopRefreshRequest / RougeShopRefreshReply
     RougeShopRefreshCmd = 30588,
     /// / Original: RougeLayerSimpleMapInfoPush
@@ -36564,8 +27846,6 @@ pub enum CmdId {
     GetSummonInfoCmd = -16421,
     /// / Original: SummonQueryTokenRequest / SummonQueryTokenReply
     SummonQueryTokenCmd = -7898,
-    /// / Original: GetSummonProgressRewardsRequest / GetSummonProgressRewardsReply
-    GetSummonProgressRewardsCmd = -3044,
     /// / Original: ChooseEnhancedPoolHeroRequest / ChooseEnhancedPoolHeroReply
     ChooseEnhancedPoolHeroCmd = 4911,
     /// / Original: SummonRequest / SummonReply
@@ -36574,169 +27854,6 @@ pub enum CmdId {
     ChooseMultiUpHeroCmd = 22095,
     /// / Original: OpenLuckyBagRequest / OpenLuckyBagReply
     OpenLuckyBagCmd = 24404,
-    /// / === SurvivalInterior ===
-    /// / Original: EnterSurvivalRequest / EnterSurvivalReply
-    EnterSurvivalCmd = -14893,
-    /// / Original: SurvivalSceneOperationLogPush
-    SurvivalInteriorSurvivalSceneOperationLogPushCmd = -13194,
-    /// / Original: SurvivalSceneOperationLogRequest / SurvivalSceneOperationLogReply
-    SurvivalInteriorSurvivalSceneOperationLogCmd = -9172,
-    /// / Original: SurvivalTaskFollowRequest / SurvivalTaskFollowReply
-    SurvivalTaskFollowCmd = -7141,
-    /// / Original: SurvivalDailyReportPush
-    SurvivalDailyReportPushCmd = -6780,
-    /// / Original: SurvivalSceneHotfix1Push
-    SurvivalInteriorSurvivalSceneHotfix1PushCmd = -5786,
-    /// / Original: SurvivalSceneHotfix2Push
-    SurvivalInteriorSurvivalSceneHotfix2PushCmd = -5785,
-    /// / Original: SurvivalSceneHotfix3Push
-    SurvivalInteriorSurvivalSceneHotfix3PushCmd = -5784,
-    /// / Original: SurvivalUseItemRequest / SurvivalUseItemReply
-    SurvivalUseItemCmd = 2321,
-    /// / Original: SurvivalSceneGiveUpRequest / SurvivalSceneGiveUpReply
-    SurvivalSceneGiveUpCmd = 11667,
-    /// / Original: SurvivalSceneOperationRequest / SurvivalSceneOperationReply
-    SurvivalSceneOperationCmd = 15540,
-    /// / Original: SurvivalUpdateClientDataRequest / SurvivalUpdateClientDataReply
-    SurvivalUpdateClientDataCmd = 21447,
-    /// / Original: SurvivalSceneHotfix1Request / SurvivalSceneHotfix1Reply
-    SurvivalInteriorSurvivalSceneHotfix1Cmd = 28582,
-    /// / Original: SurvivalSceneHotfix2Request / SurvivalSceneHotfix2Reply
-    SurvivalInteriorSurvivalSceneHotfix2Cmd = 28583,
-    /// / Original: SurvivalSceneHotfix3Request / SurvivalSceneHotfix3Reply
-    SurvivalInteriorSurvivalSceneHotfix3Cmd = 28584,
-    /// / Original: SurvivalSceneEndPush
-    SurvivalSceneEndPushCmd = 32442,
-    /// / === SurvivalOutSide ===
-    /// / Original: SurvivalSurvivalOutSideClientDataRequest / SurvivalSurvivalOutSideClientDataReply
-    SurvivalSurvivalOutSideClientDataCmd = -11044,
-    /// / Original: SurvivalOutSideGetInfoRequest / SurvivalOutSideGetInfoReply
-    SurvivalOutSideGetInfoCmd = -5489,
-    /// / Original: SurvivalMarkNewHandbookRequest / SurvivalMarkNewHandbookReply
-    SurvivalMarkNewHandbookCmd = 2465,
-    /// / Original: SurvivalHandbookPush
-    SurvivalHandbookPushCmd = 4684,
-    /// / Original: SurvivalOutSideGainRewardRequest / SurvivalOutSideGainRewardReply
-    SurvivalOutSideGainRewardCmd = 30471,
-    /// / === SurvivalWeek ===
-    /// / Original: SurvivalWeekHotfix1Request / SurvivalWeekHotfix1Reply
-    SurvivalWeekSurvivalWeekHotfix1Cmd = -31548,
-    /// / Original: SurvivalWeekHotfix2Request / SurvivalWeekHotfix2Reply
-    SurvivalWeekSurvivalWeekHotfix2Cmd = -31547,
-    /// / Original: SurvivalWeekHotfix3Request / SurvivalWeekHotfix3Reply
-    SurvivalWeekSurvivalWeekHotfix3Cmd = -31546,
-    /// / Original: SurvivalJewelryEquipWearRequest / SurvivalJewelryEquipWearReply
-    SurvivalJewelryEquipWearCmd = -31474,
-    /// / Original: SurvivalBagUpdatePush
-    SurvivalBagUpdatePushCmd = -29978,
-    /// / Original: SurvivalEquipOneKeyWearRequest / SurvivalEquipOneKeyWearReply
-    SurvivalEquipOneKeyWearCmd = -28681,
-    /// / Original: SurvivalItemTipsPush
-    SurvivalItemTipsPushCmd = -28092,
-    /// / Original: SurvivalEquipWearRequest / SurvivalEquipWearReply
-    SurvivalEquipWearCmd = -26420,
-    /// / Original: SurvivalIntrudeExterminateRequest / SurvivalIntrudeExterminateReply
-    SurvivalIntrudeExterminateCmd = -25510,
-    /// / Original: SurvivalEquipOneKeyDemountRequest / SurvivalEquipOneKeyDemountReply
-    SurvivalEquipOneKeyDemountCmd = -24700,
-    /// / Original: SurvivalWeekInfoPush
-    SurvivalWeekInfoPushCmd = -24627,
-    /// / Original: SurvivalEquipSetNewFlagRequest / SurvivalEquipSetNewFlagReply
-    SurvivalEquipSetNewFlagCmd = -23251,
-    /// / Original: SurvivalGetEquipInfoRequest / SurvivalGetEquipInfoReply
-    SurvivalGetEquipInfoCmd = -22711,
-    /// / Original: SurvivalEquipUpdatePush
-    SurvivalEquipUpdatePushCmd = -17732,
-    /// / Original: SurvivalReputationExpRequest / SurvivalReputationExpReply
-    SurvivalReputationExpCmd = -14003,
-    /// / Original: SurvivalIntrudeReExterminateRequest / SurvivalIntrudeReExterminateReply
-    SurvivalIntrudeReExterminateCmd = -11279,
-    /// / Original: SurvivalPublishRecruitTagRequest / SurvivalPublishRecruitTagReply
-    SurvivalPublishRecruitTagCmd = -7962,
-    /// / Original: SurvivalStepPush
-    SurvivalStepPushCmd = -7905,
-    /// / Original: SurvivalShopBuyRequest / SurvivalShopBuyReply
-    SurvivalShopBuyCmd = -7442,
-    /// / Original: SurvivalRemoveBagItemRequest / SurvivalRemoveBagItemReply
-    SurvivalRemoveBagItemCmd = -6272,
-    /// / Original: SurvivalSettleWeekPush
-    SurvivalSettleWeekPushCmd = -5262,
-    /// / Original: SurvivalShopUpdatePush
-    SurvivalShopUpdatePushCmd = -5201,
-    /// / Original: SurvivalHeroUpdatePush
-    SurvivalHeroUpdatePushCmd = -3930,
-    /// / Original: SurvivalAttrContainerUpdatePush
-    SurvivalAttrContainerUpdatePushCmd = 726,
-    /// / Original: SurvivalRepairRequest / SurvivalRepairReply
-    SurvivalRepairCmd = 3352,
-    /// / Original: SurvivalClosePanelRequest / SurvivalClosePanelReply
-    SurvivalClosePanelCmd = 3675,
-    /// / Original: SurvivalJewelryEquipDemountRequest / SurvivalJewelryEquipDemountReply
-    SurvivalJewelryEquipDemountCmd = 4411,
-    /// / Original: SurvivalChooseBootyRequest / SurvivalChooseBootyReply
-    SurvivalChooseBootyCmd = 5063,
-    /// / Original: SurvivalRecruitNpcRequest / SurvivalRecruitNpcReply
-    SurvivalRecruitNpcCmd = 5140,
-    /// / Original: SurvivalRecruitInfoPush
-    SurvivalRecruitInfoPushCmd = 6079,
-    /// / Original: SurvivalReceiveTaskRewardRequest / SurvivalReceiveTaskRewardReply
-    SurvivalReceiveTaskRewardCmd = 7501,
-    /// / Original: SurvivalNpcChangePositionRequest / SurvivalNpcChangePositionReply
-    SurvivalNpcChangePositionCmd = 8917,
-    /// / Original: SurvivalReputationRewardRequest / SurvivalReputationRewardReply
-    SurvivalReputationRewardCmd = 8997,
-    /// / Original: SurvivalIntrudeFightSettlePush
-    SurvivalIntrudeFightSettlePushCmd = 9079,
-    /// / Original: SurvivalAbandonWeekRequest / SurvivalAbandonWeekReply
-    SurvivalAbandonWeekCmd = 10008,
-    /// / Original: SurvivalEquipSwitchPlanRequest / SurvivalEquipSwitchPlanReply
-    SurvivalEquipSwitchPlanCmd = 12602,
-    /// / Original: SurvivalIntrudeAbandonExterminateRequest / SurvivalIntrudeAbandonExterminateReply
-    SurvivalIntrudeAbandonExterminateCmd = 12621,
-    /// / Original: SurvivalBuildRequest / SurvivalBuildReply
-    SurvivalBuildCmd = 12677,
-    /// / Original: SurvivalRefreshRecruitTagRequest / SurvivalRefreshRecruitTagReply
-    SurvivalRefreshRecruitTagCmd = 12702,
-    /// / Original: SurvivalGetWeekInfoRequest / SurvivalGetWeekInfoReply
-    SurvivalGetWeekInfoCmd = 13041,
-    /// / Original: SurvivalTaskUpdatePush
-    SurvivalTaskUpdatePushCmd = 14795,
-    /// / Original: SurvivalNpcExchangePositionRequest / SurvivalNpcExchangePositionReply
-    SurvivalNpcExchangePositionCmd = 15762,
-    /// / Original: SurvivalBatchHeroChangePositionRequest / SurvivalBatchHeroChangePositionReply
-    SurvivalBatchHeroChangePositionCmd = 17124,
-    /// / Original: SurvivalPanelOperationRequest / SurvivalPanelOperationReply
-    SurvivalPanelOperationCmd = 19158,
-    /// / Original: SurvivalShopSellRequest / SurvivalShopSellReply
-    SurvivalShopSellCmd = 19423,
-    /// / Original: SurvivalHeroChangePositionRequest / SurvivalHeroChangePositionReply
-    SurvivalHeroChangePositionCmd = 23074,
-    /// / Original: SurvivalAbandonRecruitNpcRequest / SurvivalAbandonRecruitNpcReply
-    SurvivalAbandonRecruitNpcCmd = 23431,
-    /// / Original: SurvivalGetTalentInfoRequest / SurvivalGetTalentInfoReply
-    SurvivalGetTalentInfoCmd = 23433,
-    /// / Original: SurvivalNpcAcceptTaskRequest / SurvivalNpcAcceptTaskReply
-    SurvivalNpcAcceptTaskCmd = 23641,
-    /// / Original: SurvivalWeekHotfix1Push
-    SurvivalWeekSurvivalWeekHotfix1PushCmd = 23940,
-    /// / Original: SurvivalWeekHotfix2Push
-    SurvivalWeekSurvivalWeekHotfix2PushCmd = 23941,
-    /// / Original: SurvivalWeekHotfix3Push
-    SurvivalWeekSurvivalWeekHotfix3PushCmd = 23942,
-    /// / Original: SurvivalEquipCompoundRequest / SurvivalEquipCompoundReply
-    SurvivalEquipCompoundCmd = 29090,
-    /// / Original: SurvivalSurvivalWeekClientDataRequest / SurvivalSurvivalWeekClientDataReply
-    SurvivalSurvivalWeekClientDataCmd = 29562,
-    /// / Original: SurvivalEquipDemountRequest / SurvivalEquipDemountReply
-    SurvivalEquipDemountCmd = 29753,
-    /// / Original: SurvivalStartWeekChooseDiffRequest / SurvivalStartWeekChooseDiffReply
-    SurvivalStartWeekChooseDiffCmd = 29901,
-    /// / Original: SurvivalBuildingUpdatePush
-    SurvivalBuildingUpdatePushCmd = 29926,
-    /// / Original: SurvivalUpgradeRequest / SurvivalUpgradeReply
-    SurvivalUpgradeCmd = 30653,
-    /// / Original: SurvivalHeroExchangePositionRequest / SurvivalHeroExchangePositionReply
-    SurvivalHeroExchangePositionCmd = 31775,
     /// / === Task ===
     /// / Original: DeleteTaskPush
     DeleteTaskPushCmd = -32406,
@@ -36767,23 +27884,8 @@ pub enum CmdId {
     StartTowerBattleCmd = -122,
     /// / Original: TowerResetSubEpisodeRequest / TowerResetSubEpisodeReply
     TowerResetSubEpisodeCmd = 5874,
-    /// / Original: TowerChangeTalentPlanRequest / TowerChangeTalentPlanReply
-    TowerChangeTalentPlanCmd = 7733,
     /// / Original: TowerResetTalentRequest / TowerResetTalentReply
     TowerResetTalentCmd = 10119,
-    /// / Original: TowerRenameTalentPlanRequest / TowerRenameTalentPlanReply
-    TowerRenameTalentPlanCmd = 20167,
-    /// / === TowerDeep ===
-    /// / Original: TowerDeepResetRequest / TowerDeepResetReply
-    TowerDeepResetCmd = -23357,
-    /// / Original: TowerDeepLoadArchiveRequest / TowerDeepLoadArchiveReply
-    TowerDeepLoadArchiveCmd = -9039,
-    /// / Original: TowerDeepGetInfoRequest / TowerDeepGetInfoReply
-    TowerDeepGetInfoCmd = -2260,
-    /// / Original: TowerDeepSaveArchiveRequest / TowerDeepSaveArchiveReply
-    TowerDeepSaveArchiveCmd = -1135,
-    /// / Original: TowerDeepFightSettlePush
-    TowerDeepFightSettlePushCmd = 27299,
     /// / === Turnback ===
     /// / Original: TurnbackBonusPointRequest / TurnbackBonusPointReply
     TurnbackBonusPointCmd = -31530,
@@ -36801,11 +27903,6 @@ pub enum CmdId {
     GetTurnbackInfoCmd = -15599,
     /// / Original: TurnbackAdditionPush
     TurnbackAdditionPushCmd = -11727,
-    /// / === UnlockVoucher ===
-    /// / Original: GetUnlockVoucherInfoRequest / GetUnlockVoucherInfoReply
-    GetUnlockVoucherInfoCmd = 15277,
-    /// / Original: UnlockVoucherInfoUpdatePush
-    UnlockVoucherInfoUpdatePushCmd = 21220,
     /// / === User ===
     /// / Original: DebugLogoutRequest / DebugLogoutReply
     DebugLogoutCmd = -31567,
@@ -36864,31 +27961,6 @@ pub enum CmdId {
     WeekwalkDialogHistoryCmd = 27625,
     /// / Original: WeekwalkGeneralRequest / WeekwalkGeneralReply
     WeekwalkGeneralCmd = 31013,
-    /// / === WeekwalkVer2 ===
-    /// / Original: WeekwalkVer2ChangeHeroGroupSelectRequest / WeekwalkVer2ChangeHeroGroupSelectReply
-    WeekwalkVer2ChangeHeroGroupSelectCmd = -29076,
-    /// / Original: WeekwalkVer2MarkPreSettleRequest / WeekwalkVer2MarkPreSettleReply
-    WeekwalkVer2MarkPreSettleCmd = -24210,
-    /// / Original: WeekwalkVer2InfoUpdatePush
-    WeekwalkVer2InfoUpdatePushCmd = -22854,
-    /// / Original: WeekwalkVer2MarkShowFinishedRequest / WeekwalkVer2MarkShowFinishedReply
-    WeekwalkVer2MarkShowFinishedCmd = -17919,
-    /// / Original: WeekwalkVer2ChooseSkillRequest / WeekwalkVer2ChooseSkillReply
-    WeekwalkVer2ChooseSkillCmd = -13845,
-    /// / Original: WeekwalkVer2ResetLayerRequest / WeekwalkVer2ResetLayerReply
-    WeekwalkVer2ResetLayerCmd = -7189,
-    /// / Original: WeekwalkVer2HeroRecommendRequest / WeekwalkVer2HeroRecommendReply
-    WeekwalkVer2HeroRecommendCmd = -7053,
-    /// / Original: WeekwalkVer2GetInfoRequest / WeekwalkVer2GetInfoReply
-    WeekwalkVer2GetInfoCmd = 279,
-    /// / Original: WeekwalkVer2FightSettlePush
-    WeekwalkVer2FightSettlePushCmd = 12174,
-    /// / Original: WeekwalkVer2SettleInfoUpdatePush
-    WeekwalkVer2SettleInfoUpdatePushCmd = 19339,
-    /// / Original: WeekwalkVer2MarkPopRuleRequest / WeekwalkVer2MarkPopRuleReply
-    WeekwalkVer2MarkPopRuleCmd = 29213,
-    /// / Original: WeekwalkVer2GetSettleInfoRequest / WeekwalkVer2GetSettleInfoReply
-    WeekwalkVer2GetSettleInfoCmd = 29864,
     /// / === XF ===
     /// / Original: GuestTimeOutPush
     GuestTimeOutPushCmd = 4958,
@@ -36904,10 +27976,10 @@ impl CmdId {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            Self::LoginRequestCmd => "LoginRequestCmd",
-            Self::ReconnectRequestCmd => "ReconnectRequestCmd",
-            Self::ForceLogoutPushCmd => "ForceLogoutPushCmd",
-            Self::GetReconnectStartTagRequestCmd => "GetReconnectStartTagRequestCmd",
+            Self::LoginCmd => "LoginCmd",
+            Self::ReconnectCmd => "ReconnectCmd",
+            Self::ForceLogoutCmd => "ForceLogoutCmd",
+            Self::GetReconnectStartTagCmd => "GetReconnectStartTagCmd",
             Self::UpdateAchievementPushCmd => "UpdateAchievementPushCmd",
             Self::GetAchievementInfoCmd => "GetAchievementInfoCmd",
             Self::ReadNewAchievementCmd => "ReadNewAchievementCmd",
@@ -37059,7 +28131,6 @@ impl CmdId {
             Self::GetHoroscopeCmd => "GetHoroscopeCmd",
             Self::Get128InfosCmd => "Get128InfosCmd",
             Self::Act128GetTotalRewardsCmd => "Act128GetTotalRewardsCmd",
-            Self::Act128SpFirstHalfSelectItemCmd => "Act128SpFirstHalfSelectItemCmd",
             Self::Act128GetTotalSingleRewardCmd => "Act128GetTotalSingleRewardCmd",
             Self::Act128DoublePointCmd => "Act128DoublePointCmd",
             Self::Act129LotteryCmd => "Act129LotteryCmd",
@@ -37258,16 +28329,11 @@ impl CmdId {
             Self::Get181InfosCmd => "Get181InfosCmd",
             Self::Get181BonusCmd => "Get181BonusCmd",
             Self::Get181SpBonusCmd => "Get181SpBonusCmd",
-            Self::Act182GetFriendSnapshotsCmd => "Act182GetFriendSnapshotsCmd",
-            Self::Act182SaveSnapshotCmd => "Act182SaveSnapshotCmd",
             Self::GetAct182RandomMasterCmd => "GetAct182RandomMasterCmd",
             Self::Act182RefreshMasterCmd => "Act182RefreshMasterCmd",
             Self::GetAct182InfoCmd => "GetAct182InfoCmd",
             Self::Act182GetRankRewardCmd => "Act182GetRankRewardCmd",
-            Self::Act182GetHasSnapshotFriendCmd => "Act182GetHasSnapshotFriendCmd",
-            Self::Act182GetFriendFightRecordsCmd => "Act182GetFriendFightRecordsCmd",
             Self::Act182InfoPushCmd => "Act182InfoPushCmd",
-            Self::Act182GetFriendFightMessageCmd => "Act182GetFriendFightMessageCmd",
             Self::Act183ResetEpisodeCmd => "Act183ResetEpisodeCmd",
             Self::Act183GetInfoCmd => "Act183GetInfoCmd",
             Self::Act183ResetGroupCmd => "Act183ResetGroupCmd",
@@ -37295,136 +28361,10 @@ impl CmdId {
             Self::Get187InfoCmd => "Get187InfoCmd",
             Self::Act187AcceptRewardCmd => "Act187AcceptRewardCmd",
             Self::Act187FinishGameCmd => "Act187FinishGameCmd",
-            Self::Act188ReverseCardCmd => "Act188ReverseCardCmd",
-            Self::Act188EnterEpisodeCmd => "Act188EnterEpisodeCmd",
-            Self::Act188EpisodePushCmd => "Act188EpisodePushCmd",
-            Self::Act188StepPushCmd => "Act188StepPushCmd",
-            Self::GetAct188InfoCmd => "GetAct188InfoCmd",
-            Self::Act188StoryCmd => "Act188StoryCmd",
             Self::GetAct189OnceBonusCmd => "GetAct189OnceBonusCmd",
             Self::GetAct189InfoCmd => "GetAct189InfoCmd",
-            Self::Act190EpisodePushCmd => "Act190EpisodePushCmd",
-            Self::Act190ChooseEpisodeBranchCmd => "Act190ChooseEpisodeBranchCmd",
-            Self::GetAct190InfoCmd => "GetAct190InfoCmd",
-            Self::Act190FinishEpisodeCmd => "Act190FinishEpisodeCmd",
-            Self::EndAct191GameCmd => "EndAct191GameCmd",
-            Self::Start191GameCmd => "Start191GameCmd",
-            Self::Select191EnhanceCmd => "Select191EnhanceCmd",
-            Self::Fresh191ShopCmd => "Fresh191ShopCmd",
-            Self::Select191UseHeroFacetsIdCmd => "Select191UseHeroFacetsIdCmd",
-            Self::Select191NodeCmd => "Select191NodeCmd",
-            Self::GetAct191InfoCmd => "GetAct191InfoCmd",
-            Self::Gain191RewardEventCmd => "Gain191RewardEventCmd",
-            Self::Act191TriggerEffectPushCmd => "Act191TriggerEffectPushCmd",
-            Self::ChangeAct191TeamCmd => "ChangeAct191TeamCmd",
-            Self::Select191UpgradeEventCmd => "Select191UpgradeEventCmd",
-            Self::Fresh191EnhanceCmd => "Fresh191EnhanceCmd",
-            Self::Select191InitBuildCmd => "Select191InitBuildCmd",
-            Self::End191ReplaceEventCmd => "End191ReplaceEventCmd",
-            Self::BuyIn191ShopCmd => "BuyIn191ShopCmd",
-            Self::Leave191ShopCmd => "Leave191ShopCmd",
-            Self::Act191GameInfoUpdatePushCmd => "Act191GameInfoUpdatePushCmd",
-            Self::Select191ReplaceEventCmd => "Select191ReplaceEventCmd",
-            Self::Act192EpisodePushCmd => "Act192EpisodePushCmd",
-            Self::Act192ChooseEpisodeBranchCmd => "Act192ChooseEpisodeBranchCmd",
-            Self::GetAct192InfoCmd => "GetAct192InfoCmd",
-            Self::Act192FinishEpisodeCmd => "Act192FinishEpisodeCmd",
-            Self::Act194NewEventInfosPushCmd => "Act194NewEventInfosPushCmd",
-            Self::Act194WithdrawTeamCmd => "Act194WithdrawTeamCmd",
-            Self::Act194EpisodeRecordsPushCmd => "Act194EpisodeRecordsPushCmd",
-            Self::Act194GetInfosCmd => "Act194GetInfosCmd",
-            Self::Act194ResetEpisodeCmd => "Act194ResetEpisodeCmd",
-            Self::Act194SkipEpisodeCmd => "Act194SkipEpisodeCmd",
-            Self::Act194EpisodeInfoPushCmd => "Act194EpisodeInfoPushCmd",
-            Self::Act194EpisodeFinishPushCmd => "Act194EpisodeFinishPushCmd",
-            Self::Act194FinishStoryEpisodeCmd => "Act194FinishStoryEpisodeCmd",
-            Self::Act194UseItemCmd => "Act194UseItemCmd",
-            Self::Act194GetEpisodeInfoCmd => "Act194GetEpisodeInfoCmd",
-            Self::Act194EnterEpisodeCmd => "Act194EnterEpisodeCmd",
-            Self::Act194SendTeamExploreCmd => "Act194SendTeamExploreCmd",
-            Self::Act194NextRoundCmd => "Act194NextRoundCmd",
-            Self::Act196GainCmd => "Act196GainCmd",
-            Self::Get196InfoCmd => "Get196InfoCmd",
-            Self::Get197InfoCmd => "Get197InfoCmd",
-            Self::Act197RummageCmd => "Act197RummageCmd",
-            Self::Act197ExploreCmd => "Act197ExploreCmd",
-            Self::Act198GainCmd => "Act198GainCmd",
-            Self::Act198CanGetPushCmd => "Act198CanGetPushCmd",
-            Self::Get199InfoCmd => "Get199InfoCmd",
-            Self::Act199GainCmd => "Act199GainCmd",
-            Self::Get201InfoCmd => "Get201InfoCmd",
-            Self::Act203EpisodePushCmd => "Act203EpisodePushCmd",
-            Self::Act203FinishEpisodeCmd => "Act203FinishEpisodeCmd",
-            Self::GetAct203InfoCmd => "GetAct203InfoCmd",
-            Self::Act203ChooseEpisodeBranchCmd => "Act203ChooseEpisodeBranchCmd",
-            Self::Act203SaveEpisodeProgressCmd => "Act203SaveEpisodeProgressCmd",
-            Self::GetAct204DailyCollectionCmd => "GetAct204DailyCollectionCmd",
-            Self::FinishAct204TaskCmd => "FinishAct204TaskCmd",
-            Self::Act204TaskPushCmd => "Act204TaskPushCmd",
-            Self::GetAct204MilestoneRewardCmd => "GetAct204MilestoneRewardCmd",
-            Self::GetAct204InfoCmd => "GetAct204InfoCmd",
-            Self::GetAct204OnceBonusCmd => "GetAct204OnceBonusCmd",
-            Self::Act205GetInfoCmd => "Act205GetInfoCmd",
-            Self::Act205FinishGameCmd => "Act205FinishGameCmd",
-            Self::Act205InfoPushCmd => "Act205InfoPushCmd",
-            Self::Act205GetGameInfoCmd => "Act205GetGameInfoCmd",
-            Self::Act206InfoPushCmd => "Act206InfoPushCmd",
-            Self::Act206GetBonusCmd => "Act206GetBonusCmd",
-            Self::Act206ChooseDirectionCmd => "Act206ChooseDirectionCmd",
-            Self::Act206GetInfoCmd => "Act206GetInfoCmd",
-            Self::Act208ReceiveBonusCmd => "Act208ReceiveBonusCmd",
-            Self::GetAct208InfoCmd => "GetAct208InfoCmd",
-            Self::Act209InfoPushCmd => "Act209InfoPushCmd",
-            Self::GetAct209InfoCmd => "GetAct209InfoCmd",
-            Self::Act210FinishEpisodeCmd => "Act210FinishEpisodeCmd",
-            Self::Act210ChooseEpisodeBranchCmd => "Act210ChooseEpisodeBranchCmd",
-            Self::GetAct210InfoCmd => "GetAct210InfoCmd",
-            Self::Act210SaveEpisodeProgressCmd => "Act210SaveEpisodeProgressCmd",
-            Self::Act210EpisodePushCmd => "Act210EpisodePushCmd",
-            Self::Act211FinishEpisodeCmd => "Act211FinishEpisodeCmd",
-            Self::Act211ChooseEpisodeBranchCmd => "Act211ChooseEpisodeBranchCmd",
-            Self::GetAct211InfoCmd => "GetAct211InfoCmd",
-            Self::Act211SaveEpisodeProgressCmd => "Act211SaveEpisodeProgressCmd",
-            Self::Act211EpisodePushCmd => "Act211EpisodePushCmd",
-            Self::Act212ReceiveBonusCmd => "Act212ReceiveBonusCmd",
-            Self::GetAct212InfoCmd => "GetAct212InfoCmd",
-            Self::Act212BonusPushCmd => "Act212BonusPushCmd",
             Self::GetAntiqueInfoCmd => "GetAntiqueInfoCmd",
             Self::AntiqueUpdatePushCmd => "AntiqueUpdatePushCmd",
-            Self::AssassinOutSideBuildingLevelUpCmd => {
-                "AssassinOutSideBuildingLevelUpCmd"
-            }
-            Self::InteractiveCmd => "InteractiveCmd",
-            Self::EquipHeroItemCmd => "EquipHeroItemCmd",
-            Self::GetAssassinOutSideInfoCmd => "GetAssassinOutSideInfoCmd",
-            Self::AssassinUnlockLibraryPushCmd => "AssassinUnlockLibraryPushCmd",
-            Self::GetAssassinLibraryInfoCmd => "GetAssassinLibraryInfoCmd",
-            Self::AssassinOutSideUnlockPushCmd => "AssassinOutSideUnlockPushCmd",
-            Self::HeroTransferCareerCmd => "HeroTransferCareerCmd",
-            Self::AssassinSceneHeroUpdatePushCmd => "AssassinSceneHeroUpdatePushCmd",
-            Self::NextRoundCmd => "NextRoundCmd",
-            Self::EnterBattleGridCmd => "EnterBattleGridCmd",
-            Self::AssassinUseSkillCmd => "AssassinUseSkillCmd",
-            Self::NewInteractivePushCmd => "NewInteractivePushCmd",
-            Self::HeroMoveCmd => "HeroMoveCmd",
-            Self::UseAssassinItemCmd => "UseAssassinItemCmd",
-            Self::AssassinChangeMapCmd => "AssassinChangeMapCmd",
-            Self::FinishUserTurnCmd => "FinishUserTurnCmd",
-            Self::RecoverSceneCmd => "RecoverSceneCmd",
-            Self::GiveUpAssassinSceneCmd => "GiveUpAssassinSceneCmd",
-            Self::MissionUpdatePushCmd => "MissionUpdatePushCmd",
-            Self::AssassinChangingMapPushCmd => "AssassinChangingMapPushCmd",
-            Self::EnterAssassinSceneCmd => "EnterAssassinSceneCmd",
-            Self::HeroAttackCmd => "HeroAttackCmd",
-            Self::FinishMissionCmd => "FinishMissionCmd",
-            Self::RestartAssassinSceneCmd => "RestartAssassinSceneCmd",
-            Self::MonsterUpdatePushCmd => "MonsterUpdatePushCmd",
-            Self::SummonMonsterPushCmd => "SummonMonsterPushCmd",
-            Self::HeroInteractiveCmd => "HeroInteractiveCmd",
-            Self::GameStatePushCmd => "GameStatePushCmd",
-            Self::ReturnAssassinSceneCmd => "ReturnAssassinSceneCmd",
-            Self::GainItemPushCmd => "GainItemPushCmd",
-            Self::HeroAssassinCmd => "HeroAssassinCmd",
             Self::AutoChessSettlePushCmd => "AutoChessSettlePushCmd",
             Self::AutoChessRefreshMallCmd => "AutoChessRefreshMallCmd",
             Self::AutoChessBuyChessCmd => "AutoChessBuyChessCmd",
@@ -37432,12 +28372,8 @@ impl CmdId {
             Self::AutoChessMallUpgradePushCmd => "AutoChessMallUpgradePushCmd",
             Self::AutoChessRoundSettlePushCmd => "AutoChessRoundSettlePushCmd",
             Self::AutoChessGiveUpCmd => "AutoChessGiveUpCmd",
-            Self::AutoChessEnterFriendFightSceneCmd => {
-                "AutoChessEnterFriendFightSceneCmd"
-            }
             Self::AutoChessScenePushCmd => "AutoChessScenePushCmd",
             Self::AutoChessPreviewFightCmd => "AutoChessPreviewFightCmd",
-            Self::AutoChessUseSkillCmd => "AutoChessUseSkillCmd",
             Self::AutoChessMallRegionSelectItemCmd => "AutoChessMallRegionSelectItemCmd",
             Self::AutoChessFreezeItemCmd => "AutoChessFreezeItemCmd",
             Self::AutoChessEnterSceneCmd => "AutoChessEnterSceneCmd",
@@ -37451,7 +28387,6 @@ impl CmdId {
             Self::SetUseBgmCmd => "SetUseBgmCmd",
             Self::UpdateBgmPushCmd => "UpdateBgmPushCmd",
             Self::SetFavoriteBgmCmd => "SetFavoriteBgmCmd",
-            Self::BossFightResetChapterCmd => "BossFightResetChapterCmd",
             Self::BpScoreUpdatePushCmd => "BpScoreUpdatePushCmd",
             Self::GetBpInfoCmd => "GetBpInfoCmd",
             Self::GetSelfSelectBonusCmd => "GetSelfSelectBonusCmd",
@@ -37467,22 +28402,12 @@ impl CmdId {
             Self::SandboxChargeRequsetCmd => "SandboxChargeRequsetCmd",
             Self::ReadChargeNewCmd => "ReadChargeNewCmd",
             Self::GetChargeInfoCmd => "GetChargeInfoCmd",
-            Self::GetChargePushCmd => "GetChargePushCmd",
-            Self::GetChargePushInfoCmd => "GetChargePushInfoCmd",
-            Self::RecordChargePushCmd => "RecordChargePushCmd",
             Self::SendMsgCmd => "SendMsgCmd",
             Self::DeleteOfflineMsgCmd => "DeleteOfflineMsgCmd",
             Self::ChatMsgPushCmd => "ChatMsgPushCmd",
             Self::WordTestCmd => "WordTestCmd",
             Self::ReportCmd => "ReportCmd",
             Self::GetReportTypeCmd => "GetReportTypeCmd",
-            Self::CommandPostEventReadCmd => "CommandPostEventReadCmd",
-            Self::CommandPostPaperCmd => "CommandPostPaperCmd",
-            Self::CommandPostDispatchCmd => "CommandPostDispatchCmd",
-            Self::CommandPostBonusCmd => "CommandPostBonusCmd",
-            Self::GetCommandPostInfoCmd => "GetCommandPostInfoCmd",
-            Self::FinishCommandPostEventCmd => "FinishCommandPostEventCmd",
-            Self::CommandPostBonusAllCmd => "CommandPostBonusAllCmd",
             Self::GetServerTimeCmd => "GetServerTimeCmd",
             Self::RefreshCritterMoodCmd => "RefreshCritterMoodCmd",
             Self::IncubateCritterPreviewCmd => "IncubateCritterPreviewCmd",
@@ -37519,16 +28444,6 @@ impl CmdId {
             Self::GetCurrencyListCmd => "GetCurrencyListCmd",
             Self::GetDialogInfoCmd => "GetDialogInfoCmd",
             Self::RecordDialogInfoCmd => "RecordDialogInfoCmd",
-            Self::DiceHeroGetInfoCmd => "DiceHeroGetInfoCmd",
-            Self::DiceHeroResetDiceCmd => "DiceHeroResetDiceCmd",
-            Self::DiceGiveUpCmd => "DiceGiveUpCmd",
-            Self::DiceFightSettlePushCmd => "DiceFightSettlePushCmd",
-            Self::DiceHeroEndRoundCmd => "DiceHeroEndRoundCmd",
-            Self::DiceHeroEnterStoryCmd => "DiceHeroEnterStoryCmd",
-            Self::DiceHeroGetRewardCmd => "DiceHeroGetRewardCmd",
-            Self::DiceHeroUseSkillCmd => "DiceHeroUseSkillCmd",
-            Self::DiceHeroEnterFightCmd => "DiceHeroEnterFightCmd",
-            Self::DiceHeroConfirmDiceCmd => "DiceHeroConfirmDiceCmd",
             Self::GetDispatchInfoCmd => "GetDispatchInfoCmd",
             Self::InterruptDispatchCmd => "InterruptDispatchCmd",
             Self::DispatchCmd => "DispatchCmd",
@@ -37608,12 +28523,6 @@ impl CmdId {
             Self::TestFightIdCmd => "TestFightIdCmd",
             Self::RedealCardInfoPushCmd => "RedealCardInfoPushCmd",
             Self::GetFightRecordAllCmd => "GetFightRecordAllCmd",
-            Self::GetFishingFriendsCmd => "GetFishingFriendsCmd",
-            Self::ChangeFishingCurrencyCmd => "ChangeFishingCurrencyCmd",
-            Self::GetFishingInfoCmd => "GetFishingInfoCmd",
-            Self::GetOtherFishingInfoCmd => "GetOtherFishingInfoCmd",
-            Self::FishingCmd => "FishingCmd",
-            Self::GetFishingBonusCmd => "GetFishingBonusCmd",
             Self::GetFriendInfoListCmd => "GetFriendInfoListCmd",
             Self::ApplyCmd => "ApplyCmd",
             Self::RemoveBlacklistCmd => "RemoveBlacklistCmd",
@@ -37635,7 +28544,6 @@ impl CmdId {
             Self::GmSummonResultPushCmd => "GMSummonResultPushCmd",
             Self::FightTipsMessagePushCmd => "FightTipsMessagePushCmd",
             Self::GmCmd => "GMCmd",
-            Self::ServerErrorInfoPushCmd => "ServerErrorInfoPushCmd",
             Self::UpdateGuidePushCmd => "UpdateGuidePushCmd",
             Self::GetGuideInfoCmd => "GetGuideInfoCmd",
             Self::FinishGuideCmd => "FinishGuideCmd",
@@ -37644,7 +28552,7 @@ impl CmdId {
             Self::DestinyStoneUnlockCmd => "DestinyStoneUnlockCmd",
             Self::HeroLevelUpUpdatePushCmd => "HeroLevelUpUpdatePushCmd",
             Self::UnMarkIsNewCmd => "UnMarkIsNewCmd",
-            Self::HeroHeroUpdatePushCmd => "HeroHeroUpdatePushCmd",
+            Self::HeroUpdatePushCmd => "HeroUpdatePushCmd",
             Self::HeroRankUpCmd => "HeroRankUpCmd",
             Self::TalentStyleReadCmd => "TalentStyleReadCmd",
             Self::HeroRedDotReadCmd => "HeroRedDotReadCmd",
@@ -37653,17 +28561,14 @@ impl CmdId {
             Self::PutTalentCubeBatchCmd => "PutTalentCubeBatchCmd",
             Self::TakeoffAllTalentCubeCmd => "TakeoffAllTalentCubeCmd",
             Self::PutTalentCubeCmd => "PutTalentCubeCmd",
-            Self::CancelHero3124TalentTreeCmd => "CancelHero3124TalentTreeCmd",
             Self::HeroInfoListCmd => "HeroInfoListCmd",
             Self::UnlockTalentStyleCmd => "UnlockTalentStyleCmd",
             Self::DestinyRankUpCmd => "DestinyRankUpCmd",
             Self::RenameTalentTemplateCmd => "RenameTalentTemplateCmd",
             Self::HeroTalentUpCmd => "HeroTalentUpCmd",
-            Self::ResetHero3124TalentTreeCmd => "ResetHero3124TalentTreeCmd",
             Self::UseSkinCmd => "UseSkinCmd",
             Self::DestinyStoneUseCmd => "DestinyStoneUseCmd",
             Self::DestinyLevelUpCmd => "DestinyLevelUpCmd",
-            Self::ChoiceHero3124TalentTreeCmd => "ChoiceHero3124TalentTreeCmd",
             Self::ItemUnlockCmd => "ItemUnlockCmd",
             Self::UseTalentStyleCmd => "UseTalentStyleCmd",
             Self::HeroGainPushCmd => "HeroGainPushCmd",
@@ -37674,26 +28579,20 @@ impl CmdId {
             Self::MarkHeroFavorCmd => "MarkHeroFavorCmd",
             Self::PutTalentSchemeCmd => "PutTalentSchemeCmd",
             Self::UseTalentTemplateCmd => "UseTalentTemplateCmd",
-            Self::ChoiceHero3123WeaponCmd => "ChoiceHero3123WeaponCmd",
             Self::HeroTalentStyleStatCmd => "HeroTalentStyleStatCmd",
             Self::SetHeroGroupSnapshotCmd => "SetHeroGroupSnapshotCmd",
             Self::SetHeroGroupEquipCmd => "SetHeroGroupEquipCmd",
             Self::GetHeroGroupListCmd => "GetHeroGroupListCmd",
             Self::HeroGroupUpdateHeroGroupPushCmd => "HeroGroupUpdateHeroGroupPushCmd",
             Self::ChangeHeroGroupSelectCmd => "ChangeHeroGroupSelectCmd",
-            Self::UpdateHeroGroupSnapshotPushCmd => "UpdateHeroGroupSnapshotPushCmd",
             Self::GetHeroGroupSnapshotListCmd => "GetHeroGroupSnapshotListCmd",
-            Self::CheckHeroGroupNameCmd => "CheckHeroGroupNameCmd",
-            Self::UpdateHeroGroupSortCmd => "UpdateHeroGroupSortCmd",
             Self::UpdateHeroGroupNameCmd => "UpdateHeroGroupNameCmd",
-            Self::DeleteHeroGroupCmd => "DeleteHeroGroupCmd",
             Self::HeroGroupUpdateHeroGroupCmd => "HeroGroupUpdateHeroGroupCmd",
             Self::GetHeroGroupCommonListCmd => "GetHeroGroupCommonListCmd",
             Self::GetHeroInvitationInfoCmd => "GetHeroInvitationInfoCmd",
             Self::GainFinalInviteRewardCmd => "GainFinalInviteRewardCmd",
             Self::GainInviteRewardCmd => "GainInviteRewardCmd",
             Self::GetHeroStoryCmd => "GetHeroStoryCmd",
-            Self::HeroStoryPlotFinishCmd => "HeroStoryPlotFinishCmd",
             Self::ExchangeTicketCmd => "ExchangeTicketCmd",
             Self::GetScoreBonusCmd => "GetScoreBonusCmd",
             Self::HeroStoryScorePushCmd => "HeroStoryScorePushCmd",
@@ -37717,7 +28616,6 @@ impl CmdId {
             Self::MarkReadSubType21Cmd => "MarkReadSubType21Cmd",
             Self::AutoUseExpirePowerItemCmd => "AutoUseExpirePowerItemCmd",
             Self::ItemChangePushCmd => "ItemChangePushCmd",
-            Self::GetPowerMakerInfoCmd => "GetPowerMakerInfoCmd",
             Self::UseInsightItemCmd => "UseInsightItemCmd",
             Self::GetItemListCmd => "GetItemListCmd",
             Self::MarkMailJumpCmd => "MarkMailJumpCmd",
@@ -37735,45 +28633,6 @@ impl CmdId {
             Self::StartMatch3WarChessInfoCmd => "StartMatch3WarChessInfoCmd",
             Self::Match3ChessBoardSwapCmd => "Match3ChessBoardSwapCmd",
             Self::MaterialChangePushCmd => "MaterialChangePushCmd",
-            Self::GetNecrologistStoryCmd => "GetNecrologistStoryCmd",
-            Self::FinishNecrologistStoryModeCmd => "FinishNecrologistStoryModeCmd",
-            Self::UpdateNecrologistStoryCmd => "UpdateNecrologistStoryCmd",
-            Self::OdysseyUpdateLevelPushCmd => "OdysseyUpdateLevelPushCmd",
-            Self::OdysseyMapUpdatePushCmd => "OdysseyMapUpdatePushCmd",
-            Self::OdysseyTalentNodeLevelUpCmd => "OdysseyTalentNodeLevelUpCmd",
-            Self::OdysseyFormSwitchCmd => "OdysseyFormSwitchCmd",
-            Self::OdysseyOdysseyHotfixPushCmd => "OdysseyOdysseyHotfixPushCmd",
-            Self::OdysseyTalentCassandraTreeCancelCmd => {
-                "OdysseyTalentCassandraTreeCancelCmd"
-            }
-            Self::OdysseyTalentAllResetCmd => "OdysseyTalentAllResetCmd",
-            Self::OdysseyFormSaveCmd => "OdysseyFormSaveCmd",
-            Self::OdysseyMapInteractCmd => "OdysseyMapInteractCmd",
-            Self::OdysseyTalentNodeLevelDownCmd => "OdysseyTalentNodeLevelDownCmd",
-            Self::OdysseyFightMercenaryRefreshCmd => "OdysseyFightMercenaryRefreshCmd",
-            Self::OdysseyFightReligionMemberUpdatePushCmd => {
-                "OdysseyFightReligionMemberUpdatePushCmd"
-            }
-            Self::OdysseyUpdateInfoPushCmd => "OdysseyUpdateInfoPushCmd",
-            Self::OdysseyTalentCassandraTreeChoiceCmd => {
-                "OdysseyTalentCassandraTreeChoiceCmd"
-            }
-            Self::OdysseyFightReligionDiscloseCmd => "OdysseyFightReligionDiscloseCmd",
-            Self::OdysseyBagGetItemPushCmd => "OdysseyBagGetItemPushCmd",
-            Self::OdysseyBagUpdateItemNewFlagCmd => "OdysseyBagUpdateItemNewFlagCmd",
-            Self::OdysseyFightSettlePushCmd => "OdysseyFightSettlePushCmd",
-            Self::OdysseyFightMercenaryUpdatePushCmd => {
-                "OdysseyFightMercenaryUpdatePushCmd"
-            }
-            Self::OdysseyOdysseyHotfixCmd => "OdysseyOdysseyHotfixCmd",
-            Self::OdysseyGetInfoCmd => "OdysseyGetInfoCmd",
-            Self::OdysseyTalentPointUpdatePushCmd => "OdysseyTalentPointUpdatePushCmd",
-            Self::OdysseyTalentCassandraTreeResetCmd => {
-                "OdysseyTalentCassandraTreeResetCmd"
-            }
-            Self::OdysseyFightMercenarySetDropCmd => "OdysseyFightMercenarySetDropCmd",
-            Self::OdysseyMapSetCurrElementCmd => "OdysseyMapSetCurrElementCmd",
-            Self::OdysseyMapUpdateElementPushCmd => "OdysseyMapUpdateElementPushCmd",
             Self::UpdateOpenPushCmd => "UpdateOpenPushCmd",
             Self::RenameCmd => "RenameCmd",
             Self::GetOtherPlayerInfoCmd => "GetOtherPlayerInfoCmd",
@@ -37795,7 +28654,6 @@ impl CmdId {
             Self::SimplePropertyPushCmd => "SimplePropertyPushCmd",
             Self::SetSimplePropertyCmd => "SetSimplePropertyCmd",
             Self::SetShowHeroUniqueIdsCmd => "SetShowHeroUniqueIdsCmd",
-            Self::SetUiStyleSkinCmd => "SetUiStyleSkinCmd",
             Self::SetBirthdayCmd => "SetBirthdayCmd",
             Self::SetSignatureCmd => "SetSignatureCmd",
             Self::SetPlayerCardThemeCmd => "SetPlayerCardThemeCmd",
@@ -37887,15 +28745,13 @@ impl CmdId {
             Self::GetRoomPlanInfoCmd => "GetRoomPlanInfoCmd",
             Self::GainSpecialBlockPushCmd => "GainSpecialBlockPushCmd",
             Self::BlockPackageGainPushCmd => "BlockPackageGainPushCmd",
-            Self::RoomBuildingLevelUpPushCmd => "RoomBuildingLevelUpPushCmd",
+            Self::BuildingLevelUpPushCmd => "BuildingLevelUpPushCmd",
             Self::LockOrderCmd => "LockOrderCmd",
             Self::UnloadRestBuildingCrittersCmd => "UnloadRestBuildingCrittersCmd",
             Self::ProductionLineAccelerateCmd => "ProductionLineAccelerateCmd",
             Self::ProductionLineInfoCmd => "ProductionLineInfoCmd",
             Self::RouseCrittersCmd => "RouseCrittersCmd",
-            Self::SetBlockColorCmd => "SetBlockColorCmd",
             Self::DispatchCritterCmd => "DispatchCritterCmd",
-            Self::GetBlockPermanentInfoCmd => "GetBlockPermanentInfoCmd",
             Self::ReplaceRestBuildingCrittersCmd => "ReplaceRestBuildingCrittersCmd",
             Self::GetRoomShareCmd => "GetRoomShareCmd",
             Self::GetRoomObInfoCmd => "GetRoomObInfoCmd",
@@ -37917,7 +28773,6 @@ impl CmdId {
             Self::UseRoomPlanCmd => "UseRoomPlanCmd",
             Self::GenerateRoadCmd => "GenerateRoadCmd",
             Self::BuildingGainPushCmd => "BuildingGainPushCmd",
-            Self::RoadInfoPushCmd => "RoadInfoPushCmd",
             Self::GetFrozenItemInfoCmd => "GetFrozenItemInfoCmd",
             Self::UseBlockCmd => "UseBlockCmd",
             Self::ResetRoomCmd => "ResetRoomCmd",
@@ -37971,7 +28826,6 @@ impl CmdId {
             Self::RougeEventUpdatePushCmd => "RougeEventUpdatePushCmd",
             Self::ActiveTalentCmd => "ActiveTalentCmd",
             Self::RougeOneKeyRemoveFromBarCmd => "RougeOneKeyRemoveFromBarCmd",
-            Self::RougeRefreshMapRuleCmd => "RougeRefreshMapRuleCmd",
             Self::RougeSelectReviveCmd => "RougeSelectReviveCmd",
             Self::RougeEntrustInfoPushCmd => "RougeEntrustInfoPushCmd",
             Self::RougeEndCmd => "RougeEndCmd",
@@ -37999,7 +28853,6 @@ impl CmdId {
             Self::EnterRougeSelectStyleCmd => "EnterRougeSelectStyleCmd",
             Self::RougeLayerMapInfoPushCmd => "RougeLayerMapInfoPushCmd",
             Self::RougeInMapItemUpdatePushCmd => "RougeInMapItemUpdatePushCmd",
-            Self::RougeRefreshMonsterRuleCmd => "RougeRefreshMonsterRuleCmd",
             Self::RougeShopRefreshCmd => "RougeShopRefreshCmd",
             Self::RougeLayerSimpleMapInfoPushCmd => "RougeLayerSimpleMapInfoPushCmd",
             Self::RougeUpdateGeniusPointPushCmd => "RougeUpdateGeniusPointPushCmd",
@@ -38040,131 +28893,10 @@ impl CmdId {
             Self::StoryFinishPushCmd => "StoryFinishPushCmd",
             Self::GetSummonInfoCmd => "GetSummonInfoCmd",
             Self::SummonQueryTokenCmd => "SummonQueryTokenCmd",
-            Self::GetSummonProgressRewardsCmd => "GetSummonProgressRewardsCmd",
             Self::ChooseEnhancedPoolHeroCmd => "ChooseEnhancedPoolHeroCmd",
             Self::SummonCmd => "SummonCmd",
             Self::ChooseMultiUpHeroCmd => "ChooseMultiUpHeroCmd",
             Self::OpenLuckyBagCmd => "OpenLuckyBagCmd",
-            Self::EnterSurvivalCmd => "EnterSurvivalCmd",
-            Self::SurvivalInteriorSurvivalSceneOperationLogPushCmd => {
-                "SurvivalInteriorSurvivalSceneOperationLogPushCmd"
-            }
-            Self::SurvivalInteriorSurvivalSceneOperationLogCmd => {
-                "SurvivalInteriorSurvivalSceneOperationLogCmd"
-            }
-            Self::SurvivalTaskFollowCmd => "SurvivalTaskFollowCmd",
-            Self::SurvivalDailyReportPushCmd => "SurvivalDailyReportPushCmd",
-            Self::SurvivalInteriorSurvivalSceneHotfix1PushCmd => {
-                "SurvivalInteriorSurvivalSceneHotfix1PushCmd"
-            }
-            Self::SurvivalInteriorSurvivalSceneHotfix2PushCmd => {
-                "SurvivalInteriorSurvivalSceneHotfix2PushCmd"
-            }
-            Self::SurvivalInteriorSurvivalSceneHotfix3PushCmd => {
-                "SurvivalInteriorSurvivalSceneHotfix3PushCmd"
-            }
-            Self::SurvivalUseItemCmd => "SurvivalUseItemCmd",
-            Self::SurvivalSceneGiveUpCmd => "SurvivalSceneGiveUpCmd",
-            Self::SurvivalSceneOperationCmd => "SurvivalSceneOperationCmd",
-            Self::SurvivalUpdateClientDataCmd => "SurvivalUpdateClientDataCmd",
-            Self::SurvivalInteriorSurvivalSceneHotfix1Cmd => {
-                "SurvivalInteriorSurvivalSceneHotfix1Cmd"
-            }
-            Self::SurvivalInteriorSurvivalSceneHotfix2Cmd => {
-                "SurvivalInteriorSurvivalSceneHotfix2Cmd"
-            }
-            Self::SurvivalInteriorSurvivalSceneHotfix3Cmd => {
-                "SurvivalInteriorSurvivalSceneHotfix3Cmd"
-            }
-            Self::SurvivalSceneEndPushCmd => "SurvivalSceneEndPushCmd",
-            Self::SurvivalSurvivalOutSideClientDataCmd => {
-                "SurvivalSurvivalOutSideClientDataCmd"
-            }
-            Self::SurvivalOutSideGetInfoCmd => "SurvivalOutSideGetInfoCmd",
-            Self::SurvivalMarkNewHandbookCmd => "SurvivalMarkNewHandbookCmd",
-            Self::SurvivalHandbookPushCmd => "SurvivalHandbookPushCmd",
-            Self::SurvivalOutSideGainRewardCmd => "SurvivalOutSideGainRewardCmd",
-            Self::SurvivalWeekSurvivalWeekHotfix1Cmd => {
-                "SurvivalWeekSurvivalWeekHotfix1Cmd"
-            }
-            Self::SurvivalWeekSurvivalWeekHotfix2Cmd => {
-                "SurvivalWeekSurvivalWeekHotfix2Cmd"
-            }
-            Self::SurvivalWeekSurvivalWeekHotfix3Cmd => {
-                "SurvivalWeekSurvivalWeekHotfix3Cmd"
-            }
-            Self::SurvivalJewelryEquipWearCmd => "SurvivalJewelryEquipWearCmd",
-            Self::SurvivalBagUpdatePushCmd => "SurvivalBagUpdatePushCmd",
-            Self::SurvivalEquipOneKeyWearCmd => "SurvivalEquipOneKeyWearCmd",
-            Self::SurvivalItemTipsPushCmd => "SurvivalItemTipsPushCmd",
-            Self::SurvivalEquipWearCmd => "SurvivalEquipWearCmd",
-            Self::SurvivalIntrudeExterminateCmd => "SurvivalIntrudeExterminateCmd",
-            Self::SurvivalEquipOneKeyDemountCmd => "SurvivalEquipOneKeyDemountCmd",
-            Self::SurvivalWeekInfoPushCmd => "SurvivalWeekInfoPushCmd",
-            Self::SurvivalEquipSetNewFlagCmd => "SurvivalEquipSetNewFlagCmd",
-            Self::SurvivalGetEquipInfoCmd => "SurvivalGetEquipInfoCmd",
-            Self::SurvivalEquipUpdatePushCmd => "SurvivalEquipUpdatePushCmd",
-            Self::SurvivalReputationExpCmd => "SurvivalReputationExpCmd",
-            Self::SurvivalIntrudeReExterminateCmd => "SurvivalIntrudeReExterminateCmd",
-            Self::SurvivalPublishRecruitTagCmd => "SurvivalPublishRecruitTagCmd",
-            Self::SurvivalStepPushCmd => "SurvivalStepPushCmd",
-            Self::SurvivalShopBuyCmd => "SurvivalShopBuyCmd",
-            Self::SurvivalRemoveBagItemCmd => "SurvivalRemoveBagItemCmd",
-            Self::SurvivalSettleWeekPushCmd => "SurvivalSettleWeekPushCmd",
-            Self::SurvivalShopUpdatePushCmd => "SurvivalShopUpdatePushCmd",
-            Self::SurvivalHeroUpdatePushCmd => "SurvivalHeroUpdatePushCmd",
-            Self::SurvivalAttrContainerUpdatePushCmd => {
-                "SurvivalAttrContainerUpdatePushCmd"
-            }
-            Self::SurvivalRepairCmd => "SurvivalRepairCmd",
-            Self::SurvivalClosePanelCmd => "SurvivalClosePanelCmd",
-            Self::SurvivalJewelryEquipDemountCmd => "SurvivalJewelryEquipDemountCmd",
-            Self::SurvivalChooseBootyCmd => "SurvivalChooseBootyCmd",
-            Self::SurvivalRecruitNpcCmd => "SurvivalRecruitNpcCmd",
-            Self::SurvivalRecruitInfoPushCmd => "SurvivalRecruitInfoPushCmd",
-            Self::SurvivalReceiveTaskRewardCmd => "SurvivalReceiveTaskRewardCmd",
-            Self::SurvivalNpcChangePositionCmd => "SurvivalNpcChangePositionCmd",
-            Self::SurvivalReputationRewardCmd => "SurvivalReputationRewardCmd",
-            Self::SurvivalIntrudeFightSettlePushCmd => {
-                "SurvivalIntrudeFightSettlePushCmd"
-            }
-            Self::SurvivalAbandonWeekCmd => "SurvivalAbandonWeekCmd",
-            Self::SurvivalEquipSwitchPlanCmd => "SurvivalEquipSwitchPlanCmd",
-            Self::SurvivalIntrudeAbandonExterminateCmd => {
-                "SurvivalIntrudeAbandonExterminateCmd"
-            }
-            Self::SurvivalBuildCmd => "SurvivalBuildCmd",
-            Self::SurvivalRefreshRecruitTagCmd => "SurvivalRefreshRecruitTagCmd",
-            Self::SurvivalGetWeekInfoCmd => "SurvivalGetWeekInfoCmd",
-            Self::SurvivalTaskUpdatePushCmd => "SurvivalTaskUpdatePushCmd",
-            Self::SurvivalNpcExchangePositionCmd => "SurvivalNpcExchangePositionCmd",
-            Self::SurvivalBatchHeroChangePositionCmd => {
-                "SurvivalBatchHeroChangePositionCmd"
-            }
-            Self::SurvivalPanelOperationCmd => "SurvivalPanelOperationCmd",
-            Self::SurvivalShopSellCmd => "SurvivalShopSellCmd",
-            Self::SurvivalHeroChangePositionCmd => "SurvivalHeroChangePositionCmd",
-            Self::SurvivalAbandonRecruitNpcCmd => "SurvivalAbandonRecruitNpcCmd",
-            Self::SurvivalGetTalentInfoCmd => "SurvivalGetTalentInfoCmd",
-            Self::SurvivalNpcAcceptTaskCmd => "SurvivalNpcAcceptTaskCmd",
-            Self::SurvivalWeekSurvivalWeekHotfix1PushCmd => {
-                "SurvivalWeekSurvivalWeekHotfix1PushCmd"
-            }
-            Self::SurvivalWeekSurvivalWeekHotfix2PushCmd => {
-                "SurvivalWeekSurvivalWeekHotfix2PushCmd"
-            }
-            Self::SurvivalWeekSurvivalWeekHotfix3PushCmd => {
-                "SurvivalWeekSurvivalWeekHotfix3PushCmd"
-            }
-            Self::SurvivalEquipCompoundCmd => "SurvivalEquipCompoundCmd",
-            Self::SurvivalSurvivalWeekClientDataCmd => {
-                "SurvivalSurvivalWeekClientDataCmd"
-            }
-            Self::SurvivalEquipDemountCmd => "SurvivalEquipDemountCmd",
-            Self::SurvivalStartWeekChooseDiffCmd => "SurvivalStartWeekChooseDiffCmd",
-            Self::SurvivalBuildingUpdatePushCmd => "SurvivalBuildingUpdatePushCmd",
-            Self::SurvivalUpgradeCmd => "SurvivalUpgradeCmd",
-            Self::SurvivalHeroExchangePositionCmd => "SurvivalHeroExchangePositionCmd",
             Self::DeleteTaskPushCmd => "DeleteTaskPushCmd",
             Self::FinishTaskCmd => "FinishTaskCmd",
             Self::FinishAllTaskCmd => "FinishAllTaskCmd",
@@ -38179,14 +28911,7 @@ impl CmdId {
             Self::TowerBattleFinishPushCmd => "TowerBattleFinishPushCmd",
             Self::StartTowerBattleCmd => "StartTowerBattleCmd",
             Self::TowerResetSubEpisodeCmd => "TowerResetSubEpisodeCmd",
-            Self::TowerChangeTalentPlanCmd => "TowerChangeTalentPlanCmd",
             Self::TowerResetTalentCmd => "TowerResetTalentCmd",
-            Self::TowerRenameTalentPlanCmd => "TowerRenameTalentPlanCmd",
-            Self::TowerDeepResetCmd => "TowerDeepResetCmd",
-            Self::TowerDeepLoadArchiveCmd => "TowerDeepLoadArchiveCmd",
-            Self::TowerDeepGetInfoCmd => "TowerDeepGetInfoCmd",
-            Self::TowerDeepSaveArchiveCmd => "TowerDeepSaveArchiveCmd",
-            Self::TowerDeepFightSettlePushCmd => "TowerDeepFightSettlePushCmd",
             Self::TurnbackBonusPointCmd => "TurnbackBonusPointCmd",
             Self::BuyDoubleBonusCmd => "BuyDoubleBonusCmd",
             Self::TurnbackFirstShowCmd => "TurnbackFirstShowCmd",
@@ -38195,8 +28920,6 @@ impl CmdId {
             Self::RefreshOnlineTaskCmd => "RefreshOnlineTaskCmd",
             Self::GetTurnbackInfoCmd => "GetTurnbackInfoCmd",
             Self::TurnbackAdditionPushCmd => "TurnbackAdditionPushCmd",
-            Self::GetUnlockVoucherInfoCmd => "GetUnlockVoucherInfoCmd",
-            Self::UnlockVoucherInfoUpdatePushCmd => "UnlockVoucherInfoUpdatePushCmd",
             Self::DebugLogoutCmd => "DebugLogoutCmd",
             Self::LogoutCmd => "LogoutCmd",
             Self::GetSettingInfosCmd => "GetSettingInfosCmd",
@@ -38224,22 +28947,6 @@ impl CmdId {
             Self::MarkPopDeepRuleCmd => "MarkPopDeepRuleCmd",
             Self::WeekwalkDialogHistoryCmd => "WeekwalkDialogHistoryCmd",
             Self::WeekwalkGeneralCmd => "WeekwalkGeneralCmd",
-            Self::WeekwalkVer2ChangeHeroGroupSelectCmd => {
-                "WeekwalkVer2ChangeHeroGroupSelectCmd"
-            }
-            Self::WeekwalkVer2MarkPreSettleCmd => "WeekwalkVer2MarkPreSettleCmd",
-            Self::WeekwalkVer2InfoUpdatePushCmd => "WeekwalkVer2InfoUpdatePushCmd",
-            Self::WeekwalkVer2MarkShowFinishedCmd => "WeekwalkVer2MarkShowFinishedCmd",
-            Self::WeekwalkVer2ChooseSkillCmd => "WeekwalkVer2ChooseSkillCmd",
-            Self::WeekwalkVer2ResetLayerCmd => "WeekwalkVer2ResetLayerCmd",
-            Self::WeekwalkVer2HeroRecommendCmd => "WeekwalkVer2HeroRecommendCmd",
-            Self::WeekwalkVer2GetInfoCmd => "WeekwalkVer2GetInfoCmd",
-            Self::WeekwalkVer2FightSettlePushCmd => "WeekwalkVer2FightSettlePushCmd",
-            Self::WeekwalkVer2SettleInfoUpdatePushCmd => {
-                "WeekwalkVer2SettleInfoUpdatePushCmd"
-            }
-            Self::WeekwalkVer2MarkPopRuleCmd => "WeekwalkVer2MarkPopRuleCmd",
-            Self::WeekwalkVer2GetSettleInfoCmd => "WeekwalkVer2GetSettleInfoCmd",
             Self::GuestTimeOutPushCmd => "GuestTimeOutPushCmd",
             Self::MinorLimitLoginTimePushCmd => "MinorLimitLoginTimePushCmd",
             Self::MinorPlayTimeOutPushCmd => "MinorPlayTimeOutPushCmd",
@@ -38248,12 +28955,10 @@ impl CmdId {
     /// Creates an enum from field names used in the ProtoBuf definition.
     pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
         match value {
-            "LoginRequestCmd" => Some(Self::LoginRequestCmd),
-            "ReconnectRequestCmd" => Some(Self::ReconnectRequestCmd),
-            "ForceLogoutPushCmd" => Some(Self::ForceLogoutPushCmd),
-            "GetReconnectStartTagRequestCmd" => {
-                Some(Self::GetReconnectStartTagRequestCmd)
-            }
+            "LoginCmd" => Some(Self::LoginCmd),
+            "ReconnectCmd" => Some(Self::ReconnectCmd),
+            "ForceLogoutCmd" => Some(Self::ForceLogoutCmd),
+            "GetReconnectStartTagCmd" => Some(Self::GetReconnectStartTagCmd),
             "UpdateAchievementPushCmd" => Some(Self::UpdateAchievementPushCmd),
             "GetAchievementInfoCmd" => Some(Self::GetAchievementInfoCmd),
             "ReadNewAchievementCmd" => Some(Self::ReadNewAchievementCmd),
@@ -38407,9 +29112,6 @@ impl CmdId {
             "GetHoroscopeCmd" => Some(Self::GetHoroscopeCmd),
             "Get128InfosCmd" => Some(Self::Get128InfosCmd),
             "Act128GetTotalRewardsCmd" => Some(Self::Act128GetTotalRewardsCmd),
-            "Act128SpFirstHalfSelectItemCmd" => {
-                Some(Self::Act128SpFirstHalfSelectItemCmd)
-            }
             "Act128GetTotalSingleRewardCmd" => Some(Self::Act128GetTotalSingleRewardCmd),
             "Act128DoublePointCmd" => Some(Self::Act128DoublePointCmd),
             "Act129LotteryCmd" => Some(Self::Act129LotteryCmd),
@@ -38612,20 +29314,11 @@ impl CmdId {
             "Get181InfosCmd" => Some(Self::Get181InfosCmd),
             "Get181BonusCmd" => Some(Self::Get181BonusCmd),
             "Get181SpBonusCmd" => Some(Self::Get181SpBonusCmd),
-            "Act182GetFriendSnapshotsCmd" => Some(Self::Act182GetFriendSnapshotsCmd),
-            "Act182SaveSnapshotCmd" => Some(Self::Act182SaveSnapshotCmd),
             "GetAct182RandomMasterCmd" => Some(Self::GetAct182RandomMasterCmd),
             "Act182RefreshMasterCmd" => Some(Self::Act182RefreshMasterCmd),
             "GetAct182InfoCmd" => Some(Self::GetAct182InfoCmd),
             "Act182GetRankRewardCmd" => Some(Self::Act182GetRankRewardCmd),
-            "Act182GetHasSnapshotFriendCmd" => Some(Self::Act182GetHasSnapshotFriendCmd),
-            "Act182GetFriendFightRecordsCmd" => {
-                Some(Self::Act182GetFriendFightRecordsCmd)
-            }
             "Act182InfoPushCmd" => Some(Self::Act182InfoPushCmd),
-            "Act182GetFriendFightMessageCmd" => {
-                Some(Self::Act182GetFriendFightMessageCmd)
-            }
             "Act183ResetEpisodeCmd" => Some(Self::Act183ResetEpisodeCmd),
             "Act183GetInfoCmd" => Some(Self::Act183GetInfoCmd),
             "Act183ResetGroupCmd" => Some(Self::Act183ResetGroupCmd),
@@ -38653,138 +29346,10 @@ impl CmdId {
             "Get187InfoCmd" => Some(Self::Get187InfoCmd),
             "Act187AcceptRewardCmd" => Some(Self::Act187AcceptRewardCmd),
             "Act187FinishGameCmd" => Some(Self::Act187FinishGameCmd),
-            "Act188ReverseCardCmd" => Some(Self::Act188ReverseCardCmd),
-            "Act188EnterEpisodeCmd" => Some(Self::Act188EnterEpisodeCmd),
-            "Act188EpisodePushCmd" => Some(Self::Act188EpisodePushCmd),
-            "Act188StepPushCmd" => Some(Self::Act188StepPushCmd),
-            "GetAct188InfoCmd" => Some(Self::GetAct188InfoCmd),
-            "Act188StoryCmd" => Some(Self::Act188StoryCmd),
             "GetAct189OnceBonusCmd" => Some(Self::GetAct189OnceBonusCmd),
             "GetAct189InfoCmd" => Some(Self::GetAct189InfoCmd),
-            "Act190EpisodePushCmd" => Some(Self::Act190EpisodePushCmd),
-            "Act190ChooseEpisodeBranchCmd" => Some(Self::Act190ChooseEpisodeBranchCmd),
-            "GetAct190InfoCmd" => Some(Self::GetAct190InfoCmd),
-            "Act190FinishEpisodeCmd" => Some(Self::Act190FinishEpisodeCmd),
-            "EndAct191GameCmd" => Some(Self::EndAct191GameCmd),
-            "Start191GameCmd" => Some(Self::Start191GameCmd),
-            "Select191EnhanceCmd" => Some(Self::Select191EnhanceCmd),
-            "Fresh191ShopCmd" => Some(Self::Fresh191ShopCmd),
-            "Select191UseHeroFacetsIdCmd" => Some(Self::Select191UseHeroFacetsIdCmd),
-            "Select191NodeCmd" => Some(Self::Select191NodeCmd),
-            "GetAct191InfoCmd" => Some(Self::GetAct191InfoCmd),
-            "Gain191RewardEventCmd" => Some(Self::Gain191RewardEventCmd),
-            "Act191TriggerEffectPushCmd" => Some(Self::Act191TriggerEffectPushCmd),
-            "ChangeAct191TeamCmd" => Some(Self::ChangeAct191TeamCmd),
-            "Select191UpgradeEventCmd" => Some(Self::Select191UpgradeEventCmd),
-            "Fresh191EnhanceCmd" => Some(Self::Fresh191EnhanceCmd),
-            "Select191InitBuildCmd" => Some(Self::Select191InitBuildCmd),
-            "End191ReplaceEventCmd" => Some(Self::End191ReplaceEventCmd),
-            "BuyIn191ShopCmd" => Some(Self::BuyIn191ShopCmd),
-            "Leave191ShopCmd" => Some(Self::Leave191ShopCmd),
-            "Act191GameInfoUpdatePushCmd" => Some(Self::Act191GameInfoUpdatePushCmd),
-            "Select191ReplaceEventCmd" => Some(Self::Select191ReplaceEventCmd),
-            "Act192EpisodePushCmd" => Some(Self::Act192EpisodePushCmd),
-            "Act192ChooseEpisodeBranchCmd" => Some(Self::Act192ChooseEpisodeBranchCmd),
-            "GetAct192InfoCmd" => Some(Self::GetAct192InfoCmd),
-            "Act192FinishEpisodeCmd" => Some(Self::Act192FinishEpisodeCmd),
-            "Act194NewEventInfosPushCmd" => Some(Self::Act194NewEventInfosPushCmd),
-            "Act194WithdrawTeamCmd" => Some(Self::Act194WithdrawTeamCmd),
-            "Act194EpisodeRecordsPushCmd" => Some(Self::Act194EpisodeRecordsPushCmd),
-            "Act194GetInfosCmd" => Some(Self::Act194GetInfosCmd),
-            "Act194ResetEpisodeCmd" => Some(Self::Act194ResetEpisodeCmd),
-            "Act194SkipEpisodeCmd" => Some(Self::Act194SkipEpisodeCmd),
-            "Act194EpisodeInfoPushCmd" => Some(Self::Act194EpisodeInfoPushCmd),
-            "Act194EpisodeFinishPushCmd" => Some(Self::Act194EpisodeFinishPushCmd),
-            "Act194FinishStoryEpisodeCmd" => Some(Self::Act194FinishStoryEpisodeCmd),
-            "Act194UseItemCmd" => Some(Self::Act194UseItemCmd),
-            "Act194GetEpisodeInfoCmd" => Some(Self::Act194GetEpisodeInfoCmd),
-            "Act194EnterEpisodeCmd" => Some(Self::Act194EnterEpisodeCmd),
-            "Act194SendTeamExploreCmd" => Some(Self::Act194SendTeamExploreCmd),
-            "Act194NextRoundCmd" => Some(Self::Act194NextRoundCmd),
-            "Act196GainCmd" => Some(Self::Act196GainCmd),
-            "Get196InfoCmd" => Some(Self::Get196InfoCmd),
-            "Get197InfoCmd" => Some(Self::Get197InfoCmd),
-            "Act197RummageCmd" => Some(Self::Act197RummageCmd),
-            "Act197ExploreCmd" => Some(Self::Act197ExploreCmd),
-            "Act198GainCmd" => Some(Self::Act198GainCmd),
-            "Act198CanGetPushCmd" => Some(Self::Act198CanGetPushCmd),
-            "Get199InfoCmd" => Some(Self::Get199InfoCmd),
-            "Act199GainCmd" => Some(Self::Act199GainCmd),
-            "Get201InfoCmd" => Some(Self::Get201InfoCmd),
-            "Act203EpisodePushCmd" => Some(Self::Act203EpisodePushCmd),
-            "Act203FinishEpisodeCmd" => Some(Self::Act203FinishEpisodeCmd),
-            "GetAct203InfoCmd" => Some(Self::GetAct203InfoCmd),
-            "Act203ChooseEpisodeBranchCmd" => Some(Self::Act203ChooseEpisodeBranchCmd),
-            "Act203SaveEpisodeProgressCmd" => Some(Self::Act203SaveEpisodeProgressCmd),
-            "GetAct204DailyCollectionCmd" => Some(Self::GetAct204DailyCollectionCmd),
-            "FinishAct204TaskCmd" => Some(Self::FinishAct204TaskCmd),
-            "Act204TaskPushCmd" => Some(Self::Act204TaskPushCmd),
-            "GetAct204MilestoneRewardCmd" => Some(Self::GetAct204MilestoneRewardCmd),
-            "GetAct204InfoCmd" => Some(Self::GetAct204InfoCmd),
-            "GetAct204OnceBonusCmd" => Some(Self::GetAct204OnceBonusCmd),
-            "Act205GetInfoCmd" => Some(Self::Act205GetInfoCmd),
-            "Act205FinishGameCmd" => Some(Self::Act205FinishGameCmd),
-            "Act205InfoPushCmd" => Some(Self::Act205InfoPushCmd),
-            "Act205GetGameInfoCmd" => Some(Self::Act205GetGameInfoCmd),
-            "Act206InfoPushCmd" => Some(Self::Act206InfoPushCmd),
-            "Act206GetBonusCmd" => Some(Self::Act206GetBonusCmd),
-            "Act206ChooseDirectionCmd" => Some(Self::Act206ChooseDirectionCmd),
-            "Act206GetInfoCmd" => Some(Self::Act206GetInfoCmd),
-            "Act208ReceiveBonusCmd" => Some(Self::Act208ReceiveBonusCmd),
-            "GetAct208InfoCmd" => Some(Self::GetAct208InfoCmd),
-            "Act209InfoPushCmd" => Some(Self::Act209InfoPushCmd),
-            "GetAct209InfoCmd" => Some(Self::GetAct209InfoCmd),
-            "Act210FinishEpisodeCmd" => Some(Self::Act210FinishEpisodeCmd),
-            "Act210ChooseEpisodeBranchCmd" => Some(Self::Act210ChooseEpisodeBranchCmd),
-            "GetAct210InfoCmd" => Some(Self::GetAct210InfoCmd),
-            "Act210SaveEpisodeProgressCmd" => Some(Self::Act210SaveEpisodeProgressCmd),
-            "Act210EpisodePushCmd" => Some(Self::Act210EpisodePushCmd),
-            "Act211FinishEpisodeCmd" => Some(Self::Act211FinishEpisodeCmd),
-            "Act211ChooseEpisodeBranchCmd" => Some(Self::Act211ChooseEpisodeBranchCmd),
-            "GetAct211InfoCmd" => Some(Self::GetAct211InfoCmd),
-            "Act211SaveEpisodeProgressCmd" => Some(Self::Act211SaveEpisodeProgressCmd),
-            "Act211EpisodePushCmd" => Some(Self::Act211EpisodePushCmd),
-            "Act212ReceiveBonusCmd" => Some(Self::Act212ReceiveBonusCmd),
-            "GetAct212InfoCmd" => Some(Self::GetAct212InfoCmd),
-            "Act212BonusPushCmd" => Some(Self::Act212BonusPushCmd),
             "GetAntiqueInfoCmd" => Some(Self::GetAntiqueInfoCmd),
             "AntiqueUpdatePushCmd" => Some(Self::AntiqueUpdatePushCmd),
-            "AssassinOutSideBuildingLevelUpCmd" => {
-                Some(Self::AssassinOutSideBuildingLevelUpCmd)
-            }
-            "InteractiveCmd" => Some(Self::InteractiveCmd),
-            "EquipHeroItemCmd" => Some(Self::EquipHeroItemCmd),
-            "GetAssassinOutSideInfoCmd" => Some(Self::GetAssassinOutSideInfoCmd),
-            "AssassinUnlockLibraryPushCmd" => Some(Self::AssassinUnlockLibraryPushCmd),
-            "GetAssassinLibraryInfoCmd" => Some(Self::GetAssassinLibraryInfoCmd),
-            "AssassinOutSideUnlockPushCmd" => Some(Self::AssassinOutSideUnlockPushCmd),
-            "HeroTransferCareerCmd" => Some(Self::HeroTransferCareerCmd),
-            "AssassinSceneHeroUpdatePushCmd" => {
-                Some(Self::AssassinSceneHeroUpdatePushCmd)
-            }
-            "NextRoundCmd" => Some(Self::NextRoundCmd),
-            "EnterBattleGridCmd" => Some(Self::EnterBattleGridCmd),
-            "AssassinUseSkillCmd" => Some(Self::AssassinUseSkillCmd),
-            "NewInteractivePushCmd" => Some(Self::NewInteractivePushCmd),
-            "HeroMoveCmd" => Some(Self::HeroMoveCmd),
-            "UseAssassinItemCmd" => Some(Self::UseAssassinItemCmd),
-            "AssassinChangeMapCmd" => Some(Self::AssassinChangeMapCmd),
-            "FinishUserTurnCmd" => Some(Self::FinishUserTurnCmd),
-            "RecoverSceneCmd" => Some(Self::RecoverSceneCmd),
-            "GiveUpAssassinSceneCmd" => Some(Self::GiveUpAssassinSceneCmd),
-            "MissionUpdatePushCmd" => Some(Self::MissionUpdatePushCmd),
-            "AssassinChangingMapPushCmd" => Some(Self::AssassinChangingMapPushCmd),
-            "EnterAssassinSceneCmd" => Some(Self::EnterAssassinSceneCmd),
-            "HeroAttackCmd" => Some(Self::HeroAttackCmd),
-            "FinishMissionCmd" => Some(Self::FinishMissionCmd),
-            "RestartAssassinSceneCmd" => Some(Self::RestartAssassinSceneCmd),
-            "MonsterUpdatePushCmd" => Some(Self::MonsterUpdatePushCmd),
-            "SummonMonsterPushCmd" => Some(Self::SummonMonsterPushCmd),
-            "HeroInteractiveCmd" => Some(Self::HeroInteractiveCmd),
-            "GameStatePushCmd" => Some(Self::GameStatePushCmd),
-            "ReturnAssassinSceneCmd" => Some(Self::ReturnAssassinSceneCmd),
-            "GainItemPushCmd" => Some(Self::GainItemPushCmd),
-            "HeroAssassinCmd" => Some(Self::HeroAssassinCmd),
             "AutoChessSettlePushCmd" => Some(Self::AutoChessSettlePushCmd),
             "AutoChessRefreshMallCmd" => Some(Self::AutoChessRefreshMallCmd),
             "AutoChessBuyChessCmd" => Some(Self::AutoChessBuyChessCmd),
@@ -38792,12 +29357,8 @@ impl CmdId {
             "AutoChessMallUpgradePushCmd" => Some(Self::AutoChessMallUpgradePushCmd),
             "AutoChessRoundSettlePushCmd" => Some(Self::AutoChessRoundSettlePushCmd),
             "AutoChessGiveUpCmd" => Some(Self::AutoChessGiveUpCmd),
-            "AutoChessEnterFriendFightSceneCmd" => {
-                Some(Self::AutoChessEnterFriendFightSceneCmd)
-            }
             "AutoChessScenePushCmd" => Some(Self::AutoChessScenePushCmd),
             "AutoChessPreviewFightCmd" => Some(Self::AutoChessPreviewFightCmd),
-            "AutoChessUseSkillCmd" => Some(Self::AutoChessUseSkillCmd),
             "AutoChessMallRegionSelectItemCmd" => {
                 Some(Self::AutoChessMallRegionSelectItemCmd)
             }
@@ -38813,7 +29374,6 @@ impl CmdId {
             "SetUseBgmCmd" => Some(Self::SetUseBgmCmd),
             "UpdateBgmPushCmd" => Some(Self::UpdateBgmPushCmd),
             "SetFavoriteBgmCmd" => Some(Self::SetFavoriteBgmCmd),
-            "BossFightResetChapterCmd" => Some(Self::BossFightResetChapterCmd),
             "BpScoreUpdatePushCmd" => Some(Self::BpScoreUpdatePushCmd),
             "GetBpInfoCmd" => Some(Self::GetBpInfoCmd),
             "GetSelfSelectBonusCmd" => Some(Self::GetSelfSelectBonusCmd),
@@ -38829,22 +29389,12 @@ impl CmdId {
             "SandboxChargeRequsetCmd" => Some(Self::SandboxChargeRequsetCmd),
             "ReadChargeNewCmd" => Some(Self::ReadChargeNewCmd),
             "GetChargeInfoCmd" => Some(Self::GetChargeInfoCmd),
-            "GetChargePushCmd" => Some(Self::GetChargePushCmd),
-            "GetChargePushInfoCmd" => Some(Self::GetChargePushInfoCmd),
-            "RecordChargePushCmd" => Some(Self::RecordChargePushCmd),
             "SendMsgCmd" => Some(Self::SendMsgCmd),
             "DeleteOfflineMsgCmd" => Some(Self::DeleteOfflineMsgCmd),
             "ChatMsgPushCmd" => Some(Self::ChatMsgPushCmd),
             "WordTestCmd" => Some(Self::WordTestCmd),
             "ReportCmd" => Some(Self::ReportCmd),
             "GetReportTypeCmd" => Some(Self::GetReportTypeCmd),
-            "CommandPostEventReadCmd" => Some(Self::CommandPostEventReadCmd),
-            "CommandPostPaperCmd" => Some(Self::CommandPostPaperCmd),
-            "CommandPostDispatchCmd" => Some(Self::CommandPostDispatchCmd),
-            "CommandPostBonusCmd" => Some(Self::CommandPostBonusCmd),
-            "GetCommandPostInfoCmd" => Some(Self::GetCommandPostInfoCmd),
-            "FinishCommandPostEventCmd" => Some(Self::FinishCommandPostEventCmd),
-            "CommandPostBonusAllCmd" => Some(Self::CommandPostBonusAllCmd),
             "GetServerTimeCmd" => Some(Self::GetServerTimeCmd),
             "RefreshCritterMoodCmd" => Some(Self::RefreshCritterMoodCmd),
             "IncubateCritterPreviewCmd" => Some(Self::IncubateCritterPreviewCmd),
@@ -38883,16 +29433,6 @@ impl CmdId {
             "GetCurrencyListCmd" => Some(Self::GetCurrencyListCmd),
             "GetDialogInfoCmd" => Some(Self::GetDialogInfoCmd),
             "RecordDialogInfoCmd" => Some(Self::RecordDialogInfoCmd),
-            "DiceHeroGetInfoCmd" => Some(Self::DiceHeroGetInfoCmd),
-            "DiceHeroResetDiceCmd" => Some(Self::DiceHeroResetDiceCmd),
-            "DiceGiveUpCmd" => Some(Self::DiceGiveUpCmd),
-            "DiceFightSettlePushCmd" => Some(Self::DiceFightSettlePushCmd),
-            "DiceHeroEndRoundCmd" => Some(Self::DiceHeroEndRoundCmd),
-            "DiceHeroEnterStoryCmd" => Some(Self::DiceHeroEnterStoryCmd),
-            "DiceHeroGetRewardCmd" => Some(Self::DiceHeroGetRewardCmd),
-            "DiceHeroUseSkillCmd" => Some(Self::DiceHeroUseSkillCmd),
-            "DiceHeroEnterFightCmd" => Some(Self::DiceHeroEnterFightCmd),
-            "DiceHeroConfirmDiceCmd" => Some(Self::DiceHeroConfirmDiceCmd),
             "GetDispatchInfoCmd" => Some(Self::GetDispatchInfoCmd),
             "InterruptDispatchCmd" => Some(Self::InterruptDispatchCmd),
             "DispatchCmd" => Some(Self::DispatchCmd),
@@ -38978,12 +29518,6 @@ impl CmdId {
             "TestFightIdCmd" => Some(Self::TestFightIdCmd),
             "RedealCardInfoPushCmd" => Some(Self::RedealCardInfoPushCmd),
             "GetFightRecordAllCmd" => Some(Self::GetFightRecordAllCmd),
-            "GetFishingFriendsCmd" => Some(Self::GetFishingFriendsCmd),
-            "ChangeFishingCurrencyCmd" => Some(Self::ChangeFishingCurrencyCmd),
-            "GetFishingInfoCmd" => Some(Self::GetFishingInfoCmd),
-            "GetOtherFishingInfoCmd" => Some(Self::GetOtherFishingInfoCmd),
-            "FishingCmd" => Some(Self::FishingCmd),
-            "GetFishingBonusCmd" => Some(Self::GetFishingBonusCmd),
             "GetFriendInfoListCmd" => Some(Self::GetFriendInfoListCmd),
             "ApplyCmd" => Some(Self::ApplyCmd),
             "RemoveBlacklistCmd" => Some(Self::RemoveBlacklistCmd),
@@ -39005,7 +29539,6 @@ impl CmdId {
             "GMSummonResultPushCmd" => Some(Self::GmSummonResultPushCmd),
             "FightTipsMessagePushCmd" => Some(Self::FightTipsMessagePushCmd),
             "GMCmd" => Some(Self::GmCmd),
-            "ServerErrorInfoPushCmd" => Some(Self::ServerErrorInfoPushCmd),
             "UpdateGuidePushCmd" => Some(Self::UpdateGuidePushCmd),
             "GetGuideInfoCmd" => Some(Self::GetGuideInfoCmd),
             "FinishGuideCmd" => Some(Self::FinishGuideCmd),
@@ -39014,7 +29547,7 @@ impl CmdId {
             "DestinyStoneUnlockCmd" => Some(Self::DestinyStoneUnlockCmd),
             "HeroLevelUpUpdatePushCmd" => Some(Self::HeroLevelUpUpdatePushCmd),
             "UnMarkIsNewCmd" => Some(Self::UnMarkIsNewCmd),
-            "HeroHeroUpdatePushCmd" => Some(Self::HeroHeroUpdatePushCmd),
+            "HeroUpdatePushCmd" => Some(Self::HeroUpdatePushCmd),
             "HeroRankUpCmd" => Some(Self::HeroRankUpCmd),
             "TalentStyleReadCmd" => Some(Self::TalentStyleReadCmd),
             "HeroRedDotReadCmd" => Some(Self::HeroRedDotReadCmd),
@@ -39023,17 +29556,14 @@ impl CmdId {
             "PutTalentCubeBatchCmd" => Some(Self::PutTalentCubeBatchCmd),
             "TakeoffAllTalentCubeCmd" => Some(Self::TakeoffAllTalentCubeCmd),
             "PutTalentCubeCmd" => Some(Self::PutTalentCubeCmd),
-            "CancelHero3124TalentTreeCmd" => Some(Self::CancelHero3124TalentTreeCmd),
             "HeroInfoListCmd" => Some(Self::HeroInfoListCmd),
             "UnlockTalentStyleCmd" => Some(Self::UnlockTalentStyleCmd),
             "DestinyRankUpCmd" => Some(Self::DestinyRankUpCmd),
             "RenameTalentTemplateCmd" => Some(Self::RenameTalentTemplateCmd),
             "HeroTalentUpCmd" => Some(Self::HeroTalentUpCmd),
-            "ResetHero3124TalentTreeCmd" => Some(Self::ResetHero3124TalentTreeCmd),
             "UseSkinCmd" => Some(Self::UseSkinCmd),
             "DestinyStoneUseCmd" => Some(Self::DestinyStoneUseCmd),
             "DestinyLevelUpCmd" => Some(Self::DestinyLevelUpCmd),
-            "ChoiceHero3124TalentTreeCmd" => Some(Self::ChoiceHero3124TalentTreeCmd),
             "ItemUnlockCmd" => Some(Self::ItemUnlockCmd),
             "UseTalentStyleCmd" => Some(Self::UseTalentStyleCmd),
             "HeroGainPushCmd" => Some(Self::HeroGainPushCmd),
@@ -39044,7 +29574,6 @@ impl CmdId {
             "MarkHeroFavorCmd" => Some(Self::MarkHeroFavorCmd),
             "PutTalentSchemeCmd" => Some(Self::PutTalentSchemeCmd),
             "UseTalentTemplateCmd" => Some(Self::UseTalentTemplateCmd),
-            "ChoiceHero3123WeaponCmd" => Some(Self::ChoiceHero3123WeaponCmd),
             "HeroTalentStyleStatCmd" => Some(Self::HeroTalentStyleStatCmd),
             "SetHeroGroupSnapshotCmd" => Some(Self::SetHeroGroupSnapshotCmd),
             "SetHeroGroupEquipCmd" => Some(Self::SetHeroGroupEquipCmd),
@@ -39053,21 +29582,14 @@ impl CmdId {
                 Some(Self::HeroGroupUpdateHeroGroupPushCmd)
             }
             "ChangeHeroGroupSelectCmd" => Some(Self::ChangeHeroGroupSelectCmd),
-            "UpdateHeroGroupSnapshotPushCmd" => {
-                Some(Self::UpdateHeroGroupSnapshotPushCmd)
-            }
             "GetHeroGroupSnapshotListCmd" => Some(Self::GetHeroGroupSnapshotListCmd),
-            "CheckHeroGroupNameCmd" => Some(Self::CheckHeroGroupNameCmd),
-            "UpdateHeroGroupSortCmd" => Some(Self::UpdateHeroGroupSortCmd),
             "UpdateHeroGroupNameCmd" => Some(Self::UpdateHeroGroupNameCmd),
-            "DeleteHeroGroupCmd" => Some(Self::DeleteHeroGroupCmd),
             "HeroGroupUpdateHeroGroupCmd" => Some(Self::HeroGroupUpdateHeroGroupCmd),
             "GetHeroGroupCommonListCmd" => Some(Self::GetHeroGroupCommonListCmd),
             "GetHeroInvitationInfoCmd" => Some(Self::GetHeroInvitationInfoCmd),
             "GainFinalInviteRewardCmd" => Some(Self::GainFinalInviteRewardCmd),
             "GainInviteRewardCmd" => Some(Self::GainInviteRewardCmd),
             "GetHeroStoryCmd" => Some(Self::GetHeroStoryCmd),
-            "HeroStoryPlotFinishCmd" => Some(Self::HeroStoryPlotFinishCmd),
             "ExchangeTicketCmd" => Some(Self::ExchangeTicketCmd),
             "GetScoreBonusCmd" => Some(Self::GetScoreBonusCmd),
             "HeroStoryScorePushCmd" => Some(Self::HeroStoryScorePushCmd),
@@ -39091,7 +29613,6 @@ impl CmdId {
             "MarkReadSubType21Cmd" => Some(Self::MarkReadSubType21Cmd),
             "AutoUseExpirePowerItemCmd" => Some(Self::AutoUseExpirePowerItemCmd),
             "ItemChangePushCmd" => Some(Self::ItemChangePushCmd),
-            "GetPowerMakerInfoCmd" => Some(Self::GetPowerMakerInfoCmd),
             "UseInsightItemCmd" => Some(Self::UseInsightItemCmd),
             "GetItemListCmd" => Some(Self::GetItemListCmd),
             "MarkMailJumpCmd" => Some(Self::MarkMailJumpCmd),
@@ -39113,57 +29634,6 @@ impl CmdId {
             "StartMatch3WarChessInfoCmd" => Some(Self::StartMatch3WarChessInfoCmd),
             "Match3ChessBoardSwapCmd" => Some(Self::Match3ChessBoardSwapCmd),
             "MaterialChangePushCmd" => Some(Self::MaterialChangePushCmd),
-            "GetNecrologistStoryCmd" => Some(Self::GetNecrologistStoryCmd),
-            "FinishNecrologistStoryModeCmd" => Some(Self::FinishNecrologistStoryModeCmd),
-            "UpdateNecrologistStoryCmd" => Some(Self::UpdateNecrologistStoryCmd),
-            "OdysseyUpdateLevelPushCmd" => Some(Self::OdysseyUpdateLevelPushCmd),
-            "OdysseyMapUpdatePushCmd" => Some(Self::OdysseyMapUpdatePushCmd),
-            "OdysseyTalentNodeLevelUpCmd" => Some(Self::OdysseyTalentNodeLevelUpCmd),
-            "OdysseyFormSwitchCmd" => Some(Self::OdysseyFormSwitchCmd),
-            "OdysseyOdysseyHotfixPushCmd" => Some(Self::OdysseyOdysseyHotfixPushCmd),
-            "OdysseyTalentCassandraTreeCancelCmd" => {
-                Some(Self::OdysseyTalentCassandraTreeCancelCmd)
-            }
-            "OdysseyTalentAllResetCmd" => Some(Self::OdysseyTalentAllResetCmd),
-            "OdysseyFormSaveCmd" => Some(Self::OdysseyFormSaveCmd),
-            "OdysseyMapInteractCmd" => Some(Self::OdysseyMapInteractCmd),
-            "OdysseyTalentNodeLevelDownCmd" => Some(Self::OdysseyTalentNodeLevelDownCmd),
-            "OdysseyFightMercenaryRefreshCmd" => {
-                Some(Self::OdysseyFightMercenaryRefreshCmd)
-            }
-            "OdysseyFightReligionMemberUpdatePushCmd" => {
-                Some(Self::OdysseyFightReligionMemberUpdatePushCmd)
-            }
-            "OdysseyUpdateInfoPushCmd" => Some(Self::OdysseyUpdateInfoPushCmd),
-            "OdysseyTalentCassandraTreeChoiceCmd" => {
-                Some(Self::OdysseyTalentCassandraTreeChoiceCmd)
-            }
-            "OdysseyFightReligionDiscloseCmd" => {
-                Some(Self::OdysseyFightReligionDiscloseCmd)
-            }
-            "OdysseyBagGetItemPushCmd" => Some(Self::OdysseyBagGetItemPushCmd),
-            "OdysseyBagUpdateItemNewFlagCmd" => {
-                Some(Self::OdysseyBagUpdateItemNewFlagCmd)
-            }
-            "OdysseyFightSettlePushCmd" => Some(Self::OdysseyFightSettlePushCmd),
-            "OdysseyFightMercenaryUpdatePushCmd" => {
-                Some(Self::OdysseyFightMercenaryUpdatePushCmd)
-            }
-            "OdysseyOdysseyHotfixCmd" => Some(Self::OdysseyOdysseyHotfixCmd),
-            "OdysseyGetInfoCmd" => Some(Self::OdysseyGetInfoCmd),
-            "OdysseyTalentPointUpdatePushCmd" => {
-                Some(Self::OdysseyTalentPointUpdatePushCmd)
-            }
-            "OdysseyTalentCassandraTreeResetCmd" => {
-                Some(Self::OdysseyTalentCassandraTreeResetCmd)
-            }
-            "OdysseyFightMercenarySetDropCmd" => {
-                Some(Self::OdysseyFightMercenarySetDropCmd)
-            }
-            "OdysseyMapSetCurrElementCmd" => Some(Self::OdysseyMapSetCurrElementCmd),
-            "OdysseyMapUpdateElementPushCmd" => {
-                Some(Self::OdysseyMapUpdateElementPushCmd)
-            }
             "UpdateOpenPushCmd" => Some(Self::UpdateOpenPushCmd),
             "RenameCmd" => Some(Self::RenameCmd),
             "GetOtherPlayerInfoCmd" => Some(Self::GetOtherPlayerInfoCmd),
@@ -39185,7 +29655,6 @@ impl CmdId {
             "SimplePropertyPushCmd" => Some(Self::SimplePropertyPushCmd),
             "SetSimplePropertyCmd" => Some(Self::SetSimplePropertyCmd),
             "SetShowHeroUniqueIdsCmd" => Some(Self::SetShowHeroUniqueIdsCmd),
-            "SetUiStyleSkinCmd" => Some(Self::SetUiStyleSkinCmd),
             "SetBirthdayCmd" => Some(Self::SetBirthdayCmd),
             "SetSignatureCmd" => Some(Self::SetSignatureCmd),
             "SetPlayerCardThemeCmd" => Some(Self::SetPlayerCardThemeCmd),
@@ -39287,15 +29756,13 @@ impl CmdId {
             "GetRoomPlanInfoCmd" => Some(Self::GetRoomPlanInfoCmd),
             "GainSpecialBlockPushCmd" => Some(Self::GainSpecialBlockPushCmd),
             "BlockPackageGainPushCmd" => Some(Self::BlockPackageGainPushCmd),
-            "RoomBuildingLevelUpPushCmd" => Some(Self::RoomBuildingLevelUpPushCmd),
+            "BuildingLevelUpPushCmd" => Some(Self::BuildingLevelUpPushCmd),
             "LockOrderCmd" => Some(Self::LockOrderCmd),
             "UnloadRestBuildingCrittersCmd" => Some(Self::UnloadRestBuildingCrittersCmd),
             "ProductionLineAccelerateCmd" => Some(Self::ProductionLineAccelerateCmd),
             "ProductionLineInfoCmd" => Some(Self::ProductionLineInfoCmd),
             "RouseCrittersCmd" => Some(Self::RouseCrittersCmd),
-            "SetBlockColorCmd" => Some(Self::SetBlockColorCmd),
             "DispatchCritterCmd" => Some(Self::DispatchCritterCmd),
-            "GetBlockPermanentInfoCmd" => Some(Self::GetBlockPermanentInfoCmd),
             "ReplaceRestBuildingCrittersCmd" => {
                 Some(Self::ReplaceRestBuildingCrittersCmd)
             }
@@ -39319,7 +29786,6 @@ impl CmdId {
             "UseRoomPlanCmd" => Some(Self::UseRoomPlanCmd),
             "GenerateRoadCmd" => Some(Self::GenerateRoadCmd),
             "BuildingGainPushCmd" => Some(Self::BuildingGainPushCmd),
-            "RoadInfoPushCmd" => Some(Self::RoadInfoPushCmd),
             "GetFrozenItemInfoCmd" => Some(Self::GetFrozenItemInfoCmd),
             "UseBlockCmd" => Some(Self::UseBlockCmd),
             "ResetRoomCmd" => Some(Self::ResetRoomCmd),
@@ -39379,7 +29845,6 @@ impl CmdId {
             "RougeEventUpdatePushCmd" => Some(Self::RougeEventUpdatePushCmd),
             "ActiveTalentCmd" => Some(Self::ActiveTalentCmd),
             "RougeOneKeyRemoveFromBarCmd" => Some(Self::RougeOneKeyRemoveFromBarCmd),
-            "RougeRefreshMapRuleCmd" => Some(Self::RougeRefreshMapRuleCmd),
             "RougeSelectReviveCmd" => Some(Self::RougeSelectReviveCmd),
             "RougeEntrustInfoPushCmd" => Some(Self::RougeEntrustInfoPushCmd),
             "RougeEndCmd" => Some(Self::RougeEndCmd),
@@ -39409,7 +29874,6 @@ impl CmdId {
             "EnterRougeSelectStyleCmd" => Some(Self::EnterRougeSelectStyleCmd),
             "RougeLayerMapInfoPushCmd" => Some(Self::RougeLayerMapInfoPushCmd),
             "RougeInMapItemUpdatePushCmd" => Some(Self::RougeInMapItemUpdatePushCmd),
-            "RougeRefreshMonsterRuleCmd" => Some(Self::RougeRefreshMonsterRuleCmd),
             "RougeShopRefreshCmd" => Some(Self::RougeShopRefreshCmd),
             "RougeLayerSimpleMapInfoPushCmd" => {
                 Some(Self::RougeLayerSimpleMapInfoPushCmd)
@@ -39452,141 +29916,10 @@ impl CmdId {
             "StoryFinishPushCmd" => Some(Self::StoryFinishPushCmd),
             "GetSummonInfoCmd" => Some(Self::GetSummonInfoCmd),
             "SummonQueryTokenCmd" => Some(Self::SummonQueryTokenCmd),
-            "GetSummonProgressRewardsCmd" => Some(Self::GetSummonProgressRewardsCmd),
             "ChooseEnhancedPoolHeroCmd" => Some(Self::ChooseEnhancedPoolHeroCmd),
             "SummonCmd" => Some(Self::SummonCmd),
             "ChooseMultiUpHeroCmd" => Some(Self::ChooseMultiUpHeroCmd),
             "OpenLuckyBagCmd" => Some(Self::OpenLuckyBagCmd),
-            "EnterSurvivalCmd" => Some(Self::EnterSurvivalCmd),
-            "SurvivalInteriorSurvivalSceneOperationLogPushCmd" => {
-                Some(Self::SurvivalInteriorSurvivalSceneOperationLogPushCmd)
-            }
-            "SurvivalInteriorSurvivalSceneOperationLogCmd" => {
-                Some(Self::SurvivalInteriorSurvivalSceneOperationLogCmd)
-            }
-            "SurvivalTaskFollowCmd" => Some(Self::SurvivalTaskFollowCmd),
-            "SurvivalDailyReportPushCmd" => Some(Self::SurvivalDailyReportPushCmd),
-            "SurvivalInteriorSurvivalSceneHotfix1PushCmd" => {
-                Some(Self::SurvivalInteriorSurvivalSceneHotfix1PushCmd)
-            }
-            "SurvivalInteriorSurvivalSceneHotfix2PushCmd" => {
-                Some(Self::SurvivalInteriorSurvivalSceneHotfix2PushCmd)
-            }
-            "SurvivalInteriorSurvivalSceneHotfix3PushCmd" => {
-                Some(Self::SurvivalInteriorSurvivalSceneHotfix3PushCmd)
-            }
-            "SurvivalUseItemCmd" => Some(Self::SurvivalUseItemCmd),
-            "SurvivalSceneGiveUpCmd" => Some(Self::SurvivalSceneGiveUpCmd),
-            "SurvivalSceneOperationCmd" => Some(Self::SurvivalSceneOperationCmd),
-            "SurvivalUpdateClientDataCmd" => Some(Self::SurvivalUpdateClientDataCmd),
-            "SurvivalInteriorSurvivalSceneHotfix1Cmd" => {
-                Some(Self::SurvivalInteriorSurvivalSceneHotfix1Cmd)
-            }
-            "SurvivalInteriorSurvivalSceneHotfix2Cmd" => {
-                Some(Self::SurvivalInteriorSurvivalSceneHotfix2Cmd)
-            }
-            "SurvivalInteriorSurvivalSceneHotfix3Cmd" => {
-                Some(Self::SurvivalInteriorSurvivalSceneHotfix3Cmd)
-            }
-            "SurvivalSceneEndPushCmd" => Some(Self::SurvivalSceneEndPushCmd),
-            "SurvivalSurvivalOutSideClientDataCmd" => {
-                Some(Self::SurvivalSurvivalOutSideClientDataCmd)
-            }
-            "SurvivalOutSideGetInfoCmd" => Some(Self::SurvivalOutSideGetInfoCmd),
-            "SurvivalMarkNewHandbookCmd" => Some(Self::SurvivalMarkNewHandbookCmd),
-            "SurvivalHandbookPushCmd" => Some(Self::SurvivalHandbookPushCmd),
-            "SurvivalOutSideGainRewardCmd" => Some(Self::SurvivalOutSideGainRewardCmd),
-            "SurvivalWeekSurvivalWeekHotfix1Cmd" => {
-                Some(Self::SurvivalWeekSurvivalWeekHotfix1Cmd)
-            }
-            "SurvivalWeekSurvivalWeekHotfix2Cmd" => {
-                Some(Self::SurvivalWeekSurvivalWeekHotfix2Cmd)
-            }
-            "SurvivalWeekSurvivalWeekHotfix3Cmd" => {
-                Some(Self::SurvivalWeekSurvivalWeekHotfix3Cmd)
-            }
-            "SurvivalJewelryEquipWearCmd" => Some(Self::SurvivalJewelryEquipWearCmd),
-            "SurvivalBagUpdatePushCmd" => Some(Self::SurvivalBagUpdatePushCmd),
-            "SurvivalEquipOneKeyWearCmd" => Some(Self::SurvivalEquipOneKeyWearCmd),
-            "SurvivalItemTipsPushCmd" => Some(Self::SurvivalItemTipsPushCmd),
-            "SurvivalEquipWearCmd" => Some(Self::SurvivalEquipWearCmd),
-            "SurvivalIntrudeExterminateCmd" => Some(Self::SurvivalIntrudeExterminateCmd),
-            "SurvivalEquipOneKeyDemountCmd" => Some(Self::SurvivalEquipOneKeyDemountCmd),
-            "SurvivalWeekInfoPushCmd" => Some(Self::SurvivalWeekInfoPushCmd),
-            "SurvivalEquipSetNewFlagCmd" => Some(Self::SurvivalEquipSetNewFlagCmd),
-            "SurvivalGetEquipInfoCmd" => Some(Self::SurvivalGetEquipInfoCmd),
-            "SurvivalEquipUpdatePushCmd" => Some(Self::SurvivalEquipUpdatePushCmd),
-            "SurvivalReputationExpCmd" => Some(Self::SurvivalReputationExpCmd),
-            "SurvivalIntrudeReExterminateCmd" => {
-                Some(Self::SurvivalIntrudeReExterminateCmd)
-            }
-            "SurvivalPublishRecruitTagCmd" => Some(Self::SurvivalPublishRecruitTagCmd),
-            "SurvivalStepPushCmd" => Some(Self::SurvivalStepPushCmd),
-            "SurvivalShopBuyCmd" => Some(Self::SurvivalShopBuyCmd),
-            "SurvivalRemoveBagItemCmd" => Some(Self::SurvivalRemoveBagItemCmd),
-            "SurvivalSettleWeekPushCmd" => Some(Self::SurvivalSettleWeekPushCmd),
-            "SurvivalShopUpdatePushCmd" => Some(Self::SurvivalShopUpdatePushCmd),
-            "SurvivalHeroUpdatePushCmd" => Some(Self::SurvivalHeroUpdatePushCmd),
-            "SurvivalAttrContainerUpdatePushCmd" => {
-                Some(Self::SurvivalAttrContainerUpdatePushCmd)
-            }
-            "SurvivalRepairCmd" => Some(Self::SurvivalRepairCmd),
-            "SurvivalClosePanelCmd" => Some(Self::SurvivalClosePanelCmd),
-            "SurvivalJewelryEquipDemountCmd" => {
-                Some(Self::SurvivalJewelryEquipDemountCmd)
-            }
-            "SurvivalChooseBootyCmd" => Some(Self::SurvivalChooseBootyCmd),
-            "SurvivalRecruitNpcCmd" => Some(Self::SurvivalRecruitNpcCmd),
-            "SurvivalRecruitInfoPushCmd" => Some(Self::SurvivalRecruitInfoPushCmd),
-            "SurvivalReceiveTaskRewardCmd" => Some(Self::SurvivalReceiveTaskRewardCmd),
-            "SurvivalNpcChangePositionCmd" => Some(Self::SurvivalNpcChangePositionCmd),
-            "SurvivalReputationRewardCmd" => Some(Self::SurvivalReputationRewardCmd),
-            "SurvivalIntrudeFightSettlePushCmd" => {
-                Some(Self::SurvivalIntrudeFightSettlePushCmd)
-            }
-            "SurvivalAbandonWeekCmd" => Some(Self::SurvivalAbandonWeekCmd),
-            "SurvivalEquipSwitchPlanCmd" => Some(Self::SurvivalEquipSwitchPlanCmd),
-            "SurvivalIntrudeAbandonExterminateCmd" => {
-                Some(Self::SurvivalIntrudeAbandonExterminateCmd)
-            }
-            "SurvivalBuildCmd" => Some(Self::SurvivalBuildCmd),
-            "SurvivalRefreshRecruitTagCmd" => Some(Self::SurvivalRefreshRecruitTagCmd),
-            "SurvivalGetWeekInfoCmd" => Some(Self::SurvivalGetWeekInfoCmd),
-            "SurvivalTaskUpdatePushCmd" => Some(Self::SurvivalTaskUpdatePushCmd),
-            "SurvivalNpcExchangePositionCmd" => {
-                Some(Self::SurvivalNpcExchangePositionCmd)
-            }
-            "SurvivalBatchHeroChangePositionCmd" => {
-                Some(Self::SurvivalBatchHeroChangePositionCmd)
-            }
-            "SurvivalPanelOperationCmd" => Some(Self::SurvivalPanelOperationCmd),
-            "SurvivalShopSellCmd" => Some(Self::SurvivalShopSellCmd),
-            "SurvivalHeroChangePositionCmd" => Some(Self::SurvivalHeroChangePositionCmd),
-            "SurvivalAbandonRecruitNpcCmd" => Some(Self::SurvivalAbandonRecruitNpcCmd),
-            "SurvivalGetTalentInfoCmd" => Some(Self::SurvivalGetTalentInfoCmd),
-            "SurvivalNpcAcceptTaskCmd" => Some(Self::SurvivalNpcAcceptTaskCmd),
-            "SurvivalWeekSurvivalWeekHotfix1PushCmd" => {
-                Some(Self::SurvivalWeekSurvivalWeekHotfix1PushCmd)
-            }
-            "SurvivalWeekSurvivalWeekHotfix2PushCmd" => {
-                Some(Self::SurvivalWeekSurvivalWeekHotfix2PushCmd)
-            }
-            "SurvivalWeekSurvivalWeekHotfix3PushCmd" => {
-                Some(Self::SurvivalWeekSurvivalWeekHotfix3PushCmd)
-            }
-            "SurvivalEquipCompoundCmd" => Some(Self::SurvivalEquipCompoundCmd),
-            "SurvivalSurvivalWeekClientDataCmd" => {
-                Some(Self::SurvivalSurvivalWeekClientDataCmd)
-            }
-            "SurvivalEquipDemountCmd" => Some(Self::SurvivalEquipDemountCmd),
-            "SurvivalStartWeekChooseDiffCmd" => {
-                Some(Self::SurvivalStartWeekChooseDiffCmd)
-            }
-            "SurvivalBuildingUpdatePushCmd" => Some(Self::SurvivalBuildingUpdatePushCmd),
-            "SurvivalUpgradeCmd" => Some(Self::SurvivalUpgradeCmd),
-            "SurvivalHeroExchangePositionCmd" => {
-                Some(Self::SurvivalHeroExchangePositionCmd)
-            }
             "DeleteTaskPushCmd" => Some(Self::DeleteTaskPushCmd),
             "FinishTaskCmd" => Some(Self::FinishTaskCmd),
             "FinishAllTaskCmd" => Some(Self::FinishAllTaskCmd),
@@ -39601,14 +29934,7 @@ impl CmdId {
             "TowerBattleFinishPushCmd" => Some(Self::TowerBattleFinishPushCmd),
             "StartTowerBattleCmd" => Some(Self::StartTowerBattleCmd),
             "TowerResetSubEpisodeCmd" => Some(Self::TowerResetSubEpisodeCmd),
-            "TowerChangeTalentPlanCmd" => Some(Self::TowerChangeTalentPlanCmd),
             "TowerResetTalentCmd" => Some(Self::TowerResetTalentCmd),
-            "TowerRenameTalentPlanCmd" => Some(Self::TowerRenameTalentPlanCmd),
-            "TowerDeepResetCmd" => Some(Self::TowerDeepResetCmd),
-            "TowerDeepLoadArchiveCmd" => Some(Self::TowerDeepLoadArchiveCmd),
-            "TowerDeepGetInfoCmd" => Some(Self::TowerDeepGetInfoCmd),
-            "TowerDeepSaveArchiveCmd" => Some(Self::TowerDeepSaveArchiveCmd),
-            "TowerDeepFightSettlePushCmd" => Some(Self::TowerDeepFightSettlePushCmd),
             "TurnbackBonusPointCmd" => Some(Self::TurnbackBonusPointCmd),
             "BuyDoubleBonusCmd" => Some(Self::BuyDoubleBonusCmd),
             "TurnbackFirstShowCmd" => Some(Self::TurnbackFirstShowCmd),
@@ -39617,10 +29943,6 @@ impl CmdId {
             "RefreshOnlineTaskCmd" => Some(Self::RefreshOnlineTaskCmd),
             "GetTurnbackInfoCmd" => Some(Self::GetTurnbackInfoCmd),
             "TurnbackAdditionPushCmd" => Some(Self::TurnbackAdditionPushCmd),
-            "GetUnlockVoucherInfoCmd" => Some(Self::GetUnlockVoucherInfoCmd),
-            "UnlockVoucherInfoUpdatePushCmd" => {
-                Some(Self::UnlockVoucherInfoUpdatePushCmd)
-            }
             "DebugLogoutCmd" => Some(Self::DebugLogoutCmd),
             "LogoutCmd" => Some(Self::LogoutCmd),
             "GetSettingInfosCmd" => Some(Self::GetSettingInfosCmd),
@@ -39650,26 +29972,6 @@ impl CmdId {
             "MarkPopDeepRuleCmd" => Some(Self::MarkPopDeepRuleCmd),
             "WeekwalkDialogHistoryCmd" => Some(Self::WeekwalkDialogHistoryCmd),
             "WeekwalkGeneralCmd" => Some(Self::WeekwalkGeneralCmd),
-            "WeekwalkVer2ChangeHeroGroupSelectCmd" => {
-                Some(Self::WeekwalkVer2ChangeHeroGroupSelectCmd)
-            }
-            "WeekwalkVer2MarkPreSettleCmd" => Some(Self::WeekwalkVer2MarkPreSettleCmd),
-            "WeekwalkVer2InfoUpdatePushCmd" => Some(Self::WeekwalkVer2InfoUpdatePushCmd),
-            "WeekwalkVer2MarkShowFinishedCmd" => {
-                Some(Self::WeekwalkVer2MarkShowFinishedCmd)
-            }
-            "WeekwalkVer2ChooseSkillCmd" => Some(Self::WeekwalkVer2ChooseSkillCmd),
-            "WeekwalkVer2ResetLayerCmd" => Some(Self::WeekwalkVer2ResetLayerCmd),
-            "WeekwalkVer2HeroRecommendCmd" => Some(Self::WeekwalkVer2HeroRecommendCmd),
-            "WeekwalkVer2GetInfoCmd" => Some(Self::WeekwalkVer2GetInfoCmd),
-            "WeekwalkVer2FightSettlePushCmd" => {
-                Some(Self::WeekwalkVer2FightSettlePushCmd)
-            }
-            "WeekwalkVer2SettleInfoUpdatePushCmd" => {
-                Some(Self::WeekwalkVer2SettleInfoUpdatePushCmd)
-            }
-            "WeekwalkVer2MarkPopRuleCmd" => Some(Self::WeekwalkVer2MarkPopRuleCmd),
-            "WeekwalkVer2GetSettleInfoCmd" => Some(Self::WeekwalkVer2GetSettleInfoCmd),
             "GuestTimeOutPushCmd" => Some(Self::GuestTimeOutPushCmd),
             "MinorLimitLoginTimePushCmd" => Some(Self::MinorLimitLoginTimePushCmd),
             "MinorPlayTimeOutPushCmd" => Some(Self::MinorPlayTimeOutPushCmd),
