@@ -7,7 +7,7 @@ mod hero_touch;
 mod mark_hero_favor;
 mod set_show_hero_unique_ids;
 
-pub use choice_hero_3123_weapon::on_choice_hero_3123_weapon;
+/*pub use choice_hero_3123_weapon::on_choice_hero_3123_weapon;*/
 pub use get_hero_birthday::on_get_hero_birthday;
 pub use hero_default_equip::on_hero_default_equip;
 pub use hero_info_list::on_hero_info_list;

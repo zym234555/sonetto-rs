@@ -1,7 +1,5 @@
 use sonettobuf::{BeginRoundOper, CardInfo};
 
-
-
 pub fn generate_auto_opers(deck: &[CardInfo]) -> Vec<BeginRoundOper> {
     let mut opers = Vec::new();
 
@@ -15,7 +13,6 @@ pub fn generate_auto_opers(deck: &[CardInfo]) -> Vec<BeginRoundOper> {
             param1: Some(card_index),
             param2: None,
             to_id: None,
-            param3: None,
         });
 
         // 2) Play card
@@ -24,7 +21,6 @@ pub fn generate_auto_opers(deck: &[CardInfo]) -> Vec<BeginRoundOper> {
             param1: Some(card_index),
             param2: None,
             to_id: Some(0), // auto target
-            param3: None,
         });
     }
 
@@ -34,7 +30,6 @@ pub fn generate_auto_opers(deck: &[CardInfo]) -> Vec<BeginRoundOper> {
         param1: None,
         param2: None,
         to_id: None,
-        param3: None,
     });
 
     opers

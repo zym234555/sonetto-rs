@@ -62,8 +62,6 @@ impl From<PlayerCardInfo> for sonettobuf::PlayerCardInfo {
             tower_boss_pass_count: Some(p.tower_boss_pass_count),
             hero_max_level_count: Some(p.hero_max_level_count),
             weekwalk_ver2_platinum_cup: Some(p.weekwalk_ver2_platinum_cup),
-            hero_count: Some(p.hero_count),
-            tower_layer_metre: Some(p.tower_layer_metre),
         }
     }
 }

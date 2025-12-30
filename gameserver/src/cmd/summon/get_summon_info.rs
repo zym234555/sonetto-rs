@@ -24,7 +24,7 @@ pub async fn on_get_summon_info(
         free_equip_summon: Some(stats.free_equip_summon),
         is_show_new_summon: Some(stats.is_show_new_summon),
         new_summon_count: Some(stats.new_summon_count),
-        pool_infos: pool_infos.into_iter().map(Into::into).collect(),
+        pool_infos: vec![],
         total_summon_count: Some(stats.total_summon_count),
     };
 

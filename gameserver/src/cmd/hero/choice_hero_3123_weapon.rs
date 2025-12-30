@@ -1,4 +1,4 @@
-use crate::error::AppError;
+/*use crate::error::AppError;
 use crate::packet::ClientPacket;
 use crate::state::ConnectionContext;
 use database::db::game::heroes;
@@ -76,3 +76,4 @@ pub async fn on_choice_hero_3123_weapon(
 
     Ok(())
 }
+*/

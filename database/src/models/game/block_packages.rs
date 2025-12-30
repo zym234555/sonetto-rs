@@ -37,11 +37,9 @@ impl From<BlockInfo> for sonettobuf::BlockInfo {
             y: Some(b.y),
             rotate: Some(b.rotate),
             water_type: Some(b.water_type),
-            block_color: Some(b.block_color),
         }
     }
 }
-
 
 #[derive(Debug, Clone, FromRow)]
 pub struct BlockPackage {

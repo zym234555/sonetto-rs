@@ -18,7 +18,7 @@ pub struct CommandPostEventInfo {
     pub is_read: bool,
 }
 
-impl From<CommandPostEventInfo> for sonettobuf::CommandPostEventInfo {
+/*impl From<CommandPostEventInfo> for sonettobuf::CommandPostEventInfo {
     fn from(e: CommandPostEventInfo) -> Self {
         sonettobuf::CommandPostEventInfo {
             id: Some(e.event_id),
@@ -29,7 +29,7 @@ impl From<CommandPostEventInfo> for sonettobuf::CommandPostEventInfo {
             read: Some(e.is_read),
         }
     }
-}
+}*/
 
 #[derive(Debug, Clone, FromRow)]
 pub struct CommandPostTask {

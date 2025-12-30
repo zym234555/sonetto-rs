@@ -55,7 +55,6 @@ impl FightStepBuilder {
                 layer: Some(1),
                 r#type: Some(0),
                 act_common_params: Some(String::new()),
-                act_info: vec![],
             }),
             ..Default::default()
         });
@@ -122,8 +121,6 @@ impl FightStepBuilder {
             card_heat_value: None,
             fight_tasks: vec![],
             fight: None,
-            buff_act_info: None,
-            hurt_info: None,
         });
         self
     }

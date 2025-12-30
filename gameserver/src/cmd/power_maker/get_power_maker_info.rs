@@ -1,4 +1,4 @@
-use crate::error::AppError;
+/*use crate::error::AppError;
 use crate::packet::ClientPacket;
 use crate::send_reply;
 use crate::state::ConnectionContext;
@@ -19,3 +19,4 @@ pub async fn on_get_power_maker_info(
     );
     Ok(())
 }
+*/

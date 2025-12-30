@@ -50,9 +50,7 @@ pub async fn on_destiny_stone_use(
             hero_updates: vec![hero_proto],
         };
 
-        ctx_guard
-            .send_push(CmdId::HeroHeroUpdatePushCmd, push)
-            .await?;
+        ctx_guard.send_push(CmdId::HeroUpdatePushCmd, push).await?;
 
         ctx_guard
             .send_reply(CmdId::DestinyStoneUseCmd, data, 0, req.up_tag)

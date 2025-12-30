@@ -60,9 +60,7 @@ pub async fn on_mark_hero_favor(
             hero_updates: vec![hero_proto],
         };
 
-        ctx_guard
-            .send_push(CmdId::HeroHeroUpdatePushCmd, push)
-            .await?;
+        ctx_guard.send_push(CmdId::HeroUpdatePushCmd, push).await?;
 
         tracing::info!(
             "Sent HeroUpdatePush for hero {} with favor {}",

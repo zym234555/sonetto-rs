@@ -1,4 +1,4 @@
-use crate::error::AppError;
+/*use crate::error::AppError;
 use crate::packet::ClientPacket;
 use crate::state::ConnectionContext;
 use sonettobuf::CmdId;
@@ -18,3 +18,4 @@ pub async fn on_get_charge_push_info(
 
     Ok(())
 }
+*/

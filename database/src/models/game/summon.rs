@@ -1,5 +1,5 @@
-use sqlx::FromRow;
 use sonettobuf;
+use sqlx::FromRow;
 
 #[derive(Debug, Clone, FromRow)]
 pub struct UserSummonStats {
@@ -33,14 +33,14 @@ pub struct SingleBagInfo {
     pub is_open: bool,
 }
 
-impl From<SingleBagInfo> for sonettobuf::SingleBagInfo {
+/*impl From<SingleBagInfo> for sonettobuf::SingleBagInfo {
     fn from(b: SingleBagInfo) -> Self {
         sonettobuf::SingleBagInfo {
             bag_id: Some(b.bag_id),
             is_open: Some(b.is_open),
         }
     }
-}
+}*/
 
 #[derive(Debug, Clone)]
 pub struct LuckyBagInfo {
@@ -49,15 +49,15 @@ pub struct LuckyBagInfo {
     pub not_ssr_count: i32,
 }
 
-impl From<LuckyBagInfo> for sonettobuf::LuckyBagInfo {
+/*impl From<LuckyBagInfo> for sonettobuf::LuckyBagInfo {
     fn from(info: LuckyBagInfo) -> Self {
         sonettobuf::LuckyBagInfo {
             count: Some(info.count),
-            single_bag_infos: info.single_bag_infos.into_iter().map(Into::into).collect(),
+            lucky_bag_id: info.single_bag_infos.into_iter().map(Into::into).collect(),
             not_ssr_count: Some(info.not_ssr_count),
         }
     }
-}
+}*/
 
 #[derive(Debug, Clone)]
 pub struct SpPoolInfo {
@@ -79,7 +79,6 @@ impl From<SpPoolInfo> for sonettobuf::SpPoolInfo {
             limited_ticket_num: Some(info.limited_ticket_num),
             open_time: Some(info.open_time),
             used_first_ssr_guarantee: Some(info.used_first_ssr_guarantee),
-            has_get_reward_progresses: info.has_get_reward_progresses,
         }
     }
 }
@@ -91,7 +90,7 @@ pub struct SummonPoolInfo {
     pub sp_pool: Option<SpPoolInfo>,
 }
 
-impl From<SummonPoolInfo> for sonettobuf::SummonPoolInfo {
+/*impl From<SummonPoolInfo> for sonettobuf::SummonPoolInfo {
     fn from(info: SummonPoolInfo) -> Self {
         sonettobuf::SummonPoolInfo {
             pool_id: Some(info.pool.pool_id),
@@ -104,7 +103,6 @@ impl From<SummonPoolInfo> for sonettobuf::SummonPoolInfo {
             discount_time: Some(info.pool.discount_time),
             can_get_guarantee_sr_count: Some(info.pool.can_get_guarantee_sr_count),
             guarantee_sr_count_down: Some(info.pool.guarantee_sr_countdown),
-            summon_count: Some(info.pool.summon_count),
         }
     }
-}
+}*/

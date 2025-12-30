@@ -152,7 +152,7 @@ pub async fn login_error(
 ) -> Result<(), AppError> {
     let mut ctx = ctx.lock().await;
     let payload = build_login_error(msg);
-    ctx.send_raw_reply_fixed(CmdId::LoginRequestCmd, payload, 1, up_tag)
+    ctx.send_raw_reply_fixed(CmdId::LoginCmd, payload, 1, up_tag)
         .await?;
     Err(AppError::Custom(msg.to_string()))
 }

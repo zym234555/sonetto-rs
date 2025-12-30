@@ -78,10 +78,6 @@ pub async fn build_hero_entity(
         guard: Some(-1),
         sub_cd: Some(0),
         ex_point_type: Some(0),
-        equips: vec![], // game has this empty???
-        destiny_stone: Some(record.destiny_stone),
-        destiny_rank: Some(record.destiny_rank),
-        custom_unit_id: Some(0),
     }
 }
 
@@ -150,10 +146,6 @@ pub fn build_player_entity(user_id: i64, team_type: i32) -> FightEntityInfo {
         guard: Some(-1),
         sub_cd: Some(0),
         ex_point_type: Some(0),
-        equips: vec![],
-        destiny_stone: Some(0),
-        destiny_rank: Some(0),
-        custom_unit_id: Some(0),
     }
 }
 

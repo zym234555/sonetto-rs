@@ -2,19 +2,34 @@ use crate::cmd::*;
 use crate::error::{AppError, CmdError};
 use crate::packet::ClientPacket;
 use crate::state::ConnectionContext;
-use sonettobuf::CmdId;
+use sonettobuf::{CmdId, Dummy};
 use std::sync::Arc;
 use tokio::sync::Mutex;
 
 macro_rules! dispatch {
-    ($cmd_id:expr, $ctx:expr, $packet:expr, {
+    ($raw_cmd:expr, $ctx:expr, $packet:expr, {
         $($variant:path => $handler:expr),* $(,)?
     }) => {
-        match $cmd_id {
-            $(
-                $variant => $handler($ctx, $packet).await?,
-            )*
-            v => return Err(AppError::Cmd(CmdError::UnhandledCmd(v))),
+        match TryInto::<CmdId>::try_into($raw_cmd as i32) {
+            Ok(cmd_id) => {
+                match cmd_id {
+                    $(
+                        $variant => $handler($ctx, $packet).await?,
+                    )*
+                    v => {
+                        tracing::warn!(
+                            "Unhandled CmdId {:?}, ignoring", v
+                        );
+                        return Ok(());
+                    }
+                }
+            }
+
+            Err(_) => {
+                let raw = $raw_cmd as i32;
+                tracing::error!("Invalid CmdId {}", raw);
+                return Ok(());
+            }
         }
     };
 }
@@ -24,15 +39,21 @@ pub async fn dispatch_command(
     req: &[u8],
 ) -> Result<(), AppError> {
     let req = ClientPacket::decode(req)?;
-    let cmd_id = TryInto::<CmdId>::try_into(req.cmd_id as i32)
-        .map_err(|_| AppError::Cmd(CmdError::UnregisteredCmd(req.cmd_id)))?;
+
+    let cmd_id = match TryInto::<CmdId>::try_into(req.cmd_id as i32) {
+        Ok(id) => id,
+        Err(_) => {
+            tracing::debug!("Ignoring unknown cmd: {}", req.cmd_id);
+            return Ok(()); // Silent ignore, no response
+        }
+    };
 
     tracing::info!("Received Cmd: {:?}", cmd_id);
 
     dispatch!(cmd_id, ctx, req, {
         // === System ===
-        CmdId::LoginRequestCmd => system::on_login,
-        CmdId::ReconnectRequestCmd => system::on_reconnect,
+        CmdId::LoginCmd => system::on_login,
+        CmdId::ReconnectCmd => system::on_reconnect,
         CmdId::RenameCmd => system::on_rename,
         CmdId::UpdateClientStatBaseInfoCmd => stat::on_update_client_stat_base_info,
         CmdId::ClientStatBaseInfoCmd => stat::on_client_stat_base_info,
@@ -56,7 +77,7 @@ pub async fn dispatch_command(
         CmdId::SetShowHeroUniqueIdsCmd => hero::on_set_show_hero_unique_ids,
         CmdId::GetHeroBirthdayCmd => hero::on_get_hero_birthday,
         // special equipment for ezio
-        CmdId::ChoiceHero3123WeaponCmd => hero::on_choice_hero_3123_weapon,
+        /*CmdId::ChoiceHero3123WeaponCmd => hero::on_choice_hero_3123_weapon,*/
         // sets euphoria for heros
         CmdId::DestinyStoneUseCmd => destiny_stone::on_destiny_stone_use,
 
@@ -85,7 +106,7 @@ pub async fn dispatch_command(
         CmdId::GetStoryCmd => story::on_get_story,
         CmdId::UpdateStoryCmd => story::on_update_story,
         CmdId::GetDialogInfoCmd => dialog::on_get_dialog_info,
-        CmdId::GetNecrologistStoryCmd => necrologist_story::on_get_necrologist_story,
+        /*CmdId::GetNecrologistStoryCmd => necrologist_story::on_get_necrologist_story,*/
         CmdId::GetHeroStoryCmd => hero_story::on_get_hero_story,
 
         // === Dungeons & Combat ===
@@ -133,7 +154,7 @@ pub async fn dispatch_command(
         // === Charge & Monetization ===
         CmdId::GetChargeInfoCmd => charge::on_get_charge_info,
         CmdId::GetMonthCardInfoCmd => charge::on_get_month_card_info,
-        CmdId::GetChargePushInfoCmd => charge::on_get_charge_push_info,
+        /*CmdId::GetChargePushInfoCmd => charge::on_get_charge_push_info,*/
         CmdId::ReadChargeNewCmd => charge::on_read_charge_new,
 
         // === Store ===
@@ -177,12 +198,12 @@ pub async fn dispatch_command(
         // === Miscellaneous Systems ===
         CmdId::DiceHeroGetInfoCmd => dice::on_dice_hero_get_info,
         CmdId::GetAntiqueInfoCmd => antique::on_get_antique_info,
-        CmdId::GetUnlockVoucherInfoCmd => voucher::on_get_unlock_voucher_info,
+        /*CmdId::GetUnlockVoucherInfoCmd => voucher::on_get_unlock_voucher_info,*/
         CmdId::GetWeekwalkInfoCmd => weekwalk::on_get_weekwalk_info,
         CmdId::WeekwalkVer2GetInfoCmd => weekwalk::on_weekwalk_ver2_get_info,
-        CmdId::GetCommandPostInfoCmd => command_post::on_get_command_post_info,
+        /*CmdId::GetCommandPostInfoCmd => command_post::on_get_command_post_info,*/
         CmdId::GetTurnbackInfoCmd => turnback::on_get_turnback_info,
-        CmdId::GetPowerMakerInfoCmd => power_maker::on_get_power_maker_info,
+        /*CmdId::GetPowerMakerInfoCmd => power_maker::on_get_power_maker_info,*/
         CmdId::CritterGetInfoCmd => critter::on_critter_get_info,
 
         // === Talent ===
@@ -206,9 +227,10 @@ pub async fn dispatch_command(
         CmdId::Get101InfosCmd => activity101::on_get101_infos,
         CmdId::Get101BonusCmd => activity101::on_get101_bonus,
         CmdId::Act160GetInfoCmd => activity160::on_act160_get_info,
+        CmdId::Get163InfosCmd => activity163::on_act163_get_info,
         CmdId::Act165GetInfoCmd => activity165::on_act165_get_info,
-        CmdId::GetAct208InfoCmd => activity208::on_get_act208_info,
-        CmdId::GetAct209InfoCmd => activity209::on_get_act209_info,
+        /*CmdId::GetAct208InfoCmd => activity208::on_get_act208_info,
+        CmdId::GetAct209InfoCmd => activity209::on_get_act209_info,*/
     });
 
     Ok(())

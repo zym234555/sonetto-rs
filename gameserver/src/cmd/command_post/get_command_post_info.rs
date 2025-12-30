@@ -1,4 +1,4 @@
-use crate::error::AppError;
+/*use crate::error::AppError;
 use crate::packet::ClientPacket;
 use crate::state::ConnectionContext;
 use database::db::game::command_post;
@@ -32,4 +32,4 @@ pub async fn on_get_command_post_info(
         .await?;
 
     Ok(())
-}
+}*/

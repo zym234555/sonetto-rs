@@ -52,9 +52,7 @@ pub async fn on_hero_default_equip(
             hero_updates: vec![hero_proto],
         };
 
-        ctx_guard
-            .send_push(CmdId::HeroHeroUpdatePushCmd, push)
-            .await?;
+        ctx_guard.send_push(CmdId::HeroUpdatePushCmd, push).await?;
 
         tracing::info!(
             "Sent HeroUpdatePush for hero {} with equip {}",

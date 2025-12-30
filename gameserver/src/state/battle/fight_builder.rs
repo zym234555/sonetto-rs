@@ -35,7 +35,6 @@ pub async fn build_fight(
         param: vec![],
         custom_data: vec![],
         fight_task_box: Some(sonettobuf::FightTaskBox { tasks: vec![] }),
-        progress_list: vec![],
     })
 }
 
@@ -169,9 +168,6 @@ fn build_fight_team(
         card_heat: Some(sonettobuf::CardHeatInfo { values: vec![] }),
         card_deck_size: Some(0),
         blood_pool: None,
-        vorpalith: None,
-        item_skill_group: None,
-        sp_fight_entities: vec![],
     }
 }
 
@@ -328,10 +324,6 @@ fn build_enemy_entity(
         guard: Some(-1),
         sub_cd: Some(0),
         ex_point_type: Some(0),
-        equips: vec![],
-        destiny_stone: Some(0),
-        destiny_rank: Some(0),
-        custom_unit_id: Some(0),
     })
 }
 

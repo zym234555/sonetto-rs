@@ -94,7 +94,7 @@ pub async fn on_set_hero_group_snapshot(
     let data = SetHeroGroupSnapshotReply {
         snapshot_id: Some(snapshot_id),
         snapshot_sub_id: Some(snapshot_sub_id),
-        group_info: Some(hero_group.into()),
+        fight_group: None,
     };
 
     let mut ctx_guard = ctx.lock().await;

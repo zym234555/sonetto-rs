@@ -50,9 +50,7 @@ pub async fn on_use_skin(
             hero_updates: vec![hero_proto],
         };
 
-        ctx_guard
-            .send_push(CmdId::HeroHeroUpdatePushCmd, push)
-            .await?;
+        ctx_guard.send_push(CmdId::HeroUpdatePushCmd, push).await?;
 
         ctx_guard
             .send_reply(CmdId::UseSkinCmd, data, 0, req.up_tag)

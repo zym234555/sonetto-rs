@@ -112,7 +112,6 @@ impl From<HeroSpAttribute> for sonettobuf::HeroSpAttribute {
             extra_dmg: Some(sp.extra_dmg),
             reuse_dmg: Some(sp.reuse_dmg),
             big_skill_rate: Some(sp.big_skill_rate),
-            clutch_dmg: Some(sp.clutch_dmg),
         }
     }
 }
@@ -271,7 +270,6 @@ impl From<HeroData> for sonettobuf::HeroInfo {
             destiny_stone: Some(h.record.destiny_stone),
             destiny_stone_unlock: h.destiny_stone_unlocks,
             red_dot: Some(h.record.red_dot),
-            extra_str: Some(h.record.extra_str),
         }
     }
 }

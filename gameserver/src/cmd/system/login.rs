@@ -109,7 +109,7 @@ pub async fn on_login(
         let payload = build_login_reply(user_id);
 
         ctx_guard
-            .send_raw_reply_fixed(CmdId::LoginRequestCmd, payload, 0, req.up_tag)
+            .send_raw_reply_fixed(CmdId::LoginCmd, payload, 0, req.up_tag)
             .await?;
     }
 

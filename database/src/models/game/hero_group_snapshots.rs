@@ -39,7 +39,6 @@ impl From<HeroGroupSnapshotInfo> for sonettobuf::HeroGroupSnapshotNo {
                 .into_iter()
                 .map(Into::into)
                 .collect(),
-            sort_sub_ids: info.sort_sub_ids,
         }
     }
 }
