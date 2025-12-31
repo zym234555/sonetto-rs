@@ -14,10 +14,10 @@ pub async fn on_get_hero_group_common_list(
         let player_id = ctx_guard.player_id.ok_or(AppError::NotLoggedIn)?;
 
         let commons =
-            database::db::game::hero_groups::get_hero_groups_common(&ctx_guard.state.db, player_id)
+            database::db::game::heroes::get_hero_groups_common(&ctx_guard.state.db, player_id)
                 .await?;
         let types =
-            database::db::game::hero_groups::get_hero_group_types(&ctx_guard.state.db, player_id)
+            database::db::game::heroes::get_hero_group_types(&ctx_guard.state.db, player_id)
                 .await?;
 
         (commons, types)

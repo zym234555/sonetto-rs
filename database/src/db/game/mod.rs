@@ -16,8 +16,6 @@ pub mod equipment;
 pub mod explore;
 pub mod friends;
 pub mod guides;
-pub mod hero_group_snapshots;
-pub mod hero_groups;
 pub mod heroes;
 pub mod items;
 pub mod player_card;

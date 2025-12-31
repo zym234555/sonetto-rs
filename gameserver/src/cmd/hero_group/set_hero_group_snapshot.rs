@@ -2,7 +2,7 @@ use crate::error::AppError;
 use crate::packet::ClientPacket;
 use crate::state::ConnectionContext;
 use database::{
-    db::game::hero_group_snapshots::{self, sync_snapshot_to_common},
+    db::game::heroes::{self, sync_snapshot_to_common},
     models::game::hero_groups,
 };
 use prost::Message;
@@ -73,7 +73,7 @@ pub async fn on_set_hero_group_snapshot(
         assist_boss_id: fight_group.assist_boss_id.unwrap_or(0),
     };
 
-    hero_group_snapshots::save_hero_group_snapshot(
+    heroes::save_hero_group_snapshot(
         &pool,
         player_id,
         snapshot_id,

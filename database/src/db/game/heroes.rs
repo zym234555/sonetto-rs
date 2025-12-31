@@ -1,8 +1,14 @@
+use crate::models::game::hero_group_snapshots::{
+    HeroGroupSnapshot, HeroGroupSnapshotGroup, HeroGroupSnapshotInfo,
+};
+use crate::models::game::hero_groups::{
+    HeroGroupCommon, HeroGroupEquip, HeroGroupInfo, HeroGroupType, HeroGroupTypeInfo,
+};
+pub use crate::models::game::heros::*;
 use anyhow::Result;
 use data::exceldb;
 use sqlx::SqlitePool;
-
-pub use crate::models::game::heros::*;
+use std::collections::HashMap;
 
 /// Get all heroes for a user
 pub async fn get_user_heroes(pool: &SqlitePool, user_id: i64) -> Result<Vec<HeroData>> {
@@ -24,21 +30,18 @@ pub async fn get_user_heroes(pool: &SqlitePool, user_id: i64) -> Result<Vec<Hero
         .fetch_all(pool)
         .await?;
 
-        // Get voices
         let voices: Vec<i32> =
             sqlx::query_scalar("SELECT voice_id FROM hero_voices WHERE hero_uid = ?1")
                 .bind(hero_uid)
                 .fetch_all(pool)
                 .await?;
 
-        // Get voices heard
         let voices_heard: Vec<i32> =
             sqlx::query_scalar("SELECT voice_id FROM hero_voices_heard WHERE hero_uid = ?1")
                 .bind(hero_uid)
                 .fetch_all(pool)
                 .await?;
 
-        // Get skins
         let skin_list = sqlx::query_as::<_, HeroSkin>(
             "SELECT hero_uid, skin, expire_sec FROM hero_skins WHERE hero_uid = ?1",
         )
@@ -46,14 +49,12 @@ pub async fn get_user_heroes(pool: &SqlitePool, user_id: i64) -> Result<Vec<Hero
         .fetch_all(pool)
         .await?;
 
-        // Get sp attributes
         let sp_attr =
             sqlx::query_as::<_, HeroSpAttribute>("SELECT * FROM hero_sp_attrs WHERE hero_uid = ?1")
                 .bind(hero_uid)
                 .fetch_optional(pool)
                 .await?;
 
-        // Get equip attributes
         let equip_attrs = sqlx::query_as::<_, HeroEquipAttribute>(
             "SELECT * FROM hero_equip_attributes WHERE hero_uid = ?1",
         )
@@ -61,14 +62,12 @@ pub async fn get_user_heroes(pool: &SqlitePool, user_id: i64) -> Result<Vec<Hero
         .fetch_all(pool)
         .await?;
 
-        // Get item unlocks
         let item_unlocks: Vec<i32> =
             sqlx::query_scalar("SELECT item_id FROM hero_item_unlocks WHERE hero_uid = ?1")
                 .bind(hero_uid)
                 .fetch_all(pool)
                 .await?;
 
-        // Get talent cubes
         let talent_cubes = sqlx::query_as::<_, HeroTalentCube>(
             "SELECT hero_uid, cube_id, direction, pos_x, pos_y FROM hero_talent_cubes WHERE hero_uid = ?1"
         )
@@ -76,7 +75,6 @@ pub async fn get_user_heroes(pool: &SqlitePool, user_id: i64) -> Result<Vec<Hero
         .fetch_all(pool)
         .await?;
 
-        // Get talent templates with their cubes
         let templates = sqlx::query_as::<_, HeroTalentTemplate>(
             "SELECT id, hero_uid, template_id, name, style FROM hero_talent_templates WHERE hero_uid = ?1"
         )
@@ -97,7 +95,6 @@ pub async fn get_user_heroes(pool: &SqlitePool, user_id: i64) -> Result<Vec<Hero
             talent_templates.push((template, template_cubes));
         }
 
-        // Get destiny stone unlocks
         let destiny_stone_unlocks: Vec<i32> = sqlx::query_scalar(
             "SELECT stone_id FROM hero_destiny_stone_unlocks WHERE hero_uid = ?1",
         )
@@ -123,7 +120,6 @@ pub async fn get_user_heroes(pool: &SqlitePool, user_id: i64) -> Result<Vec<Hero
     Ok(result)
 }
 
-/// Get a single hero by hero_id (not uid)
 pub async fn get_hero_by_hero_id(
     pool: &SqlitePool,
     user_id: i64,
@@ -138,7 +134,6 @@ pub async fn get_hero_by_hero_id(
 
     let hero_uid = hero_record.uid;
 
-    // Get passive skill levels
     let passive_skill_levels: Vec<i32> = sqlx::query_scalar(
         "SELECT level FROM hero_passive_skill_levels WHERE hero_uid = ? ORDER BY skill_index",
     )
@@ -146,21 +141,18 @@ pub async fn get_hero_by_hero_id(
     .fetch_all(pool)
     .await?;
 
-    // Get voices
     let voices: Vec<i32> =
         sqlx::query_scalar("SELECT voice_id FROM hero_voices WHERE hero_uid = ?")
             .bind(hero_uid)
             .fetch_all(pool)
             .await?;
 
-    // Get voices heard
     let voices_heard: Vec<i32> =
         sqlx::query_scalar("SELECT voice_id FROM hero_voices_heard WHERE hero_uid = ?")
             .bind(hero_uid)
             .fetch_all(pool)
             .await?;
 
-    // Get skins
     let skin_list = sqlx::query_as::<_, HeroSkin>(
         "SELECT hero_uid, skin, expire_sec FROM hero_skins WHERE hero_uid = ?",
     )
@@ -168,14 +160,12 @@ pub async fn get_hero_by_hero_id(
     .fetch_all(pool)
     .await?;
 
-    // Get sp attributes
     let sp_attr =
         sqlx::query_as::<_, HeroSpAttribute>("SELECT * FROM hero_sp_attrs WHERE hero_uid = ?")
             .bind(hero_uid)
             .fetch_optional(pool)
             .await?;
 
-    // Get equip attributes
     let equip_attrs = sqlx::query_as::<_, HeroEquipAttribute>(
         "SELECT * FROM hero_equip_attributes WHERE hero_uid = ?",
     )
@@ -190,7 +180,6 @@ pub async fn get_hero_by_hero_id(
             .fetch_all(pool)
             .await?;
 
-    // Get talent cubes
     let talent_cubes = sqlx::query_as::<_, HeroTalentCube>(
         "SELECT hero_uid, cube_id, direction, pos_x, pos_y FROM hero_talent_cubes WHERE hero_uid = ?"
     )
@@ -198,7 +187,6 @@ pub async fn get_hero_by_hero_id(
     .fetch_all(pool)
     .await?;
 
-    // Get talent templates with their cubes
     let templates = sqlx::query_as::<_, HeroTalentTemplate>(
         "SELECT id, hero_uid, template_id, name, style FROM hero_talent_templates WHERE hero_uid = ?"
     )
@@ -219,7 +207,6 @@ pub async fn get_hero_by_hero_id(
         talent_templates.push((template, template_cubes));
     }
 
-    // Get destiny stone unlocks
     let destiny_stone_unlocks: Vec<i32> =
         sqlx::query_scalar("SELECT stone_id FROM hero_destiny_stone_unlocks WHERE hero_uid = ?")
             .bind(hero_uid)
@@ -241,7 +228,6 @@ pub async fn get_hero_by_hero_id(
     })
 }
 
-/// Get a single hero by hero uid
 pub async fn get_hero_by_hero_uid(
     pool: &SqlitePool,
     user_id: i64,
@@ -255,8 +241,6 @@ pub async fn get_hero_by_hero_uid(
             .await?;
 
     let hero_uid = hero_record.uid;
-
-    // Get passive skill levels
     let passive_skill_levels: Vec<i32> = sqlx::query_scalar(
         "SELECT level FROM hero_passive_skill_levels WHERE hero_uid = ? ORDER BY skill_index",
     )
@@ -264,21 +248,18 @@ pub async fn get_hero_by_hero_uid(
     .fetch_all(pool)
     .await?;
 
-    // Get voices
     let voices: Vec<i32> =
         sqlx::query_scalar("SELECT voice_id FROM hero_voices WHERE hero_uid = ?")
             .bind(hero_uid)
             .fetch_all(pool)
             .await?;
 
-    // Get voices heard
     let voices_heard: Vec<i32> =
         sqlx::query_scalar("SELECT voice_id FROM hero_voices_heard WHERE hero_uid = ?")
             .bind(hero_uid)
             .fetch_all(pool)
             .await?;
 
-    // Get skins
     let skin_list = sqlx::query_as::<_, HeroSkin>(
         "SELECT hero_uid, skin, expire_sec FROM hero_skins WHERE hero_uid = ?",
     )
@@ -286,14 +267,12 @@ pub async fn get_hero_by_hero_uid(
     .fetch_all(pool)
     .await?;
 
-    // Get sp attributes
     let sp_attr =
         sqlx::query_as::<_, HeroSpAttribute>("SELECT * FROM hero_sp_attrs WHERE hero_uid = ?")
             .bind(hero_uid)
             .fetch_optional(pool)
             .await?;
 
-    // Get equip attributes
     let equip_attrs = sqlx::query_as::<_, HeroEquipAttribute>(
         "SELECT * FROM hero_equip_attributes WHERE hero_uid = ?",
     )
@@ -301,14 +280,12 @@ pub async fn get_hero_by_hero_uid(
     .fetch_all(pool)
     .await?;
 
-    // Get item unlocks
     let item_unlocks: Vec<i32> =
         sqlx::query_scalar("SELECT item_id FROM hero_item_unlocks WHERE hero_uid = ?")
             .bind(hero_uid)
             .fetch_all(pool)
             .await?;
 
-    // Get talent cubes
     let talent_cubes = sqlx::query_as::<_, HeroTalentCube>(
         "SELECT hero_uid, cube_id, direction, pos_x, pos_y FROM hero_talent_cubes WHERE hero_uid = ?"
     )
@@ -337,7 +314,6 @@ pub async fn get_hero_by_hero_uid(
         talent_templates.push((template, template_cubes));
     }
 
-    // Get destiny stone unlocks
     let destiny_stone_unlocks: Vec<i32> =
         sqlx::query_scalar("SELECT stone_id FROM hero_destiny_stone_unlocks WHERE hero_uid = ?")
             .bind(hero_uid)
@@ -359,7 +335,6 @@ pub async fn get_hero_by_hero_uid(
     })
 }
 
-/// Get touch count for user
 pub async fn get_touch_count(pool: &SqlitePool, user_id: i64) -> Result<Option<i32>> {
     let count: Option<i32> =
         sqlx::query_scalar("SELECT touch_count_left FROM hero_touch_count WHERE user_id = ?1")
@@ -370,17 +345,14 @@ pub async fn get_touch_count(pool: &SqlitePool, user_id: i64) -> Result<Option<i
     Ok(count)
 }
 
-/// Decrement touch count (returns new count, or None if no touches left)
 pub async fn use_touch(pool: &SqlitePool, user_id: i64) -> Result<Option<i32>> {
-    // Get current count
     let current = get_touch_count(pool, user_id).await?;
     let current = current.unwrap_or(5);
 
     if current <= 0 {
-        return Ok(None); // No touches left
+        return Ok(None);
     }
 
-    // Decrement
     let new_count = current - 1;
     sqlx::query("UPDATE hero_touch_count SET touch_count_left = ? WHERE user_id = ?")
         .bind(new_count)
@@ -391,7 +363,6 @@ pub async fn use_touch(pool: &SqlitePool, user_id: i64) -> Result<Option<i32>> {
     Ok(Some(new_count))
 }
 
-/// Reset daily touch count
 pub async fn reset_touch_count(pool: &SqlitePool, user_id: i64) -> Result<()> {
     sqlx::query(
         r#"
@@ -407,7 +378,6 @@ pub async fn reset_touch_count(pool: &SqlitePool, user_id: i64) -> Result<()> {
     Ok(())
 }
 
-/// Get all hero skins for user
 pub async fn get_all_hero_skins(pool: &SqlitePool, user_id: i64) -> Result<Vec<i32>> {
     let skins: Vec<i32> =
         sqlx::query_scalar("SELECT skin_id FROM hero_all_skins WHERE user_id = ?1")
@@ -418,7 +388,6 @@ pub async fn get_all_hero_skins(pool: &SqlitePool, user_id: i64) -> Result<Vec<i
     Ok(skins)
 }
 
-/// Get birthday info for user
 pub async fn get_birthday_info(pool: &SqlitePool, user_id: i64) -> Result<Vec<(i32, i32)>> {
     let info: Vec<(i32, i32)> =
         sqlx::query_as("SELECT hero_id, birthday_count FROM hero_birthday_info WHERE user_id = ?1")
@@ -469,7 +438,7 @@ pub async fn add_hero_duplicate(
     Ok(new_count)
 }
 
-/// Create a single hero with specified parameters (not maxed out)
+// Create a single hero with specified parameters
 pub async fn create_hero(pool: &SqlitePool, user_id: i64, hero_id: i32) -> sqlx::Result<i64> {
     let game_data = exceldb::get();
     let now = common::time::ServerTime::now_ms();
@@ -495,12 +464,11 @@ pub async fn create_hero(pool: &SqlitePool, user_id: i64, hero_id: i32) -> sqlx:
     let hero_skin = character.skin_id;
     let rare = character.rare as usize;
 
-    // Get LEVEL 1 stats (not max level)
     let level1_stats = game_data
         .character_level
         .iter()
         .filter(|s| s.hero_id == hero_id)
-        .min_by_key(|s| s.level); // Get the lowest level entry (level 1)
+        .min_by_key(|s| s.level); // Get the lowest level entry
 
     let (level, hp, atk, def, mdef, technic, cri, recri, cri_dmg, cri_def, add_dmg, drop_dmg) =
         if let Some(stats) = level1_stats {
@@ -546,15 +514,12 @@ pub async fn create_hero(pool: &SqlitePool, user_id: i64, hero_id: i32) -> sqlx:
         .map(|s| s.id)
         .unwrap_or(hero_skin);
 
-    // Get destiny data
     let destiny_data = game_data
         .character_destiny
         .iter()
         .find(|d| d.hero_id == hero_id);
 
-    // Destiny values
     let (destiny_rank, destiny_level, destiny_stone, red_dot_type) = if let Some(d) = destiny_data {
-        // Hero has destiny - start at 1
         let rank = min_rank;
         let level = 1;
         let stone = d
@@ -566,7 +531,6 @@ pub async fn create_hero(pool: &SqlitePool, user_id: i64, hero_id: i32) -> sqlx:
         let red_dot_type = 6;
         (rank, level, stone, red_dot_type)
     } else {
-        // Hero doesn't have destiny system
         (0, 0, 0, 0)
     };
 
@@ -620,7 +584,6 @@ pub async fn create_hero(pool: &SqlitePool, user_id: i64, hero_id: i32) -> sqlx:
         ""
     };
 
-    // Get talent data
     let min_talent_id = game_data
         .character_talent
         .iter()
@@ -629,7 +592,6 @@ pub async fn create_hero(pool: &SqlitePool, user_id: i64, hero_id: i32) -> sqlx:
         .min()
         .unwrap_or(0);
 
-    // Insert main hero record (NOT MAXED OUT, no equipment)
     sqlx::query(
         r#"
         INSERT INTO heroes (
@@ -654,36 +616,34 @@ pub async fn create_hero(pool: &SqlitePool, user_id: i64, hero_id: i32) -> sqlx:
     .bind(user_id)
     .bind(hero_id)
     .bind(now)
-    .bind(level) // Level 1 (not max)
-    .bind(0) // Starting exp
-    .bind(min_rank) // Starting rank (not max)
-    .bind(0) // No breakthrough
+    .bind(level)
+    .bind(0)
+    .bind(min_rank)
+    .bind(0)
     .bind(default_skin)
-    .bind(100) // Starting faith (not max)
-    .bind(1) // Active skill level 1
-    .bind(1) // Ex skill level 1
-    .bind(true) // is_new (true for new heroes)
-    .bind(min_talent_id) // talent
-    .bind(0) // default_equip_uid = 0 (NO EQUIPMENT)
-    .bind(0) // duplicate_count (starting at 0)
-    .bind(1) // use_talent_template_id
-    .bind(0) // talent_style_unlock (none initially)
-    .bind(0) // talent_style_red
-    .bind(false) // is_favor
-    .bind(destiny_rank) // destiny_rank (0)
-    .bind(destiny_level) // destiny_level (0)
-    .bind(destiny_stone) // destiny_stone
-    .bind(red_dot_type) // red_dot
-    .bind(extra_str) // extra_str
-    // Base attributes (level 1 stats without equipment bonuses)
+    .bind(100)
+    .bind(1)
+    .bind(1)
+    .bind(true)
+    .bind(min_talent_id)
+    .bind(0)
+    .bind(0)
+    .bind(1)
+    .bind(0)
+    .bind(0)
+    .bind(false)
+    .bind(destiny_rank)
+    .bind(destiny_level)
+    .bind(destiny_stone)
+    .bind(red_dot_type)
+    .bind(extra_str)
     .bind(final_hp)
     .bind(final_atk)
     .bind(final_def)
     .bind(final_mdef)
     .bind(final_technic)
-    .bind(0) // base_multi_hp_idx
-    .bind(0) // base_multi_hp_num
-    // Ex attributes
+    .bind(0)
+    .bind(0)
     .bind(final_cri)
     .bind(final_recri)
     .bind(final_cri_dmg)
@@ -693,7 +653,7 @@ pub async fn create_hero(pool: &SqlitePool, user_id: i64, hero_id: i32) -> sqlx:
     .execute(pool)
     .await?;
 
-    // Insert passive skill levels (starting at level 1)
+    // Insert passive skill levels
     let max_skill_group = game_data
         .skill_passive_level
         .iter()
@@ -746,7 +706,6 @@ pub async fn create_hero(pool: &SqlitePool, user_id: i64, hero_id: i32) -> sqlx:
             .await?;
     }
 
-    // Insert default sp_attrs (all zeros)
     sqlx::query(
         r#"
         INSERT INTO hero_sp_attrs (
@@ -773,11 +732,10 @@ pub async fn create_hero(pool: &SqlitePool, user_id: i64, hero_id: i32) -> sqlx:
     )
     .bind(user_id)
     .bind(hero_id)
-    .bind(0) // Starting at 0 birthday celebrations
+    .bind(0)
     .execute(pool)
     .await?;
 
-    // Insert destiny stone unlocks (empty initially - player needs to unlock)
     if let Some(destiny_data) = destiny_data {
         for stone_str in destiny_data.facets_id.split('#') {
             if let Ok(stone_id) = stone_str.parse::<i32>() {
@@ -792,20 +750,18 @@ pub async fn create_hero(pool: &SqlitePool, user_id: i64, hero_id: i32) -> sqlx:
         }
     }
 
-    // Insert talent templates (empty initially)
     for template_id in 1..=4 {
         sqlx::query(
             "INSERT INTO hero_talent_templates (hero_uid, template_id, name, style) VALUES (?, ?, ?, ?)"
         )
         .bind(hero_uid)
         .bind(template_id)
-        .bind("") // Empty name
-        .bind(0) // Style 0
+        .bind("")
+        .bind(0)
         .execute(pool)
         .await?;
     }
 
-    // Update player info hero count based on rarity
     update_player_hero_count(pool, user_id, rare, now).await?;
 
     tracing::info!(
@@ -818,7 +774,6 @@ pub async fn create_hero(pool: &SqlitePool, user_id: i64, hero_id: i32) -> sqlx:
     Ok(hero_uid)
 }
 
-/// Helper function to update player hero count
 async fn update_player_hero_count(
     pool: &SqlitePool,
     user_id: i64,
@@ -847,6 +802,592 @@ async fn update_player_hero_count(
     .bind(user_id)
     .execute(pool)
     .await?;
+
+    Ok(())
+}
+
+async fn build_hero_group_info(
+    pool: &SqlitePool,
+    _user_id: i64,
+    db_group_id: i64,
+    group_id: i32,
+) -> Result<HeroGroupInfo> {
+    // Get hero members
+    let hero_list: Vec<i64> = sqlx::query_scalar(
+        "SELECT hero_uid FROM hero_group_members WHERE hero_group_id = ? ORDER BY position",
+    )
+    .bind(db_group_id)
+    .fetch_all(pool)
+    .await?;
+
+    // Get group details
+    let group =
+        sqlx::query_as::<_, HeroGroupCommon>("SELECT * FROM hero_groups_common WHERE id = ?")
+            .bind(db_group_id)
+            .fetch_one(pool)
+            .await?;
+
+    let equip_rows: Vec<(i32, i64)> = sqlx::query_as(
+        "SELECT index_slot, equip_uid FROM hero_group_equips WHERE hero_group_id = ? ORDER BY index_slot"
+    )
+    .bind(db_group_id)
+    .fetch_all(pool)
+    .await?;
+
+    let mut equips_map: HashMap<i32, Vec<i64>> = HashMap::new();
+    for (index, equip_uid) in equip_rows {
+        equips_map.entry(index).or_default().push(equip_uid);
+    }
+
+    let equips = equips_map
+        .into_iter()
+        .map(|(index, equip_uids)| HeroGroupEquip { index, equip_uids })
+        .collect();
+
+    let activity104_rows: Vec<(i32, i64)> = sqlx::query_as(
+        "SELECT index_slot, equip_uid FROM hero_group_activity104_equips WHERE hero_group_id = ? ORDER BY index_slot"
+    )
+    .bind(db_group_id)
+    .fetch_all(pool)
+    .await?;
+
+    let mut activity104_map: HashMap<i32, Vec<i64>> = HashMap::new();
+    for (index, equip_uid) in activity104_rows {
+        activity104_map.entry(index).or_default().push(equip_uid);
+    }
+
+    let activity104_equips = activity104_map
+        .into_iter()
+        .map(|(index, equip_uids)| HeroGroupEquip { index, equip_uids })
+        .collect();
+
+    Ok(HeroGroupInfo {
+        group_id,
+        hero_list,
+        name: group.name,
+        cloth_id: group.cloth_id,
+        equips,
+        activity104_equips,
+        assist_boss_id: group.assist_boss_id,
+    })
+}
+
+// Get ONE specific hero group (returns current active group)
+pub async fn get_hero_group(
+    pool: &SqlitePool,
+    user_id: i64,
+    group_id: i32,
+) -> Result<Option<HeroGroupInfo>> {
+    // Find the DB id for this group_id
+    let db_group_id: Option<i64> =
+        sqlx::query_scalar("SELECT id FROM hero_groups_common WHERE user_id = ? AND group_id = ?")
+            .bind(user_id)
+            .bind(group_id)
+            .fetch_optional(pool)
+            .await?;
+
+    if let Some(db_id) = db_group_id {
+        Ok(Some(
+            build_hero_group_info(pool, user_id, db_id, group_id).await?,
+        ))
+    } else {
+        Ok(None)
+    }
+}
+
+// Get current active group (probably type 1's current selection)
+pub async fn get_current_hero_group(
+    pool: &SqlitePool,
+    user_id: i64,
+) -> Result<Option<HeroGroupInfo>> {
+    // Get the current selected group from type 1 (main battle group)
+    let selected_group: Option<i32> = sqlx::query_scalar(
+        "SELECT group_id FROM hero_group_types WHERE user_id = ? AND type_id = 1",
+    )
+    .bind(user_id)
+    .fetch_optional(pool)
+    .await?;
+
+    if let Some(group_id) = selected_group {
+        get_hero_group(pool, user_id, group_id).await
+    } else {
+        Ok(None)
+    }
+}
+
+// Get ALL common hero groups
+pub async fn get_hero_groups_common(pool: &SqlitePool, user_id: i64) -> Result<Vec<HeroGroupInfo>> {
+    let groups = sqlx::query_as::<_, HeroGroupCommon>(
+        "SELECT * FROM hero_groups_common WHERE user_id = ? ORDER BY group_id",
+    )
+    .bind(user_id)
+    .fetch_all(pool)
+    .await?;
+
+    let mut result = Vec::new();
+    for group in groups {
+        let info = build_hero_group_info(pool, user_id, group.id, group.group_id).await?;
+        result.push(info);
+    }
+
+    Ok(result)
+}
+
+// Get all hero group types
+pub async fn get_hero_group_types(
+    pool: &SqlitePool,
+    user_id: i64,
+) -> Result<Vec<HeroGroupTypeInfo>> {
+    let types = sqlx::query_as::<_, HeroGroupType>(
+        "SELECT * FROM hero_group_types WHERE user_id = ? ORDER BY type_id",
+    )
+    .bind(user_id)
+    .fetch_all(pool)
+    .await?;
+
+    let mut result = Vec::new();
+    for type_info in types {
+        let group_info = if let Some(group_id) = type_info.group_id {
+            get_hero_group(pool, user_id, group_id).await?
+        } else {
+            None
+        };
+
+        result.push(HeroGroupTypeInfo {
+            type_id: type_info.type_id,
+            current_select: type_info.current_select,
+            group_info,
+        });
+    }
+
+    Ok(result)
+}
+
+pub async fn set_hero_group_equip(
+    pool: &SqlitePool,
+    user_id: i64,
+    group_id: i32,
+    index: i32,
+    equip_uids: Vec<i64>,
+) -> Result<()> {
+    let db_group_id: Option<i64> =
+        sqlx::query_scalar("SELECT id FROM hero_groups_common WHERE user_id = ? AND group_id = ?")
+            .bind(user_id)
+            .bind(group_id)
+            .fetch_optional(pool)
+            .await?;
+
+    let db_group_id = db_group_id.ok_or_else(|| anyhow::anyhow!("Hero group not found"))?;
+
+    sqlx::query("DELETE FROM hero_group_equips WHERE hero_group_id = ? AND index_slot = ?")
+        .bind(db_group_id)
+        .bind(index)
+        .execute(pool)
+        .await?;
+
+    // Insert new equips
+    for equip_uid in equip_uids {
+        sqlx::query(
+            "INSERT INTO hero_group_equips (hero_group_id, index_slot, equip_uid) VALUES (?, ?, ?)",
+        )
+        .bind(db_group_id)
+        .bind(index)
+        .bind(equip_uid)
+        .execute(pool)
+        .await?;
+    }
+
+    Ok(())
+}
+
+async fn build_snapshot_group_info(
+    pool: &SqlitePool,
+    snapshot_group_id: i64,
+    group_id: i32,
+) -> Result<HeroGroupInfo> {
+    // Get group details
+    let group = sqlx::query_as::<_, HeroGroupSnapshotGroup>(
+        "SELECT * FROM hero_group_snapshot_groups WHERE id = ?",
+    )
+    .bind(snapshot_group_id)
+    .fetch_one(pool)
+    .await?;
+
+    // Get hero members
+    let hero_list: Vec<i64> = sqlx::query_scalar(
+        "SELECT hero_uid FROM hero_group_snapshot_members WHERE snapshot_group_id = ? ORDER BY position"
+    )
+    .bind(snapshot_group_id)
+    .fetch_all(pool)
+    .await?;
+
+    // Get equips
+    let equip_rows: Vec<(i32, i64)> = sqlx::query_as(
+        "SELECT index_slot, equip_uid FROM hero_group_snapshot_equips WHERE snapshot_group_id = ? ORDER BY index_slot"
+    )
+    .bind(snapshot_group_id)
+    .fetch_all(pool)
+    .await?;
+
+    let mut equips_map: HashMap<i32, Vec<i64>> = HashMap::new();
+    for (index, equip_uid) in equip_rows {
+        equips_map.entry(index).or_default().push(equip_uid);
+    }
+
+    let equips = equips_map
+        .into_iter()
+        .map(|(index, equip_uids)| HeroGroupEquip { index, equip_uids })
+        .collect();
+
+    // Get activity104 equips
+    let activity104_rows: Vec<(i32, i64)> = sqlx::query_as(
+        "SELECT index_slot, equip_uid FROM hero_group_snapshot_activity104_equips WHERE snapshot_group_id = ? ORDER BY index_slot"
+    )
+    .bind(snapshot_group_id)
+    .fetch_all(pool)
+    .await?;
+
+    let mut activity104_map: HashMap<i32, Vec<i64>> = HashMap::new();
+    for (index, equip_uid) in activity104_rows {
+        activity104_map.entry(index).or_default().push(equip_uid);
+    }
+
+    let activity104_equips = activity104_map
+        .into_iter()
+        .map(|(index, equip_uids)| HeroGroupEquip { index, equip_uids })
+        .collect();
+
+    tracing::info!(
+        "Loaded group {}: sub {} {} heroes: {:?}",
+        group_id,
+        snapshot_group_id,
+        hero_list.len(),
+        hero_list
+    );
+
+    Ok(HeroGroupInfo {
+        group_id,
+        hero_list,
+        name: group.name,
+        cloth_id: group.cloth_id,
+        equips,
+        activity104_equips,
+        assist_boss_id: group.assist_boss_id,
+    })
+}
+
+// Get all snapshots for a user
+pub async fn get_hero_group_snapshots(
+    pool: &SqlitePool,
+    user_id: i64,
+) -> Result<Vec<HeroGroupSnapshotInfo>> {
+    let snapshots = sqlx::query_as::<_, HeroGroupSnapshot>(
+        "SELECT * FROM hero_group_snapshots WHERE user_id = ? ORDER BY snapshot_id",
+    )
+    .bind(user_id)
+    .fetch_all(pool)
+    .await?;
+
+    let mut result = Vec::new();
+
+    for snapshot in snapshots {
+        // Get all groups in this snapshot
+        let snapshot_groups = sqlx::query_as::<_, HeroGroupSnapshotGroup>(
+            "SELECT * FROM hero_group_snapshot_groups WHERE snapshot_id = ? ORDER BY group_id",
+        )
+        .bind(snapshot.id)
+        .fetch_all(pool)
+        .await?;
+
+        let mut hero_group_snapshots = Vec::new();
+        for group in snapshot_groups {
+            let info = build_snapshot_group_info(pool, group.id, group.group_id).await?;
+            hero_group_snapshots.push(info);
+        }
+
+        // Get sort sub IDs
+        let sort_sub_ids: Vec<i32> = sqlx::query_scalar(
+            "SELECT sub_id FROM hero_group_snapshot_sort_ids WHERE snapshot_id = ? ORDER BY sort_order"
+        )
+        .bind(snapshot.id)
+        .fetch_all(pool)
+        .await?;
+
+        result.push(HeroGroupSnapshotInfo {
+            snapshot_id: snapshot.snapshot_id,
+            hero_group_snapshots,
+            sort_sub_ids,
+        });
+    }
+
+    Ok(result)
+}
+
+// Get a specific snapshot by ID
+pub async fn get_hero_group_snapshot(
+    pool: &SqlitePool,
+    user_id: i64,
+    snapshot_id: i32,
+) -> Result<Option<HeroGroupSnapshotInfo>> {
+    let snapshot = sqlx::query_as::<_, HeroGroupSnapshot>(
+        "SELECT * FROM hero_group_snapshots WHERE user_id = ? AND snapshot_id = ?",
+    )
+    .bind(user_id)
+    .bind(snapshot_id)
+    .fetch_optional(pool)
+    .await?;
+
+    let Some(snapshot) = snapshot else {
+        return Ok(None);
+    };
+
+    // Get all groups in this snapshot
+    let snapshot_groups = sqlx::query_as::<_, HeroGroupSnapshotGroup>(
+        "SELECT * FROM hero_group_snapshot_groups WHERE snapshot_id = ? ORDER BY group_id",
+    )
+    .bind(snapshot.id)
+    .fetch_all(pool)
+    .await?;
+
+    let mut hero_group_snapshots = Vec::new();
+    for group in snapshot_groups {
+        let info = build_snapshot_group_info(pool, group.id, group.group_id).await?;
+        hero_group_snapshots.push(info);
+    }
+
+    // Get sort sub IDs
+    let sort_sub_ids: Vec<i32> = sqlx::query_scalar(
+        "SELECT sub_id FROM hero_group_snapshot_sort_ids WHERE snapshot_id = ? ORDER BY sort_order",
+    )
+    .bind(snapshot.id)
+    .fetch_all(pool)
+    .await?;
+
+    Ok(Some(HeroGroupSnapshotInfo {
+        snapshot_id: snapshot.snapshot_id,
+        hero_group_snapshots,
+        sort_sub_ids,
+    }))
+}
+
+// Save a snapshot from current hero groups
+pub async fn save_hero_group_snapshot(
+    pool: &SqlitePool,
+    user_id: i64,
+    snapshot_id: i32,
+    groups: Vec<HeroGroupInfo>,
+    sort_sub_ids: Vec<i32>,
+) -> Result<()> {
+    let now = common::time::ServerTime::now_ms();
+
+    // Create or update snapshot
+    sqlx::query(
+        "INSERT INTO hero_group_snapshots (user_id, snapshot_id, created_at, updated_at)
+         VALUES (?, ?, ?, ?)
+         ON CONFLICT(user_id, snapshot_id) DO UPDATE SET updated_at = excluded.updated_at",
+    )
+    .bind(user_id)
+    .bind(snapshot_id)
+    .bind(now)
+    .bind(now)
+    .execute(pool)
+    .await?;
+
+    // Get the snapshot DB ID
+    let db_snapshot_id: i64 = sqlx::query_scalar(
+        "SELECT id FROM hero_group_snapshots WHERE user_id = ? AND snapshot_id = ?",
+    )
+    .bind(user_id)
+    .bind(snapshot_id)
+    .fetch_one(pool)
+    .await?;
+
+    // Save each group (only delete the specific group being updated)
+    for group in groups {
+        // Delete only THIS specific group and its related data
+        let existing_group: Option<i64> = sqlx::query_scalar(
+            "SELECT id FROM hero_group_snapshot_groups
+             WHERE snapshot_id = ? AND group_id = ?",
+        )
+        .bind(db_snapshot_id)
+        .bind(group.group_id)
+        .fetch_optional(pool)
+        .await?;
+
+        if let Some(old_group_id) = existing_group {
+            // Delete old members
+            sqlx::query("DELETE FROM hero_group_snapshot_members WHERE snapshot_group_id = ?")
+                .bind(old_group_id)
+                .execute(pool)
+                .await?;
+
+            // Delete old equips
+            sqlx::query("DELETE FROM hero_group_snapshot_equips WHERE snapshot_group_id = ?")
+                .bind(old_group_id)
+                .execute(pool)
+                .await?;
+
+            // Delete old activity104 equips
+            sqlx::query(
+                "DELETE FROM hero_group_snapshot_activity104_equips WHERE snapshot_group_id = ?",
+            )
+            .bind(old_group_id)
+            .execute(pool)
+            .await?;
+
+            // Delete the group itself
+            sqlx::query("DELETE FROM hero_group_snapshot_groups WHERE id = ?")
+                .bind(old_group_id)
+                .execute(pool)
+                .await?;
+        }
+
+        // Insert new group
+        let group_result = sqlx::query(
+            "INSERT INTO hero_group_snapshot_groups (snapshot_id, group_id, name, cloth_id, assist_boss_id)
+             VALUES (?, ?, ?, ?, ?)"
+        )
+        .bind(db_snapshot_id)
+        .bind(group.group_id)
+        .bind(&group.name)
+        .bind(group.cloth_id)
+        .bind(group.assist_boss_id)
+        .execute(pool)
+        .await?;
+
+        let snapshot_group_id = group_result.last_insert_rowid();
+
+        // Save heroes
+        for (position, hero_uid) in group.hero_list.iter().enumerate() {
+            sqlx::query(
+                "INSERT INTO hero_group_snapshot_members (snapshot_group_id, hero_uid, position)
+                 VALUES (?, ?, ?)",
+            )
+            .bind(snapshot_group_id)
+            .bind(hero_uid)
+            .bind(position as i32)
+            .execute(pool)
+            .await?;
+        }
+
+        // Save equips
+        for equip in &group.equips {
+            for equip_uid in &equip.equip_uids {
+                sqlx::query(
+                    "INSERT INTO hero_group_snapshot_equips (snapshot_group_id, index_slot, equip_uid)
+                     VALUES (?, ?, ?)"
+                )
+                .bind(snapshot_group_id)
+                .bind(equip.index)
+                .bind(equip_uid)
+                .execute(pool)
+                .await?;
+            }
+        }
+
+        // Save activity104 equips
+        for equip in &group.activity104_equips {
+            for equip_uid in &equip.equip_uids {
+                sqlx::query(
+                    "INSERT INTO hero_group_snapshot_activity104_equips (snapshot_group_id, index_slot, equip_uid)
+                     VALUES (?, ?, ?)"
+                )
+                .bind(snapshot_group_id)
+                .bind(equip.index)
+                .bind(equip_uid)
+                .execute(pool)
+                .await?;
+            }
+        }
+    }
+
+    // Update sort IDs, merge with existing ones
+    let existing_sort_ids: Vec<i32> = sqlx::query_scalar(
+        "SELECT sub_id FROM hero_group_snapshot_sort_ids
+         WHERE snapshot_id = ? ORDER BY sort_order",
+    )
+    .bind(db_snapshot_id)
+    .fetch_all(pool)
+    .await?;
+
+    // Merge: add new sort_sub_ids if not already present
+    let mut merged_sort_ids = existing_sort_ids;
+    for sub_id in &sort_sub_ids {
+        if !merged_sort_ids.contains(sub_id) {
+            merged_sort_ids.push(*sub_id);
+        }
+    }
+
+    // Replace all sort IDs
+    sqlx::query("DELETE FROM hero_group_snapshot_sort_ids WHERE snapshot_id = ?")
+        .bind(db_snapshot_id)
+        .execute(pool)
+        .await?;
+
+    for (order, sub_id) in merged_sort_ids.iter().enumerate() {
+        sqlx::query(
+            "INSERT INTO hero_group_snapshot_sort_ids (snapshot_id, sub_id, sort_order)
+             VALUES (?, ?, ?)",
+        )
+        .bind(db_snapshot_id)
+        .bind(sub_id)
+        .bind(order as i32)
+        .execute(pool)
+        .await?;
+    }
+
+    Ok(())
+}
+
+pub async fn sync_snapshot_to_common(
+    pool: &SqlitePool,
+    user_id: i64,
+    group: &HeroGroupInfo,
+) -> Result<()> {
+    let db_group_id: i64 =
+        sqlx::query_scalar("SELECT id FROM hero_groups_common WHERE user_id = ? AND group_id = ?")
+            .bind(user_id)
+            .bind(group.group_id)
+            .fetch_one(pool)
+            .await?;
+
+    // Replace heroes
+    sqlx::query("DELETE FROM hero_group_members WHERE hero_group_id = ?")
+        .bind(db_group_id)
+        .execute(pool)
+        .await?;
+
+    for (pos, hero_uid) in group.hero_list.iter().enumerate() {
+        sqlx::query(
+            "INSERT INTO hero_group_members (hero_group_id, hero_uid, position)
+             VALUES (?, ?, ?)",
+        )
+        .bind(db_group_id)
+        .bind(hero_uid)
+        .bind(pos as i32)
+        .execute(pool)
+        .await?;
+    }
+
+    // Replace equips
+    sqlx::query("DELETE FROM hero_group_equips WHERE hero_group_id = ?")
+        .bind(db_group_id)
+        .execute(pool)
+        .await?;
+
+    for equip in &group.equips {
+        for uid in &equip.equip_uids {
+            sqlx::query(
+                "INSERT INTO hero_group_equips (hero_group_id, index_slot, equip_uid)
+                 VALUES (?, ?, ?)",
+            )
+            .bind(db_group_id)
+            .bind(equip.index)
+            .bind(uid)
+            .execute(pool)
+            .await?;
+        }
+    }
 
     Ok(())
 }

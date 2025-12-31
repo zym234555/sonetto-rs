@@ -1,7 +1,7 @@
 use crate::error::AppError;
 use crate::packet::ClientPacket;
 use crate::state::ConnectionContext;
-use database::db::game::hero_group_snapshots;
+use database::db::game::heroes;
 use prost::Message;
 use sonettobuf::{CmdId, GetHeroGroupSnapshotListReply, GetHeroGroupSnapshotListRequest};
 use std::sync::Arc;
@@ -23,15 +23,12 @@ pub async fn on_get_hero_group_snapshot_list(
 
         if snapshot_id == 0 {
             // 0 means "get ALL snapshots"
-            hero_group_snapshots::get_hero_group_snapshots(&ctx_guard.state.db, player_id).await?
+            heroes::get_hero_group_snapshots(&ctx_guard.state.db, player_id).await?
         } else {
             // Get specific snapshot
-            let snapshot = hero_group_snapshots::get_hero_group_snapshot(
-                &ctx_guard.state.db,
-                player_id,
-                snapshot_id,
-            )
-            .await?;
+            let snapshot =
+                heroes::get_hero_group_snapshot(&ctx_guard.state.db, player_id, snapshot_id)
+                    .await?;
 
             if let Some(s) = snapshot {
                 vec![s]

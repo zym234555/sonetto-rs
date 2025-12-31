@@ -1,7 +1,7 @@
 use crate::error::AppError;
 use crate::packet::ClientPacket;
 use crate::state::ConnectionContext;
-use database::db::game::hero_groups;
+use database::db::game::heroes::set_hero_group_equip;
 use prost::Message;
 use sonettobuf::{CmdId, HeroGroupEquip, SetHeroGroupEquipReply, SetHeroGroupEquipRequest};
 use std::sync::Arc;
@@ -25,8 +25,7 @@ pub async fn on_set_hero_group_equip(
         let pool = &ctx_guard.state.db;
 
         // Update the equipment
-        hero_groups::set_hero_group_equip(pool, player_id, group_id, index, equip_uids.clone())
-            .await?;
+        set_hero_group_equip(pool, player_id, group_id, index, equip_uids.clone()).await?;
 
         tracing::info!(
             "User {} set group {} index {} to equips: {:?}",

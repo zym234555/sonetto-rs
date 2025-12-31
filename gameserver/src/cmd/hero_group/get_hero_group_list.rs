@@ -13,8 +13,7 @@ pub async fn on_get_hero_group_list(
         let ctx_guard = ctx.lock().await;
         let player_id = ctx_guard.player_id.ok_or(AppError::NotLoggedIn)?;
 
-        database::db::game::hero_groups::get_current_hero_group(&ctx_guard.state.db, player_id)
-            .await?
+        database::db::game::heroes::get_current_hero_group(&ctx_guard.state.db, player_id).await?
     };
 
     let reply = GetHeroGroupListReply {

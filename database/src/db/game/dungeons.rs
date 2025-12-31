@@ -77,7 +77,7 @@ pub async fn get_dungeon_last_hero_groups(
     for (chapter_id, hero_group_id) in rows {
         // Get the hero group info
         if let Some(group_info) =
-            crate::db::game::hero_groups::get_hero_group(pool, user_id, hero_group_id).await?
+            crate::db::game::heroes::get_hero_group(pool, user_id, hero_group_id).await?
         {
             result.push(DungeonLastHeroGroup {
                 chapter_id,
