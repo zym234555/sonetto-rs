@@ -46,13 +46,54 @@ pub async fn on_buy_goods(
 
     let quantity = num;
 
+    {
+        let ctx_guard = ctx.lock().await;
+        let pool = &ctx_guard.state.db;
+
+        let current_buy_count: i32 = sqlx::query_scalar(
+            "SELECT buy_count FROM user_store_goods WHERE user_id = ? AND goods_id = ?",
+        )
+        .bind(user_id)
+        .bind(goods_id)
+        .fetch_optional(pool)
+        .await?
+        .unwrap_or(0);
+
+        if goods.max_buy_count > 0 && current_buy_count + quantity > goods.max_buy_count {
+            tracing::info!(
+                "User {} at max buy count for goods {} (has {}, trying to buy {}, max {})",
+                user_id,
+                goods_id,
+                current_buy_count,
+                quantity,
+                goods.max_buy_count
+            );
+
+            drop(ctx_guard);
+
+            let reply = BuyGoodsReply {
+                store_id,
+                goods_id,
+                num,
+                select_cost,
+            };
+
+            let mut ctx_guard = ctx.lock().await;
+            ctx_guard
+                .send_reply(CmdId::BuyGoodsCmd, reply, 0, req.up_tag)
+                .await?;
+
+            return Ok(());
+        }
+    }
+
     let cost_str = if !goods.cost2.is_empty() && select_cost == Some(2) {
         &goods.cost2
     } else {
         &goods.cost
     };
 
-    let (cost_items, cost_currencies, _, _) = parse_store_product(cost_str);
+    let (cost_items, cost_currencies, _, _, _) = parse_store_product(cost_str);
     let cost_items: Vec<(u32, i32)> = cost_items
         .iter()
         .map(|(id, amt)| (*id, amt * quantity))
@@ -73,14 +114,34 @@ pub async fn on_buy_goods(
                 .unwrap_or(0);
 
             if current < *amount {
-                tracing::warn!(
+                tracing::info!(
                     "User {} insufficient item {} (has {}, needs {})",
                     user_id,
                     item_id,
                     current,
                     amount
                 );
-                return Err(AppError::InsufficientItems);
+
+                drop(ctx_guard);
+
+                push::send_item_change_push(ctx.clone(), user_id, vec![*item_id]).await?;
+
+                let mut ctx_guard = ctx.lock().await;
+                ctx_guard
+                    .send_reply(
+                        CmdId::BuyGoodsCmd,
+                        BuyGoodsReply {
+                            store_id,
+                            goods_id,
+                            num,
+                            select_cost,
+                        },
+                        0,
+                        req.up_tag,
+                    )
+                    .await?;
+
+                return Ok(());
             }
         }
 
@@ -91,14 +152,35 @@ pub async fn on_buy_goods(
                 .unwrap_or(0);
 
             if current < *amount {
-                tracing::warn!(
+                tracing::info!(
                     "User {} insufficient currency {} (has {}, needs {})",
                     user_id,
                     currency_id,
                     current,
                     amount
                 );
-                return Err(AppError::InsufficientCurrency);
+
+                drop(ctx_guard);
+
+                push::send_currency_change_push(ctx.clone(), user_id, vec![(*currency_id, 0)])
+                    .await?;
+
+                let mut ctx_guard = ctx.lock().await;
+                ctx_guard
+                    .send_reply(
+                        CmdId::BuyGoodsCmd,
+                        BuyGoodsReply {
+                            store_id,
+                            goods_id,
+                            num,
+                            select_cost,
+                        },
+                        0,
+                        req.up_tag,
+                    )
+                    .await?;
+
+                return Ok(());
             }
         }
 
@@ -111,9 +193,29 @@ pub async fn on_buy_goods(
             database::db::game::currencies::remove_currency(pool, user_id, *currency_id, *amount)
                 .await?;
         }
+
+        sqlx::query(
+            "INSERT INTO user_store_goods (user_id, goods_id, buy_count)
+             VALUES (?, ?, ?)
+             ON CONFLICT(user_id, goods_id)
+             DO UPDATE SET buy_count = buy_count + ?",
+        )
+        .bind(user_id)
+        .bind(goods_id)
+        .bind(quantity)
+        .bind(quantity)
+        .execute(pool)
+        .await?;
+
+        tracing::info!(
+            "User {} purchased goods {} x{}",
+            user_id,
+            goods_id,
+            quantity
+        );
     }
 
-    let (items, currencies, equips, heroes) = parse_store_product(&goods.product);
+    let (items, currencies, equips, heroes, power_items) = parse_store_product(&goods.product);
     let items: Vec<(u32, i32)> = items
         .iter()
         .map(|(id, amt)| (*id, amt * quantity))
@@ -130,17 +232,10 @@ pub async fn on_buy_goods(
         .iter()
         .map(|(id, amt)| (*id, amt * quantity))
         .collect();
-
-    tracing::info!(
-        "User {} purchasing goods {}: {} items, {} currencies, {} equips, {} heroes (x{})",
-        user_id,
-        goods_id,
-        items.len(),
-        currencies.len(),
-        equips.len(),
-        heroes.len(),
-        quantity
-    );
+    let power_items: Vec<(u32, i32)> = power_items
+        .iter()
+        .map(|(id, amt)| (*id, amt * quantity))
+        .collect();
 
     let (
         changed_item_ids,
@@ -178,6 +273,18 @@ pub async fn on_buy_goods(
             vec![]
         };
 
+        if !power_items.is_empty() {
+            database::db::game::items::add_power_items(
+                pool,
+                user_id,
+                &power_items
+                    .iter()
+                    .map(|(id, count)| (*id as i32, *count))
+                    .collect::<Vec<_>>(),
+            )
+            .await?;
+        }
+
         let mut hero_dupe_items = Vec::new();
         let mut hero_dupe_currencies = Vec::new();
 
@@ -202,7 +309,6 @@ pub async fn on_buy_goods(
                 );
             } else {
                 database::db::game::heroes::create_hero(pool, user_id, hero_id).await?;
-
                 tracing::info!("User {} received new hero {}", user_id, hero_id);
             }
         }
@@ -230,40 +336,41 @@ pub async fn on_buy_goods(
     for (item_id, amount) in &items {
         material_changes.push((1, *item_id, *amount));
     }
-
     for (item_id, amount) in &hero_dupe_items {
         material_changes.push((1, *item_id, *amount));
     }
-
     for (currency_id, amount) in &currencies {
         material_changes.push((2, *currency_id as u32, *amount));
     }
-
     for (currency_id, amount) in &hero_dupe_currencies {
         material_changes.push((2, *currency_id as u32, *amount));
     }
-
     for (equip_id, amount) in &equips {
         material_changes.push((9, *equip_id, *amount));
     }
-
+    for (power_item_id, amount) in &power_items {
+        material_changes.push((10, *power_item_id, *amount));
+    }
     if hero_dupe_items.is_empty() && hero_dupe_currencies.is_empty() {
         for (hero_id, amount) in &heroes {
             material_changes.push((4, *hero_id, *amount));
         }
     }
 
-    let reply = BuyGoodsReply {
-        store_id,
-        goods_id,
-        num,
-        select_cost,
-    };
-
     {
         let mut ctx_guard = ctx.lock().await;
         ctx_guard
-            .send_reply(CmdId::BuyGoodsCmd, reply, 0, req.up_tag)
+            .send_reply(
+                CmdId::BuyGoodsCmd,
+                BuyGoodsReply {
+                    store_id,
+                    goods_id,
+                    num,
+                    select_cost,
+                },
+                0,
+                req.up_tag,
+            )
             .await?;
     }
 
@@ -287,7 +394,6 @@ pub async fn on_buy_goods(
     if !material_changes.is_empty() {
         push::send_material_change_push(ctx.clone(), material_changes, Some(27)).await?;
     }
-
     tracing::info!("Successfully completed purchase for user {}", user_id);
     Ok(())
 }

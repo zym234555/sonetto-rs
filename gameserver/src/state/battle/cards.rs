@@ -49,6 +49,8 @@ pub async fn generate_initial_deck(
     })
 }
 
+
+
 #[allow(dead_code)]
 fn draw_cards_no_merge(candidates: Vec<CardInfo>, max_cards: usize) -> Vec<CardInfo> {
     let mut rng = thread_rng();

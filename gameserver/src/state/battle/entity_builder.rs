@@ -16,6 +16,16 @@ pub async fn build_hero_entity(
         .ok()
         .flatten();
 
+    let game_data = exceldb::get();
+    let hero_type = game_data
+        .character
+        .iter()
+        .find(|c| c.id == record.hero_id)
+        .map(|c| c.hero_type)
+        .unwrap_or(1);
+
+    let hero_rank = record.destiny_rank;
+
     FightEntityInfo {
         uid: Some(record.uid),
         model_id: Some(record.hero_id),
@@ -36,8 +46,8 @@ pub async fn build_hero_entity(
             multi_hp_num: Some(record.base_multi_hp_num),
         }),
         buffs: vec![], // Filled in round_builder
-        skill_group1: get_hero_skill_group(record.hero_id, 1),
-        skill_group2: get_hero_skill_group(record.hero_id, 2),
+        skill_group1: get_hero_skill_group(record.hero_id, 1, hero_rank, hero_type),
+        skill_group2: get_hero_skill_group(record.hero_id, 2, hero_rank, hero_type),
         passive_skill: get_hero_passive_skills(&hero_data, equip_id),
         ex_skill: Some(get_hero_ex_skill(&hero_data)),
         shield_value: Some(0),
@@ -157,35 +167,76 @@ pub fn build_player_entity(user_id: i64, team_type: i32) -> FightEntityInfo {
     }
 }
 
-pub fn get_hero_skill_group(hero_id: i32, group: i32) -> Vec<i32> {
+pub fn get_hero_skill_group(hero_id: i32, group: i32, _hero_rank: i32, hero_type: i32) -> Vec<i32> {
     let game_data = exceldb::get();
 
-    let character = game_data.character.iter().find(|c| c.id == hero_id);
+    let rank_replacement = game_data
+        .character_rank_replace
+        .iter()
+        .find(|r| r.id == hero_id);
 
-    if let Some(character) = character {
-        // Parse skill string: "1#30860111#30860112#30860113|2#30860121#30860122#30860123"
-        for group_str in character.skill.split('|') {
-            let parts: Vec<&str> = group_str.split('#').collect();
+    let skill_string = if let Some(replacement) = rank_replacement {
+        tracing::info!("Using rank replacement skills for hero {}", hero_id);
+        &replacement.skill
+    } else {
+        let character = game_data.character.iter().find(|c| c.id == hero_id);
+        if let Some(character) = character {
+            &character.skill
+        } else {
+            return vec![];
+        }
+    };
 
-            // First part is group number, check if it matches
-            if let Some(first) = parts.first() {
-                if let Ok(group_num) = first.parse::<i32>() {
-                    if group_num == group {
-                        // Return the skill IDs (skip first element which is the group number)
-                        return parts[1..]
-                            .iter()
-                            .filter_map(|s| s.parse::<i32>().ok())
-                            .collect();
-                    }
-                }
+    // Parse format: "1#skill1#skill2#skill3|2#skillgroup1,skillgroup2,skillgroup3"
+    for rank_section in skill_string.split('|') {
+        let mut parts = rank_section.split('#');
+
+        // First part is the group number (1 or 2)
+        let group_num: i32 = match parts.next().and_then(|p| p.parse().ok()) {
+            Some(num) => num,
+            None => continue, // Skip this section instead of ?
+        };
+
+        if group_num != group {
+            continue;
+        }
+
+        // Remaining parts form the skills
+        let rest: String = parts.collect::<Vec<_>>().join("#");
+
+        // Check if there are comma-separated alternatives
+        if rest.contains(',') {
+            // Multiple skill set options
+            let skill_sets: Vec<&str> = rest.split(',').collect();
+
+            // hero_type determines which set (0-indexed)
+            let set_index = (hero_type - 1).max(0).min(skill_sets.len() as i32 - 1) as usize;
+
+            if let Some(skill_set) = skill_sets.get(set_index) {
+                tracing::info!(
+                    "Hero {} group {} using skill set {} (hero_type={})",
+                    hero_id,
+                    group,
+                    set_index,
+                    hero_type
+                );
+
+                return skill_set
+                    .split('#')
+                    .filter_map(|s| s.parse::<i32>().ok())
+                    .collect();
             }
+        } else {
+            return rest
+                .split('#')
+                .filter_map(|s| s.parse::<i32>().ok())
+                .collect();
         }
     }
 
     vec![]
 }
 
-// Make it non-async, pass equip_id from outside
 fn get_hero_passive_skills(hero_data: &HeroData, equip_id: Option<i32>) -> Vec<i32> {
     let game_data = exceldb::get();
     let mut passives = Vec::new();

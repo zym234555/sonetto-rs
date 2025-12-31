@@ -35,4 +35,9 @@ pub const FILTER_TABLES: &[&str] = &[
     "store_goods",
     "character_cosume",
     "talent_style_cost",
+    "skill_effect",
+    "skill_behavior",
+    "character_rank_replace",
+    "store_charge_goods",
+    "store_charge_optional",
 ];

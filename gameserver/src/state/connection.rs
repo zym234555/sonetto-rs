@@ -29,6 +29,7 @@ pub struct ConnectionContext {
 }
 
 #[allow(dead_code)]
+#[derive(Debug, Clone, PartialEq)]
 pub struct ActiveBattle {
     pub tower_type: Option<i32>,
     pub tower_id: Option<i32>,

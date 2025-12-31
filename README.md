@@ -111,8 +111,10 @@ Create a `data/` folder next to those binaries and copy `excel2json` and the `st
 * Equipment can be locked and unlocked
 * Characters can be marked as favorite
 * Gacha now reduces currency used and converts when low
-* GM commands now added (check friend list)
+* GM commands now added (**check friend list**)
 * Resonance system added (can update/add talent styles)
+* Premium shop added (can purchase premium items)
+* Mail added (can claim rewards)
 
 ---
 
@@ -135,6 +137,7 @@ Create a `data/` folder next to those binaries and copy `excel2json` and the `st
 
 * Psychube upgrade materials no longer locked by default
 * Fixed a bug with 7 day sign rewards (users no longer get double rewards)
+* Fixed a bug with mail (users can now claim rewards)
 
 ---
 
@@ -172,7 +175,7 @@ Short-term:
 
 * Fix confirmed broken handlers and persistence bugs
 * Implement a proper account & progress management system (replace current hardcoded/maxed defaults)
-* Finish ~~currency/~~gacha logic and balance drops
+* Finish ~~currency~~ gacha logic and balance drops
 * Improve battle logic to match the official game behavior
 
 ---

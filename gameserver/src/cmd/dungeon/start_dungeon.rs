@@ -85,6 +85,7 @@ pub async fn on_start_dungeon(
             replay_episode_id: Some(episode_id),
             fight_id: Some(chrono::Utc::now().timestamp_millis()),
             multiplication: Some(multiplication),
+        
         });
     }
 

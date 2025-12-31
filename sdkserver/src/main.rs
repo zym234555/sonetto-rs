@@ -70,6 +70,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // Build router
     let with_encryption = handlers::router::account_router()
+        .merge(handlers::router::trade_router())
         .layer(axum::middleware::from_fn(full_logger))
         .layer(axum::middleware::from_fn(sdk_encryption));
 

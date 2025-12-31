@@ -77,7 +77,7 @@ pub async fn on_summon(
     let mut selected_currencies = Vec::new();
 
     for option in &cost_options {
-        let (items, currencies, _, _) = crate::state::parse_store_product(option);
+        let (items, currencies, _, _, _) = crate::state::parse_store_product(option);
 
         let mut can_afford = true;
         for (item_id, amount) in &items {
@@ -99,7 +99,7 @@ pub async fn on_summon(
     }
 
     if selected_items.is_empty() {
-        let (items, currencies, _, _) =
+        let (items, currencies, _, _, _) =
             crate::state::parse_store_product(cost_options.last().unwrap());
         selected_items = items;
         selected_currencies = currencies;
@@ -288,11 +288,6 @@ pub async fn on_summon(
             drop(ctx_guard);
         }
     }
-
-    /*if needs_conversion {
-        let material_changes = vec![(1, 140001, tickets_converted)];
-        push::send_material_change_push(ctx.clone(), material_changes, Some(25)).await?;
-    }*/
 
     let summon_type = if count == 10 { 2 } else { 1 };
 

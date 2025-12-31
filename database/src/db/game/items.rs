@@ -92,7 +92,6 @@ pub async fn remove_item_quantity(
     Ok(true)
 }
 
-// Power Items
 pub async fn get_all_power_items(pool: &SqlitePool, user_id: i64) -> sqlx::Result<Vec<PowerItem>> {
     sqlx::query_as("SELECT * FROM power_items WHERE user_id = ? AND expire_time > strftime('%s', 'now') ORDER BY expire_time")
         .bind(user_id)
@@ -100,14 +99,61 @@ pub async fn get_all_power_items(pool: &SqlitePool, user_id: i64) -> sqlx::Resul
         .await
 }
 
+pub async fn add_power_items(
+    pool: &SqlitePool,
+    user_id: i64,
+    power_items: &[(i32, i32)],
+) -> sqlx::Result<Vec<i32>> {
+    let mut changed_item_ids = Vec::new();
+    let now = common::time::ServerTime::now_ms();
+    let game_data = data::exceldb::get();
+    for (item_id, quantity) in power_items {
+        let power_item_config = game_data.power_item.iter().find(|p| p.id == *item_id);
+        let expire_time = if let Some(config) = power_item_config {
+            match config.expire_type {
+                0 => 0,
+                1 => (now / 1000) + (10 * 24 * 60 * 60),
+                2 => (now / 1000) + (10 * 24 * 60 * 60),
+                3 => (now / 1000) + (10 * 24 * 60 * 60),
+                _ => 0,
+            }
+        } else {
+            0
+        };
+        for _ in 0..*quantity {
+            sqlx::query(
+                "INSERT INTO power_items (user_id, item_id, quantity, expire_time, created_at)
+                 VALUES (?, ?, 1, ?, ?)",
+            )
+            .bind(user_id)
+            .bind(item_id)
+            .bind(expire_time)
+            .bind(now)
+            .execute(pool)
+            .await?;
+        }
+        changed_item_ids.push(*item_id);
+        tracing::info!(
+            "Added {} power items (id: {}) to user {} with expire_time: {}",
+            quantity,
+            item_id,
+            user_id,
+            expire_time
+        );
+    }
+    Ok(changed_item_ids)
+}
+
 pub async fn insert_power_item(pool: &SqlitePool, item: &PowerItem) -> sqlx::Result<i64> {
     let result = sqlx::query(
-        "INSERT INTO power_items (user_id, item_id, quantity, expire_time) VALUES (?, ?, ?, ?)",
+        "INSERT INTO power_items (user_id, item_id, quantity, expire_time, created_at)
+         VALUES (?, ?, ?, ?, ?)",
     )
     .bind(item.user_id)
     .bind(item.item_id)
     .bind(item.quantity)
     .bind(item.expire_time)
+    .bind(item.created_at)
     .execute(pool)
     .await?;
     Ok(result.last_insert_rowid())

@@ -61,15 +61,17 @@ pub fn parse_store_product(
     Vec<(i32, i32)>,
     Vec<(u32, i32)>,
     Vec<(u32, i32)>,
+    Vec<(u32, i32)>,
 ) {
     if s.is_empty() {
-        return (Vec::new(), Vec::new(), Vec::new(), Vec::new());
+        return (Vec::new(), Vec::new(), Vec::new(), Vec::new(), Vec::new());
     }
 
     let mut items = Vec::new();
     let mut currencies = Vec::new();
     let mut equip = Vec::new();
     let mut heroes = Vec::new();
+    let mut power_items = Vec::new();
 
     for segment in s.split('|') {
         let parts: Vec<&str> = segment.split('#').collect();
@@ -85,13 +87,14 @@ pub fn parse_store_product(
                     2 => currencies.push((id, amount)),
                     4 => heroes.push((id as u32, amount)),
                     9 => equip.push((id as u32, amount)),
+                    10 => power_items.push((id as u32, amount)),
                     _ => tracing::warn!("Unknown store product type: {}", reward_type),
                 }
             }
         }
     }
 
-    (items, currencies, equip, heroes)
+    (items, currencies, equip, heroes, power_items)
 }
 
 pub fn six_star_probability(pity_6: u32) -> f64 {

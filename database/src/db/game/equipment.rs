@@ -144,7 +144,6 @@ pub async fn add_equipment(
         is_lock = false;
     }
 
-    // Get last UID
     let last_uid: Option<i64> =
         sqlx::query_scalar("SELECT MAX(uid) FROM equipment WHERE user_id = ?")
             .bind(user_id)
@@ -154,24 +153,33 @@ pub async fn add_equipment(
 
     let new_uid = last_uid.map(|uid| uid + 1).unwrap_or(30000000);
 
-    // Create new equipment instance (count is stored in this single row)
-    sqlx::query(
-        "INSERT INTO equipment (uid, user_id, equip_id, level, exp, break_lv, count, is_lock, refine_lv, created_at, updated_at)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
-    )
-    .bind(new_uid)
-    .bind(user_id)
-    .bind(equip_id)
-    .bind(level)
-    .bind(0) // exp
-    .bind(break_lv)
-    .bind(count)
-    .bind(is_lock)
-    .bind(refine_lv)
-    .bind(now)
-    .bind(now)
-    .execute(pool)
-    .await?;
+    let mut next_uid = new_uid + 1;
+
+    for _ in 0..count {
+        sqlx::query(
+                r#"
+                INSERT INTO equipment
+                  (uid, user_id, equip_id, level, exp, break_lv, count, is_lock, refine_lv, created_at, updated_at)
+                VALUES
+                  (?,   ?,      ?,       ?,     ?,   ?,        ?,     ?,       ?,         ?,         ?)
+                "#,
+            )
+            .bind(next_uid)
+            .bind(user_id)
+            .bind(equip_id)
+            .bind(level)
+            .bind(0)
+            .bind(break_lv)
+            .bind(1)
+            .bind(is_lock)
+            .bind(refine_lv)
+            .bind(now)
+            .bind(now)
+            .execute(pool)
+            .await?;
+
+        next_uid += 1;
+    }
 
     Ok(vec![equip_id])
 }

@@ -1,3 +1,4 @@
+use super::effects::effect_types::EffectType;
 use sonettobuf::{ActEffect, BuffInfo, FightStep, fight_step};
 
 pub struct FightStepBuilder {
@@ -33,7 +34,7 @@ impl FightStepBuilder {
     pub fn add_nested_step(mut self, step: FightStep) -> Self {
         self.effects.push(ActEffect {
             target_id: Some(0),
-            effect_type: Some(162), // FIGHTSTEP wrapper
+            effect_type: Some(EffectType::FightStep.to_i32()),
             fight_step: Some(step),
             ..Default::default()
         });
@@ -43,7 +44,7 @@ impl FightStepBuilder {
     pub fn add_buff(mut self, target_id: i64, buff_id: i32, buff_uid: i64, from_uid: i64) -> Self {
         self.effects.push(ActEffect {
             target_id: Some(target_id),
-            effect_type: Some(5), // BUFFADD
+            effect_type: Some(EffectType::BuffAdd.to_i32()),
             effect_num: Some(buff_id),
             buff: Some(BuffInfo {
                 buff_id: Some(buff_id),
@@ -65,7 +66,7 @@ impl FightStepBuilder {
     pub fn add_indicator_change(mut self, target_id: i64) -> Self {
         self.effects.push(ActEffect {
             target_id: Some(target_id),
-            effect_type: Some(26), // INDICATORCHANGE
+            effect_type: Some(EffectType::IndicatorChange.to_i32()),
             effect_num: Some(0),
             ..Default::default()
         });
@@ -75,11 +76,11 @@ impl FightStepBuilder {
     pub fn add_card_distribution(
         mut self,
         cards: Vec<sonettobuf::CardInfo>,
-        effect_type: i32,
+        effect_type: EffectType,
     ) -> Self {
         self.effects.push(ActEffect {
             target_id: Some(0),
-            effect_type: Some(effect_type), // 159 or 154
+            effect_type: Some(effect_type.to_i32()),
             card_info_list: cards,
             ..Default::default()
         });
@@ -89,9 +90,91 @@ impl FightStepBuilder {
     pub fn add_power_generation(mut self, power: i32, team_type: i32) -> Self {
         self.effects.push(ActEffect {
             target_id: Some(0),
-            effect_type: Some(310),
+            effect_type: Some(EffectType::CardDeckNum.to_i32()),
             effect_num: Some(power),
             team_type: Some(team_type),
+            ..Default::default()
+        });
+        self
+    }
+
+    pub fn add_typed_effect(mut self, effect_type: EffectType) -> Self {
+        self.effects.push(ActEffect {
+            target_id: Some(0),
+            effect_type: Some(effect_type.to_i32()),
+            effect_num: Some(0),
+            ..Default::default()
+        });
+        self
+    }
+
+    pub fn add_effect_with_value(
+        mut self,
+        effect_type: EffectType,
+        target_id: i64,
+        value: i32,
+    ) -> Self {
+        self.effects.push(ActEffect {
+            target_id: Some(target_id),
+            effect_type: Some(effect_type.to_i32()),
+            effect_num: Some(value),
+            ..Default::default()
+        });
+        self
+    }
+
+    pub fn add_damage(mut self, target_id: i64, damage: i32, is_crit: bool) -> Self {
+        let effect_type = if is_crit {
+            EffectType::Crit
+        } else {
+            EffectType::Damage
+        };
+
+        self.effects.push(ActEffect {
+            target_id: Some(target_id),
+            effect_type: Some(effect_type.to_i32()),
+            effect_num: Some(damage),
+            ..Default::default()
+        });
+        self
+    }
+
+    pub fn add_heal(mut self, target_id: i64, heal: i32, is_crit: bool) -> Self {
+        let effect_type = if is_crit {
+            EffectType::HealCrit
+        } else {
+            EffectType::Heal
+        };
+
+        self.effects.push(ActEffect {
+            target_id: Some(target_id),
+            effect_type: Some(effect_type.to_i32()),
+            effect_num: Some(heal),
+            ..Default::default()
+        });
+        self
+    }
+
+    pub fn add_shield(mut self, target_id: i64, shield_value: i32) -> Self {
+        self.effects.push(ActEffect {
+            target_id: Some(target_id),
+            effect_type: Some(EffectType::Shield.to_i32()),
+            effect_num: Some(shield_value),
+            ..Default::default()
+        });
+        self
+    }
+
+    pub fn add_control_effect(mut self, target_id: i64, effect_type: EffectType) -> Self {
+        debug_assert!(
+            effect_type.is_control_effect(),
+            "Effect type must be a control effect"
+        );
+
+        self.effects.push(ActEffect {
+            target_id: Some(target_id),
+            effect_type: Some(effect_type.to_i32()),
+            effect_num: Some(0),
             ..Default::default()
         });
         self
@@ -102,28 +185,7 @@ impl FightStepBuilder {
             target_id: Some(0),
             effect_type: Some(effect_type),
             effect_num: Some(0),
-            buff: None,
-            entity: None,
-            config_effect: Some(0),
-            buff_act_id: Some(0),
-            reserve_id: Some(0),
-            reserve_str: Some(String::new()),
-            summoned: None,
-            magic_circle: None,
-            card_info: None,
-            card_info_list: vec![],
-            team_type: Some(0),
-            fight_step: None,
-            assist_boss_info: None,
-            effect_num1: Some(0),
-            emitter_info: None,
-            player_finisher_info: None,
-            power_info: None,
-            card_heat_value: None,
-            fight_tasks: vec![],
-            fight: None,
-            buff_act_info: None,
-            hurt_info: None,
+            ..Default::default()
         });
         self
     }

@@ -1,8 +1,9 @@
+use crate::error::AppError;
 use crate::packet::ClientPacket;
 use crate::state::ConnectionContext;
-use crate::{error::AppError, utils::data_loader::GameDataLoader};
+use chrono::NaiveDateTime;
 use prost::Message;
-use sonettobuf::{CmdId, GetStoreInfosReply, GetStoreInfosRequest};
+use sonettobuf::{CmdId, GetStoreInfosReply, GetStoreInfosRequest, GoodsInfo, StoreInfo};
 use std::sync::Arc;
 use tokio::sync::Mutex;
 
@@ -11,34 +12,80 @@ pub async fn on_get_store_infos(
     req: ClientPacket,
 ) -> Result<(), AppError> {
     let request = GetStoreInfosRequest::decode(&req.data[..])?;
-    let store_ids = request.store_ids;
-    tracing::info!("Requested store_ids: {:?}", store_ids);
+    tracing::info!("Received GetStoreInfosRequest: {:?}", request);
 
-    // Load master store file
-    let response: GetStoreInfosReply = GameDataLoader::load_struct("store/store_infos.json")
-        .map_err(|e| AppError::Custom(format!("Failed to load store infos: {}", e)))?;
+    let store_infos = {
+        let ctx_guard = ctx.lock().await;
+        let player_id = ctx_guard.player_id.ok_or(AppError::NotLoggedIn)?;
+        let pool = &ctx_guard.state.db;
 
-    let reply = if store_ids.is_empty() {
-        // Return all stores
-        tracing::info!("No specific store IDs requested, returning all stores");
-        response
-    } else {
-        // Filter to only requested store IDs (with all their goods)
-        GetStoreInfosReply {
-            store_infos: response
-                .store_infos
-                .into_iter()
-                .filter(|store| store_ids.contains(&store.id))
-                .collect(),
+        let game_data = data::exceldb::get();
+        let mut store_infos = Vec::new();
+
+        for store_id in &request.store_ids {
+            let goods: Vec<_> = game_data
+                .store_goods
+                .iter()
+                .filter(|g| g.store_id.parse::<i32>().unwrap_or(0) == *store_id)
+                .filter(|g| g.is_online)
+                .collect();
+
+            let mut goods_infos = Vec::new();
+
+            for good in goods {
+                let buy_count: i32 = sqlx::query_scalar(
+                    "SELECT buy_count FROM user_store_goods WHERE user_id = ? AND goods_id = ?",
+                )
+                .bind(player_id)
+                .bind(good.id)
+                .fetch_optional(pool)
+                .await?
+                .unwrap_or(0);
+
+                let offline_time = if !good.offline_time.is_empty() {
+                    NaiveDateTime::parse_from_str(&good.offline_time, "%Y-%m-%d %H:%M:%S")
+                        .ok()
+                        .map(|dt| dt.and_utc().timestamp_millis())
+                        .unwrap_or(0)
+                } else {
+                    0
+                };
+
+                goods_infos.push(GoodsInfo {
+                    goods_id: good.id,
+                    buy_count,
+                    offline_time: Some(offline_time),
+                });
+            }
+
+            let next_refresh_time = 0;
+
+            store_infos.push(StoreInfo {
+                id: *store_id,
+                next_refresh_time,
+                goods_infos: goods_infos.clone(),
+                offline_time: Some(0),
+            });
+
+            tracing::info!(
+                "User {} loaded store {} with {} goods",
+                player_id,
+                store_id,
+                goods_infos.len()
+            );
         }
+
+        store_infos
     };
 
-    tracing::info!("Returning {} store(s)", reply.store_infos.len());
+    let data = GetStoreInfosReply { store_infos };
 
-    let mut ctx_guard = ctx.lock().await;
-    ctx_guard
-        .send_reply(CmdId::GetStoreInfosCmd, reply, 0, req.up_tag)
-        .await?;
+    {
+        let mut ctx_guard = ctx.lock().await;
+        ctx_guard
+            .send_reply(CmdId::GetStoreInfosCmd, data, 0, req.up_tag)
+            .await?;
+    }
 
     Ok(())
 }

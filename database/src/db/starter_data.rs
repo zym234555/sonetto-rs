@@ -223,7 +223,7 @@ pub async fn load_hero_list(
         //.filter(|c| c.rare >= 1 && c.rare <= 5) // Valid rarity (1-5 stars)
         .filter(|c| c.id != 3029)
         .filter(|c| c.id != 9998)
-        //.filter(|c| c.id != 3125) // testing leveling logic
+        .filter(|c| c.id != 3125) // testing leveling logic
         .collect();
 
     for character in characters.clone() {
@@ -4208,6 +4208,56 @@ pub async fn load_starter_bgm(tx: &mut Transaction<'_, Sqlite>, user_id: i64) ->
     Ok(())
 }
 
+/// Load starter mail for new user
+pub async fn load_starter_mail(tx: &mut Transaction<'_, Sqlite>, uid: i64) -> sqlx::Result<()> {
+    let now = common::time::ServerTime::now_ms();
+    let base_incr_id = 80000000i64 + (uid * 1000);
+
+    sqlx::query(
+        "INSERT INTO user_mails (
+            incr_id, user_id, mail_id, params, attachment, state, create_time,
+            sender, title, content, copy, expire_time, sender_type,
+            jump_title, jump
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+    )
+    .bind(base_incr_id)           // 1
+    .bind(uid)                     // 2
+    .bind(0)                       // 3 - mail_id
+    .bind("")                      // 4 - params
+    .bind("2#5#3000000|2#3#3000000|1#110101#10|1#110201#10|2#2#1800|4#3125#1") // 5 - attachment Dust | Sharp |
+    .bind(0)                       // 6 - state
+    .bind(now)                     // 7 - create_time
+    .bind(r#"{"en":"System","zh":"系统的回响","jp":"システム"}"#) // 8 - sender
+    .bind(r#"{"en":"Welcome Gift","zh":"新手礼包","jp":"ウェルカムギフト"}"#) // 9 - title
+    .bind(r#"{"en":"Welcome to sonetto-rs! Here are some resources to help you get started. Remember, this project is free - if you paid, you got scammed, sorry.","zh":"欢迎来到 sonetto-rs！这里有一些资源帮助你开始。记住，这个项目是免费的 - 如果你付了钱，你被骗了，抱歉。","jp":"sonetto-rs へようこそ！始めるためのリソースです。このプロジェクトは無料です - もしお金を払ったなら、詐欺に遭いました、すみません。"}"#) // 10 - content
+    .bind("")                      // 11 - copy
+    .bind(0)                       // 12 - expire_time
+    .bind(2)                       // 13 - sender_type
+    .bind("")                      // 14 - jump_title
+    .bind("")                      // 15 - jump
+    .execute(&mut **tx)
+    .await?;
+
+    // Log to history
+    sqlx::query(
+        "INSERT INTO user_mail_history (
+            user_id, mail_incr_id, mail_id, attachment, action, action_time, state_at_action
+        ) VALUES (?, ?, ?, ?, ?, ?, ?)",
+    )
+    .bind(uid)
+    .bind(base_incr_id)
+    .bind(0)
+    .bind("2#5#3000000|2#3#3000000|1#110101#10|1#110201#10|2#2#1800|4#3125#1")
+    .bind("created")
+    .bind(now)
+    .bind(0)
+    .execute(&mut **tx)
+    .await?;
+
+    tracing::info!("Created welcome mail {} for new user {}", base_incr_id, uid);
+    Ok(())
+}
+
 pub async fn load_all_starter_data(pool: &SqlitePool, uid: i64) -> sqlx::Result<()> {
     tracing::info!("Loading all starter data for uid {uid} in a single transaction");
 
@@ -4248,6 +4298,7 @@ pub async fn load_all_starter_data(pool: &SqlitePool, uid: i64) -> sqlx::Result<
     load_activity101_12722(&mut tx, uid).await?;
     load_starter_bgm(&mut tx, uid).await?;
     load_room_info(&mut tx, uid).await?;
+    load_starter_mail(&mut tx, uid).await?;
 
     tx.commit().await?;
 

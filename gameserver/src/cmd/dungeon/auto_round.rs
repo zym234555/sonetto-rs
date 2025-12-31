@@ -141,9 +141,6 @@ pub async fn on_auto_round(
         );
     }
 
-    // ─────────────────────────────────────────────
-    // End battle + pushes
-    // ─────────────────────────────────────────────
     send_end_fight_push(
         ctx.clone(),
         battle_id,

@@ -10,6 +10,7 @@ pub mod character_cosume;
 pub mod character_destiny;
 pub mod character_level;
 pub mod character_rank;
+pub mod character_rank_replace;
 pub mod character_talent;
 pub mod character_voice;
 pub mod cloth_level;
@@ -28,9 +29,13 @@ pub mod monster_template;
 pub mod open;
 pub mod power_item;
 pub mod skill;
+pub mod skill_behavior;
+pub mod skill_effect;
 pub mod skill_ex_level;
 pub mod skill_passive_level;
 pub mod skin;
+pub mod store_charge_goods;
+pub mod store_charge_optional;
 pub mod store_goods;
 pub mod summon;
 pub mod summon_pool;
@@ -50,6 +55,7 @@ pub struct GameDB {
     pub character_destiny: character_destiny::CharacterDestinyTable,
     pub character_level: character_level::CharacterLevelTable,
     pub character_rank: character_rank::CharacterRankTable,
+    pub character_rank_replace: character_rank_replace::CharacterRankReplaceTable,
     pub character_talent: character_talent::CharacterTalentTable,
     pub character_voice: character_voice::CharacterVoiceTable,
     pub cloth_level: cloth_level::ClothLevelTable,
@@ -68,9 +74,13 @@ pub struct GameDB {
     pub open: open::OpenTable,
     pub power_item: power_item::PowerItemTable,
     pub skill: skill::SkillTable,
+    pub skill_behavior: skill_behavior::SkillBehaviorTable,
+    pub skill_effect: skill_effect::SkillEffectTable,
     pub skill_ex_level: skill_ex_level::SkillExLevelTable,
     pub skill_passive_level: skill_passive_level::SkillPassiveLevelTable,
     pub skin: skin::SkinTable,
+    pub store_charge_goods: store_charge_goods::StoreChargeGoodsTable,
+    pub store_charge_optional: store_charge_optional::StoreChargeOptionalTable,
     pub store_goods: store_goods::StoreGoodsTable,
     pub summon: summon::SummonTable,
     pub summon_pool: summon_pool::SummonPoolTable,
@@ -110,6 +120,9 @@ impl GameDB {
         let character_rank = character_rank::CharacterRankTable::load(
             &format!("{}/character_rank.json", data_dir)
         ).map_err(|e| anyhow::anyhow!("Failed to load character_rank.json: {}", e))?;
+        let character_rank_replace = character_rank_replace::CharacterRankReplaceTable::load(
+            &format!("{}/character_rank_replace.json", data_dir)
+        ).map_err(|e| anyhow::anyhow!("Failed to load character_rank_replace.json: {}", e))?;
         let character_talent = character_talent::CharacterTalentTable::load(
             &format!("{}/character_talent.json", data_dir)
         ).map_err(|e| anyhow::anyhow!("Failed to load character_talent.json: {}", e))?;
@@ -164,6 +177,12 @@ impl GameDB {
         let skill = skill::SkillTable::load(
             &format!("{}/skill.json", data_dir)
         ).map_err(|e| anyhow::anyhow!("Failed to load skill.json: {}", e))?;
+        let skill_behavior = skill_behavior::SkillBehaviorTable::load(
+            &format!("{}/skill_behavior.json", data_dir)
+        ).map_err(|e| anyhow::anyhow!("Failed to load skill_behavior.json: {}", e))?;
+        let skill_effect = skill_effect::SkillEffectTable::load(
+            &format!("{}/skill_effect.json", data_dir)
+        ).map_err(|e| anyhow::anyhow!("Failed to load skill_effect.json: {}", e))?;
         let skill_ex_level = skill_ex_level::SkillExLevelTable::load(
             &format!("{}/skill_ex_level.json", data_dir)
         ).map_err(|e| anyhow::anyhow!("Failed to load skill_ex_level.json: {}", e))?;
@@ -173,6 +192,12 @@ impl GameDB {
         let skin = skin::SkinTable::load(
             &format!("{}/skin.json", data_dir)
         ).map_err(|e| anyhow::anyhow!("Failed to load skin.json: {}", e))?;
+        let store_charge_goods = store_charge_goods::StoreChargeGoodsTable::load(
+            &format!("{}/store_charge_goods.json", data_dir)
+        ).map_err(|e| anyhow::anyhow!("Failed to load store_charge_goods.json: {}", e))?;
+        let store_charge_optional = store_charge_optional::StoreChargeOptionalTable::load(
+            &format!("{}/store_charge_optional.json", data_dir)
+        ).map_err(|e| anyhow::anyhow!("Failed to load store_charge_optional.json: {}", e))?;
         let store_goods = store_goods::StoreGoodsTable::load(
             &format!("{}/store_goods.json", data_dir)
         ).map_err(|e| anyhow::anyhow!("Failed to load store_goods.json: {}", e))?;
@@ -200,6 +225,7 @@ impl GameDB {
             character_destiny,
             character_level,
             character_rank,
+            character_rank_replace,
             character_talent,
             character_voice,
             cloth_level,
@@ -218,9 +244,13 @@ impl GameDB {
             open,
             power_item,
             skill,
+            skill_behavior,
+            skill_effect,
             skill_ex_level,
             skill_passive_level,
             skin,
+            store_charge_goods,
+            store_charge_optional,
             store_goods,
             summon,
             summon_pool,

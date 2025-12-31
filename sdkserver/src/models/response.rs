@@ -393,3 +393,61 @@ impl PoolName {
         }
     }
 }
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct OrderRsp {
+    pub code: u16,
+    pub msg: String,
+    pub data: OrderRspData,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct OrderRspData {
+    pub order_id: String,
+    pub pay_notify_url: String,
+    pub ext_params: String,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct GoodListRsp {
+    pub code: u16,
+    pub msg: String,
+    pub data: GoodListRspData,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct GoodListRspData {
+    pub country_iso: String,
+    pub goods_info_list: Vec<Option<serde_json::Value>>,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PaymentListRsp {
+    pub code: u16,
+    pub msg: String,
+    pub data: PaymentListRspData,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PaymentListRspData {
+    pub payments: Vec<PaymentMethod>,
+    pub web_pre_pay_url: String,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PaymentMethod {
+    pub payment_method_type: String,
+    pub payment_method: String,
+    pub payment_method_name: String,
+    pub icon_url: String,
+    pub pay_channel_id: i32,
+    pub other_payment_methods: Option<String>,
+    pub ext_payment_method_params: Option<String>,
+}

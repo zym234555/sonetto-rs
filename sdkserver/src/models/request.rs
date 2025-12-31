@@ -154,3 +154,82 @@ pub struct SummonQueryReq {
     #[serde(rename = "token")]
     pub token: String,
 }
+
+#[allow(dead_code)]
+#[derive(Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct OrderReq {
+    pub device_info: DeviceInfo,
+    pub app_package_info: AppPackageInfo,
+    pub user_id: String,
+    pub token: String,
+    pub role_id: String,
+    pub role_name: String,
+    pub current_level: i64,
+    pub role_vip_lvl: i64,
+    pub server_id: String,
+    pub server_name: String,
+    pub role_establish_time: i64,
+    pub role_type: String,
+    pub give_currency_num: i64,
+    pub paid_currency_num: i64,
+    pub currency_num: i64,
+    pub amount: i64,
+    pub origin_amount: i64,
+    pub origin_currency: String,
+    pub goods_id: String,
+    pub currency: String,
+    pub goods_name: String,
+    pub goods_desc: String,
+    pub game_order_id: String,
+    pub pass_back_param: String,
+    pub notify_url: String,
+    pub timestamp: String,
+    pub sign: String,
+    pub product_id: String,
+    pub current_progress: String,
+}
+
+#[allow(dead_code)]
+#[derive(Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct GoodListReq {
+    pub device_info: DeviceInfo,
+    pub app_package_info: AppPackageInfo,
+}
+
+#[allow(dead_code)]
+#[derive(Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PaymentListReq {
+    pub device_info: DeviceInfo,
+    pub app_package_info: AppPackageInfo,
+    pub user_id: String,
+    pub language: String,
+}
+
+#[allow(dead_code)]
+#[derive(Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PaymentPageQuery {
+    pub timestamp: Option<String>,
+    pub goods_name: Option<String>,
+    pub amount: Option<String>,
+    pub currency: Option<String>,
+    pub language: Option<String>,
+    pub price: Option<String>,
+}
+
+#[allow(dead_code)]
+#[derive(Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct CallbackQuery {
+    pub order_key: Option<String>,
+    pub payment_status: Option<String>,
+    pub payment_amount: Option<String>,
+    pub payment_currency: Option<String>,
+    pub mac2: Option<String>,
+    pub user_id: Option<String>,
+    pub foreign_invoice: Option<String>,
+    pub invoice_id: Option<String>,
+}

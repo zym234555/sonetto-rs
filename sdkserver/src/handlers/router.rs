@@ -1,5 +1,5 @@
 use crate::AppState;
-use crate::handlers::{account, game, index, jsp};
+use crate::handlers::{account, game, index, jsp, trade};
 use axum::Router;
 use axum::routing::{get, post};
 use paste::paste;
@@ -42,6 +42,13 @@ router! {
 }
 
 router! {
+    trade;
+    "/trade/order" post order;
+    "/common/payment/list" post payment_list;
+    "/common/pc/goods-list" post good_list;
+}
+
+router! {
     jsp;
     "/loadzone.jsp" get load_zone;
     "/login.jsp" get login;
@@ -58,6 +65,9 @@ router! {
     "/receiver/app" post receiver_app;
     "/resource/60001/check" get resource_check;
     "/query/summon" get summon_query;
+    "/sdk-pc-pay/pcpay.html" get sdk_pay;
+    "/SDKStaticPage/pcpay/callback.html" get sdk_pay_complete;
+
 }
 
 router! {

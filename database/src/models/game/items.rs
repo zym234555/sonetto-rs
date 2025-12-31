@@ -30,6 +30,7 @@ pub struct PowerItem {
     pub item_id: i64,
     pub quantity: i32,
     pub expire_time: i32,
+    pub created_at: i64,
 }
 
 impl From<PowerItem> for sonettobuf::PowerItem {

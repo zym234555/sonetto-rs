@@ -46,6 +46,7 @@ pub async fn dispatch_command(
         CmdId::MarkMainThumbnailCmd => player::on_mark_main_thumbnail,
         CmdId::GetAssistBonusCmd => player::on_get_assist_bonus,
         CmdId::GetPlayerCardInfoCmd => player_card::on_get_player_card_info,
+        CmdId::SetPortraitCmd => player::on_set_portrait,
 
         // === Hero ===
         CmdId::HeroInfoListCmd => hero::on_hero_info_list,
@@ -133,6 +134,7 @@ pub async fn dispatch_command(
         // === Mail ===
         CmdId::GetAllMailsCmd => mail::on_get_all_mails,
         CmdId::ReadMailBatchCmd => mail::on_read_mail_batch,
+        CmdId::ReadMailCmd => mail::on_read_mail,
 
         // === Charge & Monetization ===
         CmdId::GetChargeInfoCmd => charge::on_get_charge_info,
@@ -143,6 +145,7 @@ pub async fn dispatch_command(
         // === Store ===
         CmdId::GetStoreInfosCmd => store::on_get_store_infos, // keep this static for now it controlls the items in shop
         CmdId::BuyGoodsCmd => store::on_buy_goods,
+        CmdId::NewOrderCmd => store::on_new_order,
 
         // === Sign In & Daily Rewards ===
         CmdId::GetSignInInfoCmd => sign_in::on_get_sign_in_info,

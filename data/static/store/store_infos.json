@@ -198,7 +198,7 @@
         },
         {
           "goodsId": 6100027,
-          "buyCount": 0,
+          "buyCount": 1,
           "offlineTime": 0
         },
         {
@@ -294,38 +294,38 @@
     {
       "goodsInfos": [
         {
-          "goodsId": 30230005,
+          "goodsId": 30231005,
           "buyCount": 0,
           "offlineTime": 0
         },
         {
-          "goodsId": 30230004,
+          "goodsId": 30231004,
           "buyCount": 0,
           "offlineTime": 0
         },
         {
-          "goodsId": 30230007,
+          "goodsId": 30231007,
           "buyCount": 20,
           "offlineTime": 0
         },
         {
-          "goodsId": 30230006,
+          "goodsId": 30231006,
           "buyCount": 15,
           "offlineTime": 0
         },
         {
-          "goodsId": 30230001,
-          "buyCount": 12,
+          "goodsId": 30231001,
+          "buyCount": 9,
           "offlineTime": 0
         },
         {
-          "goodsId": 30230003,
+          "goodsId": 30231003,
           "buyCount": 0,
           "offlineTime": 0
         },
         {
-          "goodsId": 30230002,
-          "buyCount": 0,
+          "goodsId": 30231002,
+          "buyCount": 45,
           "offlineTime": 0
         }
       ],
@@ -427,7 +427,7 @@
         },
         {
           "goodsId": 301023,
-          "buyCount": 0,
+          "buyCount": 41,
           "offlineTime": 0
         },
         {
@@ -1061,12 +1061,12 @@
         },
         {
           "goodsId": 8023101,
-          "buyCount": 0,
+          "buyCount": 1,
           "offlineTime": 1769075999000
         },
         {
           "goodsId": 8023104,
-          "buyCount": 0,
+          "buyCount": 1,
           "offlineTime": 1769075999000
         },
         {
@@ -1076,12 +1076,12 @@
         },
         {
           "goodsId": 750006,
-          "buyCount": 181,
+          "buyCount": 205,
           "offlineTime": 0
         },
         {
           "goodsId": 750005,
-          "buyCount": 173,
+          "buyCount": 177,
           "offlineTime": 0
         }
       ],
@@ -1120,77 +1120,77 @@
       "goodsInfos": [
         {
           "goodsId": 90231008,
-          "buyCount": 0,
+          "buyCount": 5,
           "offlineTime": 0
         },
         {
           "goodsId": 90231009,
-          "buyCount": 0,
+          "buyCount": 10,
           "offlineTime": 0
         },
         {
           "goodsId": 90231010,
-          "buyCount": 0,
+          "buyCount": 10,
           "offlineTime": 0
         },
         {
           "goodsId": 90231011,
-          "buyCount": 0,
+          "buyCount": 15,
           "offlineTime": 0
         },
         {
           "goodsId": 90231012,
-          "buyCount": 0,
+          "buyCount": 15,
           "offlineTime": 0
         },
         {
           "goodsId": 90231013,
-          "buyCount": 0,
+          "buyCount": 25,
           "offlineTime": 0
         },
         {
           "goodsId": 90231014,
-          "buyCount": 0,
+          "buyCount": 20,
           "offlineTime": 0
         },
         {
           "goodsId": 90231015,
-          "buyCount": 0,
+          "buyCount": 30,
           "offlineTime": 0
         },
         {
           "goodsId": 90231001,
-          "buyCount": 0,
+          "buyCount": 1,
           "offlineTime": 0
         },
         {
           "goodsId": 90231002,
-          "buyCount": 0,
+          "buyCount": 1,
           "offlineTime": 0
         },
         {
           "goodsId": 90231003,
-          "buyCount": 0,
+          "buyCount": 1,
           "offlineTime": 0
         },
         {
           "goodsId": 90231004,
-          "buyCount": 0,
+          "buyCount": 3,
           "offlineTime": 0
         },
         {
           "goodsId": 90231005,
-          "buyCount": 0,
+          "buyCount": 10,
           "offlineTime": 0
         },
         {
           "goodsId": 90231006,
-          "buyCount": 0,
+          "buyCount": 8,
           "offlineTime": 0
         },
         {
           "goodsId": 90231007,
-          "buyCount": 0,
+          "buyCount": 8,
           "offlineTime": 0
         }
       ],
@@ -1227,6 +1227,11 @@
           "goodsId": 510049,
           "buyCount": 0,
           "offlineTime": 1769075999000
+        },
+        {
+          "goodsId": 510056,
+          "buyCount": 0,
+          "offlineTime": 1769075999000
         }
       ],
       "id": 510,
@@ -1242,7 +1247,7 @@
         },
         {
           "goodsId": 901004,
-          "buyCount": 22,
+          "buyCount": 24,
           "offlineTime": 0
         },
         {
@@ -1349,7 +1354,7 @@
         },
         {
           "goodsId": 160201,
-          "buyCount": 0,
+          "buyCount": 2,
           "offlineTime": 0
         },
         {
@@ -1364,7 +1369,7 @@
         },
         {
           "goodsId": 160204,
-          "buyCount": 0,
+          "buyCount": 10,
           "offlineTime": 0
         },
         {
@@ -1519,12 +1524,12 @@
         },
         {
           "goodsId": 111616,
-          "buyCount": 0,
+          "buyCount": 3,
           "offlineTime": 0
         },
         {
           "goodsId": 111203,
-          "buyCount": 0,
+          "buyCount": 16,
           "offlineTime": 0
         },
         {
@@ -1594,7 +1599,7 @@
         },
         {
           "goodsId": 111101,
-          "buyCount": 7,
+          "buyCount": 10,
           "offlineTime": 0
         },
         {
