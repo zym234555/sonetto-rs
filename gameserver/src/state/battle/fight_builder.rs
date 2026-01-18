@@ -4,8 +4,10 @@ use anyhow::Result;
 
 use database::models::game::heros::{HeroModel, UserHeroModel};
 
+use once_cell::sync::Lazy;
 use sonettobuf::{Fight, FightTeam};
 use sqlx::SqlitePool;
+use std::collections::HashMap;
 
 pub async fn build_fight(
     pool: &SqlitePool,
@@ -41,6 +43,21 @@ pub async fn build_fight(
     })
 }
 
+static TRIAL_UID_MAP: Lazy<HashMap<i64, i32>> = Lazy::new(|| {
+    let game_data = data::exceldb::get();
+    let mut map = HashMap::new();
+
+    let trial_heroes: Vec<_> = game_data.hero_trial.iter().collect();
+
+    for (index, trial) in trial_heroes.iter().enumerate() {
+        let uid = -((index + 1) as i64); // -1, -2, -3, ...
+        map.insert(uid, trial.id);
+        tracing::debug!("Trial mapping: UID {} -> trial_id {}", uid, trial.id);
+    }
+
+    map
+});
+
 async fn build_attacker_team(
     pool: &SqlitePool,
     user_id: i64,
@@ -57,7 +74,8 @@ async fn build_attacker_team(
         }
         let hero_data = hero.get_uid(*hero_uid as i32).await?;
         let entity =
-            entity_builder::build_hero_entity(pool, &hero_data, (position + 1) as i32, 1).await;
+            entity_builder::build_hero_entity(pool, &hero_data, (position + 1) as i32, 1, false)
+                .await;
         entitys.push(entity);
     }
 
@@ -67,7 +85,7 @@ async fn build_attacker_team(
             continue;
         }
         let hero_data = hero.get_uid(*hero_uid as i32).await?;
-        let entity = entity_builder::build_hero_entity(pool, &hero_data, -1, 1).await;
+        let entity = entity_builder::build_hero_entity(pool, &hero_data, -1, 1, true).await;
         sub_entitys.push(entity);
     }
 
@@ -81,6 +99,186 @@ async fn build_attacker_team(
         fight_group.cloth_id,
         build_player_skills(fight_group.cloth_id),
     ))
+}
+
+#[allow(dead_code)]
+fn build_trial_hero_entity(
+    hero_uid: i64,
+    position: i32,
+    team_type: i32,
+) -> Result<sonettobuf::FightEntityInfo> {
+    use data::exceldb;
+    use sonettobuf::{EquipRecord, FightEntityInfo, HeroAttribute};
+
+    let game_data = exceldb::get();
+
+    // Look up trial hero using the map
+    let trial_id = TRIAL_UID_MAP
+        .get(&hero_uid)
+        .ok_or_else(|| anyhow::anyhow!("Unknown trial hero UID: {}", hero_uid))?;
+
+    let trial_data = game_data
+        .hero_trial
+        .get(*trial_id)
+        .ok_or_else(|| anyhow::anyhow!("Trial data not found for ID {}", trial_id))?;
+
+    tracing::info!(
+        "Building trial hero entity: UID {} -> trial_id {} -> hero_id {}, level {}",
+        hero_uid,
+        trial_id,
+        trial_data.hero_id,
+        trial_data.level
+    );
+
+    // Get hero config for skills and career
+    let hero_config = game_data
+        .character
+        .iter()
+        .find(|h| h.id == trial_data.hero_id)
+        .ok_or_else(|| {
+            anyhow::anyhow!("Hero config not found for hero_id {}", trial_data.hero_id)
+        })?;
+
+    // Try to find exact level first
+    let char_level_opt = game_data
+        .character_level
+        .iter()
+        .find(|c| c.hero_id == trial_data.hero_id && c.level == trial_data.level);
+
+    let (hp, attack, defense, mdefense, technic) = if let Some(char_level) = char_level_opt {
+        // Found exact level
+        (
+            char_level.hp,
+            char_level.atk,
+            char_level.def,
+            char_level.mdef,
+            char_level.technic,
+        )
+    } else {
+        // Level not found - try level 1 as base
+        let base_level = game_data
+            .character_level
+            .iter()
+            .find(|c| c.hero_id == trial_data.hero_id && c.level == 1)
+            .ok_or_else(|| {
+                anyhow::anyhow!(
+                    "No level data found for hero_id {} (tried level {} and level 1)",
+                    trial_data.hero_id,
+                    trial_data.level
+                )
+            })?;
+
+        tracing::warn!(
+            "Level {} not found for hero {}, using level 1 base stats",
+            trial_data.level,
+            trial_data.hero_id
+        );
+
+        // Use level 1 stats as base (you could calculate growth here if needed)
+        (
+            base_level.hp,
+            base_level.atk,
+            base_level.def,
+            base_level.mdef,
+            base_level.technic,
+        )
+    };
+
+    // Parse skills from hero config
+    let skill_group1 = parse_skill_group(&hero_config.skill, 1);
+    let skill_group2 = parse_skill_group(&hero_config.skill, 2);
+
+    // Passive skills - empty for trial heroes
+    let passive_skill: Vec<i32> = vec![];
+
+    // Get ex skill from hero config
+    let ex_skill = hero_config.ex_skill;
+
+    Ok(FightEntityInfo {
+        uid: Some(hero_uid),
+        model_id: Some(trial_data.hero_id),
+        skin: Some(trial_data.skin),
+        position: Some(position),
+        entity_type: Some(1), // 1 = Hero
+        user_id: Some(0),     // Trial heroes have no owner
+        ex_point: Some(0),
+        level: Some(trial_data.level),
+        current_hp: Some(hp),
+        attr: Some(HeroAttribute {
+            hp: Some(hp),
+            attack: Some(attack),
+            defense: Some(defense),
+            mdefense: Some(mdefense),
+            technic: Some(technic),
+            multi_hp_idx: Some(0),
+            multi_hp_num: Some(0),
+        }),
+        buffs: vec![],
+        skill_group1,
+        skill_group2,
+        passive_skill,
+        ex_skill: Some(ex_skill),
+        shield_value: Some(0),
+        no_effect_buffs: vec![],
+        expoint_max_add: Some(0),
+        buff_harm_statistic: Some(0),
+        equip_uid: Some(0),
+        trial_equip: Some(EquipRecord {
+            equip_uid: Some(0),
+            equip_id: Some(trial_data.equip_id),
+            equip_lv: Some(trial_data.equip_lv),
+            refine_lv: Some(trial_data.equip_refine),
+        }),
+        ex_skill_level: Some(trial_data.ex_skill_lv),
+        power_infos: vec![],
+        act104_equip_uids: vec![],
+        trial_act104_equips: vec![],
+        summoned_list: vec![],
+        base_attr: Some(HeroAttribute {
+            hp: Some(hp),
+            attack: Some(attack),
+            defense: Some(defense),
+            mdefense: Some(mdefense),
+            technic: Some(technic),
+            multi_hp_idx: Some(0),
+            multi_hp_num: Some(0),
+        }),
+        ex_skill_point_change: Some(0),
+        team_type: Some(team_type),
+        enhance_info_box: Some(sonettobuf::EnhanceInfoBox {
+            uid: Some(hero_uid),
+            can_upgrade_ids: vec![],
+            upgraded_options: vec![],
+        }),
+        trial_id: Some(trial_data.id),
+        career: Some(hero_config.career),
+        status: Some(0),
+        guard: Some(-1),
+        sub_cd: Some(0),
+        ex_point_type: Some(0),
+        equips: vec![],
+        destiny_stone: Some(0),
+        destiny_rank: Some(0),
+        custom_unit_id: Some(0),
+    })
+}
+
+// Helper function to parse skill groups
+fn parse_skill_group(skill_str: &str, target_group: i32) -> Vec<i32> {
+    // Parse: "1#31240111#31240112#31240113|2#31240121#31240122#31240123"
+    for group_str in skill_str.split('|') {
+        let parts: Vec<&str> = group_str.split('#').collect();
+        if let Some(first) = parts.first()
+            && let Ok(group_num) = first.parse::<i32>()
+            && group_num == target_group
+        {
+            return parts[1..]
+                .iter()
+                .filter_map(|s| s.parse::<i32>().ok())
+                .collect();
+        }
+    }
+    vec![]
 }
 
 pub struct BattleSetup {
@@ -343,15 +541,14 @@ fn parse_monster_skill_group(active_skill: &str, target_group: i32) -> Vec<i32> 
     for group_str in active_skill.split('|') {
         let parts: Vec<&str> = group_str.split('#').collect();
 
-        if let Some(first) = parts.first() {
-            if let Ok(group_num) = first.parse::<i32>() {
-                if group_num == target_group {
-                    return parts[1..]
-                        .iter()
-                        .filter_map(|s| s.parse::<i32>().ok())
-                        .collect();
-                }
-            }
+        if let Some(first) = parts.first()
+            && let Ok(group_num) = first.parse::<i32>()
+            && group_num == target_group
+        {
+            return parts[1..]
+                .iter()
+                .filter_map(|s| s.parse::<i32>().ok())
+                .collect();
         }
     }
 
@@ -377,7 +574,7 @@ fn build_player_skills(cloth_id: Option<i32>) -> Vec<sonettobuf::PlayerSkillInfo
             skills.push(sonettobuf::PlayerSkillInfo {
                 skill_id: Some(cloth.skill1),
                 cd: Some(cloth.cd1),
-                need_power: Some(cloth.use_power1.get(0).copied().unwrap_or(0)),
+                need_power: Some(cloth.use_power1.first().copied().unwrap_or(0)),
                 r#type: Some(0),
             });
         }
@@ -387,7 +584,7 @@ fn build_player_skills(cloth_id: Option<i32>) -> Vec<sonettobuf::PlayerSkillInfo
             skills.push(sonettobuf::PlayerSkillInfo {
                 skill_id: Some(cloth.skill2),
                 cd: Some(cloth.cd2),
-                need_power: Some(cloth.use_power2.get(0).copied().unwrap_or(0)),
+                need_power: Some(cloth.use_power2.first().copied().unwrap_or(0)),
                 r#type: Some(0),
             });
         }
