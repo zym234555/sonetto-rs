@@ -3,7 +3,7 @@ use serde_json::Value;
 use std::{collections::HashSet, fs, path::Path};
 use walkdir::WalkDir;
 
-use crate::codegen::{
+use crate::excel_confgen::{
     emit_file::emit_table_file, emit_root::emit_root_module, tables::FILTER_TABLES,
 };
 

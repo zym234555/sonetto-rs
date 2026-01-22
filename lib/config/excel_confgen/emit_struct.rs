@@ -1,6 +1,6 @@
 use serde_json::Value;
 
-use crate::codegen::{
+use crate::excel_confgen::{
     rust_ident::{camel_to_snake, snake_to_pascal},
     rust_types::resolve_field_type,
     schema_infer::analyze_field_types,

@@ -47,4 +47,8 @@ pub const FILTER_TABLES: &[&str] = &[
     "activity174_role",
     "activity191_role",
     "character_destiny_facets",
+    "bp",
+    "bp_des",
+    "bp_lv_bonus",
+    "bp_task",
 ];

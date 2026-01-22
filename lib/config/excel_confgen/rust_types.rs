@@ -1,7 +1,7 @@
 use serde_json::Value;
 use std::collections::{HashMap, HashSet};
 
-use crate::codegen::schema_inspect::check_if_optional;
+use crate::excel_confgen::schema_inspect::check_if_optional;
 
 pub fn resolve_field_type(
     name: &str,

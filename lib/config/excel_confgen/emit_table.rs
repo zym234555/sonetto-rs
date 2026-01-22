@@ -1,7 +1,7 @@
 use serde_json::Value;
 use std::collections::{HashMap, HashSet};
 
-use crate::codegen::{
+use crate::excel_confgen::{
     rust_ident::{camel_to_snake, snake_to_pascal},
     schema_inspect::{
         check_if_optional, detect_group_field, detect_id_field, get_id_type, has_vec_group_type,

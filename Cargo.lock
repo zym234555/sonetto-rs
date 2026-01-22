@@ -270,6 +270,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "config"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "heck",
+ "once_cell",
+ "serde",
+ "serde_json",
+ "walkdir",
+]
+
+[[package]]
 name = "const-oid"
 version = "0.9.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -364,18 +376,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "data"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "heck",
- "once_cell",
- "serde",
- "serde_json",
- "walkdir",
-]
-
-[[package]]
 name = "database"
 version = "0.1.0"
 dependencies = [
@@ -383,7 +383,7 @@ dependencies = [
  "bcrypt",
  "chrono",
  "common",
- "data",
+ "config",
  "protocol",
  "serde",
  "serde_json",
@@ -653,8 +653,8 @@ dependencies = [
  "bytes",
  "chrono",
  "common",
+ "config",
  "dashmap",
- "data",
  "database",
  "once_cell",
  "prost",
@@ -1798,7 +1798,7 @@ dependencies = [
  "axum-server",
  "chrono",
  "common",
- "data",
+ "config",
  "database",
  "flate2",
  "gameserver",

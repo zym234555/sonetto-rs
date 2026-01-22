@@ -1,4 +1,4 @@
-use crate::codegen::rust_ident::snake_to_pascal;
+use crate::excel_confgen::rust_ident::snake_to_pascal;
 
 pub fn emit_root_module(table_names: &[String]) -> String {
     let mut lines = vec![

@@ -1,6 +1,6 @@
 use serde_json::Value;
 
-use crate::codegen::{
+use crate::excel_confgen::{
     emit_struct::emit_struct, emit_table::emit_table_store, schema_infer::analyze_field_types,
 };
 

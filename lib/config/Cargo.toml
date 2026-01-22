@@ -1,5 +1,5 @@
 [package]
-name = "data"
+name = "config"
 edition.workspace = true
 version.workspace = true
 
